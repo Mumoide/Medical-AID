@@ -1,0 +1,63 @@
+/* Styles for RegisterPage */
+
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f5f7fa; /* Light background */
+}
+
+h2 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #45a3b7;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px; /* Control form width */
+}
+
+.name-inputs,
+.additional-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.name-inputs input,
+.additional-info input,
+.additional-info select {
+  width: 48%;
+}
+
+.register-form input,
+.register-form select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.register-form button {
+  padding: 15px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-form button:hover {
+  background-color: #333;
+}
+
