@@ -4,8 +4,8 @@ import Navbar from './Navbar';
 import './App.css';
 import DiagnosticPage from './DiagnosticPage';
 import RegisterPage from './RegisterPage';
-import LoginForm from './LoginForm'
-
+import LoginForm from './LoginForm';
+import AdminPage from './AdminPage'; // Import the AdminPage component
 
 function App() {
   return (
@@ -115,9 +115,11 @@ function App() {
           {/* Diagnostic Page */}
           <Route path="/diagnostico" element={<DiagnosticPage />} />
           {/* Registration Page */}
-           <Route path="/registro" element={<RegisterPage />} />
+          <Route path="/registro" element={<RegisterPage />} />
           {/* Login Page */}
           <Route path="/Inicio-de-sesion" element={<LoginForm />} />    
+          {/* Admin Page */}
+          <Route path="/admin" element={<AdminPage />} /> {/* New Admin Page Route */}
         </Routes>
       </div>
     </Router>
