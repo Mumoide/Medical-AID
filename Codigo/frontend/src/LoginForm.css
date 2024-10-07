@@ -1,0 +1,103 @@
+/* Main Container */
+.login-container {
+  background-color: #43b1b6;
+  width: 350px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 10% auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Input Fields */
+.login-input {
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+/* Fixing overlapping fields */
+input[type="email"],
+input[type="password"] {
+  display: block;
+  width: 95%;
+  margin-bottom: 15px;
+}
+
+/* Login Button */
+.login-button {
+  background-color: #000; /* Black background */
+  color: white; /* White text */
+  border: none;
+  border-radius: 15px; /* Rounded corners */
+  padding: 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  width: 100%; /* Full width button */
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #333; /* Darker on hover */
+}
+
+/* Forgot Password Link */
+.forgot-password {
+  font-size: 0.9rem;
+  color: #007BFF;
+  text-decoration: none;
+  margin-bottom: 15px;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Social Login Buttons */
+.social-login {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.social-login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.social-facebook {
+  background-color: #4267B2;
+  color: white;
+}
+
+.social-google {
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+.social-facebook:hover, .social-google:hover {
+  opacity: 0.9;
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+  .login-container {
+    width: 90%;
+    margin: 20% auto;
+  }
+}

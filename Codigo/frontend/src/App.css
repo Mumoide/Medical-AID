@@ -1,0 +1,305 @@
+/* Hero Section */
+.hero-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height */
+  background-size: cover; /* Ensure background covers the section */
+  background-position: center; /* Center the background image */
+}
+
+.hero-content {
+  text-align: center; /* Center all text */
+  color: white;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.cta-button {
+  background-color: #3498db;
+  color: white;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background-color: #2980b9;
+}
+
+/* Cómo Funciona Section */
+.como-funciona {
+  background-color: #87CEEB;
+  padding: 40px;
+}
+
+.funciona-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  gap: 20px; /* Reduce space between image and text */
+}
+
+.funciona-image img {
+  max-width: 500px;
+  border-radius: 20px;
+}
+
+.funciona-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.funciona-text p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.ver-mas-button {
+  background-color: #000;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.ver-mas-button:hover {
+  background-color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .funciona-content {
+    flex-direction: column; /* Stack image and text vertically */
+    text-align: center; /* Center text on smaller screens */
+    gap: 20px; /* Adjust gap for mobile */
+  }
+
+  .funciona-text {
+    margin-left: 0; /* Remove left margin for mobile */
+  }
+
+  .funciona-image img {
+    max-width: 250px; /* Adjust image size for mobile */
+  }
+
+  .funciona-text h2 {
+    font-size: 2rem; /* Adjust heading size for mobile */
+  }
+
+  .funciona-text p {
+    font-size: 1.1rem; /* Adjust paragraph size for mobile */
+  }
+
+  .ver-mas-button {
+    font-size: 1rem; /* Ensure button stays legible on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .funciona-image img {
+    max-width: 200px; /* Further reduce image size on very small screens */
+  }
+
+  .funciona-text h2 {
+    font-size: 1.8rem; /* Further adjust heading size */
+  }
+
+  .funciona-text p {
+    font-size: 1rem; /* Further adjust paragraph size */
+  }
+
+  .ver-mas-button {
+    font-size: 0.9rem; /* Adjust button size for very small screens */
+    padding: 8px 16px;
+  }
+}
+
+
+/* Process Steps */
+.funciona-steps {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+
+.step {
+  text-align: center;
+  background-color: white; /* White background */
+  border-radius: 15px; /* Rounded borders */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  max-width: 250px; /* Control width of the box */
+  flex-grow: 1; /* Ensure boxes grow evenly */
+  margin: 10px;
+}
+
+.step img {
+  max-width: 50px; /* Control icon size */
+  margin-bottom: 15px;
+}
+
+.step h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.step p {
+  font-size: 1rem;
+  
+}
+/* Beneficios Section */
+.beneficios-section {
+  background-color: #f7f9fc;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.beneficios-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.beneficios-section p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+
+.beneficios-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.beneficio {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  max-width: 300px;
+  margin: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.beneficio img {
+  max-width: 80px;
+  margin-bottom: 15px;
+}
+
+.beneficio h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.beneficio p {
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .beneficios-content {
+    flex-direction: column;
+  }
+
+  .beneficio {
+    max-width: 100%;
+  }
+}
+/* Suscripción Section */
+.suscripcion-section {
+  background-color: #2c3e50; /* Dark background */
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.suscripcion-content img {
+  max-width: 100px;
+  margin-bottom: 20px;
+}
+
+.suscripcion-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.suscripcion-content p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.suscripcion-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.suscripcion-form input {
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 300px; /* Adjust the width here */
+}
+
+
+.suscripcion-form button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.suscripcion-form button:hover {
+  background-color: #2980b9;
+}
+
+.privacy-note {
+  font-size: 0.9rem;
+  color: #bdc3c7;
+}
+
+/* Footer */
+.footer {
+  background-color: #2c3e50;
+  color: #bdc3c7;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #bdc3c7;
+  margin: 0 15px;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-copyright {
+  font-size: 0.9rem;
+}

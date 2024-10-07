@@ -1,0 +1,127 @@
+/* Container that wraps everything */
+.register-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  background-color: #f0f0f0;
+  min-height: 100vh; /* Ensures it takes up full height of viewport */
+}
+
+/* Header styling */
+.register-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.spacer {
+  padding-top: 50px; /* Adds space inside the element */
+}
+
+.register-header h1 {
+  font-size: 36px;
+  color: #3690A4; /* Adjusted to match the blue tone of your form */
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* Form container styling */
+.register-form-container {
+  background-color: #3690A4;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Form title styling */
+.register-form-container h2 {
+  font-size: 24px;
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Form element styling */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.register-form input {
+  font-size: 16px;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.register-form input[type="text"],
+.register-form input[type="number"],
+.register-form input[type="date"],
+.register-form input[type="tel"],
+.register-form input[type="email"],
+.register-form input[type="password"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.register-form input::placeholder {
+  color: #888;
+}
+
+.register-form select {
+  padding: 12px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+}
+
+.mandatory-fields {
+  font-size: 12px;
+  color: white;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+/* Button styling */
+.register-button {
+  font-size: 18px;
+  padding: 15px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.register-button:hover {
+  background-color: #555;
+}
+
+/* Adjusting for smaller screens */
+@media screen and (max-width: 768px) {
+  .register-form-container {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .register-header h1 {
+    font-size: 28px;
+  }
+
+  .register-form input,
+  .register-form select {
+    padding: 10px;
+  }
+}
