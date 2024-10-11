@@ -1,12 +1,12 @@
-// db.js
+require('dotenv').config(); // Load environment variables from .env file
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'postgres',           // Username from pgAdmin
-  host: 'localhost',          // Host from pgAdmin
-  database: 'MedicalAidDB',    // Database name from pgAdmin
-  password: '202020',   // Replace with your actual password
-  port: 5433,                  // Port from pgAdmin (5433)
+  user: process.env.PG_USER,         // Username from .env
+  host: process.env.PG_HOST,         // Host from .env
+  database: process.env.PG_DATABASE, // Database name from .env
+  password: process.env.PG_PASSWORD, // Password from .env
+  port: process.env.PG_PORT,         // Port from .env
 });
 
 pool.connect((err, client, release) => {
