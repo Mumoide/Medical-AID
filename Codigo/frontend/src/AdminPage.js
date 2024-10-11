@@ -1,31 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import './AdminPage.css'; // 
-useEffect(() => {
-  const fetchUsers = async () => {
-    try {
-      const response = await fetch('http://localhost:3001/admin/users');
-      if (!response.ok) {
-        throw new Error('Failed to fetch users');
-      }
-      const data = await response.json();
-      setUsers(data);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  };
-
-  fetchUsers();
-}, []);
+import './AdminPage.css';
 
 const AdminPage = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/admin/users');
+        if (!response.ok) {
+          throw new Error('Failed to fetch users');
+        }
+        const data = await response.json();
+        setUsers(data);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+
     // Fetch users from the backend
-    fetch('http://localhost:3001/admin/users')
-      .then((response) => response.json())
-      .then((data) => setUsers(data))
-      .catch((error) => console.error('Error fetching users:', error));
+    fetchUsers();
   }, []);
 
   return (
