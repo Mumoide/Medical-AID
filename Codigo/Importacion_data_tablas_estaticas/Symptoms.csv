@@ -1,0 +1,134 @@
+Symptom;weight;sintoma;grupo_sintomatico
+itching;1;picazón;Picazón
+skin_rash;3;sarpullido;Problemas de la Piel
+nodal_skin_eruptions;4;erupciones_cutáneas_nodulares;Problemas de la Piel
+continuous_sneezing;4;estornudos_constantes;Problemas Respiratorios
+shivering;5;escalofríos;Problemas Sistémicos/Sensoriales
+chills;3;escalofríos;Problemas Sensoriales
+joint_pain;3;dolor_articular;Dolor
+stomach_pain;5;dolor_de_estómago;Dolor
+acidity;3;acidez;Problemas Digestivos
+ulcers_on_tongue;4;úlceras_en_la_lengua;Problemas de la Piel/Infección
+muscle_wasting;3;desgaste_muscular;Problemas Musculares
+vomiting;5;vómito;Náuseas y Vómitos
+burning_micturition;6;micción_con_ardor;Problemas Urinarios
+spotting_urination;6;manchas_en_la_orina;Problemas Urinarios
+fatigue;4;fatiga;Fatiga
+weight_gain;3;aumento_de_peso;Problemas Metabólicos
+anxiety;4;ansiedad;Problemas Psicológicos
+cold_hands_and_feets;5;manos_y_pies_fríos;Problemas Circulatorios
+mood_swings;3;cambios_de_humor;Problemas Psicológicos
+weight_loss;3;pérdida_de_peso;Problemas Metabólicos
+restlessness;5;inquietud;Problemas Psicológicos
+lethargy;2;letargo;Fatiga
+patches_in_throat;6;manchas_en_la_garganta;Problemas Respiratorios/Problemas de la Piel/Infecciones
+irregular_sugar_level;5;nivel_de_azúcar_irregular;Problemas Endocrinos/Hormonales/Glandulares
+cough;4;tos;Problemas Respiratorios
+high_fever;7;fiebre_alta;Fiebre
+sunken_eyes;3;ojos_hundidos;Problemas Visuales
+breathlessness;4;falta_de_aire;Problemas Respiratorios
+sweating;3;sudoración;Problemas Sistémicos
+dehydration;4;deshidratación;Problemas Sistémicos
+indigestion;5;indigestión;Problemas Digestivos
+headache;3;dolor_de_cabeza;Dolor
+yellowish_skin;3;piel_amarillenta;Problemas de la Piel
+dark_urine;4;orina_oscura;Problemas Urinarios
+nausea;5;náuseas;Náuseas y Vómitos
+loss_of_appetite;4;pérdida_del_apetito;Problemas Sensoriales
+pain_behind_the_eyes;4;dolor_detrás_de_los_ojos;Dolor
+back_pain;3;dolor_de_espalda;Dolor
+constipation;4;estreñimiento;Problemas Digestivos
+abdominal_pain;4;dolor_abdominal;Dolor
+diarrhoea;6;diarrea;Problemas Digestivos
+mild_fever;5;fiebre_leve;Fiebre
+yellow_urine;4;orina_amarilla;Problemas Urinarios
+yellowing_of_eyes;4;ictericia_en_los_ojos;Problemas Visuales
+acute_liver_failure;6;insuficiencia_hepática_aguda;Problemas de Órganos
+fluid_overload;6;sobrecarga_de_líquidos;Problemas Circulatorios
+swelling_of_stomach;7;hinchazón_del_estómago;Hinchazón
+swelled_lymph_nodes;6;ganglios_linfáticos_hinchados;Hinchazón
+malaise;6;malestar_general;Problemas Sistémicos
+blurred_and_distorted_vision;5;visión_borrosa_y_distorsionada;Problemas de Visión
+phlegm;5;flema;Problemas Respiratorios
+throat_irritation;4;irritación_de_garganta;Problemas Respiratorios
+redness_of_eyes;5;enrojecimiento_de_ojos;Problemas de la Piel
+sinus_pressure;4;presión_sinusal;Problemas Respiratorios
+runny_nose;5;nariz_moquienta;Problemas Respiratorios
+congestion;5;congestión;Problemas Respiratorios
+chest_pain;7;dolor_en_el_pecho;Dolor
+weakness_in_limbs;7;debilidad_en_las_extremidades;Problemas Sistémicos
+fast_heart_rate;5;frecuencia_cardiaca_acelerada;Problemas Cardiovasculares
+pain_during_bowel_movements;5;dolor_durante_los_movimientos_intestinales;Dolor
+pain_in_anal_region;6;dolor_en_la_región_anal;Dolor
+bloody_stool;5;heces_con_sangre;Problemas Digestivos
+irritation_in_anus;6;irritación_en_el_ano;Problemas Digestivos
+neck_pain;5;dolor_de_cuello;Dolor
+dizziness;4;mareo;Mareo
+cramps;4;calambres;Problemas Musculares
+bruising;4;hematomas;Problemas Hemorrágicos
+obesity;4;obesidad;Problemas Metabólicos
+swollen_legs;5;piernas_hinchadas;Hinchazón
+swollen_blood_vessels;5;vasos_sanguíneos_hinchados;Hinchazón
+puffy_face_and_eyes;5;cara_y_ojos_hinchados;Hinchazón
+enlarged_thyroid;6;tiroides_agrandada;Problemas Endocrinos/Hormonales/Glandulares
+brittle_nails;5;uñas_frágiles;Problemas de las Uñas
+swollen_extremeties;5;extremidades_hinchadas;Hinchazón
+excessive_hunger;4;hambre_excesiva;Problemas Endocrinos/Hormonales/Glandulares
+extra_marital_contacts;5;contactos_extramaritales;Factores de Riesgo
+drying_and_tingling_lips;4;labios_secos_y_hormigueantes;Problemas de la Piel
+slurred_speech;4;dificultades para hablar;Problemas Neurológicos
+knee_pain;3;dolor_de_rodilla;Dolor
+hip_joint_pain;2;dolor_en_la_articulación_de_la_cadera;Dolor
+muscle_weakness;2;debilidad_muscular;Problemas Musculares
+stiff_neck;4;rigidez_en_el_cuello;Problemas de Movimiento
+swelling_joints;5;hinchazón_de_articulaciones;Hinchazón
+movement_stiffness;5;rigidez_de_movimiento;Problemas de Movimiento
+spinning_movements;6;movimientos_rotatorios;Náuseas y Vómitos
+loss_of_balance;4;pérdida_del_equilibrio;Problemas Sensoriales
+unsteadiness;4;inestabilidad;Problemas Sensoriales
+weakness_of_one_body_side;4;debilidad_de_un_lado_del_cuerpo;Problemas Sistémicos
+loss_of_smell;3;pérdida_del_olfato;Problemas Sensoriales
+bladder_discomfort;4;malestar_vesical;Problemas Urinarios
+foul_smell_ofurine;5;mal_olor_de_la_orina;Problemas Urinarios
+continuous_feel_of_urine;6;sensación_continua_de_orinar;Problemas Urinarios
+passage_of_gases;5;paso_de_gases;Problemas Digestivos
+internal_itching;4;picazón_interna;Picazón
+toxic_look_(typhos);5;#N/D;#N/D
+depression;3;depresión;Problemas Psicológicos
+irritability;2;irritabilidad;Problemas Psicológicos
+muscle_pain;2;dolor_muscular;Dolor
+altered_sensorium;2;sensorio_alterado;Problemas Sensoriales
+red_spots_over_body;3;manchas_rojas_en_el_cuerpo;Problemas de la Piel
+belly_pain;4;dolor_abdominal;Dolor
+abnormal_menstruation;6;menstruación_anormal;Problemas Ginecológicos
+dischromic_patches;6;manchas_discromicas;Problemas de la Piel
+watering_from_eyes;4;ojos_llorosos;Problemas Visuales
+increased_appetite;5;aumento_del_apetito;Problemas Endocrinos/Hormonales/Glandulares
+polyuria;4;poliuria (Producción excesiva de orina);Problemas Urinarios
+family_history;5;historia_familiar;Factores de Riesgo
+mucoid_sputum;4;esputo_mucoide;Problemas Respiratorios
+rusty_sputum;4;esputo_oxidado (Esputo herrumbroso, mocos con sangre);Problemas Respiratorios
+lack_of_concentration;3;falta_de_concentración;Problemas Cognitivos
+visual_disturbances;3;trastornos_visuales;Problemas Visuales
+receiving_blood_transfusion;5;recibir_transfusión_de_sangre;Factores de Riesgo
+receiving_unsterile_injections;2;recibir_inyecciones_no_estériles;Factores de Riesgo
+coma;7;coma;Problemas Neurológicos
+stomach_bleeding;6;sangrado_estomacal;Problemas Digestivos
+distention_of_abdomen;4;distensión_abdominal;Problemas Digestivos
+history_of_alcohol_consumption;5;historia_de_consumo_de_alcohol;Factores de Riesgo
+fluid_overload;4;sobrecarga_de_líquidos;Problemas Circulatorios
+blood_in_sputum;5;sangre_en_esputo;Problemas Respiratorios
+prominent_veins_on_calf;6;venas_prominentes_en_la_pantorrilla;Problemas Circulatorios
+palpitations;4;palpitaciones;Problemas Cardiovasculares
+painful_walking;2;caminar_doloroso;Dolor
+pus_filled_pimples;2;granos_llenos_de_pus;Problemas de la Piel/Infección
+blackheads;2;puntos_negros;Problemas de la Piel
+scurring;2;agitamiento;Problemas Psicológicos
+skin_peeling;3;descamación_de_la_piel;Problemas de la Piel
+silver_like_dusting;2;exposición a polvos como plata;Factores de Riesgo
+small_dents_in_nails;2;pequeños_abollones_en_las_uñas;Problemas de las Uñas
+inflammatory_nails;2;uñas_inflamadas;Problemas de las Uñas
+blister;4;ampolla;Problemas de la Piel
+red_sore_around_nose;2;llaga_roja_alrededor_de_la_nariz;Problemas de la Piel
+yellow_crust_ooze;3;costras_amarillas_con_suposición;Problemas de la Piel/Infección
+prognosis;5;#N/D;#N/D
