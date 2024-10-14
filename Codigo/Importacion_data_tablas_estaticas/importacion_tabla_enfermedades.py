@@ -1,18 +1,24 @@
 import pandas as pd
 import psycopg2
+from dotenv import load_dotenv
+import os
 
 # Load the CSV file
 csv_path = './Descripcion_enfermedades_ingles_espanhol.csv'
 df = pd.read_csv(csv_path, sep=';')
 
-# Database connection details
+# Load environment variables from .env file
+load_dotenv()
+
+# Database connection details from environment variables
 db_params = {
-    "dbname": "Medical_AID",
-    "user": "postgres",
-    "password": "mumo123",
-    "host": "localhost",
-    "port": "5432"
+    "dbname": os.getenv("PG_DATABASE"),
+    "user": os.getenv("PG_USER"),
+    "password": os.getenv("PG_PASSWORD"),
+    "host": os.getenv("PG_HOST"),
+    "port": os.getenv("PG_PORT")
 }
+
 
 # Connect to PostgreSQL
 try:
