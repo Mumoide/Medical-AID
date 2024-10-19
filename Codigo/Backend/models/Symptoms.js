@@ -22,6 +22,10 @@ module.exports = function(sequelize, DataTypes) {
     grupo_sintomatico: {
       type: DataTypes.STRING(500),
       allowNull: false
+    },
+    model_order: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   }, {
     sequelize,

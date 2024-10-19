@@ -59,6 +59,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(500),
       allowNull: false,
       defaultValue: "default_value"
+    },
+    model_order: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,

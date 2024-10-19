@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid"; // Import UUID
 import Select from "react-select"; // Import React Select
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./SymptomsForm.css";
 
 // Helper function to format the symptom name
@@ -18,6 +19,7 @@ const SymptomComboBox = () => {
   const [selectedSymptoms, setSelectedSymptoms] = useState({});
   const [symptomsLoaded, setSymptomsLoaded] = useState(false);
   const [diagnosisResult, setDiagnosisResult] = useState(null);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   // Fetch symptom names from the API
   useEffect(() => {
@@ -46,8 +48,16 @@ const SymptomComboBox = () => {
     }));
   };
 
-  // Add a new ComboBox
+  // Add a new ComboBox (only if the last one has a selected option)
   const addNewComboBox = () => {
+    const latestComboBoxId = comboBoxes[comboBoxes.length - 1].id;
+    if (!selectedSymptoms[latestComboBoxId]) {
+      alert(
+        "Please select an option in the latest ComboBox before adding a new one."
+      );
+      return;
+    }
+
     if (comboBoxes.length < 16) {
       setComboBoxes([...comboBoxes, { id: uuidv4() }]);
     } else {
@@ -85,22 +95,28 @@ const SymptomComboBox = () => {
 
   // Handle diagnosis submission
   const handleDiagnosis = async () => {
-    // Create an array of 131 booleans, all set to false
     const booleanArray = new Array(131).fill(false);
 
-    // Set the appropriate index to true based on selected symptoms
     Object.values(selectedSymptoms).forEach((modelOrder) => {
       if (modelOrder !== null && modelOrder <= 131) {
         booleanArray[modelOrder] = true;
       }
     });
-    console.log(booleanArray);
-    console.log(symptoms);
+
     try {
       const response = await axios.post("http://localhost:5000/predict_proba", {
         input: booleanArray,
       });
-      setDiagnosisResult(response.data);
+      const probabilities = response.data.probabilities[0];
+
+      // Extract the top 3 highest probabilities and their indexes
+      const top3 = probabilities
+        .map((probability, index) => ({ probability, index }))
+        .sort((a, b) => b.probability - a.probability)
+        .slice(0, 3);
+
+      // Redirect to /diagnosis with the top 3 data
+      navigate("/diagnosis", { state: { top3 } });
     } catch (error) {
       console.error("Error during diagnosis:", error);
       setDiagnosisResult("Error during diagnosis");
@@ -115,7 +131,7 @@ const SymptomComboBox = () => {
         </div>
       ) : (
         <>
-          {comboBoxes.map((comboBox) => (
+          {comboBoxes.map((comboBox, index) => (
             <div
               key={comboBox.id}
               style={{
@@ -140,6 +156,7 @@ const SymptomComboBox = () => {
                   }
                   isClearable
                   placeholder="Type to search..."
+                  isDisabled={index !== comboBoxes.length - 1} // Disable all except the latest ComboBox
                   styles={{
                     container: (base) => ({
                       ...base,
@@ -161,7 +178,6 @@ const SymptomComboBox = () => {
                 )}
               </div>
 
-              {/* Trash button to remove ComboBox */}
               <button
                 onClick={() => removeComboBox(comboBox.id)}
                 disabled={comboBoxes.length === 1}

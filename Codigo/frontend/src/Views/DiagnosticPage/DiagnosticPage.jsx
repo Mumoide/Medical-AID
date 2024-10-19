@@ -1,5 +1,6 @@
-import React from 'react';
-import './DiagnosticPage.css'; // Assuming you have a CSS file for styling
+import React from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import "./DiagnosticPage.css"; // Assuming you have a CSS file for styling
 
 function DiagnosticPage() {
   return (
@@ -11,7 +12,9 @@ function DiagnosticPage() {
       <div className="diagnostic-content">
         <p>Medical AID utiliza IA para ofrecer diagnósticos médicos remotos.</p>
         <div className="diagnostic-buttons">
-          <button className="start-diagnostic">Iniciar Diagnóstico</button>
+          <Link to="/form">
+            <button className="start-diagnostic">Iniciar Diagnóstico</button>
+          </Link>
           <button className="more-info">Más Información</button>
         </div>
       </div>

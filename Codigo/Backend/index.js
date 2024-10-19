@@ -3,11 +3,11 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const adminRoutes = require('./routes/adminRoutes');
-const authRoutes = require('./routes/authRoutes');
 const db = require('./db'); // Database connection
 // console.log('Registering /admin routes');
 const predictionRoutes = require('./routes/predictionRoutes');
 const symptomsRoutes = require('./routes/symptomsRoutes');
+const diseaseRoutes = require('./routes/diseaseRoutes')
 app.use('/admin', adminRoutes);
 
 // Middleware configuration
@@ -31,10 +31,10 @@ app.get('/test-root', (req, res) => {
 });
 
 // Routes
-app.use('/auth', authRoutes); // Auth-related routes
 app.use('/admin', adminRoutes); // Admin routes with /admin prefix
 app.use('/api', predictionRoutes); // Use the prediction route
 app.use('/api', symptomsRoutes); // Use the symptoms route
+app.use('/api/disease', diseaseRoutes)
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

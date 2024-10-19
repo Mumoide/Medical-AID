@@ -2,13 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
 import './App.css';
-import DiagnosticPage from './DiagnosticPage';
-import RegisterPage from './RegisterPage';
+import DiagnosticPage from './Views/DiagnosticPage/DiagnosticPage';
+import RegisterPage from './Views/RegisterPage/RegisterPage';
 import LoginForm from './LoginForm';
 import AdminPage from './AdminPage'; // Import the AdminPage component
 import FormPage from './Views/HardForm/SymptomsForm'
 import HomePage from './Views/HomePage/HomePage'
 import FooterPage from './Components/Footer/Footer'
+import Diagnosis from './Views/DiagnosisResultPage/DiagnosisResultPage'
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
           <Route path="/admin" element={<AdminPage />} /> {/* New Admin Page Route */}
           {/* Form Page */}
           <Route path="/form" element={<FormPage />} />
+          {/* Diagnosis Result Page  */}
+          <Route path="/diagnosis" element={<Diagnosis />} />
         </Routes>
         <FooterPage />
       </div>
