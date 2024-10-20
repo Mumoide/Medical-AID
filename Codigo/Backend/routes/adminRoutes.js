@@ -1,12 +1,12 @@
 // routes/adminRoutes.js
 const express = require('express');
 const router = express.Router();
-const pool = require('../db');
+const pool = require('../db'); // Adjust the path if db.js is in a different folder
 
 // Route to fetch all users
-router.get('/users', async (req, res) => {
+router.get('/admin/users', async (req, res) => {
   try {
-    const result = await pool.query('SELECT id, nombre, apellidos, fecha_nacimiento, genero, altura, telefono, direccion FROM "Users"');
+    const result = await pool.query('SELECT id_user AS id, username, email FROM "Users"');
     res.json(result.rows);
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -14,11 +14,8 @@ router.get('/users', async (req, res) => {
   }
 });
 
-router.get('/test', (req, res) => {
-  res.send('Admin routes are working');
-});
-
-router.get('/test', (req, res) => {
+// Test route to confirm routing
+router.get('/admin/test', (req, res) => {
   res.send('Admin routes are working');
 });
 

@@ -1,55 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './AdminPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const AdminPage = () => {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/admin/users');
-        if (!response.ok) {
-          throw new Error('Failed to fetch users');
-        }
-        const data = await response.json();
-        setUsers(data);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    };
-
-    // Fetch users from the backend
-    fetchUsers();
-  }, []);
+  const navigate = useNavigate();
 
   return (
     <div className="admin-page">
-      <h1>Admin: Manage Users</h1>
-      <table className="users-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Email</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.nombre}</td>
-              <td>{user.apellidos}</td>
-              <td>{user.correo}</td>
-              <td>
-                <button>Edit</button>
-                <button>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {/* Header section with an image */}
+      <header className="admin-header">
+        <div className="admin-header-image-container">
+          <img src="/images/backgrounds/background-image.jpeg" alt="Admin Header" className="admin-header-image" />
+          <div className="header-overlay">
+            <h1>Administración de Usuarios</h1>
+            <p>Administra y monitorea a los usuarios, sus diagnósticos y alertas.</p>
+          </div>
+        </div>
+      </header>
+
+      {/* Logo in the middle of the page */}
+      <div className="admin-logo-container">
+        <img src="/images/logos/LogoRound.png" alt="Medical AID Logo" className="admin-logo" />
+      </div>
+
+      {/* Buttons container */}
+      <div className="admin-image-container">
+        <img src="/images/backgrounds/admin-background.jpeg" alt="Admin Background" className="admin-background-image" />
+        <div className="admin-buttons">
+          <div className="admin-action-card">
+            <h2>Administración de Usuarios</h2>
+            <button onClick={() => navigate('/admin/users')}>Ver</button>
+          </div>
+          <div className="admin-action-card">
+            <h2>Dashboard de Diagnósticos</h2>
+            <button>Ver</button>
+          </div>
+          <div className="admin-action-card">
+            <h2>Alertas</h2>
+            <button>Ver</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
