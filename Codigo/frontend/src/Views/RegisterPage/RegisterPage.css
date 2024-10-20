@@ -65,7 +65,8 @@
   font-family: "Montserrat", sans-serif; /* Montserrat for labels */
 }
 
-.register-form input {
+.register-form input,
+.register-form select {
   font-size: 16px;
   padding: 10px;
   margin-top: 5px;
@@ -76,7 +77,8 @@
   font-family: "Montserrat", sans-serif; /* Montserrat for inputs */
 }
 
-.register-form input::placeholder {
+.register-form input::placeholder,
+.register-form select::placeholder {
   font-family: "Montserrat", sans-serif; /* Montserrat for placeholders */
   color: #888; /* Placeholder color */
 }
@@ -103,12 +105,14 @@
   width: 100%;
 }
 
-.two-column input {
+.two-column input,
+.register-form select {
   width: 100%;
 }
 
 /* Two-column inputs */
-.two-column label input {
+.two-column label input,
+.register-form select {
   width: 100%;
 }
 
@@ -165,7 +169,8 @@
     flex-direction: column;
   }
 
-  .two-column input {
+  .two-column input,
+  .register-form select {
     width: 100%;
   }
 }
@@ -179,7 +184,8 @@
 }
 
 /* Adjust individual input fields */
-.register-form input {
+.register-form input,
+.register-form select {
   font-size: 16px;
   padding: 10px;
   margin-bottom: 10px;

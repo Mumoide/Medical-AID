@@ -2,18 +2,22 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const bodyParser = require('body-parser');
 const adminRoutes = require('./routes/adminRoutes');
 const db = require('./db'); // Database connection
 // console.log('Registering /admin routes');
 const predictionRoutes = require('./routes/predictionRoutes');
 const symptomsRoutes = require('./routes/symptomsRoutes');
 const diseaseRoutes = require('./routes/diseaseRoutes')
+const userRoutes = require('./routes/userRoutes');
 app.use('/admin', adminRoutes);
 
 // Middleware configuration
 app.use(cors({ origin: 'http://localhost:3000', methods: ['GET', 'POST'], credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Middleware
+app.use(bodyParser.json());
 
 // Test route to check DB connection
 app.get('/test-db', async (req, res) => {
@@ -35,6 +39,7 @@ app.use('/admin', adminRoutes); // Admin routes with /admin prefix
 app.use('/api', predictionRoutes); // Use the prediction route
 app.use('/api', symptomsRoutes); // Use the symptoms route
 app.use('/api/disease', diseaseRoutes)
+app.use('/api/users', userRoutes);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
