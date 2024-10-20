@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
-const { Users, UserRoles, UserProfiles } = require('../models'); // Import UserProfiles model
+const { Users, UserRoles, UserProfiles, Sessions } = require('../models'); // Import UserProfiles model
+const jwt = require('jsonwebtoken'); // Import jsonwebtoken
 
 // Function to validate the form data
 const validateForm = (email, password, profile) => {
@@ -27,7 +28,7 @@ const validateForm = (email, password, profile) => {
     return { isValid: false, message: "La fecha de nacimiento no puede ser mayor de 110 años." };
   }
 
-  if (!['Masculino', 'Femenino', 'Prefiero no decirlo'].includes(profile.gender)) {
+  if (profile.gender && (!['Masculino', 'Femenino', 'Prefiero no decirlo'].includes(profile.gender))) {
     return { isValid: false, message: "Género inválido." };
   }
 
@@ -121,6 +122,68 @@ exports.registerUser = async (req, res) => {
     });
   } catch (error) {
     console.error('Error registering user:', error);
+    return res.status(500).json({ error: 'Error del servidor' });
+  }
+};
+
+// Function to handle user login
+exports.loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Check if the user with the given email exists
+    const user = await Users.findOne({ where: { email } });
+    if (!user) {
+      return res.status(400).json({ error: 'Correo o contraseña incorrectos' });
+    }
+
+    // Compare the provided password with the hashed password stored in the database
+    const isPasswordValid = await bcrypt.compare(password, user.password_hash);
+    if (!isPasswordValid) {
+      return res.status(400).json({ error: 'Correo o contraseña incorrectos' });
+    }
+
+    // If credentials are valid, generate a token
+    const sessionToken = jwt.sign({ id_user: user.id_user, email: user.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
+
+    // Get current time and expiration time as full datetimes
+    const now = new Date(); // Current datetime
+    const expirationTime = new Date(now.getTime() + 60 * 60 * 1000); // Add 1 hour to the current time
+
+    // Store the session in the database with full datetimes
+    await Sessions.create({
+      id_user: user.id_user,
+      session_token: sessionToken,
+      created_at: now.toISOString(), // Full datetime for created_at
+      expires_at: expirationTime.toISOString(), // Full datetime for expires_at
+      updated_at: now.toISOString(), // Full datetime for updated_at
+    });
+
+    // Return the token and user information
+    return res.status(200).json({
+      message: 'Inicio de sesión exitoso',
+      token: sessionToken, // Return the token
+      userId: user.id_user,
+      email: user.email,
+    });
+  } catch (error) {
+    console.error('Error during login:', error);
+    return res.status(500).json({ error: 'Error del servidor' });
+  }
+};
+
+
+
+exports.logoutUser = async (req, res) => {
+  const token = req.headers['authorization'];
+
+  try {
+    // Eliminar la sesión de la base de datos
+    await Sessions.destroy({ where: { session_token: token } });
+
+    return res.status(200).json({ message: 'Sesión cerrada correctamente' });
+  } catch (error) {
+    console.error('Error during logout:', error);
     return res.status(500).json({ error: 'Error del servidor' });
   }
 };

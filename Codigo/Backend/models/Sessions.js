@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define('Sessions', {
     id_session: {
       autoIncrement: true,
@@ -21,14 +21,25 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     expires_at: {
-      type: DataTypes.DATEONLY,
-      allowNull: false
+      type: Sequelize.DATE,
+      allowNull: true
+    }
+    ,
+    updated_at: {
+      type: Sequelize.DATE,
+      allowNull: true
+    }
+    ,
+    created_at: {
+      type: Sequelize.DATE,
+      allowNull: true
     }
   }, {
     sequelize,
     tableName: 'Sessions',
     schema: 'public',
-    timestamps: true,
+    timestamps: false,
+    underscored: true,
     indexes: [
       {
         name: "Sessions_pkey",
@@ -39,13 +50,6 @@ module.exports = function(sequelize, DataTypes) {
       },
       {
         name: "sessions_id_user_index",
-        fields: [
-          { name: "id_user" },
-        ]
-      },
-      {
-        name: "sessions_id_user_unique",
-        unique: true,
         fields: [
           { name: "id_user" },
         ]

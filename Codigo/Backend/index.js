@@ -10,6 +10,7 @@ const predictionRoutes = require('./routes/predictionRoutes');
 const symptomsRoutes = require('./routes/symptomsRoutes');
 const diseaseRoutes = require('./routes/diseaseRoutes')
 const userRoutes = require('./routes/userRoutes');
+const authenticateToken = require('./middleware/authMiddleware'); // Import the middleware
 app.use('/admin', adminRoutes);
 
 // Middleware configuration

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Use react-router-dom's useNavigate hook
 import "./RegisterPage.css";
 import axios from "axios"; // Import axios
 import { ToastContainer, toast } from "react-toastify";
@@ -7,6 +8,15 @@ import { FaCheck } from "react-icons/fa"; // Import the check icon
 import Swal from "sweetalert2";
 
 const RegisterPage = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+  // Check if the user is already logged in and redirect if necessary
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      // If the user is logged in, redirect to the homepage
+      navigate("/");
+    }
+  }, [navigate]);
   const [formData, setFormData] = useState({
     nombre: "",
     apellidoPaterno: "",
