@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define('Users', {
     id_user: {
       autoIncrement: true,
@@ -24,6 +24,7 @@ module.exports = function(sequelize, DataTypes) {
     tableName: 'Users',
     schema: 'public',
     timestamps: true,
+    underscored: true,
     indexes: [
       {
         name: "Users_pkey",
