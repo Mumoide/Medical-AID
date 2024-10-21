@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
+
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('Users', {
+  const Users = sequelize.define('Users', {
     id_user: {
       autoIncrement: true,
       type: DataTypes.BIGINT,
@@ -47,4 +48,22 @@ module.exports = function (sequelize, DataTypes) {
       },
     ]
   });
+
+  // Associations
+  Users.associate = function (models) {
+    // Users has one UserProfile
+    Users.hasOne(models.UserProfiles, {
+      foreignKey: 'id_user',
+      as: 'profile', // Use this alias in the include statement
+    });
+
+
+    // Users has many UserRoles
+    Users.hasMany(models.UserRoles, {
+      foreignKey: 'id_user',
+      as: 'roles', // Optional alias for accessing UserRoles
+    });
+  };
+
+  return Users;
 };

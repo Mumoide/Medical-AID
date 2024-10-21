@@ -13,7 +13,7 @@ function Navbar({ isLoggedIn, userEmail, onLogout }) {
       <ul className="nav-list left-nav">
         <li className="nav-item"><a href="/">Inicio</a></li>
         <li className="nav-item"><a href="#proyectos">Proyectos</a></li>
-        <li className="nav-item"><a href="#equipo">Equipo</a></li>
+        <li className="nav-item"><a href="/admin">Administración</a></li>
       </ul>
 
       <div className="navbar-logo">
@@ -52,7 +52,7 @@ function Navbar({ isLoggedIn, userEmail, onLogout }) {
           <div className="dropdown-menu">
             <a className="dropdown-item" href="#inicio">Inicio</a>
             <a className="dropdown-item" href="#proyectos">Proyectos</a>
-            <a className="dropdown-item" href="#equipo">Equipo</a>
+            <a className="dropdown-item" href="#/admin">Administración</a>
             <a className="dropdown-item" href="#nosotros">Nosotros</a>
             {!isLoggedIn ? (
               <>

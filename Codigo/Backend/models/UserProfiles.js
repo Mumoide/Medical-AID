@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('UserProfiles', {
+module.exports = function (sequelize, DataTypes) {
+  const UserProfiles = sequelize.define('UserProfiles', {
     id_profile: {
       autoIncrement: true,
       type: DataTypes.BIGINT,
@@ -80,4 +80,14 @@ module.exports = function(sequelize, DataTypes) {
       },
     ]
   });
+
+  // // In userProfiles.js
+  // UserProfiles.associate = function (models) {
+  //   UserProfiles.belongsTo(models.Users, {
+  //     foreignKey: 'id_user',
+  //     as: 'user', // The reverse association
+  //   });
+  // };
+
+  return UserProfiles;
 };

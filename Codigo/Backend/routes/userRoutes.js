@@ -6,5 +6,7 @@ const userController = require('../controllers/userController'); // Import userC
 router.post('/register', userController.registerUser); // Use registerUser method
 // Route to handle user login
 router.post('/login', userController.loginUser); // Use loginUser method
+// Route to retrieve all users and their roles
+router.get('/users', userController.getAllUsers);
 
 module.exports = router;

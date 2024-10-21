@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs');
-const { Users, UserRoles, UserProfiles, Sessions } = require('../models'); // Import UserProfiles model
+const { Users, UserProfiles, UserRoles, Roles, Sessions } = require('../models'); // Import UserProfiles model
 const jwt = require('jsonwebtoken'); // Import jsonwebtoken
-
 // Function to validate the form data
 const validateForm = (email, password, profile) => {
   const currentYear = new Date().getFullYear();
@@ -187,3 +186,40 @@ exports.logoutUser = async (req, res) => {
     return res.status(500).json({ error: 'Error del servidor' });
   }
 };
+
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await Users.findAll({
+      attributes: ['id_user', 'email', 'created_at'],
+      include: [
+        {
+          model: UserProfiles,
+          as: 'profile', // Alias for the association
+          attributes: ['names', 'last_names'],
+        },
+        {
+          model: UserRoles,
+          as: 'roles', // Alias for UserRoles
+          attributes: ['id_role'],
+          include: [
+            {
+              model: Roles,
+              as: 'role', // Alias for Roles
+              attributes: ['role_name'],
+            },
+          ],
+        },
+      ],
+      logging: console.log, // Logs the SQL query to the console
+    });
+
+
+    // Send the result back to the client
+    res.status(200).json(users);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ error: 'Error fetching users' });
+  }
+};
+
