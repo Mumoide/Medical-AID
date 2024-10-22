@@ -99,14 +99,15 @@
 }
 
 /* Show Dropdown Button on Mobile */
-@media (max-width: 1000px) {
+@media (max-width: 1015px) {
   .navbar {
     margin: 20px 10px auto;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 915px) {
   .navbar {
-    margin: 20px auto;
+    margin: 20px 25px auto;
+    width: 85%;
   }
   .nav-list {
     display: none; /* Hide desktop nav links */
@@ -117,9 +118,17 @@
   }
 }
 
+@media (max-width: 700px) {
+  .navbar {
+    margin: 20px 25px auto;
+    width: 80%;
+  }
+}
+
 @media (max-width: 480px) {
   .navbar {
-    margin: 20px auto;
+    margin: 20px 3px auto;
+    width: 75%;
   }
   .navbar-logo img {
     height: 25px; /* Smaller logo for smaller screens */

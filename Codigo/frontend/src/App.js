@@ -7,6 +7,7 @@ import RegisterPage from './Views/RegisterPage/RegisterPage';
 import LoginForm from './Views/LoginForm/LoginForm';
 import AdminPage from './Views/AdminPage/AdminPage'; // Import the AdminPage component
 import UsersAdmin from './Views/AdminPage/Users'
+import CreateUserAdmin from './Views/AdminPage/CreateUser'
 import FormPage from './Views/HardForm/SymptomsForm'
 import HomePage from './Views/HomePage/HomePage'
 import FooterPage from './Components/Footer/Footer'
@@ -49,7 +50,7 @@ function App() {
           {/* Admin Page */}
           <Route path="/admin" element={<AdminPage />} /> {/* New Admin Page Route */}
           <Route path="/admin/users" element={<UsersAdmin />} />
-
+          <Route path='/admin/create' element={<CreateUserAdmin />} />
           {/* Form Page */}
           <Route path="/form" element={<FormPage />} />
           {/* Diagnosis Result Page  */}

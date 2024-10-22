@@ -223,3 +223,66 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
+
+// Function to register an admin user
+exports.registerAdmin = async (req, res) => {
+  const { email, password, profile } = req.body;
+
+  try {
+    // Validate form data (reuse the existing validateForm function)
+    const validation = validateForm(email, password, profile);
+    if (!validation.isValid) {
+      return res.status(400).json({ error: validation.message });
+    }
+
+    // Check if the email already exists
+    const existingUser = await Users.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json({ error: 'Correo ya registrado en el sistema.' });
+    }
+
+    // Hash the password
+    const salt = await bcrypt.genSalt(10);
+    const password_hash = await bcrypt.hash(password, salt);
+
+    // Create the user
+    const newUser = await Users.create({
+      email,
+      password_hash,
+    });
+
+    // Assign the "Admin" role (id_role = 2)
+    await UserRoles.create({
+      id_user: newUser.id_user, // The id_user of the newly created user
+      id_role: 2,               // Assign role id 2 (Admin)
+    });
+
+    // Handle optional fields by replacing empty strings with null
+    const height = profile.height ? profile.height : null;
+    const weight = profile.weight ? profile.weight : null;
+    const gender = profile.gender ? profile.gender : null;
+
+    // Insert user profile data into UserProfiles
+    await UserProfiles.create({
+      id_user: newUser.id_user, // Use the id_user from the newly created user
+      names: profile.names,
+      last_names: profile.last_names,
+      birthdate: profile.birthdate,
+      gender: gender,
+      height: height,
+      weight: weight,
+      phone_number: profile.phone_number,
+      address: profile.address,
+      comune: profile.comune,
+    });
+
+    // Return a success response
+    return res.status(201).json({
+      message: 'Admin registrado con éxito',
+      userId: newUser.id_user,
+    });
+  } catch (error) {
+    console.error('Error registering admin:', error);
+    return res.status(500).json({ error: 'Error del servidor' });
+  }
+};
