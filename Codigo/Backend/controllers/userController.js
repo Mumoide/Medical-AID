@@ -313,3 +313,54 @@ exports.deleteUser = async (req, res) => {
     return res.status(500).json({ error: 'Error del servidor' });
   }
 };
+
+// Function to fetch all user data by user_id
+exports.getUserById = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    // Find the user by id with related profile and roles data
+    const user = await Users.findOne({
+      where: { id_user: userId },
+      include: [
+        {
+          model: UserProfiles,
+          as: 'profile', // Alias set in the Users model
+          attributes: [
+            'names',
+            'last_names',
+            'birthdate',
+            'weight',
+            'height',
+            'gender',
+            'address',
+            'comune',
+            'phone_number',
+          ], // Select specific fields from the UserProfiles table
+        },
+        {
+          model: UserRoles,
+          as: 'roles', // Alias set in the Users model
+          include: [
+            {
+              model: Roles,
+              as: 'role', // Alias set in the UserRoles model
+              attributes: ['role_name'], // Select specific fields from the Roles table
+            },
+          ],
+        },
+      ],
+      attributes: ['id_user', 'email', 'active'], // Select specific fields from the Users table
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Return the user data in the response
+    res.json(user);
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).json({ error: 'Error fetching user data' });
+  }
+};

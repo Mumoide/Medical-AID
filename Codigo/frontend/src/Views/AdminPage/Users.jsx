@@ -126,7 +126,12 @@ const Users = () => {
       Header: "Actions",
       Cell: ({ row }) => (
         <div className="icon-buttons">
-          <FaEye />
+          <FaEye
+            style={{ cursor: "pointer" }}
+            onClick={() =>
+              (window.location.href = `user/${row.original.id_user}`)
+            }
+          />
           <FaEdit />
           {/* Add onClick handler to FaTrash */}
           <FaTrash
