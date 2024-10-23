@@ -8,6 +8,8 @@ router.post('/register', userController.registerUser); // Use registerUser metho
 router.post('/login', userController.loginUser); // Use loginUser method
 // Route to retrieve all users and their roles
 router.get('/users', userController.getAllUsers);
+// Route to handle logical deletion of a user
+router.delete('/:id_user', userController.deleteUser);
 // Route to register an admin user
 router.post('/register-admin', userController.registerAdmin);
 // Route to logout user

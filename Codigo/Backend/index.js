@@ -13,8 +13,15 @@ const userRoutes = require('./routes/userRoutes');
 const authenticateToken = require('./middleware/authMiddleware'); // Import the middleware
 app.use('/admin', adminRoutes);
 
+
+const corsOptions = {
+  origin: 'http://localhost:3000', // Allow the front-end domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+  credentials: true,
+};
 // Middleware configuration
-app.use(cors({ origin: 'http://localhost:3000', methods: ['GET', 'POST'], credentials: true }));
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Middleware

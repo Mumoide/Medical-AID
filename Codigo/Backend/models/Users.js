@@ -19,7 +19,12 @@ module.exports = function (sequelize, DataTypes) {
     password_hash: {
       type: DataTypes.STRING(255),
       allowNull: false
-    }
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+    },
   }, {
     sequelize,
     tableName: 'Users',

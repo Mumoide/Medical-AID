@@ -2,11 +2,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useTable, useFilters, useSortBy, usePagination } from "react-table";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import "./Users.css";
+import axios from "axios"; // Import axios for making the delete request
 import { useWindowWidth } from "./useWindowWidth"; // Import the custom hook correctly
+import Swal from "sweetalert2"; // Import SweetAlert
 
 const Users = () => {
   const [data, setData] = useState([]);
-  const [roleFilter, setRoleFilter] = useState(""); // State to filter by role
+  const [roleFilter, setRoleFilter] = useState("User"); // State to filter by role
   const windowWidth = useWindowWidth(); // Get window width
 
   useEffect(() => {
@@ -15,6 +17,51 @@ const Users = () => {
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
+
+  // Function to handle deleting a user (logical delete, updating 'active' field)
+  const handleDeleteUser = async (id_user) => {
+    // Show SweetAlert confirmation dialog
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This action will deactivate the user.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, deactivate it!",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // Send DELETE request to the backend (logical delete)
+          await axios.delete(`http://localhost:3001/api/users/${id_user}`);
+
+          // After successful deletion, refetch the user data to reflect changes
+          const updatedData = await fetch(
+            "http://localhost:3001/api/users/users"
+          )
+            .then((response) => response.json())
+            .catch((error) => {
+              console.error("Error fetching updated data:", error);
+              throw error;
+            });
+
+          // Update the table with the refreshed data
+          setData(updatedData);
+
+          // Show a success notification
+          Swal.fire(
+            "Deactivated!",
+            "The user has been deactivated.",
+            "success"
+          );
+        } catch (error) {
+          console.error("Error deactivating user:", error);
+          Swal.fire("Error!", "Failed to deactivate the user.", "error");
+        }
+      }
+    });
+  };
 
   // Apply the role filter based on the state
   const filteredData = useMemo(() => {
@@ -51,7 +98,7 @@ const Users = () => {
     ];
 
     // Only show Last Names if window width is greater than 768px
-    if (windowWidth > 1024) {
+    if (windowWidth > 1200) {
       baseColumns.push({
         Header: "Last Names",
         accessor: (row) => row.profile?.last_names || "N/A",
@@ -59,19 +106,19 @@ const Users = () => {
     }
 
     // Only show Names if window width is greater than 1024px
-    if (windowWidth > 768) {
+    if (windowWidth > 1024) {
       baseColumns.push({
         Header: "Names",
         accessor: (row) => row.profile?.names || "N/A",
       });
     }
 
-    // Only show Role if window width is greater than 1200px
-    if (windowWidth > 1200) {
+    // Only show the Active column if window width is greater than 1200px
+    if (windowWidth > 768) {
       baseColumns.push({
-        Header: "Role",
-        accessor: (row) =>
-          row.roles.length > 0 ? row.roles[0].role.role_name : "N/A",
+        Header: "Active", // Display the 'Active' column
+        accessor: "active", // This should match the key in your data
+        Cell: ({ value }) => (value === true ? "Active" : "Inactive"), // Display 'Active' or 'Inactive'
       });
     }
 
@@ -81,7 +128,11 @@ const Users = () => {
         <div className="icon-buttons">
           <FaEye />
           <FaEdit />
-          <FaTrash />
+          {/* Add onClick handler to FaTrash */}
+          <FaTrash
+            onClick={() => handleDeleteUser(row.original.id_user)}
+            style={{ cursor: "pointer" }}
+          />
         </div>
       ),
       disableFilters: true, // Disable filters for this column

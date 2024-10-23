@@ -191,7 +191,7 @@ exports.logoutUser = async (req, res) => {
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await Users.findAll({
-      attributes: ['id_user', 'email', 'created_at'],
+      attributes: ['id_user', 'email', 'created_at', 'active'],
       include: [
         {
           model: UserProfiles,
@@ -283,6 +283,33 @@ exports.registerAdmin = async (req, res) => {
     });
   } catch (error) {
     console.error('Error registering admin:', error);
+    return res.status(500).json({ error: 'Error del servidor' });
+  }
+};
+
+// Function to logically delete a user by setting 'active' to 0
+exports.deleteUser = async (req, res) => {
+  const { id_user } = req.params; // Extract the id_user from the request params
+
+  try {
+    // Find the user by id
+    const user = await Users.findOne({ where: { id_user } });
+
+    // If the user does not exist, return an error response
+    if (!user) {
+      return res.status(404).json({ error: 'Usuario no encontrado.' });
+    }
+
+    // Perform a logical deletion by updating the 'active' column
+    await Users.update(
+      { active: 0 }, // Set the 'active' column to 0
+      { where: { id_user } } // Where condition to find the user
+    );
+
+    // Return a success response
+    return res.status(200).json({ message: 'Usuario eliminado lógicamente con éxito.' });
+  } catch (error) {
+    console.error('Error deleting user:', error);
     return res.status(500).json({ error: 'Error del servidor' });
   }
 };
