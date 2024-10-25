@@ -187,16 +187,20 @@
 .beneficio {
   background-color: white;
   border-radius: 20px;
-  padding: 20px;
+  padding: 80px;
   max-width: 300px;
   margin: 20px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
 }
 
 .beneficio img {
-  max-width: 80px;
+  max-width: 400px;
   margin-bottom: 15px;
+  height: auto;
+  justify-content: center;
+  align-items: center;
 }
 
 .beneficio h3 {
@@ -302,4 +306,326 @@
 
 .footer-copyright {
   font-size: 0.9rem;
+}
+
+/* Optimized for Mobile Design */
+
+/* Hero Section */
+.hero-content h1 {
+  font-size: 8vw; /* Dynamic heading size based on viewport width */
+}
+
+.hero-content p {
+  font-size: 4vw; /* Dynamic paragraph size */
+}
+
+@media (max-width: 480px) {
+  .cta-button {
+    padding: 10px 20px;
+    font-size: 1rem; /* Adjust button size for mobile */
+  }
+
+  .funciona-image img {
+    width: 100%; /* Full width for better mobile fit */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  .suscripcion-form input {
+    width: 90%; /* Adjust input field size for mobile */
+    padding: 15px;
+  }
+
+  .hero-section {
+    padding: 20px; /* Add padding for mobile */
+  }
+
+  .funciona-content {
+    flex-direction: column; /* Stack content vertically on small screens */
+    text-align: center;
+  }
+
+  .beneficio {
+    max-width: 100%;
+    padding: 40px; /* Reduce padding for mobile */
+  }
+
+  .funciona-text h2 {
+    font-size: 1.5rem; /* Adjust heading size for mobile */
+  }
+
+  .funciona-text p {
+    font-size: 1rem; /* Adjust paragraph size for mobile */
+  }
+}
+
+/* General Responsive Updates */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 6vw; /* Smaller font size on medium screens */
+  }
+
+  .hero-content p {
+    font-size: 3vw;
+  }
+
+  .funciona-image img {
+    max-width: 250px; /* Adjust image size for medium screens */
+  }
+}
+
+/* Updated Beneficios Section for Mobile */
+.beneficios-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap; /* Ensure that cards wrap on smaller screens */
+}
+
+.beneficio {
+  background-color: white;
+  border-radius: 20px;
+  padding: 40px; /* Reduced padding for smaller screens */
+  width: 100%; /* Set width to 100% for smaller screens */
+  max-width: 300px;
+  margin: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.beneficio img {
+  width: 100%; /* Full width for responsiveness */
+  height: auto;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .beneficios-content {
+    flex-direction: column;
+    align-items: center; /* Center the cards on mobile */
+  }
+
+  .beneficio {
+    max-width: 100%; /* Ensure full width on mobile */
+    margin-bottom: 20px;
+  }
+
+  .beneficio img {
+    max-width: 250px; /* Adjust image size for medium screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .beneficio {
+    max-width: 100%; /* Full width for very small screens */
+    padding: 20px; /* Further reduce padding for smaller screens */
+  }
+
+  .beneficio img {
+    max-width: 100%; /* Ensure the image scales properly */
+    height: auto;
+  }
+}
+
+/* General fix to ensure elements do not overflow on mobile */
+* {
+  box-sizing: border-box;
+}
+
+/* For sections like .funciona-content that may still not be fully responsive */
+.funciona-content {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  text-align: center; /* Ensure text is centered */
+  gap: 20px;
+}
+
+.funciona-text, .funciona-image {
+  width: 100%; /* Ensure full width for both text and image sections */
+}
+
+/* Ensure buttons and text are scaling properly */
+.ver-mas-button {
+  font-size: 1rem; /* Ensure button stays readable */
+  padding: 10px 20px;
+}
+
+@media (max-width: 1024px) {
+  /* For large mobile screens like iPhone 14 Pro Max */
+  .funciona-content {
+    flex-direction: column; /* Stack items vertically */
+    padding: 20px; /* Add some padding */
+  }
+
+  .beneficio {
+    max-width: 100%; /* Ensure cards take full width on larger mobile screens */
+    padding: 20px;
+  }
+
+  .beneficio img {
+    max-width: 100%; /* Ensure images are scaling properly */
+    height: auto;
+  }
+
+  .step {
+    max-width: 100%; /* Ensure the steps section adapts for mobile */
+  }
+
+  /* Ensure that hero section text is scaling appropriately */
+  .hero-content h1 {
+    font-size: 6vw; /* Dynamically adjust font size based on viewport width */
+  }
+
+  .hero-content p {
+    font-size: 4vw;
+  }
+}
+
+/* Cómo Funciona Section */
+.funciona-content {
+  display: flex;
+  justify-content: space-between; /* Space between image and text */
+  align-items: center; /* Vertically center content */
+  gap: 20px; /* Adjust spacing between image and text */
+}
+
+.funciona-image {
+  flex: 1; /* Ensure the image takes up one portion of the available space */
+}
+
+.funciona-text {
+  flex: 1; /* Ensure the text takes up one portion of the available space */
+  text-align: left; /* Align text to the left */
+}
+
+.funciona-text h2 {
+  font-size: 2.5rem; /* Ensure heading size */
+  margin-bottom: 10px;
+}
+
+.funciona-text p {
+  font-size: 1.2rem; /* Ensure paragraph size */
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .funciona-content {
+    flex-direction: column; /* Stack image and text vertically on smaller screens */
+    text-align: center;
+  }
+
+  .funciona-text {
+    margin-left: 0;
+    text-align: center; /* Center text for smaller screens */
+  }
+
+  .funciona-image img {
+    max-width: 100%; /* Make the image full width for smaller screens */
+  }
+}
+
+/* Hero Section for Diagnosticos Remotos */
+.hero-content h1 {
+  font-size: 4rem; /* Reduce the heading size for desktop */
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.5rem; /* Smaller paragraph text */
+  margin-bottom: 30px;
+}
+
+.cta-button {
+  font-size: 1rem; /* Adjust button font size */
+}
+
+/* Media query for smaller screens to keep the text responsive */
+@media (max-width: 1024px) {
+  .hero-content h1 {
+    font-size: 3rem; /* Further reduce heading size for smaller screens */
+  }
+
+  .hero-content p {
+    font-size: 1.2rem; /* Adjust paragraph size for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2rem; /* Even smaller heading size for tablets */
+  }
+
+  .hero-content p {
+    font-size: 1rem; /* Smaller paragraph text */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.8rem; /* Mobile heading size */
+  }
+
+  .hero-content p {
+    font-size: 1rem; /* Mobile paragraph size */
+  }
+
+  .cta-button {
+    font-size: 0.9rem; /* Ensure button stays legible on mobile */
+  }
+}
+
+/* Cómo Funciona Section */
+.funciona-content {
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  gap: 4px; /* Space between image and text */
+  padding: 20px; /* Add some padding */
+}
+
+.funciona-image {
+  flex: 1; /* Allow the image to take up equal space */
+  display: flex;
+  justify-content: center; 
+}
+
+.funciona-image img {
+  max-width: 400px; /* Limit image width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Optional: Add rounded corners */
+}
+
+.funciona-text {
+  flex: 1; /* Allow the text to take up equal space */
+  text-align: center; /* Align text to the left */
+}
+
+.funciona-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.funciona-text p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .funciona-content {
+    flex-direction: column; /* Stack image and text vertically */
+    text-align: center; /* Center text on smaller screens */
+  }
+
+  .funciona-text {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .funciona-image img {
+    max-width: 200px; /* Reduce image size for smaller screens */
+  }
 }

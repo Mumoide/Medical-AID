@@ -12,6 +12,8 @@ import FormPage from './Views/HardForm/SymptomsForm'
 import HomePage from './Views/HomePage/HomePage'
 import FooterPage from './Components/Footer/Footer'
 import Diagnosis from './Views/DiagnosisResultPage/DiagnosisResultPage'
+import Spinner from './Spinner'; // Import the Spinner component
+
 // import ProtectedRoute from './ProtectedRoute'; // Protección de rutas
 
 function App() {
@@ -55,6 +57,8 @@ function App() {
           <Route path="/form" element={<FormPage />} />
           {/* Diagnosis Result Page  */}
           <Route path="/diagnosis" element={<Diagnosis />} />
+           {/* Spinner Page */}
+           <Route path="/spinner" element={<Spinner />} /> {/* Add Spinner route here */}
         </Routes>
         <FooterPage />
       </div>

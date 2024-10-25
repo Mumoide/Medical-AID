@@ -47,18 +47,7 @@
   font-size: 1.2rem;
 }
 
-/* Logo in the middle */
-.admin-logo-container {
-  display: flex;
-  justify-content: center;
-  margin-top: -80px; /* Adjust depending on positioning */
-  margin-bottom: 40px;
-}
 
-.admin-logo {
-  width: 150px;
-  height: auto;
-}
 
 /* Image container and buttons */
 .admin-image-container {
@@ -95,6 +84,14 @@
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
+}
+
+/* Specific styling for the alert icon inside the third card */
+.admin-action-card:nth-child(3) img {
+  width: 50px;  /* Adjust the size */
+  height: auto;  /* Maintain aspect ratio */
+  float: left;  /* Moves the icon to the left */
+  margin-right: 150px;  /* Add some space between the icon and the text */
 }
 
 .admin-action-card:hover {

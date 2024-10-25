@@ -17,12 +17,9 @@ const AdminPage = () => {
           </div>
         </div>
       </header>
-
-      {/* Logo in the middle of the page */}
-      <div className="admin-logo-container">
-        <img src="/images/logos/LogoRound.png" alt="Medical AID Logo" className="admin-logo" />
-      </div>
-
+      <div className="spacer"></div>
+      <div className="spacer"></div>
+      <div className="spacer"></div>
       {/* Buttons container */}
       <div className="admin-image-container">
         <img src="/images/backgrounds/admin-background.jpeg" alt="Admin Background" className="admin-background-image" />
@@ -36,6 +33,7 @@ const AdminPage = () => {
             <button>Ver</button>
           </div>
           <div className="admin-action-card">
+            <img src="/images/icons/alert-icon.png" alt="Alerts" />
             <h2>Alertas</h2>
             <button>Ver</button>
           </div>
