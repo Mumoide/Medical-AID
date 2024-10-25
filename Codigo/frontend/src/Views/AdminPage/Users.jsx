@@ -7,9 +7,9 @@ import { useWindowWidth } from "./useWindowWidth"; // Import the custom hook cor
 import Swal from "sweetalert2"; // Import SweetAlert
 
 const Users = () => {
+  const windowWidth = useWindowWidth(); // Get window width
   const [data, setData] = useState([]);
   const [roleFilter, setRoleFilter] = useState("User"); // State to filter by role
-  const windowWidth = useWindowWidth(); // Get window width
 
   useEffect(() => {
     // Fetch the user data from the backend
