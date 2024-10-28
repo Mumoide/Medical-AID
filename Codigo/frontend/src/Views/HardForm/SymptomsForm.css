@@ -22,3 +22,21 @@
     transform: rotate(360deg);
   }
 }
+
+.back-button {
+  display: block; /* Make the button a block element */
+  margin: 30px auto; /* Center the button horizontally */
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #393e46; /* Dark gray background */
+  color: white; /* White text color */
+  border: none;
+  border-radius: 5px;
+  text-align: center; /* Ensure text is centered */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.back-button:hover {
+  background-color: #555; /* Slightly lighter gray on hover */
+}

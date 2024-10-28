@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import './Navbar.css';
+import React, { useState } from "react";
+import "./Navbar.css";
 
 function Navbar({ isLoggedIn, userEmail, onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -11,9 +10,15 @@ function Navbar({ isLoggedIn, userEmail, onLogout }) {
   return (
     <nav className="navbar">
       <ul className="nav-list left-nav">
-        <li className="nav-item"><a href="/">Inicio</a></li>
-        <li className="nav-item"><a href="/spinner">Proyectos</a></li>
-        <li className="nav-item"><a href="/admin">Administración</a></li>
+        <li className="nav-item">
+          <a href="/">Inicio</a>
+        </li>
+        <li className="nav-item">
+          <a href="/spinner">Proyectos</a>
+        </li>
+        <li className="nav-item">
+          <a href="/admin">Administración</a>
+        </li>
       </ul>
 
       <div className="navbar-logo">
@@ -21,11 +26,17 @@ function Navbar({ isLoggedIn, userEmail, onLogout }) {
       </div>
 
       <ul className="nav-list right-nav">
-        <li className="nav-item"><a href="/spinner">Nosotros</a></li>
+        <li className="nav-item">
+          <a href="/spinner">Nosotros</a>
+        </li>
         {!isLoggedIn ? (
           <>
-            <li className="nav-item"><a href="/inicio-de-sesion">Iniciar Sesión</a></li>
-            <li className="nav-item"><a href="/registro">Registrarse</a></li>
+            <li className="nav-item">
+              <a href="/inicio-de-sesion">Iniciar Sesión</a>
+            </li>
+            <li className="nav-item">
+              <a href="/registro">Registrarse</a>
+            </li>
           </>
         ) : (
           <>
@@ -35,29 +46,42 @@ function Navbar({ isLoggedIn, userEmail, onLogout }) {
                 href="/"
                 onClick={(e) => {
                   e.preventDefault(); // Prevent default anchor navigation
-                  onLogout();         // Call the logout function
+                  onLogout(); // Call the logout function
                 }}
               >
                 Cerrar Sesión
               </a>
             </li>
-
           </>
         )}
       </ul>
 
       <div className="dropdown">
-        <button className="dropdown-toggle" onClick={toggleMenu}>Menu</button>
+        <button className="dropdown-toggle" onClick={toggleMenu}>
+          Menu
+        </button>
         {isOpen && (
           <div className="dropdown-menu">
-            <a className="dropdown-item" href="/">Inicio</a>
-            <a className="dropdown-item" href="/spinner">Proyectos</a>
-            <a className="dropdown-item" href="/admin">Administración</a>
-            <a className="dropdown-item" href="/spinner">Nosotros</a>
+            <a className="dropdown-item" href="/">
+              Inicio
+            </a>
+            <a className="dropdown-item" href="/spinner">
+              Proyectos
+            </a>
+            <a className="dropdown-item" href="/admin">
+              Administración
+            </a>
+            <a className="dropdown-item" href="/spinner">
+              Nosotros
+            </a>
             {!isLoggedIn ? (
               <>
-                <a className="dropdown-item" href="/inicio-de-sesion">Iniciar Sesión</a>
-                <a className="dropdown-item" href="/registro">Registrarse</a>
+                <a className="dropdown-item" href="/inicio-de-sesion">
+                  Iniciar Sesión
+                </a>
+                <a className="dropdown-item" href="/registro">
+                  Registrarse
+                </a>
               </>
             ) : (
               <>
@@ -67,7 +91,7 @@ function Navbar({ isLoggedIn, userEmail, onLogout }) {
                   href="/"
                   onClick={(e) => {
                     e.preventDefault(); // Prevent default anchor navigation
-                    onLogout();         // Call the logout function
+                    onLogout(); // Call the logout function
                   }}
                 >
                   Cerrar Sesión

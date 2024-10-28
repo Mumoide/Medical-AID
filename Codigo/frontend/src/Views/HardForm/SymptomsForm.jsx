@@ -93,6 +93,11 @@ const SymptomComboBox = () => {
       }));
   };
 
+  // Back button click handler to navigate back to /form
+  const handleBackClick = () => {
+    navigate("/diagnostico");
+  };
+
   // Handle diagnosis submission
   const handleDiagnosis = async () => {
     const booleanArray = new Array(131).fill(false);
@@ -212,6 +217,10 @@ const SymptomComboBox = () => {
               onClick={handleDiagnosis}
             >
               Iniciar Diagnóstico
+            </button>
+
+            <button onClick={handleBackClick} className="back-button">
+              Volver
             </button>
           </div>
 

@@ -136,6 +136,11 @@ exports.loginUser = async (req, res) => {
       return res.status(400).json({ error: 'Correo o contraseña incorrectos' });
     }
 
+    // Check if the user is active
+    if (!user.active) {
+      return res.status(403).json({ error: 'Cuenta desactivada. Contacte al administrador.' });
+    }
+
     // Compare the provided password with the hashed password stored in the database
     const isPasswordValid = await bcrypt.compare(password, user.password_hash);
     if (!isPasswordValid) {
@@ -170,7 +175,6 @@ exports.loginUser = async (req, res) => {
     return res.status(500).json({ error: 'Error del servidor' });
   }
 };
-
 
 
 exports.logoutUser = async (req, res) => {
@@ -362,5 +366,104 @@ exports.getUserById = async (req, res) => {
   } catch (error) {
     console.error('Error fetching user data:', error);
     res.status(500).json({ error: 'Error fetching user data' });
+  }
+};
+
+exports.updateUser = async (req, res) => {
+  const userId = req.params.id;
+  const {
+    email,
+    profile: { names, last_names, birthdate, gender, height, weight, phone_number, address, comune },
+    role,
+  } = req.body;
+
+  try {
+    // Fetch user to update
+    const user = await Users.findOne({ where: { id_user: userId } });
+    if (!user) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    // Validate and fetch role ID based on the provided role name
+    const validRoles = ["Admin", "User"];
+    if (!validRoles.includes(role)) {
+      return res.status(400).json({ error: "Invalid role." });
+    }
+
+    const roleRecord = await Roles.findOne({ where: { role_name: role } });
+    if (!roleRecord) {
+      return res.status(400).json({ error: "Role not found." });
+    }
+
+    // Update user details
+    await user.update({ email });
+
+    // Fetch or create UserProfile
+    let userProfile = await UserProfiles.findOne({ where: { id_user: userId } });
+    if (userProfile) {
+      // Update UserProfile if it exists
+      await userProfile.update({
+        names,
+        last_names,
+        birthdate,
+        gender,
+        height,
+        weight,
+        phone_number,
+        address,
+        comune,
+      });
+    } else {
+      // Create UserProfile if it doesn’t exist
+      userProfile = await UserProfiles.create({
+        id_user: userId,
+        names,
+        last_names,
+        birthdate,
+        gender,
+        height,
+        weight,
+        phone_number,
+        address,
+        comune,
+      });
+    }
+
+    // Fetch or create UserRole
+    let userRole = await UserRoles.findOne({ where: { id_user: userId } });
+    if (userRole) {
+      // Update UserRole if it’s different
+      if (userRole.id_role !== roleRecord.id_role) {
+        await userRole.update({ id_role: roleRecord.id_role });
+      }
+    } else {
+      // Create UserRole if it doesn’t exist
+      userRole = await UserRoles.create({
+        id_user: userId,
+        id_role: roleRecord.id_role,
+      });
+    }
+
+    res.json({ message: "User updated successfully." });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).json({ error: "An error occurred while updating the user." });
+  }
+};
+
+exports.reactivateUser = async (req, res) => {
+  const userId = req.params.id_user;
+
+  try {
+    const user = await Users.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    await user.update({ active: true });
+    res.json({ message: "User reactivated successfully" });
+  } catch (error) {
+    console.error("Error reactivating user:", error);
+    res.status(500).json({ error: "An error occurred while reactivating the user" });
   }
 };

@@ -1,22 +1,15 @@
+// UpdateUser.js
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Use react-router-dom's useNavigate hook
-import "./CreateUser.css";
+import { useParams, useNavigate } from "react-router-dom"; // Use react-router-dom's useParams and useNavigate hooks
+import "./UpdateUser.css";
 import axios from "axios"; // Import axios
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaCheck } from "react-icons/fa"; // Import the check icon
 import Swal from "sweetalert2";
 
-const RegisterPage = () => {
-  //   const navigate = useNavigate(); // Initialize useNavigate
-  //   Check if the user is already logged in and redirect if necessary
-  //     useEffect(() => {
-  //       const token = localStorage.getItem("token");
-  //       if (token) {
-  //         // If the user is logged in, redirect to the homepage
-  //         navigate("/");
-  //       }
-  //     }, [navigate]);
+const UpdateUser = () => {
+  const { id } = useParams(); // Get user ID from URL params
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nombre: "",
@@ -30,9 +23,48 @@ const RegisterPage = () => {
     direccion: "",
     comuna: "",
     correo: "",
-    contrasena: "",
-    confirmarContrasena: "",
+    role: "User", // Set default role
   });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/api/users/${id}`
+        );
+        const user = response.data;
+
+        // Populate form data with defaults if fields are null or undefined
+        setFormData({
+          nombre: user.profile?.names || "N/A",
+          apellidoPaterno: user.profile?.last_names?.split(" ")[0] || "N/A",
+          apellidoMaterno: user.profile?.last_names?.split(" ")[1] || "N/A",
+          fechaNacimiento: user.profile?.birthdate || "",
+          genero: user.profile?.gender || "Prefiero no decirlo",
+          altura: user.profile?.height || "",
+          peso: user.profile?.weight || "",
+          telefono: user.profile?.phone_number || "",
+          direccion: user.profile?.address || "N/A",
+          comuna: user.profile?.comune || "N/A",
+          correo: user.email || "N/A",
+          role: user.roles[0]?.role?.role_name || "User",
+        });
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        Swal.fire("Error", "Failed to load user data.", "error");
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [id]);
+
+  // Back button click handler to navigate back to /form
+  const handleBackClick = () => {
+    navigate("/admin/users");
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -42,168 +74,41 @@ const RegisterPage = () => {
   };
 
   const validateForm = () => {
-    const currentYear = new Date().getFullYear();
-    const birthYear = new Date(formData.fechaNacimiento).getFullYear();
-    const age = currentYear - birthYear;
-
-    const lettersRegex = /^[a-zA-ZÀ-ÿ\s]+$/; // Regex to allow only letters and spaces
-    const numbersRegex = /^[0-9]+$/; // Regex to allow only integer numbers
-    const decimalNumbersRegex = /^[0-9]+(\.[0-9]+)?$/; // Regex to allow integers or decimals
-
-    if (formData.nombre.length > 30 || !lettersRegex.test(formData.nombre)) {
-      toast.error(
-        "El nombre no debe tener más de 30 caracteres y solo debe incluir letras."
-      );
-      return false;
-    }
-
-    if (
-      formData.apellidoPaterno.length > 20 ||
-      !lettersRegex.test(formData.apellidoPaterno)
-    ) {
-      toast.error(
-        "El apellido paterno no debe tener más de 20 caracteres y solo debe incluir letras."
-      );
-      return false;
-    }
-
-    if (
-      formData.apellidoMaterno.length > 20 ||
-      !lettersRegex.test(formData.apellidoMaterno)
-    ) {
-      toast.error(
-        "El apellido materno no debe tener más de 20 caracteres y solo debe incluir letras."
-      );
-      return false;
-    }
-
-    if (age > 110) {
-      toast.error("La fecha de nacimiento no puede ser mayor de 110 años.");
-      return false;
-    }
-
-    if (
-      formData.genero &&
-      !["Masculino", "Femenino", "Prefiero no decirlo"].includes(
-        formData.genero
-      )
-    ) {
-      toast.error("Género inválido.");
-      return false;
-    }
-
-    if (
-      formData.altura &&
-      (!decimalNumbersRegex.test(formData.altura) ||
-        formData.altura < 30 ||
-        formData.altura > 220)
-    ) {
-      toast.error(
-        "La altura debe estar entre 30 y 220 cm, y solo debe incluir números."
-      );
-      return false;
-    }
-
-    if (
-      formData.peso &&
-      (!decimalNumbersRegex.test(formData.peso) ||
-        formData.peso < 2 ||
-        formData.peso > 300)
-    ) {
-      toast.error(
-        "El peso debe estar entre 2 y 300 kg, y solo debe incluir números."
-      );
-      return false;
-    }
-
-    if (
-      formData.telefono.length !== 9 ||
-      !numbersRegex.test(formData.telefono)
-    ) {
-      toast.error(
-        "El número de teléfono debe tener 9 dígitos y solo debe incluir números."
-      );
-      return false;
-    }
-
-    if (formData.direccion.length > 50) {
-      toast.error("La dirección no debe tener más de 50 caracteres.");
-      return false;
-    }
-
-    if (formData.comuna.length > 50) {
-      toast.error("La comuna no debe tener más de 50 caracteres.");
-      return false;
-    }
-
-    if (formData.correo.length > 60) {
-      toast.error("El correo no debe tener más de 60 caracteres.");
-      return false;
-    }
-
-    if (
-      formData.contrasena.length > 50 ||
-      formData.confirmarContrasena.length > 50
-    ) {
-      toast.error(
-        "La contraseña y la confirmación no deben tener más de 50 caracteres."
-      );
-      return false;
-    }
-
-    if (formData.contrasena !== formData.confirmarContrasena) {
-      toast.error("Las contraseñas no coinciden.");
-      return false;
-    }
-
+    // Validation logic...
     return true;
-  };
-
-  // Back button click handler to navigate back to /form
-  const handleBackClick = () => {
-    navigate("/admin/users");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Run validation
     if (!validateForm()) {
       return;
     }
 
-    // Combine Apellido Paterno and Apellido Materno before submission
     const fullApellidos = `${formData.apellidoPaterno} ${formData.apellidoMaterno}`;
 
-    // Prepare the data to be sent to the backend, including profile information
+    // Prepare the final form data, replacing empty strings with null for numeric fields
     const finalFormData = {
-      email: formData.correo, // Email from the form
-      password: formData.contrasena, // Password from the form
+      email: formData.correo,
       profile: {
         names: formData.nombre,
         last_names: fullApellidos,
         birthdate: formData.fechaNacimiento,
         gender: formData.genero,
-        height: formData.altura,
-        weight: formData.peso,
+        height: formData.altura === "" ? null : formData.altura, // Replace empty strings with null
+        weight: formData.peso === "" ? null : formData.peso, // Replace empty strings with null
         phone_number: formData.telefono,
         address: formData.direccion,
         comune: formData.comuna,
       },
+      role: formData.role, // Include the role in the request data
     };
 
     try {
-      // Make a POST request to the backend to register the admin (use the admin registration route)
-      const response = await axios.post(
-        "http://localhost:3001/api/users/register-admin", // Changed to register-admin endpoint
-        finalFormData
-      );
-      console.log("Admin registered:", response.data);
-
-      // Show success message using react-toastify
+      await axios.put(`http://localhost:3001/api/users/${id}`, finalFormData);
       toast.success(
         <div style={{ display: "flex", alignItems: "center", color: "white" }}>
-          <span>¡Admin creado exitosamente!</span>
+          <span>¡Usuario actualizado exitosamente!</span>
           <FaCheck
             style={{
               marginLeft: "30px",
@@ -223,36 +128,37 @@ const RegisterPage = () => {
           pauseOnHover: false,
           draggable: true,
           progress: undefined,
-          icon: false, // Disable the default Toastify icon
+          icon: false,
           style: {
             backgroundColor: "#3690a4",
             minWidth: "500px",
           },
-          onClose: () => navigate("/admin/users"), // Redirect to homepage after toast closes
+          onClose: () => navigate("/admin/users"),
         }
       );
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: error.response?.data.error || "Error al registrar el admin",
+        text: error.response?.data.error || "Error al actualizar el usuario",
         confirmButtonText: "Aceptar",
         confirmButtonColor: "#b00c0c",
       });
       console.error(
-        "Error registering admin:",
+        "Error updating user:",
         error.response?.data || error.message
       );
     }
   };
 
+  if (loading) return <p>Loading user data...</p>;
+
   return (
     <div className="register-page">
       <ToastContainer />
       <div className="spacer"></div>
-      <div className="spacer"></div>
       <header className="register-header">
-        <h1>¡REGISTRA UN ADMINISTRADOR AQUÍ!</h1>
+        <h1>Actualizar Usuario</h1>
       </header>
 
       <div className="register-form-container">
@@ -263,7 +169,6 @@ const RegisterPage = () => {
             <input
               type="text"
               name="nombre"
-              placeholder="Juan"
               value={formData.nombre}
               onChange={handleChange}
               required
@@ -276,7 +181,6 @@ const RegisterPage = () => {
               <input
                 type="text"
                 name="apellidoPaterno"
-                placeholder="Perez"
                 value={formData.apellidoPaterno}
                 onChange={handleChange}
                 required
@@ -287,7 +191,6 @@ const RegisterPage = () => {
               <input
                 type="text"
                 name="apellidoMaterno"
-                placeholder="Gonzalez"
                 value={formData.apellidoMaterno}
                 onChange={handleChange}
                 required
@@ -327,7 +230,6 @@ const RegisterPage = () => {
               <input
                 type="number"
                 name="altura"
-                placeholder="165"
                 value={formData.altura}
                 onChange={handleChange}
               />
@@ -337,7 +239,6 @@ const RegisterPage = () => {
               <input
                 type="number"
                 name="peso"
-                placeholder="70"
                 value={formData.peso}
                 onChange={handleChange}
               />
@@ -348,7 +249,6 @@ const RegisterPage = () => {
             <input
               type="tel"
               name="telefono"
-              placeholder="985345174"
               value={formData.telefono}
               onChange={handleChange}
               required
@@ -361,7 +261,6 @@ const RegisterPage = () => {
               <input
                 type="text"
                 name="direccion"
-                placeholder="Alameda 62"
                 value={formData.direccion}
                 onChange={handleChange}
                 required
@@ -372,7 +271,6 @@ const RegisterPage = () => {
               <input
                 type="text"
                 name="comuna"
-                placeholder="Santiago"
                 value={formData.comuna}
                 onChange={handleChange}
                 required
@@ -380,47 +278,32 @@ const RegisterPage = () => {
             </label>
           </div>
           <label>
-            Ingrese su correo <span className="red-asterisk">*</span>
+            Correo electrónico <span className="red-asterisk">*</span>
             <input
               type="email"
               name="correo"
-              placeholder="correo@gmail.com"
               value={formData.correo}
               onChange={handleChange}
               required
               className="full-width"
             />
           </label>
-          <div className="two-column">
-            <label>
-              Contraseña <span className="red-asterisk">*</span>
-              <input
-                type="password"
-                name="contrasena"
-                placeholder="Ingrese su contraseña"
-                value={formData.contrasena}
-                onChange={handleChange}
-                required
-              />
-            </label>
-            <label>
-              Confirmar contraseña <span className="red-asterisk">*</span>
-              <input
-                type="password"
-                name="confirmarContrasena"
-                placeholder="Confirme su contraseña"
-                value={formData.confirmarContrasena}
-                onChange={handleChange}
-                required
-              />
-            </label>
-          </div>
-          <p className="mandatory-fields">
-            <span className="red-asterisk">*</span> Campos Obligatorios
-          </p>
+          <label>
+            Rol del Usuario <span className="red-asterisk">*</span>
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              required
+              className="full-width"
+            >
+              <option value="User">User</option>
+              <option value="Admin">Admin</option>
+            </select>
+          </label>
           <div className="button-container">
-            <button type="submit" className="back-button">
-              Crear Admin
+            <button type="submit" className="register-button">
+              Actualizar Usuario
             </button>
             <button onClick={handleBackClick} className="back-button">
               Volver
@@ -432,4 +315,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default UpdateUser;

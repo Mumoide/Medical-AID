@@ -10,8 +10,12 @@ router.post('/login', userController.loginUser); // Use loginUser method
 router.get('/users', userController.getAllUsers);
 // Route to handle logical deletion of a user
 router.delete('/:id_user', userController.deleteUser);
+// Route to handle the reactivation of a user
+router.put('/reactivate/:id_user', userController.reactivateUser);
 // Route to get user data by user_id
 router.get('/:id', userController.getUserById);
+// Route to update user data by user_id
+router.put('/:id', userController.updateUser);
 // Route to register an admin user
 router.post('/register-admin', userController.registerAdmin);
 // Route to logout user

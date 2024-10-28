@@ -87,7 +87,7 @@ const Diagnosis = () => {
 
       <div style={{ marginTop: "30px" }}>
         <button onClick={handleBackClick} className="back-button">
-          Back to Form
+          Volver
         </button>
       </div>
     </div>

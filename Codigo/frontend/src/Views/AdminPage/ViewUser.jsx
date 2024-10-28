@@ -1,6 +1,6 @@
 // UserDetails.js
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ViewUser.css"; // Optional CSS for styling
 
@@ -9,6 +9,12 @@ const UserDetails = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  // Back button click handler to navigate back to /users/admin
+  const handleBackClick = () => {
+    navigate("/admin/users");
+  };
 
   useEffect(() => {
     // Fetch the user data from the backend using the user_id
@@ -76,6 +82,11 @@ const UserDetails = () => {
         <p>
           <strong>Phone Number:</strong> {phoneNumber}
         </p>
+        <div style={{ marginTop: "30px" }}>
+          <button onClick={handleBackClick} className="back-button">
+            Volver
+          </button>
+        </div>
       </div>
     </div>
   );

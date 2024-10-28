@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useTable, useFilters, useSortBy, usePagination } from "react-table";
-import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { FaEye, FaEdit, FaTrash, FaCheck } from "react-icons/fa";
 import "./Users.css";
 import axios from "axios"; // Import axios for making the delete request
 import { useWindowWidth } from "./useWindowWidth"; // Import the custom hook correctly
@@ -8,6 +9,7 @@ import Swal from "sweetalert2"; // Import SweetAlert
 
 const Users = () => {
   const windowWidth = useWindowWidth(); // Get window width
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [roleFilter, setRoleFilter] = useState("User"); // State to filter by role
 
@@ -17,6 +19,10 @@ const Users = () => {
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
+  // Back button click handler to navigate back to /form
+  const handleBackClick = () => {
+    navigate("/admin");
+  };
 
   // Function to handle deleting a user (logical delete, updating 'active' field)
   const handleDeleteUser = async (id_user) => {
@@ -58,6 +64,51 @@ const Users = () => {
         } catch (error) {
           console.error("Error deactivating user:", error);
           Swal.fire("Error!", "Failed to deactivate the user.", "error");
+        }
+      }
+    });
+  };
+
+  // Function to handle reactivating a user
+  const handleReactivateUser = async (id_user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This action will reactivate the user.",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, reactivate it!",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // Send PUT request to reactivate the user
+          await axios.put(
+            `http://localhost:3001/api/users/reactivate/${id_user}`
+          );
+
+          // Refetch the updated user data to reflect changes
+          const updatedData = await fetch(
+            "http://localhost:3001/api/users/users"
+          )
+            .then((response) => response.json())
+            .catch((error) => {
+              console.error("Error fetching updated data:", error);
+              throw error;
+            });
+
+          setData(updatedData);
+
+          // Show success message
+          Swal.fire(
+            "Reactivated!",
+            "The user has been reactivated.",
+            "success"
+          );
+        } catch (error) {
+          console.error("Error reactivating user:", error);
+          Swal.fire("Error!", "Failed to reactivate the user.", "error");
         }
       }
     });
@@ -132,12 +183,23 @@ const Users = () => {
               (window.location.href = `user/${row.original.id_user}`)
             }
           />
-          <FaEdit />
-          {/* Add onClick handler to FaTrash */}
-          <FaTrash
-            onClick={() => handleDeleteUser(row.original.id_user)}
+          <FaEdit
             style={{ cursor: "pointer" }}
+            onClick={() =>
+              (window.location.href = `updateuser/${row.original.id_user}`)
+            }
           />
+          {row.original.active ? (
+            <FaTrash
+              style={{ cursor: "pointer" }}
+              onClick={() => handleDeleteUser(row.original.id_user)}
+            />
+          ) : (
+            <FaCheck
+              style={{ cursor: "pointer" }}
+              onClick={() => handleReactivateUser(row.original.id_user)}
+            />
+          )}
         </div>
       ),
       disableFilters: true, // Disable filters for this column
@@ -254,6 +316,10 @@ const Users = () => {
           </select>
         </div>
       </div>
+
+      <button onClick={handleBackClick} className="back-button">
+        Volver
+      </button>
     </div>
   );
 };

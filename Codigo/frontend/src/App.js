@@ -9,6 +9,7 @@ import AdminPage from './Views/AdminPage/AdminPage'; // Import the AdminPage com
 import UsersAdmin from './Views/AdminPage/Users'
 import CreateUserAdmin from './Views/AdminPage/CreateUser'
 import ViewUser from './Views/AdminPage/ViewUser'
+import UpdateUser from './Views/AdminPage/UpdateUser'
 import FormPage from './Views/HardForm/SymptomsForm'
 import HomePage from './Views/HomePage/HomePage'
 import FooterPage from './Components/Footer/Footer'
@@ -31,6 +32,7 @@ function App() {
     localStorage.removeItem('email');
     setIsLoggedIn(false); // Set login state to false
     setUserEmail('');
+    window.location.href = '/'; // Redirect to home page after logout
   };
 
   return (
@@ -55,13 +57,14 @@ function App() {
           <Route path="/admin/users" element={<UsersAdmin />} />
           <Route path='/admin/create' element={<CreateUserAdmin />} />
           <Route path='/admin/user/:id' element={<ViewUser />} />
+          <Route path='/admin/updateuser/:id' element={<UpdateUser />} />
 
           {/* Form Page */}
           <Route path="/form" element={<FormPage />} />
           {/* Diagnosis Result Page  */}
           <Route path="/diagnosis" element={<Diagnosis />} />
-           {/* Spinner Page */}
-           <Route path="/spinner" element={<Spinner />} /> {/* Add Spinner route here */}
+          {/* Spinner Page */}
+          <Route path="/spinner" element={<Spinner />} /> {/* Add Spinner route here */}
         </Routes>
         <FooterPage />
       </div>
