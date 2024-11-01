@@ -1,0 +1,129 @@
+/* General page styling */
+.admin-page {
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+/* Admin header section with image */
+.admin-header {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.admin-header-image-container {
+  position: relative;
+}
+
+.admin-header-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.4); /* Optional dark overlay */
+}
+
+.admin-header h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.admin-header p {
+  font-size: 1.2rem;
+}
+
+
+
+/* Image container and buttons */
+.admin-image-container {
+  position: relative;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.admin-background-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+/* Buttons container */
+.admin-buttons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Space between buttons */
+}
+
+/* Card styling */
+.admin-action-card {
+  background-color: rgba(255, 255, 255, 0.8); /* Slight transparency */
+  padding: 20px;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Specific styling for the alert icon inside the third card */
+.admin-action-card:nth-child(3) img {
+  width: 50px;  /* Adjust the size */
+  height: auto;  /* Maintain aspect ratio */
+  float: left;  /* Moves the icon to the left */
+  margin-right: 150px;  /* Add some space between the icon and the text */
+}
+
+.admin-action-card:hover {
+  transform: scale(1.05);
+}
+
+/* Specific card colors */
+.admin-action-card:nth-child(1) {
+  background-color: #4EABDF;
+}
+
+.admin-action-card:nth-child(2) {
+  background-color: #D1F8CB;
+  color: #333;
+}
+
+.admin-action-card:nth-child(3) {
+  background-color: #F5BD2D;
+}
+
+/* Button styling inside cards */
+.admin-action-card button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.admin-action-card button:hover {
+  background-color: #333;
+}

@@ -1,8 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
 import numpy as np
 import pickle
 
 app = Flask(__name__)
+
+# Enable CORS for all routes
+CORS(app)
 
 # Load the model
 with open('best_rf_model.pkl', 'rb') as model_file:
@@ -21,7 +25,7 @@ def predict_proba():
     try:
         # Convert input to the appropriate format (assuming it's a list of features)
         features = np.array(data['input']).reshape(1, -1)
-        
+
         # Log the received input for debugging
         print(f"Received input: {data['input']}")
         print(f"Features shape: {features.shape}")

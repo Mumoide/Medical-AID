@@ -1,32 +1,56 @@
+// index.js
 const express = require('express');
 const cors = require('cors');
-const db = require('./db');  // Ensure this is correct
 const app = express();
-const router = express.Router();
-const authRoutes = require('./routes/authRoutes');
+const bodyParser = require('body-parser');
 const adminRoutes = require('./routes/adminRoutes');
+const db = require('./db'); // Database connection
+// console.log('Registering /admin routes');
+const predictionRoutes = require('./routes/predictionRoutes');
+const symptomsRoutes = require('./routes/symptomsRoutes');
+const diseaseRoutes = require('./routes/diseaseRoutes')
+const userRoutes = require('./routes/userRoutes');
+const diagnosisRoutes = require('./routes/diagnosesRoutes'); // Adjust path if needed
+const authenticateToken = require('./middleware/authMiddleware'); // Import the middleware
 app.use('/admin', adminRoutes);
 
-// Test route to check DB connection
-router.get('/test-db', async (req, res) => {
-    try {
-        const result = await pool.query('SELECT NOW()');
-        res.json({ message: 'Database connected successfully', time: result.rows[0].now });
-    } catch (error) {
-        console.error('Database connection error:', error);
-        res.status(500).json({ message: 'Database connection failed', error });
-    }
-});
 
-// Middleware
-app.use(cors({ origin: 'http://localhost:3000', methods: ['GET', 'POST'], credentials: true }));
+const corsOptions = {
+  origin: 'http://localhost:3000', // Allow the front-end domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+  credentials: true,
+};
+// Middleware configuration
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Middleware
+app.use(bodyParser.json());
+
+// Test route to check DB connection
+app.get('/test-db', async (req, res) => {
+  try {
+    const result = await db.query('SELECT NOW()');
+    res.json({ message: 'Database connected successfully', time: result.rows[0].now });
+  } catch (error) {
+    console.error('Database connection error:', error);
+    res.status(500).json({ message: 'Database connection failed', error });
+  }
+});
+
+app.get('/test-root', (req, res) => {
+  res.send('Root test is working');
+});
 
 // Routes
-app.use('/auth', authRoutes); // Use /auth as base for auth-related routes
+app.use('/admin', adminRoutes); // Admin routes with /admin prefix
+app.use('/api', predictionRoutes); // Use the prediction route
+app.use('/api', symptomsRoutes); // Use the symptoms route
+app.use('/api/disease', diseaseRoutes)
+app.use('/api/users', userRoutes);
+app.use('/api/diagnosis', diagnosisRoutes);
 
-// Start the server
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
