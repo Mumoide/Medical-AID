@@ -31,6 +31,11 @@ module.exports = function (sequelize, DataTypes) {
     probability: {
       type: DataTypes.FLOAT,
       allowNull: false
+    },
+    diagnosis_session_id: {
+      type: DataTypes.STRING, // UUID as a unique identifier
+      allowNull: false,
+      unique: true, // Ensure uniqueness
     }
   }, {
     sequelize,

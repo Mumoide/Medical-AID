@@ -111,6 +111,15 @@ const SymptomComboBox = () => {
           const timestamp = new Date().toISOString(); // Get current timestamp
           const userId = localStorage.getItem("user_id"); // Get user id from localStorage
 
+          // Check for existing diagnosisSessionId and delete if it exists
+          if (localStorage.getItem("diagnosisSessionId")) {
+            localStorage.removeItem("diagnosisSessionId");
+          }
+
+          // Create a new session ID and store it
+          const newDiagnosisSessionId = uuidv4();
+          localStorage.setItem("diagnosisSessionId", newDiagnosisSessionId);
+
           // Sample diagnosis request
           const response = await axios.post(
             "http://localhost:5000/predict_proba",
@@ -135,7 +144,7 @@ const SymptomComboBox = () => {
             ];
           }
 
-          // Navigate to /diagnosis with all relevant data
+          // Navigate to /diagnosis with all relevant data, including diagnosisSessionId
           navigate("/diagnosis", {
             state: {
               top3: filteredProbabilities,
@@ -145,6 +154,7 @@ const SymptomComboBox = () => {
                 location: { latitude, longitude },
                 selectedSymptoms: selectedIndexes,
               },
+              diagnosisSessionId: newDiagnosisSessionId, // Pass session ID in state
             },
           });
         });
