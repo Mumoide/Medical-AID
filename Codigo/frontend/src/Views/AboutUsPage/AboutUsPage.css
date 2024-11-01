@@ -1,0 +1,230 @@
+.about-us-container {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #ffffff;
+  padding: 0;
+  margin: 0 auto;
+}
+
+/* Intro Section - Centered Heading and Body */
+.intro-section {
+  text-align: center;
+  max-width: 600px; /* Reduced width for a more compact layout */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Heading and Image Flex Container */
+.intro-section h1 {
+  font-family: 'Georgia', serif;
+  font-size: 1.8rem; /* Slightly smaller font size */
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px; /* Reduced margin for compact spacing */
+  line-height: 1.2;
+}
+
+/* Subheading Style */
+.intro-section h1 span {
+  font-size: 1.6rem; /* Slightly smaller for the second line */
+  display: inline-block;
+  vertical-align: middle;
+  color: #333;
+}
+
+/* Subheading Style */
+.intro-section h1 span {
+  font-size: 1.8rem; /* Slightly smaller for emphasis */
+  display: inline-block;
+  vertical-align: middle;
+  color: #333;
+}
+
+/* Image Styling */
+.intro-image {
+  width: 400px; /* Adjust size as needed */
+  height: auto; /* Maintains aspect ratio */
+}
+
+/* Body Text Style */
+.intro-section p {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.95rem; /* Slightly smaller font size */
+  line-height: 1.4; /* Tighter line height */
+  color: #555;
+  margin-bottom: 10px; /* Reduced spacing between paragraphs */
+}
+
+/* Underline Separator */
+.intro-section .separator {
+  display: block;
+  width: 60px; /* Slightly narrower underline */
+  height: 2px; /* Thinner line */
+  background-color: #b0c4de;
+  margin: 10px auto; /* Reduced margin */
+}
+
+
+.header-section {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.header-image {
+  width: 100%;
+  max-width: 1920px;
+  height: auto;
+  object-fit: cover;
+}
+
+.header-section h1, .header-section h2, .header-section p {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* CTA Section Styling */
+.cta-section {
+  max-width: 600px; /* Original max width */
+  padding: 20px 40px; /* Original padding */
+  border-radius: 20px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 0 auto;
+  transform: scale(0.5); /* Scales the entire section to 50% */
+}
+
+.cta-section img {
+  transition: transform 0.3s ease; /* Smooth transition for both effects */
+  border-radius: 55px; /* Adjust the value for roundness */
+}
+
+.cta-section img:hover {
+  transform: scale(1.05); /* Slightly scales up the image */
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+}
+
+.mission-section {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.mission-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.mission-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Hover Effect */
+.mission-item:hover {
+  transform: scale(1.05); /* Slight scale-up on hover */
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Deeper shadow for emphasis */
+}
+
+.mission-item {
+  background-color: #ffffff; /* Default light gray color */
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for animation */
+
+}
+
+/* Apply blue background for the 1st and 3rd items */
+.mission-item:nth-child(1),
+.mission-item:nth-child(3) {
+  background-color: hsl(194, 61%, 79%); /* Light blue color */
+}
+
+.mission-icon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 15px;
+}
+
+.mission-item h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-top: 0;
+}
+
+.mission-item p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.subscribe-title {
+  font-size: 1.5rem;
+  margin-bottom: 15px; /* Space between the title and the form */
+}
+
+.subscribe-section {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #2d3436;
+  color: white;
+  border-radius: 10px;
+}
+
+.subscribe-title {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+.subscribe-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Space between input and button */
+}
+
+.subscribe-input {
+  padding: 10px;
+  width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  }
+ 
+
+.subscribe-button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  }
+
+.subscribe-button:hover {
+  background-color: #2980b9;
+}
+
+.subscribe-section p {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.subscribe-text {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #ccc;
+}

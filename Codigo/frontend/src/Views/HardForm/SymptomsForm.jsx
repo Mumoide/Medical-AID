@@ -109,7 +109,7 @@ const SymptomComboBox = () => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           const timestamp = new Date().toISOString(); // Get current timestamp
-          const userId = localStorage.getItem("userId"); // Get user id from localStorage
+          const userId = localStorage.getItem("user_id"); // Get user id from localStorage
 
           // Sample diagnosis request
           const response = await axios.post(

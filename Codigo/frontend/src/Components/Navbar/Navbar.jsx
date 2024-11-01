@@ -14,7 +14,7 @@ function Navbar({ isLoggedIn, userEmail, onLogout }) {
           <a href="/">Inicio</a>
         </li>
         <li className="nav-item">
-          <a href="/spinner">Proyectos</a>
+          <a href="/biblioteca-de-diagnosticos">Biblioteca de Diagnosticos</a>
         </li>
         <li className="nav-item">
           <a href="/admin">Administración</a>
@@ -27,7 +27,7 @@ function Navbar({ isLoggedIn, userEmail, onLogout }) {
 
       <ul className="nav-list right-nav">
         <li className="nav-item">
-          <a href="/spinner">Nosotros</a>
+          <a href="/about-us">Nosotros</a>
         </li>
         {!isLoggedIn ? (
           <>
@@ -65,8 +65,8 @@ function Navbar({ isLoggedIn, userEmail, onLogout }) {
             <a className="dropdown-item" href="/">
               Inicio
             </a>
-            <a className="dropdown-item" href="/spinner">
-              Proyectos
+            <a className="dropdown-item" href="/biblioteca-de-diagnosticos">
+              Biblioteca de diagnosticos
             </a>
             <a className="dropdown-item" href="/admin">
               Administración
