@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid"; // Import UUID
-import Select from "react-select"; // Import React Select
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { v4 as uuidv4 } from "uuid";
+import Select from "react-select";
+import { useNavigate } from "react-router-dom";
 import "./SymptomsForm.css";
 
-// Helper function to format the symptom name
 const formatSymptomName = (symptomName) => {
   let formattedName = symptomName.replace(/_/g, " ");
   return (
@@ -19,9 +18,8 @@ const SymptomComboBox = () => {
   const [selectedSymptoms, setSelectedSymptoms] = useState({});
   const [symptomsLoaded, setSymptomsLoaded] = useState(false);
   const [diagnosisResult, setDiagnosisResult] = useState(null);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
-  // Fetch symptom names from the API
   useEffect(() => {
     const fetchSymptoms = async () => {
       try {
@@ -40,7 +38,6 @@ const SymptomComboBox = () => {
     fetchSymptoms();
   }, []);
 
-  // Handle symptom selection
   const handleSymptomChange = (selectedOption, comboBoxId) => {
     setSelectedSymptoms((prevSelectedSymptoms) => ({
       ...prevSelectedSymptoms,
@@ -48,7 +45,6 @@ const SymptomComboBox = () => {
     }));
   };
 
-  // Add a new ComboBox (only if the last one has a selected option)
   const addNewComboBox = () => {
     const latestComboBoxId = comboBoxes[comboBoxes.length - 1].id;
     if (!selectedSymptoms[latestComboBoxId]) {
@@ -57,7 +53,6 @@ const SymptomComboBox = () => {
       );
       return;
     }
-
     if (comboBoxes.length < 16) {
       setComboBoxes([...comboBoxes, { id: uuidv4() }]);
     } else {
@@ -65,7 +60,6 @@ const SymptomComboBox = () => {
     }
   };
 
-  // Remove a ComboBox by its ID
   const removeComboBox = (comboBoxId) => {
     if (comboBoxes.length > 1) {
       setComboBoxes(comboBoxes.filter((box) => box.id !== comboBoxId));
@@ -77,7 +71,6 @@ const SymptomComboBox = () => {
     }
   };
 
-  // Prepare options for React Select, filtering out already selected symptoms
   const getFilteredOptions = (comboBoxId) => {
     const selectedModelOrders = Object.values(selectedSymptoms);
     return symptoms
@@ -93,35 +86,71 @@ const SymptomComboBox = () => {
       }));
   };
 
-  // Back button click handler to navigate back to /form
   const handleBackClick = () => {
     navigate("/diagnostico");
   };
 
-  // Handle diagnosis submission
   const handleDiagnosis = async () => {
     const booleanArray = new Array(131).fill(false);
 
-    Object.values(selectedSymptoms).forEach((modelOrder) => {
-      if (modelOrder !== null && modelOrder <= 131) {
-        booleanArray[modelOrder] = true;
-      }
+    // Collect indexes of selected symptoms
+    const selectedIndexes = Object.values(selectedSymptoms).filter(
+      (modelOrder) => modelOrder !== null && modelOrder <= 131
+    );
+
+    selectedIndexes.forEach((modelOrder) => {
+      booleanArray[modelOrder] = true;
     });
 
     try {
-      const response = await axios.post("http://localhost:5000/predict_proba", {
-        input: booleanArray,
-      });
-      const probabilities = response.data.probabilities[0];
+      // Obtain the user's geolocation
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          const timestamp = new Date().toISOString(); // Get current timestamp
+          const userId = localStorage.getItem("userId"); // Get user id from localStorage
 
-      // Extract the top 3 highest probabilities and their indexes
-      const top3 = probabilities
-        .map((probability, index) => ({ probability, index }))
-        .sort((a, b) => b.probability - a.probability)
-        .slice(0, 3);
+          // Sample diagnosis request
+          const response = await axios.post(
+            "http://localhost:5000/predict_proba",
+            {
+              input: booleanArray,
+            }
+          );
+          const probabilities = response.data.probabilities[0];
 
-      // Redirect to /diagnosis with the top 3 data
-      navigate("/diagnosis", { state: { top3 } });
+          // Filter probabilities to include only those greater than 30
+          let filteredProbabilities = probabilities
+            .map((probability, index) => ({ probability, index }))
+            .filter((item) => item.probability > 30)
+            .sort((a, b) => b.probability - a.probability);
+
+          // If no probabilities > 30, take the highest probability item
+          if (filteredProbabilities.length === 0) {
+            const maxProbability = Math.max(...probabilities);
+            const maxIndex = probabilities.indexOf(maxProbability);
+            filteredProbabilities = [
+              { probability: maxProbability, index: maxIndex },
+            ];
+          }
+
+          // Navigate to /diagnosis with all relevant data
+          navigate("/diagnosis", {
+            state: {
+              top3: filteredProbabilities,
+              diagnosisData: {
+                userId,
+                timestamp,
+                location: { latitude, longitude },
+                selectedSymptoms: selectedIndexes,
+              },
+            },
+          });
+        });
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
     } catch (error) {
       console.error("Error during diagnosis:", error);
       setDiagnosisResult("Error during diagnosis");
@@ -132,7 +161,7 @@ const SymptomComboBox = () => {
     <div style={{ marginTop: "200px", textAlign: "center" }}>
       {!symptomsLoaded ? (
         <div>
-          <div className="spinner"></div> {/* Spinner with CSS */}
+          <div className="spinner"></div>
         </div>
       ) : (
         <>
@@ -161,7 +190,7 @@ const SymptomComboBox = () => {
                   }
                   isClearable
                   placeholder="Type to search..."
-                  isDisabled={index !== comboBoxes.length - 1} // Disable all except the latest ComboBox
+                  isDisabled={index !== comboBoxes.length - 1}
                   styles={{
                     container: (base) => ({
                       ...base,

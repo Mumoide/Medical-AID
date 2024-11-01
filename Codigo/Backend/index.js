@@ -10,6 +10,7 @@ const predictionRoutes = require('./routes/predictionRoutes');
 const symptomsRoutes = require('./routes/symptomsRoutes');
 const diseaseRoutes = require('./routes/diseaseRoutes')
 const userRoutes = require('./routes/userRoutes');
+const diagnosisRoutes = require('./routes/diagnosesRoutes'); // Adjust path if needed
 const authenticateToken = require('./middleware/authMiddleware'); // Import the middleware
 app.use('/admin', adminRoutes);
 
@@ -48,6 +49,7 @@ app.use('/api', predictionRoutes); // Use the prediction route
 app.use('/api', symptomsRoutes); // Use the symptoms route
 app.use('/api/disease', diseaseRoutes)
 app.use('/api/users', userRoutes);
+app.use('/api/diagnosis', diagnosisRoutes);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

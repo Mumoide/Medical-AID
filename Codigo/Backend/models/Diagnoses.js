@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define('Diagnoses', {
     id_diagnosis: {
       autoIncrement: true,
@@ -17,7 +17,19 @@ module.exports = function(sequelize, DataTypes) {
       unique: "diagnoses_id_user_unique"
     },
     diagnosis_date: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    latitude: {
+      type: DataTypes.FLOAT,
+      allowNull: true
+    },
+    longitude: {
+      type: DataTypes.FLOAT,
+      allowNull: true
+    },
+    probability: {
+      type: DataTypes.FLOAT,
       allowNull: false
     }
   }, {

@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom"; // Import useNavigate
+import React, { useEffect, useState, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./DiagnosisResultPage.css"; // Import the CSS file
+import Swal from "sweetalert2"; // Import SweetAlert
+import "./DiagnosisResultPage.css";
 
 const Diagnosis = () => {
   const location = useLocation();
-  const { top3 } = location.state || [];
+  const { top3, diagnosisData } = location.state;
 
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
   // State to store the disease data for the top 3 diagnoses
   const [diseaseData, setDiseaseData] = useState([]);
+
+  // Use ref for diagnosisData to prevent re-triggering useEffect
+  const diagnosisDataRef = useRef(diagnosisData);
 
   // Function to fetch disease data for each diagnosis
   const fetchDiseaseData = async (modelOrder) => {
@@ -18,32 +22,48 @@ const Diagnosis = () => {
       const response = await axios.get(
         `http://localhost:3001/api/disease/${modelOrder}`
       );
-      return response.data; // Return the disease data
+      return response.data;
     } catch (error) {
       console.error("Error fetching disease data:", error);
       return null;
     }
   };
 
-  // Fetch data for each diagnosis in top3
   useEffect(() => {
     const fetchAllDiseases = async () => {
       const diseases = await Promise.all(
         top3.map(async (diagnosis) => {
-          const disease = await fetchDiseaseData(diagnosis.index); // Fetch disease by index (model_order)
+          const disease = await fetchDiseaseData(diagnosis.index);
           return {
-            ...disease, // Add fetched disease details
-            probability: diagnosis.probability, // Keep the probability from the top3
+            ...disease,
+            probability: diagnosis.probability,
           };
         })
       );
-      setDiseaseData(diseases); // Update state with all fetched disease data
+      setDiseaseData(diseases);
+
+      if (top3.some((diagnosis) => diagnosis.probability < 30)) {
+        Swal.fire({
+          title: "Low Probability Warning",
+          text: "Your diagnosis has a low probability, please consider consulting a healthcare professional.",
+          icon: "warning",
+          confirmButtonText: "Understood",
+          confirmButtonColor: "#3085d6",
+        });
+      }
+
+      // Send data to backend using diagnosisDataRef to avoid re-triggering useEffect
+      await axios.post("http://localhost:3001/api/diagnosis/create", {
+        diagnosisIds: diseases.map((disease) => disease.id_disease),
+        top3: top3,
+        diagnosisData: diagnosisDataRef.current, // Use ref here
+      });
     };
 
     if (top3.length > 0) {
-      fetchAllDiseases(); // Only fetch if there are diagnoses in the top3
+      fetchAllDiseases();
     }
-  }, [top3]);
+  }, [top3]); // Only top3 as a dependency
 
   // Back button click handler to navigate back to /form
   const handleBackClick = () => {
