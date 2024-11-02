@@ -56,13 +56,6 @@ module.exports = function (sequelize, DataTypes) {
           { name: "id_user" },
         ]
       },
-      {
-        name: "diagnoses_id_user_unique",
-        unique: true,
-        fields: [
-          { name: "id_user" },
-        ]
-      },
     ]
   });
 };

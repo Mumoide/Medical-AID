@@ -51,10 +51,10 @@ const Diagnosis = () => {
         });
       }
 
-      // Send data to backend using diagnosisDataRef to avoid re-triggering useEffect
+      // Ensure single POST request with diagnosis data
       if (!hasPosted.current) {
-        // Only proceed if hasn't posted yet
-        hasPosted.current = true; // Set flag to prevent re-posting
+        // Set flag just before posting
+        hasPosted.current = true;
         try {
           await axios.post("http://localhost:3001/api/diagnosis/create", {
             diagnosisSessionId,
@@ -75,7 +75,7 @@ const Diagnosis = () => {
     if (top3.length > 0) {
       fetchAllDiseases();
     }
-  }, [top3, diagnosisSessionId]); // Only top3 and diagnosisSessionId as dependencies
+  }, [top3, diagnosisSessionId]);
 
   const handleBackClick = () => {
     navigate("/form");
