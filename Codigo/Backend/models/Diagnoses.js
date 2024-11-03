@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
+
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('Diagnoses', {
+
+  const Diagnoses = sequelize.define('Diagnoses', {
     id_diagnosis: {
       autoIncrement: true,
       type: DataTypes.BIGINT,
@@ -57,5 +59,20 @@ module.exports = function (sequelize, DataTypes) {
         ]
       },
     ]
-  });
+  }
+  );
+
+  Diagnoses.associate = function (models) {
+    // Associations for Diagnoses
+    Diagnoses.hasMany(models.DiagnosisDisease, {
+      foreignKey: 'id_diagnosis',
+      as: 'diagnosisDiseases'
+    });
+    Diagnoses.hasMany(models.DiagnosisSymptoms, {
+      foreignKey: 'id_diagnosis',
+      as: 'diagnosisSymptoms'
+    });
+  };
+
+  return Diagnoses;
 };

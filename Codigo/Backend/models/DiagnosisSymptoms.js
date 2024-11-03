@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('DiagnosisSymptoms', {
+  const DiagnosisSymptoms = sequelize.define('DiagnosisSymptoms', {
     id_diagnosis_symptom: {
       autoIncrement: true,
       type: DataTypes.BIGINT,
@@ -40,4 +40,14 @@ module.exports = function (sequelize, DataTypes) {
       },
     ]
   });
+
+  DiagnosisSymptoms.associate = function (models) {
+    // Association for DiagnosisSymptoms to Symptoms
+    DiagnosisSymptoms.belongsTo(models.Symptoms, {
+      foreignKey: 'id_symptom',
+      as: 'symptom'
+    });
+  };
+
+  return DiagnosisSymptoms;
 };

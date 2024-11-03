@@ -16,6 +16,7 @@ import FooterPage from './Components/Footer/Footer'
 import Diagnosis from './Views/DiagnosisResultPage/DiagnosisResultPage'
 import AboutUsPage from './Views/AboutUsPage/AboutUsPage';
 import DiagnosticLibraryPage from './Views/DiagnosticLibraryPage/DiagnosticLibraryPage';
+import DashboardPage from './Views/AdminPage/Dashboard/DashboardView'
 import Spinner from './Spinner'; // Import the Spinner component
 
 // import ProtectedRoute from './ProtectedRoute'; // Protección de rutas
@@ -55,11 +56,16 @@ function App() {
           <Route path="/Inicio-de-sesion" element={<LoginForm onLoginSuccess={handleLoginSuccess} />} />
 
           {/* Admin Page */}
-          <Route path="/admin" element={<AdminPage />} /> {/* New Admin Page Route */}
+          <Route path="/admin" element={<AdminPage />} />
+
+          {/* User administration */}
           <Route path="/admin/users" element={<UsersAdmin />} />
           <Route path='/admin/create' element={<CreateUserAdmin />} />
           <Route path='/admin/user/:id' element={<ViewUser />} />
           <Route path='/admin/updateuser/:id' element={<UpdateUser />} />
+
+          {/* Dashboard administration */}
+          <Route path='/admin/dashboard' element={<DashboardPage />} />
 
           {/* Form Page */}
           <Route path="/form" element={<FormPage />} />
