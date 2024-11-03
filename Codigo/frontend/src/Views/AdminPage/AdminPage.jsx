@@ -17,6 +17,11 @@ const AdminPage = () => {
           </div>
         </div>
       </header>
+      
+      <section className="logo_medicalAid">
+        <img src="/images/logos/LogoRound.png" alt="Logotipo" className="Logotipo_MedicalAID" />
+      </section>
+
       <div className="spacer"></div>
       <div className="spacer"></div>
       <div className="spacer"></div>

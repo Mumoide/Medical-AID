@@ -166,7 +166,19 @@ const SymptomComboBox = () => {
           <div className="spinner"></div>
         </div>
       ) : (
-        <>
+        <div className="hero-container">
+         
+      <div className="text-content">
+        <h1>Diagnósticos Remotos</h1>
+        <p>¿No sabes cómo identificar tus síntomas?</p>
+        <button className="cta-button">Te Ayudamos</button>
+      </div>
+      <img
+        src="/images/backgrounds/img-about.png"
+        alt="Imagen Principal"
+        className="hero-image"
+      />
+    
           {comboBoxes.map((comboBox, index) => (
             <div
               key={comboBox.id}
@@ -179,7 +191,7 @@ const SymptomComboBox = () => {
             >
               <div>
                 <label htmlFor={`symptom-combobox-${comboBox.id}`}>
-                  Select a Symptom:
+                  Selecciona tus síntomas:
                 </label>
                 <Select
                   id={`symptom-combobox-${comboBox.id}`}
@@ -257,11 +269,11 @@ const SymptomComboBox = () => {
 
           {diagnosisResult && (
             <div style={{ marginTop: "20px" }}>
-              <h3>Diagnosis Result:</h3>
+              <h3>Resultados del Diagnóstico:</h3>
               <p>{JSON.stringify(diagnosisResult)}</p>
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );
