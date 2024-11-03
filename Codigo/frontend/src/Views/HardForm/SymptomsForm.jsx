@@ -108,24 +108,16 @@ const SymptomComboBox = () => {
         navigator.geolocation.getCurrentPosition(async (position) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
-          const timestamp = new Date().toISOString(); // Get current timestamp
-          const userId = localStorage.getItem("user_id"); // Get user id from localStorage
+          const timestamp = new Date().toISOString();
+          const userId = localStorage.getItem("user_id");
 
-          // Check for existing diagnosisSessionId and delete if it exists
-          if (localStorage.getItem("diagnosisSessionId")) {
-            localStorage.removeItem("diagnosisSessionId");
-          }
-
-          // Create a new session ID and store it
+          // Create a new unique diagnosisSessionId directly
           const newDiagnosisSessionId = uuidv4();
-          localStorage.setItem("diagnosisSessionId", newDiagnosisSessionId);
 
           // Sample diagnosis request
           const response = await axios.post(
             "http://localhost:5000/predict_proba",
-            {
-              input: booleanArray,
-            }
+            { input: booleanArray }
           );
           const probabilities = response.data.probabilities[0];
 
@@ -144,9 +136,7 @@ const SymptomComboBox = () => {
             ];
           }
 
-          
-
-          // Navigate to /diagnosis with all relevant data, including diagnosisSessionId
+          // Navigate to /diagnosis with all relevant data, including the new unique diagnosisSessionId
           navigate("/diagnosis", {
             state: {
               top3: filteredProbabilities,
@@ -156,7 +146,7 @@ const SymptomComboBox = () => {
                 location: { latitude, longitude },
                 selectedSymptoms: selectedIndexes,
               },
-              diagnosisSessionId: newDiagnosisSessionId, // Pass session ID in state
+              diagnosisSessionId: newDiagnosisSessionId, // Pass the new session ID
             },
           });
         });

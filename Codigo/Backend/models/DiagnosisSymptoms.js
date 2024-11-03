@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define('DiagnosisSymptoms', {
     id_diagnosis_symptom: {
       autoIncrement: true,
@@ -36,20 +36,6 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         fields: [
           { name: "id_diagnosis_symptom" },
-        ]
-      },
-      {
-        name: "diagnosissymptoms_id_diagnosis_unique",
-        unique: true,
-        fields: [
-          { name: "id_diagnosis" },
-        ]
-      },
-      {
-        name: "diagnosissymptoms_id_symptom_unique",
-        unique: true,
-        fields: [
-          { name: "id_symptom" },
         ]
       },
     ]
