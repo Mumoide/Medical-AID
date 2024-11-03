@@ -1,0 +1,219 @@
+/* Container that wraps everything */
+.register-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  font-family: "Montserrat", sans-serif; /* Set Montserrat font for the whole page */
+}
+
+/* Header styling */
+.register-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.spacer {
+  padding-top: 50px;
+}
+
+.register-header h1 {
+  font-size: 36px;
+  color: #3690a4;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* Form container styling */
+.register-form-container {
+  background-color: #3690a4;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Montserrat", sans-serif; /* Ensure Montserrat is applied here too */
+}
+
+/* Form title styling */
+.register-form-container h2 {
+  font-size: 28px; /* Increase font size */
+  font-weight: 700; /* Make it bold */
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Form element styling */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.register-form label {
+  font-size: 16px;
+  color: black;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif; /* Montserrat for labels */
+}
+
+.register-form input,
+.register-form select {
+  font-size: 16px;
+  padding: 10px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif; /* Montserrat for inputs */
+}
+
+.register-form input::placeholder,
+.register-form select::placeholder {
+  font-family: "Montserrat", sans-serif; /* Montserrat for placeholders */
+  color: #888; /* Placeholder color */
+}
+
+/* Red asterisk for mandatory fields */
+.red-asterisk {
+  color: red;
+  font-weight: bold;
+}
+
+/* Full-width inputs */
+.full-width {
+  width: 100%;
+}
+
+/* Two-column layout for inputs */
+.two-column {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.two-column label {
+  width: 100%;
+}
+
+.two-column input,
+.register-form select {
+  width: 100%;
+}
+
+/* Two-column inputs */
+.two-column label input,
+.register-form select {
+  width: 100%;
+}
+
+.two-column > label {
+  width: 48%;
+}
+
+.mandatory-fields {
+  font-size: 12px;
+  color: white;
+  text-align: left;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif; /* Montserrat for this text */
+}
+
+/* Adjusting for smaller screens */
+@media screen and (max-width: 768px) {
+  .register-form-container {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .register-header h1 {
+    font-size: 28px;
+  }
+
+  .register-form input,
+  .register-form select {
+    padding: 10px;
+  }
+
+  .two-column {
+    flex-direction: column;
+  }
+
+  .two-column input,
+  .register-form select {
+    width: 100%;
+  }
+}
+
+/* Make sure all inputs use the full width */
+.full-width {
+  width: 100%;
+  margin: 0;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* Adjust individual input fields */
+.register-form input,
+.register-form select {
+  font-size: 16px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif; /* Ensure Montserrat for inputs */
+}
+
+/* Full-width for specific inputs */
+.register-form input[type="email"],
+.register-form input[type="text"],
+.register-form input[type="tel"],
+.register-form input[type="password"],
+.register-form input[type="date"],
+.register-form input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  align-items: center; /* Align the buttons vertically */
+  gap: 20px; /* Space between the buttons */
+  margin-top: 20px;
+  width: 100%; /* Ensure container spans full width */
+}
+
+.register-button,
+.back-button {
+  width: 150px;
+  height: 45px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #393e46;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  font-family: "Montserrat", sans-serif;
+  padding: 0; /* Remove extra padding */
+  margin: 0 auto; /* Center align each button in its container */
+}
+
+.register-button:hover,
+.back-button:hover {
+  background-color: #555;
+}
