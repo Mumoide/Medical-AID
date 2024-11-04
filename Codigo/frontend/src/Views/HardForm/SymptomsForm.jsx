@@ -160,39 +160,35 @@ const SymptomComboBox = () => {
   };
 
   return (
-    <div style={{ marginTop: "200px", textAlign: "center" }}>
+    <div>
       {!symptomsLoaded ? (
         <div>
           <div className="spinner"></div>
         </div>
       ) : (
-        <div className="hero-container">
-         
+        <div className="hero-container-form">
+         <div className="introduction">
       <div className="text-content">
         <h1>Diagnósticos Remotos</h1>
         <p>¿No sabes cómo identificar tus síntomas?</p>
-        <button className="cta-button">Te Ayudamos</button>
+        <button className="cta-button-form">Te Ayudamos</button>
       </div>
+      <div className="diagnostico">
       <img
-        src="/images/backgrounds/img-about.png"
+        src="/images/backgrounds/Diagnostic.png"
         alt="Imagen Principal"
-        className="hero-image"
+        className="diagnostic-image"
       />
-    
+      </div>
+    </div>
+            <div className="diagnosis-container">
+  <h2>Si estás seguro de tus síntomas, ¡ingrésalos a continuación!</h2>
           {comboBoxes.map((comboBox, index) => (
-            <div
-              key={comboBox.id}
-              style={{
-                marginBottom: "20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <div>
+            <div className="combobox-container" key={comboBox.id}>
                 <label htmlFor={`symptom-combobox-${comboBox.id}`}>
                   Selecciona tus síntomas:
                 </label>
+              <div className="symptom-combobox">
                 <Select
                   id={`symptom-combobox-${comboBox.id}`}
                   options={getFilteredOptions(comboBox.id)}
@@ -205,13 +201,7 @@ const SymptomComboBox = () => {
                   isClearable
                   placeholder="Type to search..."
                   isDisabled={index !== comboBoxes.length - 1}
-                  styles={{
-                    container: (base) => ({
-                      ...base,
-                      width: "300px",
-                      margin: "10px auto",
-                    }),
-                  }}
+                  className="seleccionar-sintoma"
                 />
                 {selectedSymptoms[comboBox.id] && (
                   <p>
@@ -224,8 +214,7 @@ const SymptomComboBox = () => {
                     }
                   </p>
                 )}
-              </div>
-
+                
               <button
                 onClick={() => removeComboBox(comboBox.id)}
                 disabled={comboBoxes.length === 1}
@@ -241,10 +230,11 @@ const SymptomComboBox = () => {
               >
                 🗑️
               </button>
+              </div>
+
             </div>
           ))}
-
-          <div style={{ marginTop: "20px" }}>
+                    <div className="buttons-container "style={{ marginTop: "20px" }}>
             <button
               style={{
                 marginRight: "10px",
@@ -266,6 +256,9 @@ const SymptomComboBox = () => {
               Volver
             </button>
           </div>
+          </div>
+
+
 
           {diagnosisResult && (
             <div style={{ marginTop: "20px" }}>
