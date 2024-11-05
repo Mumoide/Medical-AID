@@ -1,4 +1,5 @@
-import "./HomePage.css";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import "./HomePage.css"
 
 const HomePage = () => {
   return (
@@ -17,8 +18,8 @@ const HomePage = () => {
             síntomas ingresados.
           </p>
           <button
-            className="cta-button"
-            onClick={() => (window.location.href = "/diagnostico")}
+            className="start-diagnostic"
+            onClick={() => document.getElementById("diagnostic-section").scrollIntoView({ behavior: "smooth" })}
           >
             Iniciar Diagnóstico
           </button>
@@ -33,8 +34,12 @@ const HomePage = () => {
           </div>
           <div className="funciona-text-homepage">
             <h2>Cómo Funciona</h2>
+            <center>
             <p>Descubre el proceso detrás de nuestra tecnología.</p>
-            <button className="ver-mas-button-homepage">Ver Más</button>
+            </center>
+            <Link to="/about-us">
+            <button className="ver-mas-button-homepage">Ver más</button>
+            </Link>
           </div>
         </div>
 
@@ -91,25 +96,70 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Subscription Section */}
-      <section className="suscripcion-section-homepage">
-        <div className="suscripcion-content-homepage">
-          <img src="/images/logos/LogoRound.png" alt="Medical AID Logo" />
-          <h2>Diagnósticos Inteligentes</h2>
-          <p>Suscribirse para recibir actualizaciones.</p>
-          <div className="suscripcion-form-homepage">
-            <input
-              type="email"
-              className="subscription-input-homepage"
-              placeholder="Ingresa tu email"
-            />
-            <button>Suscribirse</button>
-          </div>
-          <p className="privacy-note-homepage">
-            Al suscribirse aceptas nuestra Política de Privacidad
-          </p>
+ {/* Diagnostic Section */}
+ <div className="diagnostic-container" id="diagnostic-section">
+    <div className="diagnostic-image">
+        <img src="/images/brain-image.png" alt="Diagnostic List" />
+    </div>
+    <div className="diagnostic-content">
+        <h2>Diagnóstico Inteligente</h2>
+        <p>Obtén resultados rápidos y precisos para tus diagnósticos.</p>
+        <div className="diagnostic-buttons">
+        <Link to="/form">
+            <button className="start-diagnostic">Iniciar Diagnóstico</button>
+          </Link>
+          <Link to="/about-us">
+            <button className="more-info">Más Información</button>
+            </Link>
         </div>
-      </section>
+        </div>
+        </div> 
+          <h2 className="comments-heading">Comentarios</h2>
+        <div className="comments-section">
+    <div className="comment-card">
+        <div className="comment-user">
+            <img src="/images/user1.jpg" alt="Juan Pérez" className="comment-user-image" />
+            <div className="comment-user-info">
+                <p className="comment-user-name">Juan Pérez</p>
+                <p className="comment-user-title">Usuario</p>
+            </div>
+        </div>
+        <div className="comment-stars">
+            ⭐⭐⭐⭐⭐
+        </div>
+        <p className="comment-text">"Medical AID me proporcionó un diagnóstico rápido y preciso. ¡Muy recomendable!"</p>
+    </div>
+
+    <div className="comment-card">
+        <div className="comment-user">
+            <img src="/images/user2.jpg" alt="Ana Gómez" className="comment-user-image" />
+            <div className="comment-user-info">
+                <p className="comment-user-name">Ana Gómez</p>
+                <p className="comment-user-title">Usuario</p>
+            </div>
+        </div>
+        <div className="comment-stars">
+            ⭐⭐⭐⭐⭐
+        </div>
+        <p className="comment-text">"La plataforma es fácil de usar y los diagnósticos son muy precisos."</p>
+    </div>
+</div>
+
+      <footer className="subscribe-section">
+        <div className="subscribe-info">
+          <h2 className="subscribe-title">Diagnósticos Inteligentes</h2>
+        </div>
+        <div className="subscriibe-content">
+          <img src="/images/logos/LogoRound.png" alt="Logo Diagnósticos Remotos" className='Logo'/>
+        </div>
+        <p className="subcribete-text">Subscríbete a nuestros informativos vía correo electrónico y recibe todas nuestras noticias y actualizaciones.</p>
+        <form className="subscribe-form">
+          <input type="text" placeholder="Ingresa tu email" className="subscribe-input" />
+          <button className="subscribe-button">Suscribirse</button>
+        </form>
+        <p>Al suscribirte aceptas nuestra Política de Privacidad</p>
+        <hr class="custom-line"></hr>
+      </footer>
     </div>
   );
 };
