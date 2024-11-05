@@ -1,0 +1,504 @@
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f5f5f5; /* Fondo suave para mejorar el contraste */
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* Intro Section - Centered Heading and Body */
+.intro-section {
+  text-align: center;
+  max-width: 800px; /* Reduced width for a more compact layout */
+  margin: 100px auto 10px; /* Espacio superior para la imagen */
+  padding: 20px 15px;
+}
+
+/* Estilos para el Texto de la Introducción */
+.intro-section p {
+  font-family: 'Arial', sans-serif; /* Fuente limpia y fácil de leer */
+  font-size: 1rem; /* Tamaño de la fuente */
+  line-height: 1.6; /* Espaciado de línea para mejorar la legibilidad */
+  color: #333; /* Color del texto */
+  margin: 0 auto; /* Centrado horizontal */
+  max-width: 700px; /* Limitar el ancho del párrafo */
+  text-align: justify; /* Justificar el texto */
+}
+
+
+/* Heading and Image Flex Container */
+.intro-section h1 {
+  font-family: 'Georgia', serif;
+  font-size: 2rem; /* Slightly smaller font size */
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px; /* Reduced margin for compact spacing */
+}
+
+/* Subheading Style */
+.intro-section h1 span {
+  font-size: 1.6rem; /* Slightly smaller for the second line */
+  display: inline-block;
+  vertical-align: middle;
+  color: #333;
+}
+
+
+/* Subheading Style */
+.intro-section h1 span {
+  font-size: 1.8rem; /* Slightly smaller for emphasis */
+  display: inline-block;
+  vertical-align: middle;
+  color: #333;
+}
+
+/* Image Styling */
+.intro-image {
+  width: 400px; /* Adjust size as needed */
+  height: auto; /* Maintains aspect ratio */
+}
+
+/* Body Text Style */
+.intro-section p {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.95rem; /* Slightly smaller font size */
+  line-height: 1.4; /* Tighter line height */
+  color: #555;
+  margin-bottom: 10px; /* Reduced spacing between paragraphs */
+  
+}
+
+/* Underline Separator */
+.intro-section .separator {
+  display: block;
+  width: 60px; /* Slightly narrower underline */
+  height: 2px; /* Thinner line */
+  background-color: #b0c4de;
+  margin: 10px auto; /* Reduced margin */
+}
+
+.intro-section hr {
+  border: none; 
+  height: 7px; 
+  background-color: #C3E5F8; 
+  width: 50%; 
+  margin: 20px auto; /* Centrar la línea horizontalmente y ajustar el espaciado */
+  border-radius: 25px; /* Bordes redondeados */
+}
+
+.header-section {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.header-image {
+  width: 97%;
+  height: 550px;
+  object-fit: cover;
+}
+
+.header-section h1, .header-section h2, .header-section p {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+/* Resaltar Número de Diagnósticos */
+.highlight {
+  font-weight: bold; /* Resaltar el número de diagnósticos */
+  color: #000000; /* Mantener el color blanco para el número */
+  font-size: 1.5rem;
+}
+
+
+/* CTA Section Styling */
+.cta-section {
+  max-width: 600px; /* Original max width */
+  padding: 20px 40px; /* Original padding */
+  border-radius: 20px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 0 auto;
+  transform: scale(0.5); /* Scales the entire section to 50% */
+}
+
+.cta-section img {
+  transition: transform 0.3s ease; /* Smooth transition for both effects */
+  border-radius: 55px; /* Adjust the value for roundness */
+}
+
+.cta-section img:hover {
+  transform: scale(1.05); /* Slightly scales up the image */
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+}
+
+.mission-section {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.mission-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.mission-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Hover Effect */
+.mission-item:hover {
+  transform: scale(1.05); /* Slight scale-up on hover */
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Deeper shadow for emphasis */
+}
+
+.mission-item {
+  background-color: #ffffff; /* Default light gray color */
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for animation */
+  margin-top: 40px;
+}
+
+/* Apply blue background for the 1st and 3rd items */
+.mission-item:nth-child(1),
+.mission-item:nth-child(3) {
+  background-color: hsl(194, 61%, 79%); /* Light blue color */
+}
+
+.mission-icon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 15px;
+}
+
+.mission-item h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-top: 0;
+}
+
+.mission-item p {
+  font-size: 1rem;
+  color: #555;
+  
+}
+
+/* Subscription Section */
+
+
+.subscribe-section {
+  background-color: #1e272e; /* Fondo oscuro */
+  color: #ffffff; /* Texto blanco */
+  padding: 10px 30px; /* Padding amplio */
+  border-radius: 5px;
+  max-width: 100%; /* Limitar el ancho de la sección */
+  margin: 40px auto; /* Centrar la sección */
+  margin-bottom: -45px;
+  
+}
+
+.subscribe-section img{
+  width: 10%;
+  height: 10%;
+  margin-left: 30px;
+  margin-top: 25px;
+  margin-bottom: -150px;
+}
+
+.subscribe-title {
+  font-size: 2rem; 
+  font-weight: bold; 
+  margin-bottom: 30px; 
+  margin-left: 30px;
+}
+
+.subscribe-form {
+  display: flex;
+  flex-direction: column; /* Disposición en columna */
+  flex-direction: row;
+  align-items: center; /* Alinear los elementos a la izquierda */
+  gap: 15px; /* Espacio entre input y botón */
+  margin-bottom: 20px;
+}
+
+/* Estilo para el Input */
+.subscribe-input {
+  padding: 15px;
+  width: 600px; /* Tamaño específico para un mejor diseño */
+  border: 1px solid #f4f5f6;
+  font-size: 1rem;
+  margin-left: 300px;
+  background-color: transparent;
+}
+
+.subscribe-button {
+  padding: 15px 25px;
+  color: white;
+  background-color: transparent;
+  border: 3px solid #008A90;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.subscribe-button:hover {
+  background-color: #2980b9;
+}
+
+.subscribe-section p {
+  margin-top: 20px; 
+  font-size: 0.9rem; 
+  color: #ffffff; 
+  margin-left: 300px;
+}
+
+/* Sección del Botón */
+.button-section {
+  margin-top: 80px;
+  margin-bottom: 80px; 
+} 
+
+/* Contenedor del Botón */
+.button-wrapper {
+  display: flex;
+  align-items: center; 
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.cta-button {
+  padding: 25px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background-color: #3498db;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Efecto hover para el botón */
+.cta-button:hover {
+  background-color: #2980b9; 
+  transform: scale(1.05);
+}
+
+/* Texto dentro del Botón */
+.button-text {
+  margin-right: 20px; 
+}
+
+/* Imagen dentro del Botón */
+/* Definir la Animación Circular */
+@keyframes move-circle {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(30px, 0); /* Mover hacia la derecha */
+  }
+  50% {
+    transform: translate(30px, 30px); /* Mover hacia abajo */
+  }
+  75% {
+    transform: translate(0, 30px); /* Mover hacia la izquierda */
+  }
+  100% {
+    transform: translate(0, 0); /* Volver a la posición inicial */
+  }
+}
+
+/* Imagen dentro del Botón */
+.button-image {
+  width: 8%; 
+  height: 8%;
+  position: relative; 
+  animation: move-circle 6s linear infinite; /* Animación circular continua */
+  transition: transform 0.3s ease; /* Transición para el efecto hover */
+}
+
+
+/* Footer Section */
+.footer {
+  display: flex;
+  justify-content: space-between; /* Distribuir los elementos a lo largo del contenedor */
+  align-items: center; /* Alinear todos los elementos verticalmente al centro */
+  padding: 20px;
+  background-color: #1e272e; /* Fondo del pie de página */
+  color: #ffffff; /* Color de los textos del pie de página */
+  flex-wrap: wrap; /* En caso de pantallas pequeñas, los elementos pueden moverse */
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px; /* Espacio entre los enlaces */
+}
+
+.footer-copyright {
+  display: flex;
+  justify-content: flex-end; /* Alinear el copyright a la derecha */
+  align-items: center; /* Asegurarse de que estén a la misma altura */
+}
+
+.footer a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+
+.footer-links {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.footer-copyright{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Media Queries para Adaptabilidad */
+
+/* Dispositivos muy pequeños (max-width: 480px) */
+@media (max-width: 480px) {
+  .intro-section {
+    margin: 50px auto 10px;
+    padding: 15px;
+  }
+
+  .header-image {
+    height: 300px;
+  }
+
+  .cta-box {
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
+
+  .subscribe-title {
+    font-size: 1.5rem;
+  }
+
+  .subscribe-input {
+    width: 90%;
+    margin-bottom: 10px;
+  }
+
+  .subscribe-button {
+    width: 90%;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer a {
+    font-size: 0.8rem;
+  }
+
+  .footer-copyright {
+    font-size: 0.7rem;
+  }
+}
+
+/* Dispositivos medianos (max-width: 768px) */
+@media (max-width: 768px) {
+  .intro-section {
+    max-width: 90%;
+    margin: 75px auto 10px;
+  }
+
+  .header-image {
+    height: 400px;
+  }
+
+  .cta-box {
+    left: 50%;
+    width: 390px;
+    height: 155px;
+  }
+
+  .subscribe-section img{
+    width: 20%;
+    margin-bottom: -50px;
+    margin-left: 160px;
+   
+  }
+
+  .subscribe-title {
+    font-size: 1rem; 
+    font-weight: bold; 
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .subscribe-input {
+  margin-left: 20px;
+  }
+
+  .subscribe-section p {
+    margin-top: 70px; 
+    margin-left: 20px;
+    margin-bottom: 10px;
+  }
+
+  .footer-links {
+    gap: 15px;
+  }
+
+  .footer a {
+    font-size: 0.65rem;
+
+  }
+
+  .footer-copyright{
+    margin-left: 40px;
+    margin-top: 15px;
+  }
+}
+
+/* Dispositivos grandes (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .intro-section {
+    margin: 80px auto;
+  }
+
+  .cta-box {
+    top: -5%;
+    padding: 20px 30px;
+  }
+
+  .subscribe-input,
+  .subscribe-button {
+    max-width: 80%;
+  }
+}
+
+

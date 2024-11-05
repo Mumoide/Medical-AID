@@ -14,6 +14,26 @@
   margin-bottom: 40px;
 }
 
+.diagnosis-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #4e9197;
+  border-radius: 20px;
+  width: 90%;
+  text-align: center;
+  margin-left: 50px;
+  height: 500px;
+}
+.diagnosis-container h2 {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.introduction{
+display: flex;
+}
+
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -39,4 +59,72 @@
 
 .back-button:hover {
   background-color: #555; /* Slightly lighter gray on hover */
+}
+.hero-container-form {
+  display: flex;
+  align-items: flex-start; /* Alinea ambos elementos hacia la parte superior */
+  justify-content: space-between; /* Coloca el texto y la imagen a cada lado del contenedor */
+  flex-direction: column;
+  padding: 40px;
+  max-width: 1200px; /* Define el ancho máximo del contenedor */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+}
+
+.text-content h1 {
+  max-width: 500px;
+  font-size: 4rem;
+  margin-bottom: 10px;
+  margin-top: 180px;
+  color: #0388A6;
+  margin-left: 50px;
+}
+
+.text-content p{
+  color: #393e46;
+  font-size: 1.5rem;
+  margin-left: 50px;
+}
+
+.cta-button-form {
+  padding: 10px 20px;
+  background-color: #393e46;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 50px;
+  margin-bottom: 90px;
+  width: 210px;
+  font-size: 1rem;
+}
+
+.cta-button-form :hover {
+  background-color: #644cba;
+}
+
+.diagnostic-image {
+  margin-top: 100px;
+  max-width: 70%; /* Reducir ligeramente el ancho máximo para darle más espacio al contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  margin-left: 190px;
+}
+
+.combobox-container {
+  align-items: center;  /* Alinea el contenido verticalmente */
+  justify-content: space-between;  /* Añade espacio entre el Select y el botón */
+  background-color: #4e9197;  /* Fondo claro */
+  padding: 15px;  /* Espacio interno para que el contenido no esté pegado al borde */
+  margin: auto;  /* Centrar horizontalmente y añadir espacio vertical */
+  max-width: 500px;  /* Ancho máximo para el combobox */
+}
+
+
+.symptom-combobox{
+  display: flex;
+  max-width: 700px;
+}
+
+.seleccionar-sintoma {
+  min-width: 500px;
 }

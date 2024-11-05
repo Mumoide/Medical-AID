@@ -108,15 +108,16 @@ const SymptomComboBox = () => {
         navigator.geolocation.getCurrentPosition(async (position) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
-          const timestamp = new Date().toISOString(); // Get current timestamp
-          const userId = localStorage.getItem("userId"); // Get user id from localStorage
+          const timestamp = new Date().toISOString();
+          const userId = localStorage.getItem("user_id");
+
+          // Create a new unique diagnosisSessionId directly
+          const newDiagnosisSessionId = uuidv4();
 
           // Sample diagnosis request
           const response = await axios.post(
             "http://localhost:5000/predict_proba",
-            {
-              input: booleanArray,
-            }
+            { input: booleanArray }
           );
           const probabilities = response.data.probabilities[0];
 
@@ -135,7 +136,7 @@ const SymptomComboBox = () => {
             ];
           }
 
-          // Navigate to /diagnosis with all relevant data
+          // Navigate to /diagnosis with all relevant data, including the new unique diagnosisSessionId
           navigate("/diagnosis", {
             state: {
               top3: filteredProbabilities,
@@ -145,6 +146,7 @@ const SymptomComboBox = () => {
                 location: { latitude, longitude },
                 selectedSymptoms: selectedIndexes,
               },
+              diagnosisSessionId: newDiagnosisSessionId, // Pass the new session ID
             },
           });
         });
@@ -158,27 +160,35 @@ const SymptomComboBox = () => {
   };
 
   return (
-    <div style={{ marginTop: "200px", textAlign: "center" }}>
+    <div>
       {!symptomsLoaded ? (
         <div>
           <div className="spinner"></div>
         </div>
       ) : (
-        <>
+        <div className="hero-container-form">
+         <div className="introduction">
+      <div className="text-content">
+        <h1>Diagnósticos Remotos</h1>
+        <p>¿No sabes cómo identificar tus síntomas?</p>
+        <button className="cta-button-form">Te Ayudamos</button>
+      </div>
+      <div className="diagnostico">
+      <img
+        src="/images/backgrounds/Diagnostic.png"
+        alt="Imagen Principal"
+        className="diagnostic-image"
+      />
+      </div>
+    </div>
+            <div className="diagnosis-container">
+  <h2>Si estás seguro de tus síntomas, ¡ingrésalos a continuación!</h2>
           {comboBoxes.map((comboBox, index) => (
-            <div
-              key={comboBox.id}
-              style={{
-                marginBottom: "20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <div>
+            <div className="combobox-container" key={comboBox.id}>
                 <label htmlFor={`symptom-combobox-${comboBox.id}`}>
-                  Select a Symptom:
+                  Selecciona tus síntomas:
                 </label>
+              <div className="symptom-combobox">
                 <Select
                   id={`symptom-combobox-${comboBox.id}`}
                   options={getFilteredOptions(comboBox.id)}
@@ -191,13 +201,7 @@ const SymptomComboBox = () => {
                   isClearable
                   placeholder="Type to search..."
                   isDisabled={index !== comboBoxes.length - 1}
-                  styles={{
-                    container: (base) => ({
-                      ...base,
-                      width: "300px",
-                      margin: "10px auto",
-                    }),
-                  }}
+                  className="seleccionar-sintoma"
                 />
                 {selectedSymptoms[comboBox.id] && (
                   <p>
@@ -210,8 +214,7 @@ const SymptomComboBox = () => {
                     }
                   </p>
                 )}
-              </div>
-
+                
               <button
                 onClick={() => removeComboBox(comboBox.id)}
                 disabled={comboBoxes.length === 1}
@@ -227,10 +230,11 @@ const SymptomComboBox = () => {
               >
                 🗑️
               </button>
+              </div>
+
             </div>
           ))}
-
-          <div style={{ marginTop: "20px" }}>
+                    <div className="buttons-container "style={{ marginTop: "20px" }}>
             <button
               style={{
                 marginRight: "10px",
@@ -252,14 +256,17 @@ const SymptomComboBox = () => {
               Volver
             </button>
           </div>
+          </div>
+
+
 
           {diagnosisResult && (
             <div style={{ marginTop: "20px" }}>
-              <h3>Diagnosis Result:</h3>
+              <h3>Resultados del Diagnóstico:</h3>
               <p>{JSON.stringify(diagnosisResult)}</p>
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );

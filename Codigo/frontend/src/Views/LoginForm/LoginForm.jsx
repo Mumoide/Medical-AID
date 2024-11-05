@@ -24,8 +24,10 @@ function LoginForm({ onLoginSuccess }) {
       }
 
       const data = await response.json();
+      console.log(data)
       localStorage.setItem("token", data.token);
       localStorage.setItem("email", data.email);
+      localStorage.setItem("user_id", data.userId)
 
       // Call the onLoginSuccess callback to update the state
       onLoginSuccess(data.email);

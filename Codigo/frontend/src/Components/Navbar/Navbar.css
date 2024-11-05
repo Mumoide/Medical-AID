@@ -5,12 +5,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 40px;
-  margin: 20px 20px auto;
   width: 90%;
   border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: absolute;
   top: 20px;
+  left: 50%; /* Mueve el navbar al centro del eje X */
+  transform: translateX(-50%); /* Ajusta para centrar el elemento */
   z-index: 1000;
 }
 
@@ -73,8 +74,10 @@
   border-radius: 10px;
   position: absolute;
   top: 70px;
-  right: 10px;
-  width: 100%;
+  right: 0;
+  left: 0;
+  width: 90%;
+  margin: 0 auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 15px 0;
   display: flex;
@@ -96,6 +99,13 @@
 .dropdown-item:active {
   background-color: #3498db;
   color: white;
+}
+
+@media (max-width: 720px) {
+  .navbar {
+    padding: 10px 20px; /* Reducir padding para ahorrar espacio */
+    width: 95%; /* Aumentar el ancho del navbar para ocupar más espacio disponible */
+  }
 }
 
 /* Show Dropdown Button on Mobile */

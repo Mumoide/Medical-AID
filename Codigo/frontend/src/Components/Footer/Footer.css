@@ -1,5 +1,6 @@
 /* Footer */
 .footer {
+<<<<<<< HEAD
     background-color: #2c3e50;
     color: #bdc3c7;
     padding: 20px;
@@ -32,3 +33,37 @@
   .footer-copyright {
     font-size: 0.9rem;
   }
+=======
+  background-color: #2c3e50;
+  color: #bdc3c7;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column; /* Ensures stacked layout if space is constrained */
+  align-items: center; /* Center items within the footer */
+  width: 100%; /* Make sure it takes the full width of the parent */
+  max-width: 2160px; /* Constrain to match other content's max-width */
+  margin: 0 auto; /* Center footer within the page */
+  box-sizing: border-box; /* Include padding in total width */
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #bdc3c7;
+  margin: 0 15px;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-copyright {
+  font-size: 0.9rem;
+}
+>>>>>>> 5a0c396782018a07a5e7100ea77aab4ad68d4320

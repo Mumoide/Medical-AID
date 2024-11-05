@@ -1,22 +1,21 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Swal from "sweetalert2"; // Import SweetAlert
+import Swal from "sweetalert2";
 import "./DiagnosisResultPage.css";
 
 const Diagnosis = () => {
   const location = useLocation();
-  const { top3, diagnosisData } = location.state;
+  const { top3, diagnosisData, diagnosisSessionId } = location.state; // Retrieve session ID from state
 
   const navigate = useNavigate();
 
-  // State to store the disease data for the top 3 diagnoses
   const [diseaseData, setDiseaseData] = useState([]);
-
-  // Use ref for diagnosisData to prevent re-triggering useEffect
   const diagnosisDataRef = useRef(diagnosisData);
 
-  // Function to fetch disease data for each diagnosis
+  // Flag to prevent duplicate POST requests
+  const hasPosted = useRef(false);
+
   const fetchDiseaseData = async (modelOrder) => {
     try {
       const response = await axios.get(
@@ -52,20 +51,32 @@ const Diagnosis = () => {
         });
       }
 
-      // Send data to backend using diagnosisDataRef to avoid re-triggering useEffect
-      await axios.post("http://localhost:3001/api/diagnosis/create", {
-        diagnosisIds: diseases.map((disease) => disease.id_disease),
-        top3: top3,
-        diagnosisData: diagnosisDataRef.current, // Use ref here
-      });
+      // Ensure single POST request with diagnosis data
+      if (!hasPosted.current) {
+        // Set flag just before posting
+        hasPosted.current = true;
+        try {
+          await axios.post("http://localhost:3001/api/diagnosis/create", {
+            diagnosisSessionId,
+            diagnosisIds: diseases.map((disease) => disease.id_disease),
+            top3: top3,
+            diagnosisData: diagnosisDataRef.current,
+          });
+        } catch (error) {
+          if (error.response && error.response.status === 409) {
+            console.warn("Diagnosis already registered for this session.");
+          } else {
+            console.error("Error saving diagnosis data:", error);
+          }
+        }
+      }
     };
 
     if (top3.length > 0) {
       fetchAllDiseases();
     }
-  }, [top3]); // Only top3 as a dependency
+  }, [top3, diagnosisSessionId]);
 
-  // Back button click handler to navigate back to /form
   const handleBackClick = () => {
     navigate("/form");
   };
@@ -83,11 +94,9 @@ const Diagnosis = () => {
                   ({disease.probability.toFixed(1)}%)
                 </span>
               </div>
-
               <div className="diagnosis-description-container">
                 <p>{disease.descripcion}</p>
               </div>
-
               <div className="diagnosis-recommendations-container">
                 <strong>Recomendaciones:</strong>
                 <ul>
@@ -104,7 +113,6 @@ const Diagnosis = () => {
           <p>Loading disease information...</p>
         )}
       </div>
-
       <div style={{ marginTop: "30px" }}>
         <button onClick={handleBackClick} className="back-button">
           Volver

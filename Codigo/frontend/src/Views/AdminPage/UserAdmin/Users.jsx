@@ -241,19 +241,19 @@ const Users = () => {
           className={roleFilter === "User" ? "active" : ""}
           onClick={() => setRoleFilter("User")}
         >
-          Filter by User
+          Filtrar por usuario
         </button>
         <button
           className={roleFilter === "Admin" ? "active" : ""}
           onClick={() => setRoleFilter("Admin")}
         >
-          Filter by Admin
+          Filtrar por administrador
         </button>
         <button
           className="create-button"
           onClick={() => (window.location.href = "/admin/create")}
         >
-          Create New User
+          Crear nuevo usuario
         </button>
       </div>
 
