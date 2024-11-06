@@ -43,8 +43,8 @@ const Diagnosis = () => {
 
       if (top3.some((diagnosis) => diagnosis.probability < 30)) {
         Swal.fire({
-          title: "Low Probability Warning",
-          text: "Your diagnosis has a low probability, please consider consulting a healthcare professional.",
+          title: "Advertencia de baja probabilidad",
+          text: "Su diagnóstico tiene una probabilidad baja, considere consultar a un profesional de la salud.",
           icon: "warning",
           confirmButtonText: "Understood",
           confirmButtonColor: "#3085d6",
@@ -64,7 +64,7 @@ const Diagnosis = () => {
           });
         } catch (error) {
           if (error.response && error.response.status === 409) {
-            console.warn("Diagnosis already registered for this session.");
+            console.warn("El Diagnóstico ya fue registrado para esta sesión.");
           } else {
             console.error("Error saving diagnosis data:", error);
           }

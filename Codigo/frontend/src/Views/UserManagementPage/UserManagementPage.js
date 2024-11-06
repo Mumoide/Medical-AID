@@ -30,7 +30,7 @@ const UserManagementPage = () => {
             <th>ID</th>
             <th>Username</th>
             <th>Email</th>
-            <th>Actions</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>

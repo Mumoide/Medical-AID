@@ -22,11 +22,13 @@
   width: 90%;
   text-align: center;
   margin-left: 50px;
-  height: 500px;
+  height: 100%;
 }
 .diagnosis-container h2 {
-  font-size: 1.5rem;
+  font-size: 2.0rem;
   color: #fff;
+  margin: auto;
+  margin-top: 35px;
 }
 
 .introduction{
@@ -116,15 +118,91 @@ display: flex;
   background-color: #4e9197;  /* Fondo claro */
   padding: 15px;  /* Espacio interno para que el contenido no esté pegado al borde */
   margin: auto;  /* Centrar horizontalmente y añadir espacio vertical */
-  max-width: 500px;  /* Ancho máximo para el combobox */
+  min-width: 80%;  /* Ancho máximo para el combobox */
+  margin-top: 30px;
 }
 
+.combobox-container label {
+  margin-top: 50px;
+  color:rgb(34, 61, 82);
+  font-size: 1rem;
+}
 
 .symptom-combobox{
   display: flex;
+  margin-top:10px;
   max-width: 700px;
+  margin-left: 190px;
+}
+
+.buttons-container{
+  align-items: center;
+  margin: auto;
 }
 
 .seleccionar-sintoma {
   min-width: 500px;
+
+}
+
+/*Botones*/
+.buttons-container button {
+  background-color: #393E46; 
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente los botones */
+  gap: 15px; /* Espacio entre botones */
+  margin-bottom: 40px;
+}
+
+.eliminar-btn-container {
+  margin-left: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+}
+
+.eliminar-btn {
+  margin-left: 10px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(196, 22, 22);
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 24px;
+  margin-top:2px;
+}
+
+.eliminar-btn:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(124, 16, 16);
+}
+
+.categoria {
+  display: flex;
+  flex-direction: column; /* Coloca la imagen arriba del texto */
+  align-items: center; /* Alinea horizontalmente ambos elementos */
+  text-align: center; /* Centra el texto debajo de la imagen */
+  padding: 20px; /* Espacio alrededor del contenido */
+  margin-right: 390px;
+  margin-bottom: 250px;
+}
+
+.icono-categoria {
+  max-width: 150px; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: auto; /* Mantén la proporción de la imagen */
+}
+.categoria h2 {
+  font-size: 1.5rem; /* Ajusta el tamaño del texto */
+  font-weight: bold;
+  margin: 0; /* Elimina el margen superior e inferior */
+  color: #333; /* Color del texto */
+  margin-left: 350px;
 }

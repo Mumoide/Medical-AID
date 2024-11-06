@@ -3,6 +3,7 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
+import { RxCrossCircled } from "react-icons/rx";
 import "./SymptomsForm.css";
 
 const formatSymptomName = (symptomName) => {
@@ -32,7 +33,7 @@ const SymptomComboBox = () => {
         setSymptoms(sortedSymptoms);
         setSymptomsLoaded(true);
       } catch (error) {
-        console.error("Error fetching symptom names:", error);
+        console.error("Error al recuperar los nombres de los síntomas:", error);
       }
     };
     fetchSymptoms();
@@ -49,14 +50,14 @@ const SymptomComboBox = () => {
     const latestComboBoxId = comboBoxes[comboBoxes.length - 1].id;
     if (!selectedSymptoms[latestComboBoxId]) {
       alert(
-        "Please select an option in the latest ComboBox before adding a new one."
+        "Seleccione una opción en el último ComboBox antes de agregar una nueva."
       );
       return;
     }
     if (comboBoxes.length < 16) {
       setComboBoxes([...comboBoxes, { id: uuidv4() }]);
     } else {
-      alert("Maximum of 16 ComboBoxes reached");
+      alert("Se alcanzó el máximo de 16 Síntomas");
     }
   };
 
@@ -182,7 +183,7 @@ const SymptomComboBox = () => {
       </div>
     </div>
             <div className="diagnosis-container">
-  <h2>Si estás seguro de tus síntomas, ¡ingrésalos a continuación!</h2>
+              <h2>Si estás seguro de tus síntomas,<br /> ¡ingrésalos a continuación!</h2>
           {comboBoxes.map((comboBox, index) => (
             <div className="combobox-container" key={comboBox.id}>
                 <label htmlFor={`symptom-combobox-${comboBox.id}`}>
@@ -203,9 +204,9 @@ const SymptomComboBox = () => {
                   isDisabled={index !== comboBoxes.length - 1}
                   className="seleccionar-sintoma"
                 />
-                {selectedSymptoms[comboBox.id] && (
+                {/* {selectedSymptoms[comboBox.id] && (
                   <p>
-                    You selected:{" "}
+                    Seleccionaste:{" "}
                     {
                       getFilteredOptions(comboBox.id).find(
                         (option) =>
@@ -213,38 +214,32 @@ const SymptomComboBox = () => {
                       )?.label
                     }
                   </p>
-                )}
+                )} */}
                 
-              <button
+              <button className="eliminar-btn-container"
                 onClick={() => removeComboBox(comboBox.id)}
                 disabled={comboBoxes.length === 1}
                 style={{
-                  marginLeft: "10px",
-                  background: "none",
-                  border: "none",
                   cursor: comboBoxes.length === 1 ? "not-allowed" : "pointer",
-                  fontSize: "20px",
                   opacity: comboBoxes.length === 1 ? 0.5 : 1,
                 }}
                 aria-label="Delete ComboBox"
               >
-                🗑️
+                <RxCrossCircled
+                  className="eliminar-btn"
+                />
               </button>
               </div>
 
             </div>
           ))}
-                    <div className="buttons-container "style={{ marginTop: "20px" }}>
+              <div className="buttons-container"style={{ marginTop: "20px" }}>
             <button
-              style={{
-                marginRight: "10px",
-                padding: "10px 20px",
-                fontSize: "16px",
-              }}
               onClick={addNewComboBox}
             >
               Añadir Nuevo
             </button>
+            
             <button
               style={{ padding: "10px 20px", fontSize: "16px" }}
               onClick={handleDiagnosis}
@@ -252,7 +247,7 @@ const SymptomComboBox = () => {
               Iniciar Diagnóstico
             </button>
 
-            <button onClick={handleBackClick} className="back-button">
+            <button onClick={handleBackClick} >
               Volver
             </button>
           </div>
@@ -268,7 +263,13 @@ const SymptomComboBox = () => {
           )}
         </div>
       )}
+      <div className="categoria">
+        <img  src="/images/backgrounds/letter_icon.png" alt="icono-cat" className="icono-categoria"></img>
+        <h2>Seleccciona una Categoria</h2>
+      </div>
     </div>
+
+    
   );
 };
 
