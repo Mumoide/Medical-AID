@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
-import DiagnosticPage from './Views/DiagnosticPage/DiagnosticPage';
 import RegisterPage from './Views/RegisterPage/RegisterPage';
 import LoginForm from './Views/LoginForm/LoginForm';
 import AdminPage from './Views/AdminPage/AdminPage'; // Import the AdminPage component
@@ -47,8 +46,6 @@ function App() {
           {/* Home Page */}
           <Route path="/" element={<HomePage />} />
 
-          {/* Diagnostic Page */}
-          <Route path="/diagnostico" element={<DiagnosticPage />} />
           {/* Registration Page */}
           <Route path="/registro" element={<RegisterPage />} />
           {/* Login Page */}

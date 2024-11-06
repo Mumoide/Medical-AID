@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "./HomePage.css"
+import "../LoginForm/LoginForm.css"
 
 const HomePage = () => {
   return (
@@ -18,7 +19,7 @@ const HomePage = () => {
             síntomas ingresados.
           </p>
           <button
-            className="start-diagnostic"
+            className="cta-button-homepage"
             onClick={() => document.getElementById("diagnostic-section").scrollIntoView({ behavior: "smooth" })}
           >
             Iniciar Diagnóstico
@@ -98,9 +99,11 @@ const HomePage = () => {
 
  {/* Diagnostic Section */}
  <div className="diagnostic-container" id="diagnostic-section">
-    <div className="diagnostic-image">
-        <img src="/images/brain-image.png" alt="Diagnostic List" />
+
+    <div className="diagnostic-image v2">
+        <img src="/images/brain-image.png" alt="Diagnostic List" className="diagnostic-image img"/>
     </div>
+
     <div className="diagnostic-content">
         <h2>Diagnóstico Inteligente</h2>
         <p>Obtén resultados rápidos y precisos para tus diagnósticos.</p>

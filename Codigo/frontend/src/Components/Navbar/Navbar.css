@@ -1,6 +1,6 @@
 /* Navbar Styles */
 .navbar {
-  background-color: white;
+  background-color: #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -70,13 +70,13 @@
 }
 
 .dropdown-menu {
-  background-color: white;
+  background-color: rgba(0, 138, 144, 1);
   border-radius: 10px;
   position: absolute;
   top: 70px;
   right: 0;
   left: 0;
-  width: 90%;
+  width: 30%;
   margin: 0 auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 15px 0;
@@ -86,10 +86,9 @@
 
 .dropdown-item {
   padding: 10px 20px;
-  text-align: center;
   text-decoration: none;
   font-size: 1rem;
-  color: #333;
+  color: #ffffff;
 }
 
 .dropdown-item:hover {
@@ -97,7 +96,7 @@
 }
 
 .dropdown-item:active {
-  background-color: #3498db;
+  background-color: #ffffff4f;
   color: white;
 }
 

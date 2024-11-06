@@ -107,10 +107,9 @@ display: flex;
 }
 
 .diagnostic-image {
-  margin-top: 100px;
+  margin-top: 60px;
   max-width: 70%; /* Reducir ligeramente el ancho máximo para darle más espacio al contenedor */
   height: auto; /* Mantiene la proporción de la imagen */
-  margin-left: 190px;
 }
 
 .combobox-container {

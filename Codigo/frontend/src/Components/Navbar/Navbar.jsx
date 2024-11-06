@@ -71,7 +71,7 @@ function Navbar({ isLoggedIn, userEmail, onLogout }) {
             <a className="dropdown-item" href="/admin">
               Administración
             </a>
-            <a className="dropdown-item" href="/spinner">
+            <a className="dropdown-item" href="/about-us">
               Nosotros
             </a>
             {!isLoggedIn ? (
