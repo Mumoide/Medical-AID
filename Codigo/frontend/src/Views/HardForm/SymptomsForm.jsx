@@ -265,10 +265,47 @@ const SymptomComboBox = () => {
       )}
       <div className="categoria">
         <img  src="/images/backgrounds/letter_icon.png" alt="icono-cat" className="icono-categoria"></img>
-        <h2>Seleccciona una Categoria</h2>
+        <h2>Selecciona una Categoria</h2>
       </div>
-    </div>
+      <div className="combobox-categorias">
+        <h2>hola</h2>
+        <div className="buttons-container"style={{ marginTop: "20px" }}>
+            <button
+              onClick={addNewComboBox}
+            >
+              Añadir Nuevo
+            </button>
+            
+            <button
+              style={{ padding: "10px 20px", fontSize: "16px" }}
+              onClick={handleDiagnosis}
+            >
+              Iniciar Diagnóstico
+            </button>
 
+            <button onClick={handleBackClick} >
+              Volver
+            </button>
+          </div>
+      </div>
+
+      <footer className="subscribe-section">
+        <div className="subscribe-info">
+          <h2 className="subscribe-title">Diagnósticos Inteligentes</h2>
+        </div>
+        <div className="subscriibe-content">
+          <img src="/images/logos/LogoRound.png" alt="Logo Diagnósticos Remotos" className='Logo'/>
+        </div>
+        <p className="subcribete-text">Subscríbete a nuestros informativos vía correo electrónico y recibe todas nuestras noticias y actualizaciones.</p>
+        <form className="subscribe-form">
+          <input type="text" placeholder="Ingresa tu email" className="subscribe-input" />
+          <button className="subscribe-button">Suscribirse</button>
+        </form>
+        <p>Al suscribirte aceptas nuestra Política de Privacidad</p>
+        <hr class="custom-line"></hr>
+      </footer>
+    </div>
+  
     
   );
 };

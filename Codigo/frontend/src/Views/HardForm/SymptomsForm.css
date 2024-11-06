@@ -24,6 +24,7 @@
   margin-left: 50px;
   height: 100%;
 }
+
 .diagnosis-container h2 {
   font-size: 2.0rem;
   color: #fff;
@@ -192,7 +193,7 @@ display: flex;
   text-align: center; /* Centra el texto debajo de la imagen */
   padding: 20px; /* Espacio alrededor del contenido */
   margin-right: 390px;
-  margin-bottom: 250px;
+  margin-bottom: 30px;
 }
 
 .icono-categoria {
@@ -205,4 +206,69 @@ display: flex;
   margin: 0; /* Elimina el margen superior e inferior */
   color: #333; /* Color del texto */
   margin-left: 350px;
+}
+.combobox-categorias{
+  display: flex;
+  flex-direction: column;
+  background-color: #4e9197;
+  border-radius: 20px;
+  width: 72%;
+  margin-left: 190px;
+  height: 100%;
+  margin-bottom: 100px;
+}
+
+.combobox-categorias h2{
+text-align: center;
+
+}
+
+
+/* Footer Section */
+.footer {
+  display: flex;
+  justify-content: space-between; /* Distribuir los elementos a lo largo del contenedor */
+  align-items: center; /* Alinear todos los elementos verticalmente al centro */
+  padding: 20px;
+  background-color: #1e272e; /* Fondo del pie de página */
+  color: #ffffff; /* Color de los textos del pie de página */
+  flex-wrap: wrap; /* En caso de pantallas pequeñas, los elementos pueden moverse */
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px; /* Espacio entre los enlaces */
+}
+
+.footer-copyright {
+  display: flex;
+  justify-content: flex-end; /* Alinear el copyright a la derecha */
+  align-items: center; /* Asegurarse de que estén a la misma altura */
+}
+
+.footer a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+
+.footer-links {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.footer-copyright{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.icon-estetoscopio img{
+  max-width: 5%; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: auto; /* Mantén la proporción de la imagen */
 }
