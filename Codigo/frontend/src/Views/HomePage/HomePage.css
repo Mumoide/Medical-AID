@@ -10,29 +10,65 @@
 
 .hero-content-homepage {
   text-align: center; /* Center all text */
-  color: white;
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 99%;
+
 }
 
 .hero-content-homepage h1 {
-  font-size: 4vw; /* Dynamic heading size based on viewport width */
+  font-size: 5vw; /* Dynamic heading size based on viewport width */
+  margin-top: 190px;
 }
 
 .hero-content-homepage p {
   font-size: 2vw; /* Dynamic paragraph size */
 }
 
-.cta-button-homepage, .more-info {
-  background-color: #3498db;
+.cta-button-homepage {
+  background-color: #0388A6;
   border: none;
-  padding: 15px 30px;
+  padding: 25px 70px;
   color: white;
-  font-size: 1rem;
+  font-size: 1.5rem;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 35px;
+  margin-top: 30px;
 }
 
 .cta-button-homepage:hover {
   background-color: #2980b9;
+}
+
+.mision-container {
+  display: flex; /* Alinear imagen y texto horizontalmente */
+  align-items: center; /* Alinear verticalmente la imagen y el texto */
+  margin: 20px auto; /* Centrar la sección horizontalmente y agregar espacio vertical */
+  max-width: 800px; /* Limitar el ancho del contenedor */
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.logo-mision {
+  max-width: 100px; /* Ajustar el tamaño de la imagen */
+  height: auto; /* Mantener la proporción de la imagen */
+  margin-right: 20px; /* Espacio entre la imagen y el texto */
+}
+
+.texto-mision h1 {
+  color: #0388A6; /* Color del título */
+  font-size: 1.8rem; /* Tamaño del título */
+  margin: 0 0 10px 0; /* Espaciado debajo del título */
+  font-weight: bold; /* Negrita para destacar */
+}
+
+.texto-mision p {
+  font-size: 1.8rem; /* Tamaño de fuente del párrafo */
+  line-height: 1.5; /* Espaciado entre líneas para mejor legibilidad */
+  color: #121212; /* Color del texto */
+  margin: 0; /* Eliminar margen extra */
+  font-weight: normal; /* Negrita ligera */
 }
 
 /* Responsive Design */
@@ -74,45 +110,54 @@
 
 /* Cómo Funciona Section */
 .como-funciona-homepage {
-  background-color: #87ceeb;
-  padding: 40px;
+  background-color: #87ceeb; /* Fondo color azul claro */
+  padding: 60px 20px;
+  border-radius: 15px; /* Bordes redondeados */
 }
 
 .funciona-content-homepage {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  text-align: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding-bottom: 40px;
+  flex-wrap: wrap; /* Permitir que el contenido se ajuste en pantallas más pequeñas */
 }
 
 .funciona-image-homepage {
-  flex: 1; /* Allow the image to take up equal space */
+  flex: 1;
   display: flex;
-  justify-content: center; 
+  justify-content: center;
+  overflow: hidden;
 }
 
 .funciona-image-homepage img {
-  width: 150px; /* Responsive width */
-  height: auto;
-  margin-bottom: 20px;
+  width: 65%;
+  height: 290px; /* Ajusta esta altura según cuánto quieras cortar */
+  object-fit: cover; /* Asegura que la imagen llene el contenedor sin deformarse */
+  object-position: center; /* Centra la imagen para que quede bien recortada */
+  border-radius: 20px; /* Bordes redondeados para la imagen */
 }
 
 .funciona-text-homepage {
-  flex: 1; /* Allow the text to take up equal space */
-  text-align: center; /* Align text to the left */
+  flex: 1;
+  padding-left: 5px; /* Espacio a la izquierda del texto */
+  max-width: 500px;
 }
 
 .funciona-text-homepage h2 {
   font-size: 2.5rem;
+  color: #ffffff;
   margin-bottom: 20px;
+  text-align: left;
 }
 
 .funciona-text-homepage p {
   font-size: 1.2rem;
+  color: #0f0e0e;
   margin-bottom: 20px;
+  text-align: left;
 }
 
 .ver-mas-button-homepage {
@@ -123,10 +168,51 @@
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .ver-mas-button-homepage:hover {
   background-color: #333;
+  transform: scale(1.05);
+}
+
+.funciona-icons-homepage {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+  gap: 20px;
+  flex-wrap: wrap; /* Permitir que los iconos se ajusten en dispositivos pequeños */
+}
+
+.funciona-icon-homepage {
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  max-width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.funciona-icon-homepage img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 15px;
+}
+
+.funciona-icon-homepage h3 {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.funciona-icon-homepage p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.funciona-icon-homepage:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive Design */
@@ -207,6 +293,7 @@
 .beneficios-section-homepage h2 {
   font-size: 2.5rem;
   margin-bottom: 20px;
+  color: #0388A6;
 }
 
 .beneficios-section-homepage p {
@@ -217,28 +304,48 @@
 .beneficios-content-homepage {
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Hace que los elementos se envuelvan para pantallas más pequeñas */
+  gap: 20px; /* Espacio entre cada beneficio */
 }
 
 .beneficio-homepage {
-  background-color: white;
+  
   border-radius: 20px;
-  padding: 40px; /* Reduced padding for smaller screens */
+  padding: 40px; 
   max-width: 300px;
   margin: 20px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación para el hover */
+}
+
+.beneficio-homepage:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumentar la sombra al pasar el mouse */
 }
 
 .beneficio-homepage img {
-  width: 80%; /* Full width for responsiveness */
+  width: 60%; 
   height: auto;
   margin-bottom: 15px;
+  border-radius: 10px; /* Agrega bordes redondeados a la imagen */
 }
+
+.beneficio-homepage h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.beneficio-homepage p {
+  font-size: 1rem;
+  color: #555;
+}
+
 
 @media (max-width: 1024px) {
   .beneficio-homepage {
-    max-width: 100%; /* Ensure cards take full width on larger mobile screens */
+    max-width: 60%; /* Ensure cards take full width on larger mobile screens */
     padding: 20px;
   }
 
@@ -256,6 +363,7 @@
   .beneficio-homepage {
     max-width: 100%; /* Ensure full width on mobile */
     margin-bottom: 20px;
+    min-width: 65%;
   }
 
   .beneficio-homepage img {
@@ -281,7 +389,7 @@
   gap: 20px;
   justify-content: center;
   flex-wrap: wrap; /* Enables cards to wrap on smaller screens */
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
 .step-homepage {
@@ -306,7 +414,7 @@
 }
 
 .step-homepage p {
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 @media (max-width: 1024px) {
@@ -380,58 +488,107 @@
   }
 }
 
-.diagnostic-container {
+.diagnostic-container-inteligente {
   display: flex;
-  flex-direction: column;
-
-  align-items: center;
-  height: 100vh;
+  flex-direction: row; /* Flex para organizar contenido en columnas */
+  justify-content: space-between; /* Coloca los elementos en los extremos */
+  align-items: center; /* Centra verticalmente */
+  height: 50vh;
   background-color: #022E40;
-
-  text-align: center;
+  text-align: left; /* Alineación del texto a la izquierda */
+  padding: 20px; /* Espacio interior para separar el contenido del borde */
+  margin-bottom: 90px;
+  max-width: 100%;
 }
 
 /* Desktop view */
-@media (min-width: 768px) {
-  .diagnostic-container {
+@media (max-width: 768px) {
+  .diagnostic-container-inteligente {
     flex-direction: row;
     justify-content: space-around;
     text-align: left;
   }
+}
 
-  .diagnostic-content {
-    max-width: 400px;
-  }
+
+
+.diagnostic-image {
+  display: flex;
+  justify-content: center; /* Centra la imagen horizontalmente */
+  align-items: center; /* Centra la imagen verticalmente si es necesario */
+  margin-top:50px;
 }
 
 .diagnostic-image img {
-  border-radius: 15px;
-  max-width: 400px;
-  width: 100%;
+  width: 30%;
   height: auto;
-  background-color: #03202c;
+  margin-bottom: 120px;
+  right:350px;
+  /* Propiedades de animación */
+  animation: float 3s ease-in-out infinite; /* Define la animación infinita */
+  /* margin-left: 350px; */
 }
 
-.diagnostic-image v2{
-  width: 100%; /* Full width for responsiveness */
-  height: auto;
-  margin-bottom: 15px;
+@media (max-width: 768) {
+  .diagnostic-image  {
+    width: 80%;
+    height:50px;
+  }
 }
+
+@media (max-width: 650px) {
+  .diagnostic-image {
+    display: none; /* Oculta el div cuando la pantalla es muy pequeña */
+  }
+}
+
+@media (max-width: 480px) {
+  .diagnostic-image {
+    display: none; /* Oculta el div cuando la pantalla es muy pequeña */
+  }
+}
+
+/* Definición de la animación float */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0); /* Posición inicial y final sin desplazamiento */
+  }
+  50% {
+    transform: translateY(-10px); /* Mover hacia arriba 10px en el punto medio */
+  }
+}
+
 
 .diagnostic-content {
   color: white;
-  margin-top: 20px; /* Adds space on mobile view */
+  margin: 20px 50px 50px auto; /* Margen superior, horizontal y luego inferior */
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .diagnostic-content {
+    max-width: 400px;
+    margin-right: 50px; /* Reducir margen derecho para pantallas pequeñas */
+  }
+}
+
+@media (max-width: 650px) {
+  .diagnostic-content {
+    margin: 20px auto 50px auto; /* Margen superior, horizontal y luego inferior */
+  }
 }
 
 .diagnostic-content p {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin-bottom: 30px;
 }
 
+/* Contenedor de Botones */
 .diagnostic-buttons {
   display: flex;
   gap: 20px;
-  flex-direction: column; /* Stack buttons on mobile */
+  flex-direction: row; /* Botones en fila para pantallas grandes */
+  margin-top: 20px;
 }
 
 @media (min-width: 768px) {
@@ -453,7 +610,7 @@
 .more-info {
   background-color: transparent;
   border: 2px solid #3498db;
-  color: #3498db;
+  color: #ffffff;
 }
 
 .start-diagnostic:hover {
@@ -540,61 +697,16 @@
 /* iPhone 15 Specific Adjustments */
 @media (max-width: 393px) {
   /* Hero Section */
-  .hero-section {
+  .hero-section-homepage {
       height: 70vh; /* Reduce height for smaller screens */
   }
 
-  .hero-content h1 {
+  .hero-content-homepage h1 {
       font-size: 1.8rem; /* Adjust heading size */
   }
 
-  .hero-content p {
+  .hero-content-homepage p {
       font-size: 1rem; /* Adjust paragraph size */
-  }
-
-  .cta-button {
-      font-size: 0.9rem; /* Smaller font for button */
-      padding: 10px 20px;
-  }
-
-  /* Cómo Funciona Section */
-  .funciona-content {
-      flex-direction: column;
-      text-align: center;
-  }
-
-  .funciona-image img {
-      max-width: 100%;
-      height: auto;
-  }
-
-  .funciona-text h2 {
-      font-size: 1.5rem; /* Adjust heading size */
-  }
-
-  .funciona-text p {
-      font-size: 1rem;
-  }
-
-  /* Beneficios Section */
-  .beneficios-content {
-      flex-direction: column;
-      align-items: center;
-  }
-
-  .beneficio {
-      max-width: 100%;
-      padding: 20px; /* Reduce padding */
-  }
-
-  /* Suscripción Section */
-  .suscripcion-form input {
-      width: 90%;
-      padding: 12px;
-  }
-
-  .suscripcion-form button {
-      padding: 12px 20px;
   }
 
   /* Comments Section */

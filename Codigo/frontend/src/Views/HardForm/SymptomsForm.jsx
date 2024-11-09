@@ -178,7 +178,7 @@ const SymptomComboBox = () => {
       <img
         src="/images/backgrounds/Diagnostic.png"
         alt="Imagen Principal"
-        className="diagnostic-image"
+        className="diagnostic-image-form"
       />
       </div>
     </div>

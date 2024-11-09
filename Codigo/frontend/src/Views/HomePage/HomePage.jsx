@@ -9,13 +9,13 @@ const HomePage = () => {
       <section
         className="hero-section-homepage"
         style={{
-          backgroundImage: "url(/images/backgrounds/background-image.jpeg)",
+          backgroundImage: "url(/images/backgrounds/medical-banner.jpg)",
         }}
       >
         <div className="hero-content-homepage">
           <h1>Diagnósticos Remotos</h1>
           <p>
-            Medical AID utiliza IA para diagnósticos médicos remotos basados en
+            Medical AID utiliza IA <br /> para diagnósticos médicos remotos basados en
             síntomas ingresados.
           </p>
           <button
@@ -27,6 +27,14 @@ const HomePage = () => {
         </div>
       </section>
 
+      <div className="mision-container">
+  <img src="images/logos/LogoRound.png" alt="Medical_Logo" className="logo-mision" />
+  <div className="texto-mision">
+    <h1>Nuestra Misión</h1>
+    <p>Proveer diagnósticos médicos precisos y accesibles mediante inteligencia artificial.</p>
+  </div>
+</div>
+
       {/* Cómo Funciona Section */}
       <section className="como-funciona-homepage">
         <div className="funciona-content-homepage">
@@ -35,9 +43,7 @@ const HomePage = () => {
           </div>
           <div className="funciona-text-homepage">
             <h2>Cómo Funciona</h2>
-            <center>
             <p>Descubre el proceso detrás de nuestra tecnología.</p>
-            </center>
             <Link to="/about-us">
             <button className="ver-mas-button-homepage">Ver más</button>
             </Link>
@@ -48,7 +54,7 @@ const HomePage = () => {
         <div className="funciona-steps-homepage">
           <div className="step-homepage">
             <img
-              src="/images/icons/icon-symptoms.png"
+              src="/images/icons/seleccion.png"
               alt="Ingresar Síntomas"
             />
             <h3>Ingresar Síntomas</h3>
@@ -56,7 +62,7 @@ const HomePage = () => {
           </div>
           <div className="step-homepage">
             <img
-              src="/images/icons/icon-ia-analysis.png"
+              src="/images/icons/ia.png"
               alt="Análisis de IA"
             />
             <h3>Análisis de IA</h3>
@@ -64,7 +70,7 @@ const HomePage = () => {
           </div>
           <div className="step-homepage">
             <img
-              src="/images/icons/icon-diagnosis.png"
+              src="/images/icons/diagnostico.png"
               alt="Diagnóstico Remoto"
             />
             <h3>Diagnóstico Remoto</h3>
@@ -98,10 +104,10 @@ const HomePage = () => {
       </section>
 
  {/* Diagnostic Section */}
- <div className="diagnostic-container" id="diagnostic-section">
+ <div className="diagnostic-container-inteligente" id="diagnostic-section">
 
-    <div className="diagnostic-image v2">
-        <img src="/images/brain-image.png" alt="Diagnostic List" className="diagnostic-image img"/>
+    <div className="diagnostic-image">
+        <img src="/images/icons/artificial.png" alt="Diagnostic List" className="diagnostic-image img"/>
     </div>
 
     <div className="diagnostic-content">
@@ -117,6 +123,8 @@ const HomePage = () => {
         </div>
         </div>
         </div> 
+
+        <div className="comentarios">
           <h2 className="comments-heading">Comentarios</h2>
         <div className="comments-section">
     <div className="comment-card">
@@ -147,6 +155,7 @@ const HomePage = () => {
         <p className="comment-text">"La plataforma es fácil de usar y los diagnósticos son muy precisos."</p>
     </div>
 </div>
+</div>
 
       <footer className="subscribe-section">
         <div className="subscribe-info">
@@ -164,6 +173,7 @@ const HomePage = () => {
         <hr class="custom-line"></hr>
       </footer>
     </div>
+    
   );
 };
 

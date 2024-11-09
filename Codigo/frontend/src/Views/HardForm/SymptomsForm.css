@@ -106,10 +106,11 @@ display: flex;
   background-color: #644cba;
 }
 
-.diagnostic-image {
-  margin-top: 60px;
+.diagnostic-image-form {
+  margin-top: 100px;
   max-width: 70%; /* Reducir ligeramente el ancho máximo para darle más espacio al contenedor */
   height: auto; /* Mantiene la proporción de la imagen */
+  margin-left: 190px;
 }
 
 .combobox-container {
@@ -265,9 +266,4 @@ text-align: center;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-}
-
-.icon-estetoscopio img{
-  max-width: 5%; /* Ajusta el tamaño de la imagen según sea necesario */
-  height: auto; /* Mantén la proporción de la imagen */
 }
