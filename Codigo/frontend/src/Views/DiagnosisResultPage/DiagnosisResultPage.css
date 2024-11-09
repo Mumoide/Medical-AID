@@ -52,7 +52,6 @@
   overflow: auto; /* Add scroll if the recommendations are too long */
 }
 
-
 .back-button {
   margin-top: 30px;
   padding: 10px 20px;
@@ -63,7 +62,6 @@
   border: none;
   border-radius: 5px;
 }
-
 
 /* Diagnosis.css */
 .back-button {

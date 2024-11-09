@@ -1,11 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useTable, usePagination, useSortBy } from "react-table";
-import Swal from "sweetalert2"; // Import SweetAlert for alerts
-import "./DiagnosticRecordsPage.css"; // Add CSS for styling if needed
+import { useNavigate } from "react-router-dom";
+import { FaEye } from "react-icons/fa"; // Import the eye icon
+import Swal from "sweetalert2";
+import "./DiagnosticRecordsPage.css";
 
 const DiagnosticRecordsPage = () => {
   const [data, setData] = useState([]);
   const userId = localStorage.getItem("user_id");
+  const navigate = useNavigate();
 
   const formatSymptomName = (symptomName) => {
     let formattedName = symptomName.replace(/_/g, " ");
@@ -16,20 +19,18 @@ const DiagnosticRecordsPage = () => {
   };
 
   useEffect(() => {
-    // Fetch diagnostic records for the logged-in user
     const fetchDiagnosticRecords = async () => {
       try {
         const response = await fetch(
           `http://localhost:3001/api/diagnosis/diagnostic-records/${userId}`,
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`, // Include token in request
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }
         );
 
         if (response.status === 403) {
-          // Handle token expiration
           Swal.fire({
             title: "Session Expired",
             text: "Please log in again.",
@@ -46,10 +47,16 @@ const DiagnosticRecordsPage = () => {
 
         let data = await response.json();
 
-        // Filter out records with empty disease names
-        data = data.filter((record) =>
-          record.diseases.some((disease) => disease.disease_name)
-        );
+        // Flatten data so each disease has its own row
+        data = data
+          .filter((record) => record.diseases.some((d) => d.disease_name))
+          .flatMap((record) =>
+            record.diseases.map((disease) => ({
+              diagnosis_date: record.diagnosis_date,
+              disease_name: disease.disease_name,
+              symptoms: record.symptoms,
+            }))
+          );
 
         setData(data);
       } catch (error) {
@@ -66,7 +73,6 @@ const DiagnosticRecordsPage = () => {
     fetchDiagnosticRecords();
   }, [userId]);
 
-  // Define columns for the table
   const columns = useMemo(
     () => [
       {
@@ -80,10 +86,8 @@ const DiagnosticRecordsPage = () => {
         },
       },
       {
-        Header: "Diseases",
-        accessor: "diseases",
-        Cell: ({ value }) =>
-          value.map((disease) => disease.disease_name).join(", "),
+        Header: "Disease",
+        accessor: "disease_name",
       },
       {
         Header: "Symptoms",
@@ -93,11 +97,25 @@ const DiagnosticRecordsPage = () => {
             .map((symptom) => formatSymptomName(symptom.symptom_name))
             .join(", "),
       },
+      {
+        Header: "Actions",
+        accessor: "actions",
+        Cell: ({ row }) => (
+          <div className="icon-buttons-register">
+            <FaEye
+              onClick={() =>
+                navigate("/disease", {
+                  state: { disease_name: row.original.disease_name },
+                })
+              }
+            />
+          </div>
+        ),
+      },
     ],
-    []
+    [navigate]
   );
 
-  // Set up table instance with react-table hooks
   const {
     getTableProps,
     getTableBodyProps,
@@ -115,10 +133,10 @@ const DiagnosticRecordsPage = () => {
     {
       columns,
       data,
-      initialState: { pageIndex: 0 }, // Start on the first page
+      initialState: { pageIndex: 0 },
     },
-    useSortBy, // Enable sorting
-    usePagination // Enable pagination
+    useSortBy,
+    usePagination
   );
 
   return (
@@ -179,6 +197,11 @@ const DiagnosticRecordsPage = () => {
           ))}
         </select>
       </div>
+
+      {/* Back button */}
+      <button onClick={() => navigate(-1)} className="back-button-records">
+        Back
+      </button>
     </div>
   );
 };
