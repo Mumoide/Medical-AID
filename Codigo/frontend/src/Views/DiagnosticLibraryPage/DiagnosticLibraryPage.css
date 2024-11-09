@@ -6,16 +6,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.library-main-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 90%;
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 40px;
+  margin-top: 90px;
+  width: 100%;
 }
 
 .library-text {
@@ -44,6 +36,7 @@
   transition: background-color 0.3s ease;
   text-decoration: none; /* Ensures it doesn’t look like a link */
   margin-top: 60px;
+  text-decoration: none;
 }
 
 .library-button:hover {
@@ -74,6 +67,7 @@
   height: 100%;
   background-color: #f3f3f3;
   width: 100%;
+  margin-top: 30px;
 }
 /* Título de la sección de diagnósticos */
 .table-title-library h2{
@@ -112,6 +106,7 @@
   color: #0388A6;
   margin-bottom: 10px;
   text-align: center;
+  margin-bottom: 30px;
 }
 
 /* Descripción de cada enfermedad */
@@ -120,6 +115,8 @@
   color: #333;
   margin-bottom: 15px;
   line-height: 1.5;
+  text-align: justify;
+
 }
 
 /* Lista de precauciones para cada enfermedad */
@@ -128,6 +125,13 @@
   padding-left: 20px;
   font-size: 1rem;
   color: #555;
+  text-align: justify;
+  margin-top: 25px;
+}
+
+.precautions-list-library h1 {
+  color: #585a5a;
+  font-size: 1.3rem;
 }
 
 /* Estilos del contenedor principal del carrusel */
@@ -181,25 +185,6 @@
   transform: scale(1.2); /* Aumenta el tamaño del dot cuando el mouse pasa sobre él */
 }
 
-
-
-/* Estilos del botón para ver más */
-.library-button {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: #0388A6;
-  color: #fff;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: background-color 0.3s;
-  margin-top: 20px;
-}
-
-.library-button:hover {
-  background-color: #026d8e;
-}
-
 /* Estilos de la imagen y el contenedor principal */
 .library-main-content {
   display: flex;
@@ -211,41 +196,9 @@
   margin: 40px auto;
 }
 
-.library-image {
-  width: 40%;
-  height: auto;
-  animation: zoomIn 2s ease-in-out infinite; /* Añadido para hacer la animación infinita */
-}
-
-.library-text {
-  flex: 1;
-  margin-right: 20px;
-}
-
-.library-text h1 {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.library-text a {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #0388A6;
-  color: #fff;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
-.library-text a:hover {
-  background-color: #026d8e;
-}
-
 .slick-arrow.slick-next::before, .slick-arrow.slick-prev::before {
   color:black;
 }
-
-
 
 /* Animación para la imagen */
 @keyframes zoomIn {
@@ -260,45 +213,158 @@
   }
 }
 
-/* Estilos responsivos para mejorar la visualización en dispositivos más pequeños */
+/* Diseño responsivo para tablets y dispositivos medianos */
 @media (max-width: 1024px) {
+  /* Contenedor principal de la biblioteca */
   .library-main-content {
     flex-direction: column;
     align-items: center;
     text-align: center;
-  }
-  
-  .library-image {
-    margin-bottom: 20px;
+    padding: 20px;
   }
 
-  .slick-slider {
-    max-width: 90%;
+  .library-text {
+    margin-right: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .library-text h1 {
+    font-size: 3rem; /* Ajusta el tamaño del título para pantallas más pequeñas */
+    margin-bottom: 15px;
+  }
+
+  .library-image {
+    width: 70%; /* Ajusta el tamaño de la imagen */
+    margin-bottom: 20px;
   }
 
   .disease-card-library {
     padding: 15px;
+    height: auto;
   }
 }
 
+/* Ajustes para pantallas más pequeñas (móviles grandes, 768px o menos) */
 @media (max-width: 768px) {
   .library-text h1 {
-    font-size: 2rem;
+    font-size: 2.5rem; /* Reduce aún más el tamaño del título */
+  }
+
+  .library-button {
+    font-size: 1.2rem;
+    padding: 10px 30px; /* Reduce el tamaño del botón */
+  }
+
+  .disease-card-library {
+    margin: 10px;
+    max-width: 100%; /* Asegura que la tarjeta ocupe todo el ancho disponible */
+  }
+
+  .table-title-library h2 {
+    font-size: 2rem; /* Ajusta el tamaño del título para diagnósticos */
+  }
+
+  .slick-slide {
+    padding: 0 10px; /* Ajusta el padding para que haya más espacio en pantallas pequeñas */
+  }
+
+  .slick-slider {
+    max-width: 95%; /* Ajusta el ancho del slider para que tenga más margen en móviles */
+  }
+}
+
+/* Diseño para pantallas móviles pequeñas (600px o menos) */
+@media (max-width: 600px) {
+  .library-main-content {
+    padding: 10px;
+    margin: 20px 0;
+  }
+
+  .library-text h1 {
+    font-size: 2rem; /* Reduce el título para dispositivos más pequeños */
   }
 
   .library-button {
     font-size: 1rem;
-    padding: 8px 16px;
+    padding: 8px 16px; /* Reduce el tamaño del botón para móviles */
   }
-}
 
-/* Ajuste específico para pantallas más pequeñas */
-@media (max-width: 600px) {
+  .library-image {
+    width: 80%; /* Imagen ocupa más espacio, pero no se desborda */
+    margin-bottom: 15px;
+  }
+
   .disease-card-library {
-    margin: 0 5px;
+    margin: 5px;
+    padding: 10px;
+    max-width: 100%;
   }
 
   .slick-slide {
-    padding: 0 10px;
+    padding: 0 8px; /* Reduce el espacio alrededor de las tarjetas en el slider */
+  }
+
+  .table-title-library h2 {
+    font-size: 1.8rem; /* Reduce el tamaño del título de diagnósticos */
+  }
+
+  /* Asegura que los dots se mantengan visibles y organizados */
+  .slick-dots.custom-dots {
+    gap: 10px;
+    margin: 10px;
+    max-width: 90%;
+  }
+}
+
+/* Diseño para pantallas extra pequeñas (480px o menos) */
+@media (max-width: 480px) {
+  .library-text h1 {
+    font-size: 1.8rem; /* Ajusta el tamaño del título para una mejor legibilidad */
+  }
+
+  .library-button {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  .disease-card-library {
+    height: auto; /* Elimina la altura fija para asegurar que el contenido fluya bien */
+    padding: 10px;
+  }
+
+  .slick-dots.custom-dots {
+    gap: 5px;
+    margin: 5px;
+    max-width: 100%;
+  }
+
+  /* Botones de navegación del slider */
+  .slick-arrow.slick-next::before, .slick-arrow.slick-prev::before {
+    color: black;
+    font-size: 1.2rem; /* Reduce el tamaño de los iconos de flechas para pantallas más pequeñas */
+  }
+}
+
+/* Mejora la alineación y distribución del carrusel */
+@media (max-width: 400px) {
+  .library-image {
+    width: 90%;
+  }
+
+  .slick-slider {
+    padding: 0;
+  }
+
+  .disease-title-library {
+    font-size: 1.3rem; /* Reduce el tamaño del título de cada tarjeta */
+  }
+
+  .disease-description-library {
+    font-size: 0.9rem; /* Reduce la fuente para que se vea más limpia en pantallas pequeñas */
+  }
+
+  .precautions-list-library {
+    font-size: 0.9rem; /* Ajuste para lista de precauciones */
   }
 }

@@ -98,7 +98,7 @@ const DiagnosticLibraryPage = () => {
       <section>
         <div className="library-main-content">
           <div className="library-text">
-            <h1>Biblioteca De Diagnósticos</h1>
+            <h1>Biblioteca <br />De Diagnósticos</h1>
             <a href="#table-section-library" className="library-button">
               Ver
             </a>
@@ -126,6 +126,7 @@ const DiagnosticLibraryPage = () => {
                     {disease.descripcion}
                   </p>
                   <ul className="precautions-list-library">
+                    <h1>Recomendaciones</h1>
                     {disease.precaucion_1 && <li>{disease.precaucion_1}</li>}
                     {disease.precaucion_2 && <li>{disease.precaucion_2}</li>}
                     {disease.precaucion_3 && <li>{disease.precaucion_3}</li>}
