@@ -20,4 +20,15 @@ const getDiseaseByModelOrder = async (req, res) => {
     }
 };
 
-module.exports = { getDiseaseByModelOrder }; // Export the controller function
+// Controller function to fetch all diseases
+const getAllDiseases = async (req, res) => {
+    try {
+        const diseases = await Disease.findAll(); // Fetch all diseases from the database
+        res.json(diseases); // Return the list of diseases as JSON
+    } catch (error) {
+        console.error('Error fetching diseases:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
+module.exports = { getDiseaseByModelOrder, getAllDiseases }; // Export the controller function

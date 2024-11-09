@@ -1,0 +1,12 @@
+.dashboard-container {
+  padding: 20px;
+}
+
+.map-container {
+  height: 500px;
+  margin-bottom: 20px;
+}
+
+.ag-theme-alpine {
+  width: 100%;
+}
