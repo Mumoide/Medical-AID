@@ -491,7 +491,7 @@
 .diagnostic-container-inteligente {
   display: flex;
   flex-direction: row; /* Flex para organizar contenido en columnas */
-  justify-content: space-between; /* Coloca los elementos en los extremos */
+  justify-content:space-around; /* Coloca los elementos en los extremos */
   align-items: center; /* Centra verticalmente */
   height: 50vh;
   background-color: #022E40;
@@ -500,6 +500,7 @@
   margin-bottom: 90px;
   max-width: 100%;
 }
+
 
 /* Desktop view */
 @media (max-width: 768px) {
@@ -523,26 +524,36 @@
   width: 30%;
   height: auto;
   margin-bottom: 120px;
-  right:350px;
+  margin-left: 150px;
   /* Propiedades de animación */
   animation: float 3s ease-in-out infinite; /* Define la animación infinita */
-  /* margin-left: 350px; */
 }
 
-@media (max-width: 768) {
-  .diagnostic-image  {
-    width: 80%;
-    height:50px;
+@media (max-width: 1200px) {
+  .diagnostic-image img {
+    width: 40%;
+    height:auto;
+    margin-left: 125px;
   }
 }
 
-@media (max-width: 650px) {
-  .diagnostic-image {
-    display: none; /* Oculta el div cuando la pantalla es muy pequeña */
+@media (max-width: 1024px) {
+  .diagnostic-image img {
+    width: 45%;
+    height:auto;
+    margin-left: 100px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  .diagnostic-image img {
+    width: 40%;
+    height:auto;
+    margin-left: 50px;
+  }
+}
+
+@media (max-width: 680px) {
   .diagnostic-image {
     display: none; /* Oculta el div cuando la pantalla es muy pequeña */
   }
@@ -561,8 +572,15 @@
 
 .diagnostic-content {
   color: white;
-  margin: 20px 50px 50px auto; /* Margen superior, horizontal y luego inferior */
+  margin: 20px 200px 50px auto; /* Margen superior, horizontal y luego inferior */
   max-width: 100%;
+}
+
+/* Desktop view */
+@media (max-width: 1024px) {
+  .diagnostic-content {
+    margin: 20px 50px 50px auto; /* Margen superior, horizontal y luego inferior */
+  }
 }
 
 @media (max-width: 768px) {
@@ -572,7 +590,7 @@
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 680px) {
   .diagnostic-content {
     margin: 20px auto 50px auto; /* Margen superior, horizontal y luego inferior */
   }
