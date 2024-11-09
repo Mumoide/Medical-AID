@@ -3,7 +3,7 @@ import { jwtDecode } from 'jwt-decode'; // Use named import instead of default
 
 export const checkTokenExpiration = () => {
     const token = localStorage.getItem("token");
-    if (!token) return { expired: true };
+    if (!token) return { expired: false };
 
     const decodedToken = jwtDecode(token);
     const currentTime = Math.floor(Date.now() / 1000);
