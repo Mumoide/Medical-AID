@@ -15,10 +15,49 @@ const Users = () => {
 
   useEffect(() => {
     // Fetch the user data from the backend
-    fetch("http://localhost:3001/api/users/users")
-      .then((response) => response.json())
-      .then((data) => setData(data));
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/api/users/users", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token from storage
+          },
+        });
+
+        if (response.status === 403) {
+          // Token is invalid or expired
+          Swal.fire({
+            title: "Session Expired",
+            text: "Please log in again.",
+            icon: "warning",
+            confirmButtonText: "OK",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // Redirect to login after the alert is confirmed/closed
+              localStorage.removeItem("token");
+              window.location.href = "/inicio-de-sesion";
+            }
+          });
+          return;
+        } else if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+
+        const data = await response.json();
+        setData(data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        Swal.fire({
+          title: "Error",
+          text: "An error occurred. Please try again.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
+    };
+
+    fetchUserData();
   }, []);
+
   // Back button click handler to navigate back to /form
   const handleBackClick = () => {
     navigate("/admin");
@@ -40,11 +79,20 @@ const Users = () => {
       if (result.isConfirmed) {
         try {
           // Send DELETE request to the backend (logical delete)
-          await axios.delete(`http://localhost:3001/api/users/${id_user}`);
+          await axios.delete(`http://localhost:3001/api/users/${id_user}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token from storage
+            },
+          });
 
           // After successful deletion, refetch the user data to reflect changes
           const updatedData = await fetch(
-            "http://localhost:3001/api/users/users"
+            "http://localhost:3001/api/users/users",
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token from storage
+              },
+            }
           )
             .then((response) => response.json())
             .catch((error) => {
@@ -85,12 +133,23 @@ const Users = () => {
         try {
           // Send PUT request to reactivate the user
           await axios.put(
-            `http://localhost:3001/api/users/reactivate/${id_user}`
+            `http://localhost:3001/api/users/reactivate/${id_user}`,
+            {}, // Empty body for PUT request
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`, // Ensure token is set correctly
+              },
+            }
           );
 
           // Refetch the updated user data to reflect changes
           const updatedData = await fetch(
-            "http://localhost:3001/api/users/users"
+            "http://localhost:3001/api/users/users",
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token from storage
+              },
+            }
           )
             .then((response) => response.json())
             .catch((error) => {
@@ -116,6 +175,7 @@ const Users = () => {
 
   // Apply the role filter based on the state
   const filteredData = useMemo(() => {
+    if (!Array.isArray(data)) return []; // Return an empty array if `data` is not an array
     if (!roleFilter) return data; // If no filter is applied, return all data
     return data.filter(
       (user) =>

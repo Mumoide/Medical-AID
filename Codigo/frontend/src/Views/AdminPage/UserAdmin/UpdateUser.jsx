@@ -31,7 +31,12 @@ const UpdateUser = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/users/${id}`
+          `http://localhost:3001/api/users/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token from storage
+            },
+          }
         );
         const user = response.data;
 
@@ -105,7 +110,11 @@ const UpdateUser = () => {
     };
 
     try {
-      await axios.put(`http://localhost:3001/api/users/${id}`, finalFormData);
+      await axios.put(`http://localhost:3001/api/users/${id}`, finalFormData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token from storage
+        },
+      });
       toast.success(
         <div style={{ display: "flex", alignItems: "center", color: "white" }}>
           <span>¡Usuario actualizado exitosamente!</span>

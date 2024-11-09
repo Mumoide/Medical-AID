@@ -21,7 +21,12 @@ const UserDetails = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/users/${id}`
+          `http://localhost:3001/api/users/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token from storage
+            },
+          }
         );
         setUserData(response.data);
         setLoading(false);

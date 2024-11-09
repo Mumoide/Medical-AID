@@ -24,14 +24,13 @@ function LoginForm({ onLoginSuccess }) {
       }
 
       const data = await response.json();
-      console.log(data);
       localStorage.setItem("token", data.token);
       localStorage.setItem("email", data.email);
       localStorage.setItem("user_id", data.userId);
       localStorage.setItem("user_name", data.nombre);
 
       // Call the onLoginSuccess callback to update the state
-      onLoginSuccess(data.email);
+      onLoginSuccess(data.nombre);
 
       Swal.fire({
         icon: "success",

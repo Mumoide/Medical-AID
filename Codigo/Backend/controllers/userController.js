@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const { Users, UserProfiles, UserRoles, Roles, Sessions } = require('../models'); // Import UserProfiles model
 const jwt = require('jsonwebtoken'); // Import jsonwebtoken
+
+
 // Function to validate the form data
 const validateForm = (email, password, profile) => {
   const currentYear = new Date().getFullYear();
