@@ -11,7 +11,7 @@ const AdminPage = () => {
       <header className="admin-header">
         <div className="admin-header-image-container">
           <img
-            src="/images/backgrounds/background-image.jpeg"
+            src="/images/backgrounds/female-doctor.jpg"
             alt="Admin Header"
             className="admin-header-image"
           />

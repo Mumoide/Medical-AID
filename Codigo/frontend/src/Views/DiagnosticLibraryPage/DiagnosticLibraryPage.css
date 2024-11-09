@@ -2,7 +2,7 @@
   font-family: Arial, sans-serif;
   color: #333;
   background-color: #ffffff;
-  padding: 20px;
+  padding: 0px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,15 +10,12 @@
 
 .library-main-content {
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: space-between;
   width: 90%;
   max-width: 1200px;
   margin: 40px auto;
   padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #f8f9fa;
 }
 
 .library-text {
@@ -30,22 +27,23 @@
 }
 
 .library-text h1 {
-  font-size: 2rem;
+  font-size: 4rem;
   color: #333;
   margin-bottom: 20px;
 }
 
 .library-button {
   display: inline-block;
-  padding: 10px 20px;
-  font-size: 1rem;
+  padding: 10px 80px;
+  font-size: 1.5rem;
   color: white;
   background-color: #3498db;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none; /* Ensures it doesn’t look like a link */
+  margin-top: 60px;
 }
 
 .library-button:hover {
@@ -53,48 +51,254 @@
 }
 
 .library-image {
-  width: 50%;
-  max-width: 600px;
+  width: 45%;
   height: auto;
-  border-radius: 15px;
-  flex: 1;
+  animation: zoomInOut 5s ease-in-out infinite; /* Aplica la animación de manera infinita */
+  margin-top: 50px;
 }
 
+@keyframes zoomInOut {
+  0% {
+    transform: scale(1); /* Tamaño normal al inicio */
+  }
+  50% {
+    transform: scale(1.05); /* Se agranda un poco en la mitad del ciclo */
+  }
+  100% {
+    transform: scale(1); /* Vuelve al tamaño normal al final */
+  }
+}
+
+/* Estilos de la sección del carrusel */
 .table-section-library {
-  padding: 20px;
-  margin-top: 20px;
+  height: 100%;
+  background-color: #f3f3f3;
+  width: 100%;
+}
+/* Título de la sección de diagnósticos */
+.table-title-library h2{
+  font-size: 2.5rem;
+  color: #0388A6;
+  margin-bottom: 40px;
+  text-align: center;;
 }
 
-.table-title-library {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: #333;
-}
-
+/* Estilos del contenedor de cada tarjeta de diagnóstico */
 .disease-card-library {
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px; /* Espaciado vertical y horizontal entre tarjetas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: left;
+  height: 750px; /* Altura fija para todas las tarjetas */
+  width: 100%; /* Ajusta el ancho para que las tarjetas tengan el mismo tamaño */
+  max-width: 350px; /* Limita el ancho máximo para que todas se vean consistentes */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.disease-card-library h2 {
+/* Efecto hover para las tarjetas */
+.disease-card-library:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Título de cada enfermedad */
+.disease-title-library {
   font-size: 1.5rem;
-  color: #333;
+  color: #0388A6;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-.disease-card-library p {
+/* Descripción de cada enfermedad */
+.disease-description-library {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+/* Lista de precauciones para cada enfermedad */
+.precautions-list-library {
+  list-style-type: disc;
+  padding-left: 20px;
   font-size: 1rem;
   color: #555;
 }
 
-.disease-card-library ul {
-  list-style-type: disc;
-  margin-left: 20px;
-  color: #333;
+/* Estilos del contenedor principal del carrusel */
+.slick-slider {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 0 10px;
 }
 
-.disease-card-library li {
-  margin: 5px 0;
+/* Estilo de cada slide dentro del carrusel */
+.slick-slide {
+  padding: 0 15px; /* Ajusta el espacio alrededor de cada tarjeta */
+  box-sizing: border-box;
+}
+
+/* Estilos de los puntos de navegación */
+.slick-dots li button:before {
+  color: #0388A6; /* Cambia el color de los puntos de navegación */
+}
+
+/* Contenedor de los dots */
+.slick-dots.custom-dots {
+  position: relative;
+  bottom: 0px;
+  display: flex;
+  flex-wrap: wrap; /* Permite que los dots se distribuyan en varias filas */
+  justify-content: center;
+  gap: 12px; /* Espacio entre cada punto de navegación */
+  margin: 15px; /* Añadir espacio alrededor de los dots */
+  max-width: 100%; /* Limita el ancho del contenedor de dots */
+}
+
+/* Cada dot se comporta como un elemento flex */
+.slick-dots.custom-dots li {
+  flex: 1 1 10%; /* Cada dot ocupa un 10% del contenedor */
+  max-width: 30px; /* Limita el ancho máximo del dot */
+  height: 30px; /* Ajusta la altura */
+  margin-bottom: 8px; /* Espacio adicional debajo de cada dot */
+}
+
+/* Estilo de cada botón del dot */
+.slick-dots.custom-dots button {
+  font-size: 0.8rem; /* Tamaño del texto de los dots */
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Hace que los dots sean redondos */
+  transition: transform 0.3s; /* Agrega una animación suave para resaltar los dots */
+}
+
+.slick-dots.custom-dots button:hover {
+  transform: scale(1.2); /* Aumenta el tamaño del dot cuando el mouse pasa sobre él */
+}
+
+
+
+/* Estilos del botón para ver más */
+.library-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #0388A6;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.library-button:hover {
+  background-color: #026d8e;
+}
+
+/* Estilos de la imagen y el contenedor principal */
+.library-main-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Hace que los elementos se acomoden bien en pantallas pequeñas */
+  margin-top: 70px;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+.library-image {
+  width: 40%;
+  height: auto;
+  animation: zoomIn 2s ease-in-out infinite; /* Añadido para hacer la animación infinita */
+}
+
+.library-text {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.library-text h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.library-text a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0388A6;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.library-text a:hover {
+  background-color: #026d8e;
+}
+
+.slick-arrow.slick-next::before, .slick-arrow.slick-prev::before {
+  color:black;
+}
+
+
+
+/* Animación para la imagen */
+@keyframes zoomIn {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Estilos responsivos para mejorar la visualización en dispositivos más pequeños */
+@media (max-width: 1024px) {
+  .library-main-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .library-image {
+    margin-bottom: 20px;
+  }
+
+  .slick-slider {
+    max-width: 90%;
+  }
+
+  .disease-card-library {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .library-text h1 {
+    font-size: 2rem;
+  }
+
+  .library-button {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
+
+/* Ajuste específico para pantallas más pequeñas */
+@media (max-width: 600px) {
+  .disease-card-library {
+    margin: 0 5px;
+  }
+
+  .slick-slide {
+    padding: 0 10px;
+  }
 }

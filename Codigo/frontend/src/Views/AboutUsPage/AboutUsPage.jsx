@@ -5,7 +5,7 @@ const AboutUsPage = () => {
   return (
     <div className="about-us-container">
       <header className="header-section"> {/* Updated container class name */}
-        <img src="/images/img-about.jpg" alt="Header AI and Doctor" className="header-image" />
+        <img src="/images/backgrounds/hand-medical.jpg" alt="Header AI and Doctor" className="header-image" />
 
         <header className="intro-section">
         <img src="/images/logos/LogoRound.png" alt="Imagen Principal" class="image"/>
