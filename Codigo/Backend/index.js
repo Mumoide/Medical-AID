@@ -12,7 +12,7 @@ const diseaseRoutes = require('./routes/diseaseRoutes')
 const userRoutes = require('./routes/userRoutes');
 const diagnosisRoutes = require('./routes/diagnosesRoutes'); // Adjust path if needed
 const dashboardRoutes = require('./routes/dashboardRoutes')
-const authenticateToken = require('./middleware/authMiddleware'); // Import the middleware
+const authenticateToken = require('./middleware/authenticateToken'); // Import the middleware
 app.use('/admin', adminRoutes);
 
 

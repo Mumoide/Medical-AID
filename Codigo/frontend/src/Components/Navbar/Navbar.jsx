@@ -40,7 +40,9 @@ function Navbar({ isLoggedIn, userEmail, onLogout }) {
           </>
         ) : (
           <>
-            <li className="nav-item">{userEmail}</li>
+            <li className="nav-item">
+              <a href="/profile">{userEmail}</a>
+            </li>
             <li className="nav-item">
               <a
                 href="/"
@@ -85,7 +87,9 @@ function Navbar({ isLoggedIn, userEmail, onLogout }) {
               </>
             ) : (
               <>
-                <span className="dropdown-item">{userEmail}</span>
+                <a className="dropdown-item" href="/profile">
+                  {userEmail}
+                </a>
                 <a
                   className="dropdown-item"
                   href="/"

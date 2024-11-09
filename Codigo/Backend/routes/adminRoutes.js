@@ -2,6 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db'); // Adjust the path if db.js is in a different folder
+const authenticateToken = require('../middleware/authenticateToken')
+
+// Apply authenticateToken to all routes in this router
+router.use(authenticateToken);
 
 // Route to fetch all users
 router.get('/admin/users', async (req, res) => {

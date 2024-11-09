@@ -15,13 +15,14 @@ import Diagnosis from './Views/DiagnosisResultPage/DiagnosisResultPage'
 import AboutUsPage from './Views/AboutUsPage/AboutUsPage';
 import DiagnosticLibraryPage from './Views/DiagnosticLibraryPage/DiagnosticLibraryPage';
 import DashboardPage from './Views/AdminPage/Dashboard/DashboardView'
+import UserProfilePage from './Views/UserProfilePage/UserProfilePage'
 import Spinner from './Spinner'; // Import the Spinner component
 
 // import ProtectedRoute from './ProtectedRoute'; // Protección de rutas
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token')); // Initialize based on token in localStorage
-  const [userEmail, setUserEmail] = useState(localStorage.getItem('email') || '');
+  const [userEmail, setUserEmail] = useState(localStorage.getItem('user_name') || '');
 
   const handleLoginSuccess = (email) => {
     setIsLoggedIn(true); // Set login state to true
@@ -68,9 +69,14 @@ function App() {
           {/* Diagnosis Result Page  */}
           <Route path="/diagnosis" element={<Diagnosis />} />
           {/* Spinner Page */}
-          <Route path="/spinner" element={<Spinner />} /> {/* Add Spinner route here */}
+          <Route path="/spinner" element={<Spinner />} />
+          {/* About Us Page */}
           <Route path="/about-us" element={<AboutUsPage />} />
-          <Route path="/biblioteca-de-diagnosticos" element={<DiagnosticLibraryPage />} /> {/* Make sure this path matches */}
+          {/* Diagnostic Library Page */}
+          <Route path="/biblioteca-de-diagnosticos" element={<DiagnosticLibraryPage />} />
+          {/* Profile Page */}
+          <Route path="/profile" element={<UserProfilePage />} />
+
 
 
         </Routes>

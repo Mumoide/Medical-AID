@@ -130,8 +130,18 @@ exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Check if the user with the given email exists
-    const user = await Users.findOne({ where: { email } });
+    // Check if the user with the given email exists, including UserProfiles
+    const user = await Users.findOne({
+      where: { email },
+      include: [
+        {
+          model: UserProfiles,
+          as: 'profile', // Use the alias specified in your association
+          attributes: ['names', 'last_names'], // Retrieve only the 'names' field
+        },
+      ],
+    });
+
     if (!user) {
       return res.status(400).json({ error: 'Correo o contraseña incorrectos' });
     }
@@ -147,8 +157,12 @@ exports.loginUser = async (req, res) => {
       return res.status(400).json({ error: 'Correo o contraseña incorrectos' });
     }
 
-    // If credentials are valid, generate a token
-    const sessionToken = jwt.sign({ id_user: user.id_user, email: user.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
+    // Generate a token
+    const sessionToken = jwt.sign(
+      { id_user: user.id_user, email: user.email },
+      process.env.SECRET_KEY,
+      { expiresIn: '1h' }
+    );
 
     // Get current time and expiration time as full datetimes
     const now = new Date(); // Current datetime
@@ -163,18 +177,22 @@ exports.loginUser = async (req, res) => {
       updated_at: now.toISOString(), // Full datetime for updated_at
     });
 
-    // Return the token and user information
+    // Return the token, user ID, email, and user's 'names'
     return res.status(200).json({
       message: 'Inicio de sesión exitoso',
       token: sessionToken, // Return the token
       userId: user.id_user,
       email: user.email,
+      nombre: user.profile
+        ? user.profile.names + " " + (user.profile.last_names ? user.profile.last_names.split(" ")[0] : "")
+        : null,
     });
   } catch (error) {
     console.error('Error during login:', error);
     return res.status(500).json({ error: 'Error del servidor' });
   }
 };
+
 
 
 exports.logoutUser = async (req, res) => {
