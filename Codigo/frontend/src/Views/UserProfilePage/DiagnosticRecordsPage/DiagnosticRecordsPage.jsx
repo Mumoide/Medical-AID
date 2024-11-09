@@ -7,6 +7,14 @@ const DiagnosticRecordsPage = () => {
   const [data, setData] = useState([]);
   const userId = localStorage.getItem("user_id");
 
+  const formatSymptomName = (symptomName) => {
+    let formattedName = symptomName.replace(/_/g, " ");
+    return (
+      formattedName.charAt(0).toUpperCase() +
+      formattedName.slice(1).toLowerCase()
+    );
+  };
+
   useEffect(() => {
     // Fetch diagnostic records for the logged-in user
     const fetchDiagnosticRecords = async () => {
@@ -36,7 +44,13 @@ const DiagnosticRecordsPage = () => {
           throw new Error("Failed to fetch diagnostic records");
         }
 
-        const data = await response.json();
+        let data = await response.json();
+
+        // Filter out records with empty disease names
+        data = data.filter((record) =>
+          record.diseases.some((disease) => disease.disease_name)
+        );
+
         setData(data);
       } catch (error) {
         console.error("Error fetching diagnostic records:", error);
@@ -55,10 +69,6 @@ const DiagnosticRecordsPage = () => {
   // Define columns for the table
   const columns = useMemo(
     () => [
-      {
-        Header: "Diagnosis ID",
-        accessor: "id_diagnosis",
-      },
       {
         Header: "Diagnosis Date",
         accessor: "diagnosis_date",
@@ -79,7 +89,9 @@ const DiagnosticRecordsPage = () => {
         Header: "Symptoms",
         accessor: "symptoms",
         Cell: ({ value }) =>
-          value.map((symptom) => symptom.symptom_name).join(", "),
+          value
+            .map((symptom) => formatSymptomName(symptom.symptom_name))
+            .join(", "),
       },
     ],
     []
