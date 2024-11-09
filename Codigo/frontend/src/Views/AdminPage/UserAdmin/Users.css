@@ -87,17 +87,17 @@ td {
   background-color: white;
 }
 
-.icon-buttons {
+.icon-buttons-users-admin {
   display: flex;
   gap: 10px;
 }
 
-.icon-buttons svg {
+.icon-buttons-users-admin svg {
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
-.icon-buttons svg:hover {
+.icon-buttons-users-admin svg:hover {
   color: #007bff;
 }
 

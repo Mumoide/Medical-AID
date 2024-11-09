@@ -17,6 +17,7 @@ import DiagnosticLibraryPage from './Views/DiagnosticLibraryPage/DiagnosticLibra
 import DashboardPage from './Views/AdminPage/Dashboard/DashboardView'
 import UserProfilePage from './Views/UserProfilePage/UserProfilePage'
 import DiagnosticRecordsPage from './Views/UserProfilePage/DiagnosticRecordsPage/DiagnosticRecordsPage'
+import DiseasePage from './Views/UserProfilePage/DiseasePage/DiseasePage'
 import UserUpdatePage from './Views/UserProfilePage/UserUpdatePage/UserUpdatePage'
 import Spinner from './Spinner'; // Import the Spinner component
 import Swal from "sweetalert2";
@@ -134,6 +135,7 @@ function App() {
           <Route path="/profile" element={<UserProfilePage />} />
           <Route path="/diagnostic-records" element={<DiagnosticRecordsPage />} />
           <Route path="/update-profile" element={<UserUpdatePage />} />
+          <Route path="/disease" element={<DiseasePage />} />
 
 
 

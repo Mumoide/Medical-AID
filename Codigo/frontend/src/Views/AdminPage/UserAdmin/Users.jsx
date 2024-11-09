@@ -236,7 +236,7 @@ const Users = () => {
     baseColumns.push({
       Header: "Actions",
       Cell: ({ row }) => (
-        <div className="icon-buttons">
+        <div className="icon-buttons-users-admin">
           <FaEye
             style={{ cursor: "pointer" }}
             onClick={() =>
