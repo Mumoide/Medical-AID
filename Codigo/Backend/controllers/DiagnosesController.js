@@ -1,4 +1,4 @@
-const { Diagnoses, Symptoms, DiagnosisSymptoms, DiagnosisDisease } = require('../models'); // Adjust paths if needed
+const { Diagnoses, Disease, Symptoms, DiagnosisSymptoms, DiagnosisDisease } = require('../models'); // Adjust paths if needed
 
 exports.createDiagnosis = async (req, res) => {
     const { diagnosisSessionId, diagnosisIds, top3, diagnosisData } = req.body;
@@ -56,5 +56,63 @@ exports.createDiagnosis = async (req, res) => {
     } catch (error) {
         console.error("Error saving diagnosis data:", error);
         res.status(500).json({ error: "Failed to save diagnosis data" });
+    }
+};
+
+exports.getUserDiagnosticRecords = async (req, res) => {
+    const userId = req.params.userId; // Retrieve user_id from request parameters
+
+    try {
+        // Fetch diagnoses related to the user
+        const diagnoses = await Diagnoses.findAll({
+            where: { id_user: userId },
+            attributes: ['id_diagnosis', 'id_user', 'diagnosis_date'],
+            include: [
+                {
+                    model: DiagnosisDisease,
+                    as: 'diagnosisDiseases',
+                    attributes: ['id_disease', 'id_diagnosis'],
+                    include: [
+                        {
+                            model: Disease,
+                            as: 'disease',
+                            attributes: ['nombre'], // Fetch disease name
+                        },
+                    ],
+                },
+                {
+                    model: DiagnosisSymptoms,
+                    as: 'diagnosisSymptoms',
+                    attributes: ['id_symptom', 'id_diagnosis'],
+                    include: [
+                        {
+                            model: Symptoms,
+                            as: 'symptom',
+                            attributes: ['nombre'], // Fetch symptom name
+                        },
+                    ],
+                },
+            ],
+        });
+
+        // Transform the response data
+        const formattedData = diagnoses.map((diagnosis) => ({
+            id_diagnosis: diagnosis.id_diagnosis,
+            id_user: diagnosis.id_user,
+            diagnosis_date: diagnosis.diagnosis_date,
+            diseases: diagnosis.diagnosisDiseases.map((dd) => ({
+                id_disease: dd.id_disease,
+                disease_name: dd.disease ? dd.disease.nombre : "No Name",
+            })),
+            symptoms: diagnosis.diagnosisSymptoms.map((ds) => ({
+                id_symptom: ds.id_symptom,
+                symptom_name: ds.symptom ? ds.symptom.nombre : "No Name",
+            })),
+        }));
+
+        res.json(formattedData);
+    } catch (error) {
+        console.error('Error fetching diagnostic records:', error);
+        res.status(500).json({ error: 'Error fetching diagnostic records' });
     }
 };

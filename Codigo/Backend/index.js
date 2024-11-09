@@ -12,9 +12,7 @@ const diseaseRoutes = require('./routes/diseaseRoutes')
 const userRoutes = require('./routes/userRoutes');
 const diagnosisRoutes = require('./routes/diagnosesRoutes'); // Adjust path if needed
 const dashboardRoutes = require('./routes/dashboardRoutes')
-const authenticateToken = require('./middleware/authenticateToken'); // Import the middleware
-app.use('/admin', adminRoutes);
-
+const authRoutes = require('./routes/authRoutes');
 
 const corsOptions = {
   origin: 'http://localhost:3000', // Allow the front-end domain
@@ -52,7 +50,7 @@ app.use('/api/disease', diseaseRoutes)
 app.use('/api/users', userRoutes);
 app.use('/api/diagnosis', diagnosisRoutes);
 app.use('/api/dashboard', dashboardRoutes)
-
+app.use('/api/auth', authRoutes);
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
