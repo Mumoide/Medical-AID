@@ -64,6 +64,63 @@ const validateForm = (email, password, profile) => {
   return { isValid: true, message: '' };
 };
 
+const validateProfileForm = (email, profile) => {
+  const currentYear = new Date().getFullYear();
+  const birthYear = new Date(profile.birthdate).getFullYear();
+  const age = currentYear - birthYear;
+
+  const lettersRegex = /^[a-zA-ZÀ-ÿ\s]+$/;
+  const numbersRegex = /^[0-9]+$/;
+  const decimalNumbersRegex = /^[0-9]+(\.[0-9]+)?$/;
+
+  if (profile.names.length > 30 || !lettersRegex.test(profile.names)) {
+    return { isValid: false, message: "El nombre no debe tener más de 30 caracteres y solo debe incluir letras." };
+  }
+
+  if (profile.last_names.split(' ')[0].length > 20 || !lettersRegex.test(profile.last_names.split(' ')[0])) {
+    return { isValid: false, message: "El apellido paterno no debe tener más de 20 caracteres y solo debe incluir letras." };
+  }
+
+  if (profile.last_names.split(' ')[1].length > 20 || !lettersRegex.test(profile.last_names.split(' ')[1])) {
+    return { isValid: false, message: "El apellido materno no debe tener más de 20 caracteres y solo debe incluir letras." };
+  }
+
+  if (age > 110) {
+    return { isValid: false, message: "La fecha de nacimiento no puede ser mayor de 110 años." };
+  }
+
+  if (profile.gender && !["Masculino", "Femenino", "Prefiero no decirlo"].includes(profile.gender)) {
+    return { isValid: false, message: "Género inválido." };
+  }
+
+  if (profile.height && (!decimalNumbersRegex.test(profile.height) || profile.height < 30 || profile.height > 220)) {
+    return { isValid: false, message: "La altura debe estar entre 30 y 220 cm, y solo debe incluir números." };
+  }
+
+  if (profile.weight && (!decimalNumbersRegex.test(profile.weight) || profile.weight < 2 || profile.weight > 300)) {
+    return { isValid: false, message: "El peso debe estar entre 2 y 300 kg, y solo debe incluir números." };
+  }
+
+  if (!profile.phone_number || profile.phone_number.length !== 9 || !numbersRegex.test(profile.phone_number)) {
+    return { isValid: false, message: "El número de teléfono debe tener 9 dígitos y solo debe incluir números." };
+  }
+
+  if (!profile.address || profile.address.length > 50) {
+    return { isValid: false, message: "La dirección no debe tener más de 50 caracteres." };
+  }
+
+  if (!profile.comune || profile.comune.length > 50) {
+    return { isValid: false, message: "La comuna no debe tener más de 50 caracteres." };
+  }
+
+  if (email.length > 60) {
+    return { isValid: false, message: "El correo no debe tener más de 60 caracteres." };
+  }
+
+  return { isValid: true, message: "" };
+};
+
+
 // Function to create a new user and insert profile data
 exports.registerUser = async (req, res) => {
   const { email, password, profile } = req.body;
@@ -485,5 +542,77 @@ exports.reactivateUser = async (req, res) => {
   } catch (error) {
     console.error("Error reactivating user:", error);
     res.status(500).json({ error: "An error occurred while reactivating the user" });
+  }
+};
+
+// Define the updateProfile function
+exports.updateProfile = async (req, res) => {
+  console.log("Request body:", req.body);
+  const userId = req.user.id_user; // Use the authenticated user's ID
+  const {
+    email,
+    profile: { names, last_names, birthdate, gender, height, weight, phone_number, address, comune },
+  } = req.body;
+
+  const validation = validateProfileForm(email, { names, last_names, birthdate, gender, height, weight, phone_number, address, comune });
+  if (!validation.isValid) {
+    return res.status(400).json({ error: validation.message });
+  }
+
+  try {
+    // Fetch user to update
+    const user = await Users.findOne({ where: { id_user: userId } });
+    if (!user) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    // Check if the new email already exists in the database for a different user
+    if (email && email !== user.email) {
+      const emailExists = await Users.findOne({ where: { email } });
+      if (emailExists) {
+        return res.status(400).json({ error: "Email is already in use by another account." });
+      }
+    }
+
+    // Update user email if it has changed and passes uniqueness check
+    if (email) {
+      await user.update({ email });
+    }
+
+    // Fetch or create UserProfile
+    let userProfile = await UserProfiles.findOne({ where: { id_user: userId } });
+    if (userProfile) {
+      // Update existing UserProfile
+      await userProfile.update({
+        names,
+        last_names,
+        birthdate,
+        gender,
+        height,
+        weight,
+        phone_number,
+        address,
+        comune,
+      });
+    } else {
+      // Create UserProfile if it doesn’t exist
+      await UserProfiles.create({
+        id_user: userId,
+        names,
+        last_names,
+        birthdate,
+        gender,
+        height,
+        weight,
+        phone_number,
+        address,
+        comune,
+      });
+    }
+
+    res.json({ message: "Profile updated successfully." });
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res.status(500).json({ error: "An error occurred while updating the profile." });
   }
 };

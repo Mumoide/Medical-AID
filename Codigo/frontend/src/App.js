@@ -21,6 +21,7 @@ import DiseasePage from './Views/UserProfilePage/DiseasePage/DiseasePage'
 import UserUpdatePage from './Views/UserProfilePage/UserUpdatePage/UserUpdatePage'
 import Spinner from './Spinner'; // Import the Spinner component
 import Swal from "sweetalert2";
+import NotFoundRedirect from './Components/NotFoundRedirect/NotFoundRedirect'; // Import the NotFoundRedirect component
 import { checkTokenExpiration } from "./utils/tokenUtils";
 // import ProtectedRoute from './ProtectedRoute'; // Protección de rutas
 
@@ -138,7 +139,8 @@ function App() {
           <Route path="/disease" element={<DiseasePage />} />
 
 
-
+          {/* Catch-all route to redirect to home for undefined routes */}
+          <Route path="*" element={<NotFoundRedirect />} />
         </Routes>
         <FooterPage />
       </div>

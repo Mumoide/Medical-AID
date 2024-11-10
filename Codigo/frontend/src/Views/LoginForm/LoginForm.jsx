@@ -56,6 +56,7 @@ function LoginForm({ onLoginSuccess }) {
 
   return (
     <div className="login-container">
+      <h2>Inicio de sesión</h2>
       <form onSubmit={handleLogin}>
         <input
           type="email"

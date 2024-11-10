@@ -47,7 +47,7 @@ function UserProfilePage() {
           genero: user.profile?.gender || "Prefiero no decirlo",
           altura: user.profile?.height || "No registrada.",
           peso: user.profile?.weight || "No registrado.",
-          telefono: user.profile?.phone_number || "",
+          telefono: user.profile?.phone_number || "No registrado",
           direccion: user.profile?.address || "No registrado.",
           comuna: user.profile?.comune || "No registrado.",
           correo: user.email || "No registrado.",
@@ -112,9 +112,11 @@ function UserProfilePage() {
           <p>
             <strong>Correo:</strong> <span>{userProfile.correo}</span>
           </p>
-          <p>
-            <strong>Role:</strong> <span>{userProfile.role}</span>
-          </p>
+          {userProfile.role !== "User" && (
+            <p>
+              <strong>Role:</strong> <span>{userProfile.role}</span>
+            </p>
+          )}
         </div>
         <div className="profile-buttons">
           <button
@@ -125,7 +127,9 @@ function UserProfilePage() {
           </button>
           <button
             className="profile-button"
-            onClick={() => navigate("/update-profile")}
+            onClick={() =>
+              navigate("/update-profile", { state: { userProfile } })
+            } // Pass userProfile as state
           >
             <FaPen className="button-icon" /> Editar mi Información
           </button>

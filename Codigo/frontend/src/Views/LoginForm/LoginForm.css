@@ -5,11 +5,16 @@
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 10% auto;
+  margin: 150px auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+
+.login-container h2 {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Input Fields */
@@ -51,7 +56,7 @@ input[type="password"] {
 /* Forgot Password Link */
 .forgot-password {
   font-size: 0.9rem;
-  color: #007BFF;
+  color: #007bff;
   text-decoration: none;
   margin-bottom: 15px;
 }
@@ -81,7 +86,7 @@ input[type="password"] {
 }
 
 .social-facebook {
-  background-color: #4267B2;
+  background-color: #4267b2;
   color: white;
 }
 
@@ -90,7 +95,8 @@ input[type="password"] {
   border: 1px solid #ddd;
 }
 
-.social-facebook:hover, .social-google:hover {
+.social-facebook:hover,
+.social-google:hover {
   opacity: 0.9;
 }
 
