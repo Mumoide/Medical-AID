@@ -170,9 +170,9 @@ const UpdateUser = () => {
         <h1>Actualizar Usuario</h1>
       </header>
 
-      <div className="register-form-container">
+      <div className="register-form-update-page-container">
         <h2>Información Personal</h2>
-        <form className="register-form" onSubmit={handleSubmit}>
+        <form className="register-form-update-page" onSubmit={handleSubmit}>
           <label>
             Nombre <span className="red-asterisk">*</span>
             <input
@@ -184,7 +184,7 @@ const UpdateUser = () => {
               className="full-width"
             />
           </label>
-          <div className="two-column">
+          <div className="two-column-update-user">
             <label>
               Apellido Paterno <span className="red-asterisk">*</span>
               <input
@@ -206,7 +206,7 @@ const UpdateUser = () => {
               />
             </label>
           </div>
-          <div className="two-column">
+          <div className="two-column-update-user">
             <label>
               Fecha de Nacimiento <span className="red-asterisk">*</span>
               <input
@@ -233,7 +233,7 @@ const UpdateUser = () => {
               </select>
             </label>
           </div>
-          <div className="two-column">
+          <div className="two-column-update-user">
             <label>
               Altura (CM)
               <input
@@ -264,7 +264,7 @@ const UpdateUser = () => {
               className="full-width"
             />
           </label>
-          <div className="two-column">
+          <div className="two-column-update-user">
             <label>
               Dirección <span className="red-asterisk">*</span>
               <input

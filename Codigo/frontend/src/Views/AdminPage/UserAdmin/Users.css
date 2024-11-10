@@ -110,7 +110,6 @@ td {
   max-width: 1200px;
   gap: 0; /* Remove the gap between buttons */
   margin-bottom: 20px;
-  background-color: #dbe2f2; /* Light blue-greyish background */
   border-radius: 4px; /* Rounded corners */
   overflow: hidden;
 }

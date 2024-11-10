@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken'); // Import jsonwebtoken
 
 // Function to validate the form data
 const validateForm = (email, password, profile) => {
+  if (!profile.birthdate) {
+    return { isValid: false, message: "Debe ingresar su fecha de nacimiento." };
+  }
   const currentYear = new Date().getFullYear();
   const birthYear = new Date(profile.birthdate).getFullYear();
   const age = currentYear - birthYear;
@@ -13,8 +16,35 @@ const validateForm = (email, password, profile) => {
   const numbersRegex = /^[0-9]+$/; // Regex to allow only integer numbers
   const decimalNumbersRegex = /^[0-9]+(\.[0-9]+)?$/; // Regex to allow integers or decimals
 
+  if (!profile.phone_number) {
+    return { isValid: false, message: "Debe ingresar un número de teléfono." };
+  }
+
+  if (!profile.address) {
+    return { isValid: false, message: "Debe ingresar una dirección." };
+  }
+
+  if (!profile.comune) {
+    return { isValid: false, message: "Debe ingresar una comuna." };
+  }
+  if (!email) {
+    return { isValid: false, message: "Debe ingresar un correo electrónico." };
+  }
+
+  if (!profile.names) {
+    return { isValid: false, message: "Debe ingresar su nombre." };
+  }
+
   if (profile.names.length > 30 || !lettersRegex.test(profile.names)) {
     return { isValid: false, message: "El nombre no debe tener más de 30 caracteres y solo debe incluir letras." };
+  }
+
+  if (!profile.last_names.split(' ')[0]) {
+    return { isValid: false, message: "Debe ingresar su apellido paterno." };
+  }
+
+  if (!profile.last_names.split(' ')[1]) {
+    return { isValid: false, message: "Debe ingresar su apellido materno." };
   }
 
   if (profile.last_names.split(' ')[0].length > 20 || !lettersRegex.test(profile.last_names.split(' ')[0])) {
@@ -65,6 +95,9 @@ const validateForm = (email, password, profile) => {
 };
 
 const validateProfileForm = (email, profile) => {
+  if (!profile.birthdate) {
+    return { isValid: false, message: "Debe ingresar su fecha de nacimiento." };
+  }
   const currentYear = new Date().getFullYear();
   const birthYear = new Date(profile.birthdate).getFullYear();
   const age = currentYear - birthYear;
@@ -73,8 +106,24 @@ const validateProfileForm = (email, profile) => {
   const numbersRegex = /^[0-9]+$/;
   const decimalNumbersRegex = /^[0-9]+(\.[0-9]+)?$/;
 
+  if (!profile.names) {
+    return { isValid: false, message: "Debe ingresar su nombre." };
+  }
+
   if (profile.names.length > 30 || !lettersRegex.test(profile.names)) {
     return { isValid: false, message: "El nombre no debe tener más de 30 caracteres y solo debe incluir letras." };
+  }
+
+  if (!profile.last_names) {
+    return { isValid: false, message: "Debe ingresar ambos apellidos." };
+  }
+
+  if (!profile.last_names.split(' ')[0]) {
+    return { isValid: false, message: "Debe ingresar su apellido paterno." };
+  }
+
+  if (!profile.last_names.split(' ')[1]) {
+    return { isValid: false, message: "Debe ingresar su apellido materno." };
   }
 
   if (profile.last_names.split(' ')[0].length > 20 || !lettersRegex.test(profile.last_names.split(' ')[0])) {
@@ -101,16 +150,32 @@ const validateProfileForm = (email, profile) => {
     return { isValid: false, message: "El peso debe estar entre 2 y 300 kg, y solo debe incluir números." };
   }
 
+  if (!profile.phone_number) {
+    return { isValid: false, message: "Debe ingresar un número de teléfono." };
+  }
+
   if (!profile.phone_number || profile.phone_number.length !== 9 || !numbersRegex.test(profile.phone_number)) {
     return { isValid: false, message: "El número de teléfono debe tener 9 dígitos y solo debe incluir números." };
   }
 
-  if (!profile.address || profile.address.length > 50) {
+  if (!profile.address) {
+    return { isValid: false, message: "Debe ingresar una dirección." };
+  }
+
+  if (profile.address.length > 50) {
     return { isValid: false, message: "La dirección no debe tener más de 50 caracteres." };
   }
 
-  if (!profile.comune || profile.comune.length > 50) {
+  if (!profile.comune) {
+    return { isValid: false, message: "Debe ingresar una comuna." };
+  }
+
+  if (profile.comune.length > 50) {
     return { isValid: false, message: "La comuna no debe tener más de 50 caracteres." };
+  }
+
+  if (!email) {
+    return { isValid: false, message: "Debe ingresar un correo electrónico." };
   }
 
   if (email.length > 60) {

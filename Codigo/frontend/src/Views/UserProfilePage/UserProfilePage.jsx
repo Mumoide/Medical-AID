@@ -74,7 +74,7 @@ function UserProfilePage() {
   return (
     <div className="user-profile-page">
       <div className="profile-card">
-        <h1 className="profile-title">User Profile</h1>
+        <h1 className="profile-title">Perfil de Usuario</h1>
         <div className="profile-info">
           <p>
             <strong>Nombre:</strong> <span>{userProfile.nombre}</span>

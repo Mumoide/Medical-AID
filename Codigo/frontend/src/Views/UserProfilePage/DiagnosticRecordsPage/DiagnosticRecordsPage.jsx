@@ -76,7 +76,7 @@ const DiagnosticRecordsPage = () => {
   const columns = useMemo(
     () => [
       {
-        Header: "Diagnosis Date",
+        Header: "Fecha",
         accessor: "diagnosis_date",
         Cell: ({ value }) => {
           const date = new Date(value);
@@ -86,11 +86,11 @@ const DiagnosticRecordsPage = () => {
         },
       },
       {
-        Header: "Disease",
+        Header: "Diagnóstico",
         accessor: "disease_name",
       },
       {
-        Header: "Symptoms",
+        Header: "Síntomas",
         accessor: "symptoms",
         Cell: ({ value }) =>
           value
@@ -98,7 +98,7 @@ const DiagnosticRecordsPage = () => {
             .join(", "),
       },
       {
-        Header: "Actions",
+        Header: "Acciones",
         accessor: "actions",
         Cell: ({ row }) => (
           <div className="icon-buttons-register">
@@ -141,7 +141,7 @@ const DiagnosticRecordsPage = () => {
 
   return (
     <div className="diagnostic-records-page">
-      <h1>Diagnostic Records</h1>
+      <h1>Historial de Diagnósticos</h1>
       <table {...getTableProps()} className="diagnostic-table">
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -178,13 +178,13 @@ const DiagnosticRecordsPage = () => {
       {/* Pagination controls */}
       <div className="pagination">
         <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          Previous
+          Anterior
         </button>
         <span>
-          Page <strong>{pageIndex + 1}</strong>
+          Página <strong>{pageIndex + 1}</strong>
         </span>
         <button onClick={() => nextPage()} disabled={!canNextPage}>
-          Next
+          Siguiente
         </button>
         <select
           value={pageSize}
@@ -192,7 +192,7 @@ const DiagnosticRecordsPage = () => {
         >
           {[10, 20, 30, 40, 50].map((size) => (
             <option key={size} value={size}>
-              Show {size}
+              Mostrar {size}
             </option>
           ))}
         </select>
@@ -200,7 +200,7 @@ const DiagnosticRecordsPage = () => {
 
       {/* Back button */}
       <button onClick={() => navigate(-1)} className="back-button-records">
-        Back
+        Volver
       </button>
     </div>
   );

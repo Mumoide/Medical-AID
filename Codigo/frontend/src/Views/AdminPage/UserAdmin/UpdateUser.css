@@ -28,7 +28,7 @@
 }
 
 /* Form container styling */
-.register-form-container {
+.register-form-update-page-container {
   background-color: #3690a4;
   padding: 30px;
   border-radius: 10px;
@@ -42,7 +42,7 @@
 }
 
 /* Form title styling */
-.register-form-container h2 {
+.register-form-update-page-container h2 {
   font-size: 28px; /* Increase font size */
   font-weight: 700; /* Make it bold */
   text-align: center;
@@ -51,13 +51,13 @@
 }
 
 /* Form element styling */
-.register-form {
+.register-form-update-page {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.register-form label {
+.register-form-update-page label {
   font-size: 16px;
   color: black;
   margin-bottom: 5px;
@@ -65,8 +65,8 @@
   font-family: "Montserrat", sans-serif; /* Montserrat for labels */
 }
 
-.register-form input,
-.register-form select {
+.register-form-update-page input,
+.register-form-update-page select {
   font-size: 16px;
   padding: 10px;
   margin-top: 5px;
@@ -77,8 +77,8 @@
   font-family: "Montserrat", sans-serif; /* Montserrat for inputs */
 }
 
-.register-form input::placeholder,
-.register-form select::placeholder {
+.register-form-update-page input::placeholder,
+.register-form-update-page select::placeholder {
   font-family: "Montserrat", sans-serif; /* Montserrat for placeholders */
   color: #888; /* Placeholder color */
 }
@@ -95,28 +95,28 @@
 }
 
 /* Two-column layout for inputs */
-.two-column {
+.two-column-update-user {
   display: flex;
   justify-content: space-between;
   gap: 20px;
 }
 
-.two-column label {
+.two-column-update-user label {
   width: 100%;
 }
 
-.two-column input,
-.register-form select {
+.two-column-update-user input,
+.register-form-update-page select {
   width: 100%;
 }
 
 /* Two-column inputs */
-.two-column label input,
-.register-form select {
+.two-column-update-user label input,
+.register-form-update-page select {
   width: 100%;
 }
 
-.two-column > label {
+.two-column-update-user > label {
   width: 48%;
 }
 
@@ -131,27 +131,55 @@
 
 /* Adjusting for smaller screens */
 @media screen and (max-width: 768px) {
-  .register-form-container {
-    padding: 20px;
-    width: 90%;
+  .register-form-update-page-container {
+    padding: 30px;
+    width: 100%;
   }
 
   .register-header h1 {
     font-size: 28px;
   }
 
-  .register-form input,
-  .register-form select {
+  .register-form-update-page input,
+  .register-form-update-page select {
     padding: 10px;
   }
 
-  .two-column {
+  .two-column-update-user {
     flex-direction: column;
   }
 
-  .two-column input,
-  .register-form select {
+  .two-column-update-user input,
+  .register-form-update-page select {
     width: 100%;
+  }
+
+  .two-column-update-user-update-user {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .two-column-update-user-update-user input,
+  .register-form-update-page select {
+    width: 100%;
+  }
+
+  /* Full-width inputs */
+  .register-form-update-page input,
+  .register-form-update-page select {
+    width: 100%; /* Ensure all inputs and selects use 100% width */
+    box-sizing: border-box;
+  }
+
+  /* Remove the two-column-update-user layout so each input uses the full width */
+  .two-column-update-user {
+    display: block; /* Display block so each label spans the full row */
+    width: 100%; /* Ensure container width matches input width */
+  }
+
+  /* Remove any specific widths for labels inside two-column-update-user */
+  .two-column-update-user > label {
+    width: 100%; /* Make labels full-width to match inputs */
   }
 }
 
@@ -164,8 +192,8 @@
 }
 
 /* Adjust individual input fields */
-.register-form input,
-.register-form select {
+.register-form-update-page input,
+.register-form-update-page select {
   font-size: 16px;
   padding: 10px;
   margin-bottom: 10px;
@@ -177,12 +205,12 @@
 }
 
 /* Full-width for specific inputs */
-.register-form input[type="email"],
-.register-form input[type="text"],
-.register-form input[type="tel"],
-.register-form input[type="password"],
-.register-form input[type="date"],
-.register-form input[type="number"] {
+.register-form-update-page input[type="email"],
+.register-form-update-page input[type="text"],
+.register-form-update-page input[type="tel"],
+.register-form-update-page input[type="password"],
+.register-form-update-page input[type="date"],
+.register-form-update-page input[type="number"] {
   width: 100%;
   box-sizing: border-box;
 }
@@ -192,7 +220,6 @@
   justify-content: center; /* Center the buttons horizontally */
   align-items: center; /* Align the buttons vertically */
   gap: 20px; /* Space between the buttons */
-  margin-top: 20px;
   width: 100%; /* Ensure container spans full width */
 }
 

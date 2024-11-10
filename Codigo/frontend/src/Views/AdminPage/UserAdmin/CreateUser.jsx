@@ -247,17 +247,17 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="register-page">
+    <div className="register-page-create-user">
       <ToastContainer />
       <div className="spacer"></div>
       <div className="spacer"></div>
       <header className="register-header">
-        <h1>¡REGISTRA UN ADMINISTRADOR AQUÍ!</h1>
+        <h1>Registro de usuario</h1>
       </header>
 
-      <div className="register-form-container">
+      <div className="register-form-create-user-container">
         <h2>Información Personal</h2>
-        <form className="register-form" onSubmit={handleSubmit}>
+        <form className="register-form-create-user" onSubmit={handleSubmit}>
           <label>
             Nombre <span className="red-asterisk">*</span>
             <input
@@ -270,7 +270,7 @@ const RegisterPage = () => {
               className="full-width"
             />
           </label>
-          <div className="two-column">
+          <div className="two-column-create-user">
             <label>
               Apellido Paterno <span className="red-asterisk">*</span>
               <input
@@ -294,7 +294,7 @@ const RegisterPage = () => {
               />
             </label>
           </div>
-          <div className="two-column">
+          <div className="two-column-create-user">
             <label>
               Fecha de Nacimiento <span className="red-asterisk">*</span>
               <input
@@ -321,7 +321,7 @@ const RegisterPage = () => {
               </select>
             </label>
           </div>
-          <div className="two-column">
+          <div className="two-column-create-user">
             <label>
               Altura (CM)
               <input
@@ -355,7 +355,7 @@ const RegisterPage = () => {
               className="full-width"
             />
           </label>
-          <div className="two-column">
+          <div className="two-column-create-user">
             <label>
               Dirección <span className="red-asterisk">*</span>
               <input
@@ -391,7 +391,7 @@ const RegisterPage = () => {
               className="full-width"
             />
           </label>
-          <div className="two-column">
+          <div className="two-column-create-user">
             <label>
               Contraseña <span className="red-asterisk">*</span>
               <input
@@ -418,11 +418,11 @@ const RegisterPage = () => {
           <p className="mandatory-fields">
             <span className="red-asterisk">*</span> Campos Obligatorios
           </p>
-          <div className="button-container">
-            <button type="submit" className="back-button">
+          <div className="button-container-create">
+            <button type="submit" className="register-button-create">
               Crear Admin
             </button>
-            <button onClick={handleBackClick} className="back-button">
+            <button onClick={handleBackClick} className="back-button-create">
               Volver
             </button>
           </div>

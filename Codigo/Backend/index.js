@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
-const adminRoutes = require('./routes/adminRoutes');
 const db = require('./db'); // Database connection
 // console.log('Registering /admin routes');
 const predictionRoutes = require('./routes/predictionRoutes');
@@ -43,7 +42,6 @@ app.get('/test-root', (req, res) => {
 });
 
 // Routes
-app.use('/admin', adminRoutes); // Admin routes with /admin prefix
 app.use('/api', predictionRoutes); // Use the prediction route
 app.use('/api', symptomsRoutes); // Use the symptoms route
 app.use('/api/disease', diseaseRoutes)

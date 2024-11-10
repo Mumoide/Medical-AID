@@ -29,8 +29,8 @@
 }
 
 /* Fixing overlapping fields */
-input[type="email"],
-input[type="password"] {
+.login-container input[type="email"],
+.login-container input[type="password"] {
   display: block;
   width: 95%;
   margin-bottom: 15px;

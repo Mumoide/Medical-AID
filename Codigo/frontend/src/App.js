@@ -90,7 +90,7 @@ function App() {
           }
         });
       }
-    }, 60 * 1000); // Check every minute
+    }, 60 * 4000); // Check every 4 minutes
 
     return () => clearInterval(interval); // Cleanup on component unmount
   }, []);

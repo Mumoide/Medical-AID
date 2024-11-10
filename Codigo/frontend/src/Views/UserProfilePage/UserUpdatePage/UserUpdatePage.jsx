@@ -41,6 +41,10 @@ function UserUpdatePage() {
     }));
   };
 
+  const handleBackClick = () => {
+    navigate("/profile");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -99,110 +103,156 @@ function UserUpdatePage() {
 
   return (
     <div className="user-update-page">
-      <h1>Update Profile</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Nombre:
-          <input
-            type="text"
-            name="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Apellido Paterno:
-          <input
-            type="text"
-            name="apellidoPaterno"
-            value={formData.apellidoPaterno}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Apellido Materno:
-          <input
-            type="text"
-            name="apellidoMaterno"
-            value={formData.apellidoMaterno}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Fecha de Nacimiento:
-          <input
-            type="date"
-            name="fechaNacimiento"
-            value={formData.fechaNacimiento}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Género:
-          <select name="genero" value={formData.genero} onChange={handleChange}>
-            <option value="Prefiero no decirlo">Prefiero no decirlo</option>
-            <option value="Masculino">Masculino</option>
-            <option value="Femenino">Femenino</option>
-          </select>
-        </label>
-        <label>
-          Altura (cm):
-          <input
-            type="number"
-            name="altura"
-            value={formData.altura}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Peso (kg):
-          <input
-            type="number"
-            name="peso"
-            value={formData.peso}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Teléfono:
-          <input
-            type="text"
-            name="telefono"
-            value={formData.telefono}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Dirección:
-          <input
-            type="text"
-            name="direccion"
-            value={formData.direccion}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Comuna:
-          <input
-            type="text"
-            name="comuna"
-            value={formData.comuna}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Correo:
-          <input
-            type="email"
-            name="correo"
-            value={formData.correo}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit" className="submit-button">
-          Update Profile
-        </button>
-      </form>
+      <div className="spacer"></div>
+      <header className="register-header-update-page">
+        <h1>Actualizar Perfil</h1>
+      </header>
+      <div className="user-update-form-container">
+        <h2>Información Personal</h2>
+        <form className="user-update-form" onSubmit={handleSubmit}>
+          <label>
+            Nombre: <span className="red-asterisk">*</span>
+            <input
+              type="text"
+              required
+              name="nombre"
+              value={formData.nombre}
+              onChange={handleChange}
+              className="full-width-update-page"
+            />
+          </label>
+
+          <div className="two-column-pair-update-page">
+            <label>
+              Apellido Paterno: <span className="red-asterisk">*</span>
+              <input
+                type="text"
+                name="apellidoPaterno"
+                value={formData.apellidoPaterno}
+                required
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Apellido Materno: <span className="red-asterisk">*</span>
+              <input
+                type="text"
+                name="apellidoMaterno"
+                value={formData.apellidoMaterno}
+                required
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+
+          <div className="two-column-pair-update-page">
+            <label>
+              Fecha de Nacimiento: <span className="red-asterisk">*</span>
+              <input
+                type="date"
+                name="fechaNacimiento"
+                value={formData.fechaNacimiento}
+                required
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Género:
+              <select
+                name="genero"
+                value={formData.genero}
+                onChange={handleChange}
+              >
+                <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+              </select>
+            </label>
+          </div>
+
+          <div className="two-column-pair-update-page">
+            <label>
+              Altura (cm):
+              <input
+                type="number"
+                name="altura"
+                value={formData.altura}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Peso (kg):
+              <input
+                type="number"
+                name="peso"
+                value={formData.peso}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+
+          <label>
+            Teléfono: <span className="red-asterisk">*</span>
+            <input
+              type="text"
+              name="telefono"
+              value={formData.telefono}
+              required
+              onChange={handleChange}
+              className="full-width-update-page"
+            />
+          </label>
+
+          <div className="two-column-pair-update-page">
+            <label>
+              Dirección: <span className="red-asterisk">*</span>
+              <input
+                type="text"
+                name="direccion"
+                value={formData.direccion}
+                required
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Comuna: <span className="red-asterisk">*</span>
+              <input
+                type="text"
+                name="comuna"
+                value={formData.comuna}
+                required
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+
+          <label>
+            Correo: <span className="red-asterisk">*</span>
+            <input
+              type="email"
+              name="correo"
+              value={formData.correo}
+              required
+              onChange={handleChange}
+              className="full-width-update-page"
+            />
+          </label>
+          <p className="mandatory-fields">
+            <span className="red-asterisk">*</span> Campos Obligatorios
+          </p>
+          <div className="button-container-update-page">
+            <button type="submit" className="submit-button-update-page">
+              Actualizar Perfil
+            </button>
+            <button
+              onClick={handleBackClick}
+              className="back-button-update-page"
+            >
+              Volver
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

@@ -187,7 +187,7 @@ const Users = () => {
   const columns = useMemo(() => {
     const baseColumns = [
       {
-        Header: "Created At",
+        Header: "Fecha de Creación",
         accessor: "created_at",
         disableFilters: true, // Disable filters for this column
         Cell: ({ value }) => {
@@ -211,7 +211,7 @@ const Users = () => {
     // Only show Last Names if window width is greater than 768px
     if (windowWidth > 1200) {
       baseColumns.push({
-        Header: "Last Names",
+        Header: "Apellidos",
         accessor: (row) => row.profile?.last_names || "N/A",
       });
     }
@@ -219,7 +219,7 @@ const Users = () => {
     // Only show Names if window width is greater than 1024px
     if (windowWidth > 1024) {
       baseColumns.push({
-        Header: "Names",
+        Header: "Nombres",
         accessor: (row) => row.profile?.names || "N/A",
       });
     }
@@ -227,14 +227,14 @@ const Users = () => {
     // Only show the Active column if window width is greater than 1200px
     if (windowWidth > 768) {
       baseColumns.push({
-        Header: "Active", // Display the 'Active' column
+        Header: "Activo", // Display the 'Active' column
         accessor: "active", // This should match the key in your data
         Cell: ({ value }) => (value === true ? "Active" : "Inactive"), // Display 'Active' or 'Inactive'
       });
     }
 
     baseColumns.push({
-      Header: "Actions",
+      Header: "Acciones",
       Cell: ({ row }) => (
         <div className="icon-buttons-users-admin">
           <FaEye
@@ -322,31 +322,46 @@ const Users = () => {
         {/* Table */}
         <table {...getTableProps()}>
           <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render("Header")}
-                    <span>
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? " 🔽"
-                          : " 🔼"
-                        : ""}
-                    </span>
-                  </th>
-                ))}
-              </tr>
-            ))}
+            {headerGroups.map((headerGroup) => {
+              const { key, ...headerGroupProps } =
+                headerGroup.getHeaderGroupProps(); // Extract key for <tr>
+              return (
+                <tr key={key} {...headerGroupProps}>
+                  {headerGroup.headers.map((column) => {
+                    const { key: headerKey, ...headerProps } =
+                      column.getHeaderProps(column.getSortByToggleProps()); // Extract key for <th>
+                    return (
+                      <th key={headerKey} {...headerProps}>
+                        {column.render("Header")}
+                        <span>
+                          {column.isSorted
+                            ? column.isSortedDesc
+                              ? " 🔽"
+                              : " 🔼"
+                            : ""}
+                        </span>
+                      </th>
+                    );
+                  })}
+                </tr>
+              );
+            })}
           </thead>
+
           <tbody {...getTableBodyProps()}>
             {page.map((row) => {
               prepareRow(row);
+              const { key, ...rowProps } = row.getRowProps(); // Extract key for <tr>
               return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  ))}
+                <tr key={key} {...rowProps}>
+                  {row.cells.map((cell) => {
+                    const { key: cellKey, ...cellProps } = cell.getCellProps(); // Extract key for <td>
+                    return (
+                      <td key={cellKey} {...cellProps}>
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
                 </tr>
               );
             })}
@@ -356,13 +371,13 @@ const Users = () => {
         {/* Pagination Controls */}
         <div className="pagination">
           <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-            Previous
+            Anterior
           </button>
           <span>
-            Page <strong>{pageIndex + 1}</strong>
+            Página <strong>{pageIndex + 1}</strong>
           </span>
           <button onClick={() => nextPage()} disabled={!canNextPage}>
-            Next
+            Siguiente
           </button>
           <select
             value={pageSize}
@@ -370,7 +385,7 @@ const Users = () => {
           >
             {[10, 20, 30, 40, 50].map((size) => (
               <option key={size} value={size}>
-                Show {size}
+                Mostrar {size}
               </option>
             ))}
           </select>
