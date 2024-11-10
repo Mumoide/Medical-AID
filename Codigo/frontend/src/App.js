@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
 import RegisterPage from './Views/RegisterPage/RegisterPage';
 import LoginForm from './Views/LoginForm/LoginForm';
+import PasswordRecoveryPage from './Views/LoginForm/PasswordRecoveryPage/PasswordRecoveryPage';
 import AdminPage from './Views/AdminPage/AdminPage'; // Import the AdminPage component
 import UsersAdmin from './Views/AdminPage/UserAdmin/Users'
 import CreateUserAdmin from './Views/AdminPage/UserAdmin/CreateUser'
@@ -109,6 +110,9 @@ function App() {
           <Route path="/registro" element={<RegisterPage />} />
           {/* Login Page */}
           <Route path="/Inicio-de-sesion" element={<LoginForm onLoginSuccess={handleLoginSuccess} />} />
+          {/* Recover Password Page */}
+          <Route path="/recuperar-contrasena" element={<PasswordRecoveryPage/>} />
+
 
           {/* Admin Page */}
           <Route path="/admin" element={<AdminPage />} />

@@ -222,8 +222,9 @@ const RegisterPage = () => {
             backgroundColor: "#3690a4",
             minWidth: "500px",
           },
+          onClose: () => navigate("/inicio-de-sesion"), // Redirecciona al cerrar el toast          
         }
-      );
+      )
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -242,30 +243,31 @@ const RegisterPage = () => {
   return (
     <div className="register-page">
       <ToastContainer />
-      <div className="spacer"></div>
-      <div className="spacer"></div>
-      <header className="register-header">
-        <h1>¡REGÍSTRATE AQUÍ!</h1>
-      </header>
+      <div className="register-container">
+        {/* Sección de la Imagen */}
+        <div className="image-section">
+          <div className="image-overlay"></div>
+        </div>
 
-      <div className="register-form-container">
-        <h2>Información Personal</h2>
-        <form className="register-form" onSubmit={handleSubmit}>
-          <label>
-            Nombre <span className="red-asterisk">*</span>
-            <input
-              type="text"
-              name="nombre"
-              placeholder="Juan"
-              value={formData.nombre}
-              onChange={handleChange}
-              required
-              className="full-width"
-            />
-          </label>
-          <div className="two-column">
+        {/* Sección del Formulario */}
+        <div className="form-section">
+          <h2>Registrate Aquí</h2>
+          <form className="register-form" onSubmit={handleSubmit}>
+            {/* Campos del formulario */}
             <label>
-              Apellido Paterno <span className="red-asterisk">*</span>
+              Nombre <span className="required-asterisk">*</span>
+              <input
+                type="text"
+                name="nombre"
+                placeholder="Juan"
+                value={formData.nombre}
+                onChange={handleChange}
+                required
+                className="full-width"
+              />
+            </label>
+            <label>
+              Apellido Paterno <span className="required-asterisk">*</span>
               <input
                 type="text"
                 name="apellidoPaterno"
@@ -276,7 +278,7 @@ const RegisterPage = () => {
               />
             </label>
             <label>
-              Apellido Materno <span className="red-asterisk">*</span>
+              Apellido Materno <span className="required-asterisk">*</span>
               <input
                 type="text"
                 name="apellidoMaterno"
@@ -286,10 +288,8 @@ const RegisterPage = () => {
                 required
               />
             </label>
-          </div>
-          <div className="two-column">
             <label>
-              Fecha de Nacimiento <span className="red-asterisk">*</span>
+              Fecha de Nacimiento <span className="required-asterisk">*</span>
               <input
                 type="date"
                 name="fechaNacimiento"
@@ -299,11 +299,12 @@ const RegisterPage = () => {
               />
             </label>
             <label>
-              Género
+              Género <span className="required-asterisk">*</span>
               <select
                 name="genero"
                 value={formData.genero}
                 onChange={handleChange}
+                required
               >
                 <option value="" disabled hidden>
                   Seleccione su género
@@ -313,44 +314,42 @@ const RegisterPage = () => {
                 <option value="Prefiero no decirlo">Prefiero no decirlo</option>
               </select>
             </label>
-          </div>
-          <div className="two-column">
             <label>
-              Altura (CM)
+              Altura (CM) <span className="required-asterisk">*</span>
               <input
                 type="number"
                 name="altura"
                 placeholder="165"
                 value={formData.altura}
                 onChange={handleChange}
+                required
               />
             </label>
             <label>
-              Peso (KG)
+              Peso (KG) <span className="required-asterisk">*</span>
               <input
                 type="number"
                 name="peso"
                 placeholder="70"
                 value={formData.peso}
                 onChange={handleChange}
+                required
               />
             </label>
-          </div>
-          <label>
-            Teléfono celular (+569) <span className="red-asterisk">*</span>
-            <input
-              type="tel"
-              name="telefono"
-              placeholder="985345174"
-              value={formData.telefono}
-              onChange={handleChange}
-              required
-              className="full-width"
-            />
-          </label>
-          <div className="two-column">
             <label>
-              Dirección <span className="red-asterisk">*</span>
+              Teléfono celular (+569) <span className="required-asterisk">*</span>
+              <input
+                type="tel"
+                name="telefono"
+                placeholder="985345174"
+                value={formData.telefono}
+                onChange={handleChange}
+                required
+                className="full-width"
+              />
+            </label>
+            <label>
+              Dirección <span className="required-asterisk">*</span>
               <input
                 type="text"
                 name="direccion"
@@ -361,7 +360,7 @@ const RegisterPage = () => {
               />
             </label>
             <label>
-              Comuna <span className="red-asterisk">*</span>
+              Comuna <span className="required-asterisk">*</span>
               <input
                 type="text"
                 name="comuna"
@@ -371,22 +370,20 @@ const RegisterPage = () => {
                 required
               />
             </label>
-          </div>
-          <label>
-            Ingrese su correo <span className="red-asterisk">*</span>
-            <input
-              type="email"
-              name="correo"
-              placeholder="correo@gmail.com"
-              value={formData.correo}
-              onChange={handleChange}
-              required
-              className="full-width"
-            />
-          </label>
-          <div className="two-column">
             <label>
-              Contraseña <span className="red-asterisk">*</span>
+              Ingrese su correo <span className="required-asterisk">*</span>
+              <input
+                type="email"
+                name="correo"
+                placeholder="correo@gmail.com"
+                value={formData.correo}
+                onChange={handleChange}
+                required
+                className="full-width"
+              />
+            </label>
+            <label>
+              Contraseña <span className="required-asterisk">*</span>
               <input
                 type="password"
                 name="contrasena"
@@ -397,7 +394,7 @@ const RegisterPage = () => {
               />
             </label>
             <label>
-              Confirmar contraseña <span className="red-asterisk">*</span>
+              Confirmar contraseña <span className="required-asterisk">*</span>
               <input
                 type="password"
                 name="confirmarContrasena"
@@ -407,14 +404,20 @@ const RegisterPage = () => {
                 required
               />
             </label>
-          </div>
-          <p className="mandatory-fields">
-            <span className="red-asterisk">*</span> Campos Obligatorios
+            <div className="checkbox-container">
+              <input type="checkbox" id="terms" required />
+              <label htmlFor="terms">
+                Acepto todos los términos y la Política de Privacidad <span className="required-asterisk">*</span>
+              </label>
+            </div>
+            <button type="submit" className="register-button">
+              Crear Cuenta
+            </button>
+          </form>
+          <p className="already-member">
+          ¿Ya tienes una cuenta?  <a href="/inicio-de-sesion">Iniciar Sesión</a>
           </p>
-          <button type="submit" className="register-button">
-            Crear Cuenta
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );

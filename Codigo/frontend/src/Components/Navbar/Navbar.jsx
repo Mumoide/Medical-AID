@@ -14,7 +14,7 @@ function Navbar({ isLoggedIn, userEmail, onLogout }) {
           <a href="/">Inicio</a>
         </li>
         <li className="nav-item">
-          <a href="/biblioteca-de-diagnosticos">Biblioteca de Diagnosticos</a>
+          <a href="/biblioteca-de-diagnosticos">Biblioteca de Diagnósticos</a>
         </li>
         <li className="nav-item">
           <a href="/admin">Administración</a>

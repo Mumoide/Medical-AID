@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Use react-router-dom's useNavigate hook
-import "./LoginForm.css";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import "./LoginForm.css";
 
 function LoginForm({ onLoginSuccess }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -29,7 +30,7 @@ function LoginForm({ onLoginSuccess }) {
       localStorage.setItem("user_id", data.userId);
       localStorage.setItem("user_name", data.nombre);
 
-      // Call the onLoginSuccess callback to update the state
+      // Llama al callback onLoginSuccess para actualizar el estado
       onLoginSuccess(data.nombre);
 
       Swal.fire({
@@ -39,7 +40,6 @@ function LoginForm({ onLoginSuccess }) {
         confirmButtonText: "Aceptar",
         confirmButtonColor: "#3690a4",
       }).then(() => {
-        // Reload the page after the user clicks "Aceptar" in the alert
         navigate("/");
       });
     } catch (error) {
@@ -50,47 +50,61 @@ function LoginForm({ onLoginSuccess }) {
         confirmButtonText: "Aceptar",
         confirmButtonColor: "#d33",
       });
-      console.error("Error during login:", error);
+      console.error("Error durante el inicio de sesión:", error);
     }
   };
 
   return (
-    <div className="login-container">
-      <h2>Inicio de sesión</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Ingrese su correo Electronico"
-          className="login-input"
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Ingrese su Contraseña"
-          className="login-input"
-          required
-        />
-        <button type="submit" className="login-button">
-          Iniciar Sesión
-        </button>
-        <a href="/forgot-password" className="forgot-password">
-          Olvide mi contraseña
-        </a>
-        <div className="social-login">
-          <button type="button" className="social-login-button social-facebook">
-            Continuar con Facebook
-          </button>
-          <button type="button" className="social-login-button social-google">
-            Continuar con Google
+    <div className="login-page">
+      <div className="login-container">
+        <div className="login-form-container">
+          <h2>Iniciar Sesión</h2>
+          <form onSubmit={handleLogin}>
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Su dirección de correo electrónico"
+              className="login-input"
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Ingrese su contraseña"
+              className="login-input"
+              required
+            />
+            <button type="submit" className="login-button">
+             Acceder
+            </button>
+          </form>
+          <a
+            href="/recuperar-contrasena"
+            className="forgot-password"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/recuperar-contrasena");
+            }}
+          >
+            Olvidé mi contraseña
+          </a>
+        </div>
+        <div className="register-container-form">
+          <h2>¿No estás registrado?</h2>
+          <p>Si aún no tienes una cuenta, puedes registrarte ahora para acceder a Medical AID.</p>
+          <br />
+          <button
+            className="register-button"
+            onClick={() => navigate("/registro")}
+          >
+            Regístrese ahora
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
