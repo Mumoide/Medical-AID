@@ -86,7 +86,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
   text-align: left;
-  height: 750px; /* Altura fija para todas las tarjetas */
+  height: 780px; /* Altura fija para todas las tarjetas */
   width: 100%; /* Ajusta el ancho para que las tarjetas tengan el mismo tamaño */
   max-width: 350px; /* Limita el ancho máximo para que todas se vean consistentes */
   display: flex;
@@ -221,6 +221,7 @@
     align-items: center;
     text-align: center;
     padding: 20px;
+    margin-right: 150px;
   }
 
   .library-text {
@@ -234,14 +235,23 @@
     margin-bottom: 15px;
   }
 
+  .table-title-library h2 {
+    font-size: 3rem; /* Ajusta el tamaño del título para diagnósticos */
+    margin-right: 150px;
+  }
+
   .library-image {
     width: 70%; /* Ajusta el tamaño de la imagen */
     margin-bottom: 20px;
   }
 
   .disease-card-library {
-    padding: 15px;
-    height: auto;
+    height: 600px; /* Establece una altura máxima para evitar desbordamiento */
+    width: 120%;
+    padding: 15px; /* Ajusta el padding para pantallas pequeñas */
+    margin: 10px auto; /* Centramos las tarjetas y ajustamos los márgenes */
+    overflow-y: auto; /* Agrega un scroll interno si el contenido es demasiado largo */
+    margin-left: 40px;
   }
 }
 
@@ -249,21 +259,34 @@
 @media (max-width: 768px) {
   .library-text h1 {
     font-size: 2.5rem; /* Reduce aún más el tamaño del título */
-
+    margin-right: 130px;
   }
 
   .library-button {
-    font-size: 1.2rem;
-    padding: 20px 40px; /* Reduce el tamaño del botón */
+    font-size: 1.3rem;
+    padding: 10px 70px; /* Reduce el tamaño del botón para móviles */
+    margin-right: 130px;
+  }
+
+  .library-image {
+    width: 45%; /* Imagen ocupa más espacio, pero no se desborda */
+    margin-bottom: 15px;
+    margin-right: 130px;
+
   }
 
   .disease-card-library {
-    margin: 10px;
-    max-width: 100%; /* Asegura que la tarjeta ocupe todo el ancho disponible */
+    max-height: auto; /* Establece una altura máxima para evitar desbordamiento */
+    max-width: 70%;
+    padding: 15px; /* Ajusta el padding para pantallas pequeñas */
+    margin: 10px auto; /* Centramos las tarjetas y ajustamos los márgenes */
+    overflow-y: auto; /* Agrega un scroll interno si el contenido es demasiado largo */
+    margin-left: 40px;
   }
 
   .table-title-library h2 {
     font-size: 2rem; /* Ajusta el tamaño del título para diagnósticos */
+    margin-right: 150px;
   }
 
   .slick-slide {
@@ -284,22 +307,32 @@
 
   .library-text h1 {
     font-size: 2rem; /* Reduce el título para dispositivos más pequeños */
+    margin-right: 130px;
   }
 
+  .table-title-library h2 {
+    margin-right: 150px;
+  }
+  
   .library-button {
-    font-size: 1rem;
-    padding: 8px 16px; /* Reduce el tamaño del botón para móviles */
+    font-size: 1.3rem;
+    padding: 10px 70px; /* Reduce el tamaño del botón para móviles */
+    margin-right: 130px;
   }
 
   .library-image {
-    width: 80%; /* Imagen ocupa más espacio, pero no se desborda */
+    width: 65%; /* Imagen ocupa más espacio, pero no se desborda */
     margin-bottom: 15px;
+    margin-right: 130px;
+
   }
 
   .disease-card-library {
-    margin: 5px;
-    padding: 10px;
-    max-width: 100%;
+    max-height: 650px; /* Establece una altura máxima para evitar desbordamiento */
+    max-width: 73%;
+    padding: 15px; /* Ajusta el padding para pantallas pequeñas */
+    margin: 10px auto; /* Centramos las tarjetas y ajustamos los márgenes */
+    overflow-y: auto; /* Agrega un scroll interno si el contenido es demasiado largo */
   }
 
   .slick-slide {
@@ -322,16 +355,25 @@
 @media (max-width: 480px) {
   .library-text h1 {
     font-size: 1.8rem; /* Ajusta el tamaño del título para una mejor legibilidad */
+    margin-right: 120px;
   }
 
+  .table-title-library h2 {
+    margin-right: 150px;
+  }
+  
   .library-button {
     font-size: 1.4rem;
     padding: 10px 60px;
+    margin-right: 100px;
   }
 
   .disease-card-library {
-    height: auto; /* Elimina la altura fija para asegurar que el contenido fluya bien */
-    padding: 10px;
+    max-height: 650px; /* Establece una altura máxima para evitar desbordamiento */
+    max-width: 65%;
+    padding: 15px; /* Ajusta el padding para pantallas pequeñas */
+    margin: 10px auto; /* Centramos las tarjetas y ajustamos los márgenes */
+    overflow-y: auto; /* Agrega un scroll interno si el contenido es demasiado largo */
   }
 
   .slick-dots.custom-dots {
@@ -340,17 +382,23 @@
     max-width: 100%;
   }
 
+  .library-image {
+    width: 40%;
+    margin-right: 95px;
+  }
+
   /* Botones de navegación del slider */
-  .slick-arrow.slick-next::before, .slick-arrow.slick-prev::before {
+  .slick-arrow.slick-next::before {
     color: black;
     font-size: 1.2rem; /* Reduce el tamaño de los iconos de flechas para pantallas más pequeñas */
   }
+
 }
 
 /* Mejora la alineación y distribución del carrusel */
 @media (max-width: 400px) {
   .library-image {
-    width: 90%;
+    width: 100%;
   }
 
   .slick-slider {
