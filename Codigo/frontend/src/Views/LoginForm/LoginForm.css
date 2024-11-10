@@ -1,9 +1,8 @@
-
 .login-page {
   background-image: url("../../../public/images/backgrounds/technology-global.jpg");
   background-size: cover;
   background-position: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 90px); /* Corrected calculation */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,7 +20,7 @@
 }
 
 .login-form-container,
-.register-container-form{
+.register-container-form {
   flex: 1;
   padding: 40px;
 }
@@ -30,8 +29,8 @@
   background-color: #ffffff;
 }
 
-.login-form-container h2{
- text-align: center;
+.login-form-container h2 {
+  text-align: center;
 }
 
 .register-container-form {
@@ -81,10 +80,10 @@
 }
 
 .forgot-password {
-  display: block;  /* Asegura que ocupe toda la línea */
-  margin: 0 auto;  /* Centra horizontalmente */
+  display: block; /* Asegura que ocupe toda la línea */
+  margin: 0 auto; /* Centra horizontalmente */
   text-align: center; /* Alinea el texto en el centro del bloque */
-  color: #1f96b1;    /* Mantén el color actual */
+  color: #1f96b1; /* Mantén el color actual */
   text-decoration: none; /* Sin subrayado */
   margin-top: 15px; /* Mantiene un margen superior adecuado */
 }
@@ -92,7 +91,6 @@
 .forgot-password:hover {
   text-decoration: underline; /* Resalta el enlace al pasar el mouse */
 }
-
 
 /* Media Queries para pantallas pequeñas */
 @media (max-width: 768px) {
@@ -106,7 +104,7 @@
     margin-bottom: 10%;
   }
 
-  .login-form-container{
+  .login-form-container {
     margin-top: 120px;
     border-radius: 15px;
   }
@@ -147,5 +145,4 @@
     font-size: 13px; /* Disminuye el tamaño del texto del botón aún más */
     padding: 8px; /* Reduce el padding de los botones */
   }
-
 }

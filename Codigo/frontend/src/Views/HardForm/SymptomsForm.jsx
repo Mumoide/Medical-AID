@@ -32,7 +32,13 @@ const SymptomComboBox = () => {
         const response = await axios.get(
           "http://localhost:3001/api/symptoms/names"
         );
-        const sortedSymptoms = response.data.sort((a, b) =>
+        const processedSymptoms = response.data.map((symptom) => {
+          const categories = symptom.grupo_sintomatico
+            .split("/")
+            .map((cat) => cat.trim());
+          return { ...symptom, categories };
+        });
+        const sortedSymptoms = processedSymptoms.sort((a, b) =>
           a.nombre.localeCompare(b.nombre)
         );
         setSymptoms(sortedSymptoms);
@@ -56,6 +62,18 @@ const SymptomComboBox = () => {
         [comboBoxId]: selectedOption ? selectedOption.model_order : null,
       }));
     }
+  };
+
+  const getAvailableOptions = (selectedSymptoms) => {
+    const selectedModelOrders = new Set(Object.values(selectedSymptoms));
+
+    return symptoms
+      .filter((symptom) => !selectedModelOrders.has(symptom.model_order))
+      .map((symptom) => ({
+        value: symptom.model_order,
+        label: formatSymptomName(symptom.nombre),
+        model_order: symptom.model_order,
+      }));
   };
 
   const addNewComboBox = () => {
@@ -111,35 +129,28 @@ const SymptomComboBox = () => {
   };
 
   const getFilteredOptions = (comboBoxId) => {
-    const selectedModelOrders = Object.values(selectedSymptoms);
-    return symptoms
-      .filter(
-        (symptom) =>
-          !selectedModelOrders.includes(symptom.model_order) ||
-          selectedSymptoms[comboBoxId] === symptom.model_order
-      )
-      .map((symptom) => ({
-        value: symptom.model_order,
-        label: formatSymptomName(symptom.nombre),
-        model_order: symptom.model_order,
-      }));
+    return getAvailableOptions(selectedSymptoms);
   };
 
-  // Filters options based on selected grupo_sintomatico and other selected symptoms
   const getFilteredOptionsByCategory = (comboBoxId) => {
-    const selectedModelOrders = Object.values(selectedSymptoms);
-    return symptoms
-      .filter(
-        (symptom) =>
-          (!selectedModelOrders.includes(symptom.model_order) ||
-            selectedSymptoms[comboBoxId] === symptom.model_order) &&
-          (!selectedGroup || symptom.grupo_sintomatico === selectedGroup) // Filter by selected group
-      )
-      .map((symptom) => ({
-        value: symptom.model_order,
-        label: formatSymptomName(symptom.nombre),
-        model_order: symptom.model_order,
-      }));
+    // Get available options excluding already selected symptoms
+    const availableOptions = symptoms.filter(
+      (symptom) =>
+        !Object.values(selectedEasySymptoms).includes(symptom.model_order)
+    );
+
+    // Apply selectedGroup filtering based on the categories array
+    const filteredOptions = selectedGroup
+      ? availableOptions.filter((symptom) =>
+          symptom.categories.includes(selectedGroup)
+        )
+      : availableOptions;
+
+    return filteredOptions.map((symptom) => ({
+      value: symptom.model_order,
+      label: formatSymptomName(symptom.nombre),
+      model_order: symptom.model_order,
+    }));
   };
 
   const handleBackClick = () => {
@@ -319,10 +330,10 @@ const SymptomComboBox = () => {
     });
   };
 
-  // Extract unique grupo_sintomatico values
+  // Extract unique grupo_sintomatico values and sort alphabetically
   const uniqueGroups = [
-    ...new Set(symptoms.map((symptom) => symptom.grupo_sintomatico)),
-  ];
+    ...new Set(symptoms.flatMap((symptom) => symptom.categories)),
+  ].sort((a, b) => a.localeCompare(b));
 
   return (
     <div>
@@ -439,7 +450,9 @@ const SymptomComboBox = () => {
                   {uniqueGroups.map((group) => (
                     <button
                       key={group}
-                      onClick={() => setSelectedGroup(group)}
+                      onClick={() => {
+                        setSelectedGroup(group);
+                      }}
                       className={`group-button ${
                         selectedGroup === group ? "active" : ""
                       }`}
