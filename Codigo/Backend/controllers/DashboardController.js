@@ -32,23 +32,25 @@ exports.getAllDiagnoses = async (req, res) => {
             ]
         });
 
-        // Format the response to make it easier to consume on the frontend
-        const formattedDiagnoses = diagnoses.map(diagnosis => ({
-            id_diagnosis: diagnosis.id_diagnosis,
-            id_user: diagnosis.id_user,
-            diagnosis_date: diagnosis.diagnosis_date,
-            latitude: diagnosis.latitude,
-            longitude: diagnosis.longitude,
-            probability: diagnosis.probability,
-            diseases: diagnosis.diagnosisDiseases ? diagnosis.diagnosisDiseases.map(d => ({
-                id_disease: d.id_disease,
-                disease_name: d.disease.nombre
-            })) : [], // Return an empty array if no diseases
-            symptoms: diagnosis.diagnosisSymptoms ? diagnosis.diagnosisSymptoms.map(s => ({
-                id_symptom: s.id_symptom,
-                symptom_name: s.symptom.nombre
-            })) : [] // Return an empty array if no symptoms
-        }));
+        // Filter out diagnoses with no diseases or symptoms and format the response
+        const formattedDiagnoses = diagnoses
+            .filter(diagnosis => diagnosis.diagnosisDiseases.length > 0 && diagnosis.diagnosisSymptoms.length > 0)
+            .map(diagnosis => ({
+                id_diagnosis: diagnosis.id_diagnosis,
+                id_user: diagnosis.id_user,
+                diagnosis_date: diagnosis.diagnosis_date,
+                latitude: diagnosis.latitude,
+                longitude: diagnosis.longitude,
+                probability: diagnosis.probability,
+                diseases: diagnosis.diagnosisDiseases.map(d => ({
+                    id_disease: d.id_disease,
+                    disease_name: d.disease.nombre
+                })),
+                symptoms: diagnosis.diagnosisSymptoms.map(s => ({
+                    id_symptom: s.id_symptom,
+                    symptom_name: s.symptom.nombre
+                }))
+            }));
 
         res.status(200).json(formattedDiagnoses);
     } catch (error) {

@@ -1,12 +1,35 @@
-.dashboard-container {
-  padding: 20px;
+.custom-map {
+  height: 600px; /* Adjust height */
+  width: 80%; /* Adjust width */
+  margin: 0 auto; /* Center align if needed */
 }
 
-.map-container {
-  height: 500px;
-  margin-bottom: 20px;
+/* Map styling */
+.leaflet-tile {
+  background-color: transparent !important;
+  border: none !important;
 }
 
-.ag-theme-alpine {
-  width: 100%;
+.leaflet-tile-container {
+  transform: translateZ(0); /* Forces hardware acceleration */
+}
+
+.leaflet-container {
+  background-color: #f0f0f0; /* Adjust to match map styling */
+  height: 400px;
+  width: 80%;
+}
+
+.custom-cluster-icon {
+  background-color: #1976d2;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  height: 40px;
+  width: 40px;
+  text-align: center;
 }

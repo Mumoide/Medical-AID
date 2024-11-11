@@ -16,7 +16,22 @@ const DashboardView = () => {
         const response = await axios.get(
           "http://localhost:3001/api/dashboard/all"
         );
-        setDiagnosisData(response.data);
+
+        // Transform data to disease granularity level
+        const transformedData = response.data.flatMap((diagnosis) =>
+          diagnosis.diseases.map((disease) => ({
+            id_diagnosis: diagnosis.id_diagnosis,
+            id_user: diagnosis.id_user,
+            diagnosis_date: diagnosis.diagnosis_date,
+            latitude: diagnosis.latitude,
+            longitude: diagnosis.longitude,
+            probability: diagnosis.probability,
+            disease_name: disease.disease_name,
+            symptoms: diagnosis.symptoms.map((s) => s.symptom_name).join(", "),
+          }))
+        );
+
+        setDiagnosisData(transformedData);
       } catch (err) {
         setError("Failed to fetch data");
       }
@@ -24,16 +39,19 @@ const DashboardView = () => {
     fetchDiagnosisData();
   }, []);
 
+  const defaultColDef = {
+    flex: 1, // Each column will take up an equal portion of the table width
+    filter: "agTextColumnFilter",
+    sortable: true,
+    resizable: true,
+  };
+
   const columns = [
-    { headerName: "ID Diagnosis", field: "id_diagnosis" },
-    { headerName: "User ID", field: "id_user" },
     {
       headerName: "Diagnosis Date",
       field: "diagnosis_date",
       valueFormatter: (params) => new Date(params.value).toLocaleString(),
     },
-    { headerName: "Latitude", field: "latitude" },
-    { headerName: "Longitude", field: "longitude" },
     {
       headerName: "Probability",
       field: "probability",
@@ -41,17 +59,75 @@ const DashboardView = () => {
     },
     {
       headerName: "Disease Name",
-      field: "diseases",
-      valueGetter: (params) =>
-        params.data.diseases.map((d) => d.disease_name).join(", "),
+      field: "disease_name",
+      filter: "agTextColumnFilter",
+
+      filterParams: {
+        maxNumConditions: 1,
+        debounceMs: 200,
+        trimInput: true,
+        caseSensitive: false,
+        textFormatter: (r) => {
+          if (r == null) return null;
+          return r
+            .toLowerCase()
+            .replace(/[àáâãäå]/g, "a")
+            .replace(/æ/g, "ae")
+            .replace(/ç/g, "c")
+            .replace(/[èéêë]/g, "e")
+            .replace(/[ìíîï]/g, "i")
+            .replace(/ñ/g, "n")
+            .replace(/[òóôõö]/g, "o")
+            .replace(/œ/g, "oe")
+            .replace(/[ùúûü]/g, "u")
+            .replace(/[ýÿ]/g, "y");
+        },
+        filterOptions: ["contains"],
+      },
     },
     {
       headerName: "Symptoms",
       field: "symptoms",
-      valueGetter: (params) =>
-        params.data.symptoms.map((s) => s.symptom_name).join(", "),
+      filter: "agTextColumnFilter", // Enable text filter
+      filterParams: {
+        maxNumConditions: 1,
+        filterOptions: ["contains"],
+        debounceMs: 200,
+        caseSensitive: false,
+        defaultOption: "contains",
+        textFormatter: (r) => {
+          if (r == null) return null;
+          return r
+            .toLowerCase()
+            .replace(/[àáâãäå]/g, "a")
+            .replace(/æ/g, "ae")
+            .replace(/ç/g, "c")
+            .replace(/[èéêë]/g, "e")
+            .replace(/[ìíîï]/g, "i")
+            .replace(/ñ/g, "n")
+            .replace(/[òóôõö]/g, "o")
+            .replace(/œ/g, "oe")
+            .replace(/[ùúûü]/g, "u")
+            .replace(/[ýÿ]/g, "y");
+        },
+      },
     },
   ];
+
+  const localeText = {
+    // Common filter options
+    contains: "Contiene",
+    notContains: "No contiene",
+    equals: "Igual a",
+    notEqual: "No igual a",
+    startsWith: "Empieza con",
+    endsWith: "Termina con",
+    // Buttons
+    filterOoo: "Filtrar...",
+    applyFilter: "Aplicar",
+    clearFilter: "Limpiar",
+    // Others as needed...
+  };
 
   if (error) {
     return <p>{error}</p>;
@@ -71,7 +147,9 @@ const DashboardView = () => {
           rowData={diagnosisData}
           columnDefs={columns}
           pagination={true}
-          paginationPageSize={10}
+          paginationPageSize={20}
+          defaultColDef={defaultColDef}
+          localeText={localeText}
         />
       </div>
     </div>
