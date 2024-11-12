@@ -166,7 +166,6 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     // Run validation
     if (!validateForm()) {
       return;
@@ -196,7 +195,12 @@ const RegisterPage = () => {
       // Make a POST request to the backend to register the admin (use the admin registration route)
       const response = await axios.post(
         "http://localhost:3001/api/users/register-admin", // Changed to register-admin endpoint
-        finalFormData
+        finalFormData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token from storage
+          },
+        }
       );
       console.log("Admin registered:", response.data);
 
