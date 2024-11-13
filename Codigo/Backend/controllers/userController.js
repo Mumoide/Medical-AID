@@ -814,7 +814,8 @@ exports.verifyRecoveryCode = async (req, res) => {
 
 exports.resetPassword = async (req, res) => {
   const { email, recoveryCode, newPassword } = req.body;
-  console.log(newPassword)
+  console.log(newPassword);
+
   try {
     const user = await Users.findOne({ where: { email } });
     if (!user) {
@@ -847,9 +848,30 @@ exports.resetPassword = async (req, res) => {
 
     console.log('Password updated successfully for user:', user.email);
 
+    // Nodemailer transporter setup
+    const transporter = nodemailer.createTransport({
+      service: 'Gmail', // or use 'SMTP' for custom configurations
+      auth: {
+        user: process.env.EMAIL_USER, // Your email
+        pass: process.env.EMAIL_PASS, // Your email password or app password
+      },
+    });
+
+    // Email message options
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'Password Change Confirmation',
+      text: `Hello! Your password has been successfully changed. If you did not make this change, please contact our support immediately.`,
+    };
+
+    // Send the email
+    await transporter.sendMail(mailOptions);
+
     return res.status(200).json({ message: 'Password reset successful.' });
   } catch (error) {
     console.error('Error resetting password:', error);
     return res.status(500).json({ error: 'Server error.' });
   }
 };
+

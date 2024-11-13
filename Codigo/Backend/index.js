@@ -11,6 +11,7 @@ const diseaseRoutes = require('./routes/diseaseRoutes')
 const userRoutes = require('./routes/userRoutes');
 const diagnosisRoutes = require('./routes/diagnosesRoutes'); // Adjust path if needed
 const dashboardRoutes = require('./routes/dashboardRoutes')
+const newsletterRoutes = require('./routes/subscribeNewsLetterRoutes');
 const authRoutes = require('./routes/authRoutes');
 
 const corsOptions = {
@@ -49,6 +50,9 @@ app.use('/api/users', userRoutes);
 app.use('/api/diagnosis', diagnosisRoutes);
 app.use('/api/dashboard', dashboardRoutes)
 app.use('/api/auth', authRoutes);
+app.use('/api/newsletter', newsletterRoutes);
+
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
