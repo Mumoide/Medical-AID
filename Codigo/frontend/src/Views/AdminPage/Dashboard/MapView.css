@@ -21,7 +21,6 @@
 }
 
 .custom-cluster-icon {
-  background-color: #1976d2;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -29,7 +28,5 @@
   justify-content: center;
   font-size: 14px;
   font-weight: bold;
-  height: 40px;
-  width: 40px;
   text-align: center;
 }

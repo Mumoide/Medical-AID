@@ -45,7 +45,7 @@ const MapView = () => {
     return <p>{error}</p>;
   }
 
-  // Custom function to show the sum of cases within each cluster
+  // Custom function to show the sum of cases within each cluster with variable size and color, in a circular shape
   const createClusterCustomIcon = (cluster) => {
     const markers = cluster.getAllChildMarkers();
     const totalCases = markers.reduce(
@@ -53,10 +53,25 @@ const MapView = () => {
       0
     );
 
+    // Define size scaling based on total cases (adjust as necessary)
+    const size = Math.min(40 + totalCases * 0.5, 80); // Cap the size to 80px max
+
+    // Define color scaling based on total cases (adjust thresholds as needed)
+    let color;
+    if (totalCases < 10) {
+      color = "#81C784"; // Green for low emergency (few cases)
+    } else if (totalCases < 50) {
+      color = "#c4b532"; // Yellow for moderate emergency
+    } else if (totalCases < 100) {
+      color = "#dc8b14"; // Orange for high emergency
+    } else {
+      color = "#cf2c28"; // Red for critical emergency (many cases)
+    }
+
     return L.divIcon({
-      html: `<div><span>${totalCases}</span></div>`,
+      html: `<div style="background-color:${color}; width:${size}px; height:${size}px; line-height:${size}px; border-radius: 50%;"><span>${totalCases}</span></div>`,
       className: "custom-cluster-icon",
-      iconSize: L.point(40, 40, true),
+      iconSize: L.point(size, size),
     });
   };
 
