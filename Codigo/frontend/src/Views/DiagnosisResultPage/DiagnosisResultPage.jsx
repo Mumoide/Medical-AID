@@ -56,12 +56,20 @@ const Diagnosis = () => {
         // Set flag just before posting
         hasPosted.current = true;
         try {
-          await axios.post("http://localhost:3001/api/diagnosis/create", {
-            diagnosisSessionId,
-            diagnosisIds: diseases.map((disease) => disease.id_disease),
-            top3: top3,
-            diagnosisData: diagnosisDataRef.current,
-          });
+          await axios.post(
+            "http://localhost:3001/api/diagnosis/create",
+            {
+              diagnosisSessionId,
+              diagnosisIds: diseases.map((disease) => disease.id_disease),
+              top3: top3,
+              diagnosisData: diagnosisDataRef.current,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            }
+          );
         } catch (error) {
           if (error.response && error.response.status === 409) {
             console.warn("El Diagnóstico ya fue registrado para esta sesión.");

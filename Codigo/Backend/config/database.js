@@ -5,6 +5,7 @@ const sequelize = new Sequelize(process.env.PG_DATABASE, process.env.PG_USER, pr
     host: 'localhost',
     port: process.env.PG_PORT || 5433,
     dialect: 'postgres', // or 'mysql' or other database dialect you're using
+    timezone: '-03:00',
 });
 
 module.exports = sequelize;
