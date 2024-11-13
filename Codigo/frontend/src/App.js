@@ -20,6 +20,7 @@ import UserProfilePage from './Views/UserProfilePage/UserProfilePage'
 import DiagnosticRecordsPage from './Views/UserProfilePage/DiagnosticRecordsPage/DiagnosticRecordsPage'
 import DiseasePage from './Views/UserProfilePage/DiseasePage/DiseasePage'
 import UserUpdatePage from './Views/UserProfilePage/UserUpdatePage/UserUpdatePage'
+import ChangePasswordPage from './Views/UserProfilePage/UserUpdatePage/ChangePasswordPage/ChangePasswordPage'
 import Spinner from './Spinner'; // Import the Spinner component
 import Swal from "sweetalert2";
 import NotFoundRedirect from './Components/NotFoundRedirect/NotFoundRedirect'; // Import the NotFoundRedirect component
@@ -111,7 +112,7 @@ function App() {
           {/* Login Page */}
           <Route path="/Inicio-de-sesion" element={<LoginForm onLoginSuccess={handleLoginSuccess} />} />
           {/* Recover Password Page */}
-          <Route path="/recuperar-contrasena" element={<PasswordRecoveryPage/>} />
+          <Route path="/recuperar-contrasena" element={<PasswordRecoveryPage />} />
 
 
           {/* Admin Page */}
@@ -140,6 +141,7 @@ function App() {
           <Route path="/profile" element={<UserProfilePage />} />
           <Route path="/diagnostic-records" element={<DiagnosticRecordsPage />} />
           <Route path="/update-profile" element={<UserUpdatePage />} />
+          <Route path="/update-password" element={<ChangePasswordPage onLogout={handleLogout} />} />
           <Route path="/disease" element={<DiseasePage />} />
 
 

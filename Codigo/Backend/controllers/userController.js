@@ -681,3 +681,27 @@ exports.updateProfile = async (req, res) => {
     res.status(500).json({ error: "An error occurred while updating the profile." });
   }
 };
+
+exports.changePassword = async (req, res) => {
+  const { userId, newPassword } = req.body;
+
+  try {
+    // Check if the user exists
+    const user = await Users.findOne({ where: { id_user: userId } });
+    if (!user) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update the user's password
+    await user.update({ password_hash: hashedPassword });
+
+    res.status(200).json({ message: "Password updated successfully." });
+  } catch (error) {
+    console.error("Error changing password:", error);
+    res.status(500).json({ error: "An error occurred while changing the password." });
+  }
+};

@@ -24,5 +24,7 @@ router.put('/:id', authenticateToken, userController.updateUser);
 router.post('/register-admin', authenticateToken, userController.registerAdmin);
 // Route to logout user
 router.post('/logout', userController.logoutUser);
+// Route to change password of user
+router.post('/update-password', authenticateToken, userController.changePassword)
 
 module.exports = router;
