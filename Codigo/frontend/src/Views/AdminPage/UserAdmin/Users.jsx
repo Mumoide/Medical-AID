@@ -12,6 +12,19 @@ const Users = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [roleFilter, setRoleFilter] = useState("User"); // State to filter by role
+  const [nameFilter, setNameFilter] = useState(""); // Add name filter state
+  const [startDate, setStartDate] = useState(""); // State for start date filter
+  const [endDate, setEndDate] = useState(""); // State for end date filter
+  const [inputStartDate, setInputStartDate] = useState("");
+  const [inputEndDate, setInputEndDate] = useState("");
+
+  // Get today's date in YYYY-MM-DD format
+  // Get today's date in YYYY-MM-DD format, adjusted for local timezone
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+  const day = String(today.getDate()).padStart(2, "0");
+  const formattedToday = `${year}-${month}-${day}`;
 
   useEffect(() => {
     // Fetch the user data from the backend
@@ -173,15 +186,86 @@ const Users = () => {
     });
   };
 
-  // Apply the role filter based on the state
+  // Function to handle applying the date filter
+  const applyDateFilter = () => {
+    const start = new Date(inputStartDate);
+    const end = new Date(inputEndDate);
+    const currentDate = new Date();
+
+    if (end > currentDate) {
+      Swal.fire({
+        title: "Invalid End Date",
+        text: "End date cannot be greater than the current date.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    } else if (start > end) {
+      Swal.fire({
+        title: "Invalid Date Range",
+        text: "Start date must be before or equal to end date.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    } else {
+      setStartDate(inputStartDate);
+      setEndDate(inputEndDate);
+    }
+  };
+
+  // Function to clear date filter
+  const clearDateFilter = () => {
+    setStartDate("");
+    setEndDate("");
+    setInputStartDate("");
+    setInputEndDate("");
+    setNameFilter("");
+  };
+
   const filteredData = useMemo(() => {
-    if (!Array.isArray(data)) return []; // Return an empty array if `data` is not an array
-    if (!roleFilter) return data; // If no filter is applied, return all data
-    return data.filter(
-      (user) =>
-        user.roles.length > 0 && user.roles[0].role.role_name === roleFilter
-    );
-  }, [data, roleFilter]);
+    if (!Array.isArray(data)) return [];
+    let filtered = data;
+
+    if (roleFilter) {
+      filtered = filtered.filter(
+        (user) =>
+          user.roles.length > 0 && user.roles[0].role.role_name === roleFilter
+      );
+    }
+
+    if (nameFilter) {
+      const lowerCaseFilter = nameFilter.toLowerCase();
+      filtered = filtered.filter((user) => {
+        const fullName = `${user.profile?.names || ""} ${
+          user.profile?.last_names || ""
+        }`.toLowerCase();
+        return fullName.includes(lowerCaseFilter);
+      });
+    }
+
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+
+      filtered = filtered.filter((user) => {
+        const createdAt = new Date(user.created_at);
+        return createdAt >= start && createdAt <= end;
+      });
+    }
+
+    return filtered;
+  }, [data, roleFilter, nameFilter, startDate, endDate]);
+
+  useEffect(() => {
+    // Check if no data is found within the range and alert if empty
+    if (filteredData.length === 0 && startDate && endDate) {
+      Swal.fire({
+        title: "No Data Found",
+        text: "No users found within the selected date range.",
+        icon: "info",
+        confirmButtonText: "OK",
+      });
+    }
+  }, [filteredData, startDate, endDate]);
 
   // Conditionally show/hide columns based on window width
   const columns = useMemo(() => {
@@ -296,105 +380,147 @@ const Users = () => {
   return (
     <div>
       {/* Role Filter Buttons outside of table-container */}
-      <div className="role-filter-buttons">
-        <button
-          className={roleFilter === "User" ? "active" : ""}
-          onClick={() => setRoleFilter("User")}
-        >
-          Filtrar por usuario
-        </button>
-        <button
-          className={roleFilter === "Admin" ? "active" : ""}
-          onClick={() => setRoleFilter("Admin")}
-        >
-          Filtrar por administrador
-        </button>
-        <button
-          className="create-button"
-          onClick={() => (window.location.href = "/admin/create")}
-        >
-          Crear nuevo usuario
-        </button>
-      </div>
+      <div className="user-admincontainer">
+        <div className="filter-user-admin-container">
+          <div className="role-filter-buttons">
+            <button
+              className={roleFilter === "User" ? "active" : ""}
+              onClick={() => setRoleFilter("User")}
+            >
+              Filtrar por usuario
+            </button>
+            <button
+              className={roleFilter === "Admin" ? "active" : ""}
+              onClick={() => setRoleFilter("Admin")}
+            >
+              Filtrar por administrador
+            </button>
+            <button
+              className="create-button"
+              onClick={() => (window.location.href = "/admin/create")}
+            >
+              Crear nuevo usuario
+            </button>
+          </div>
 
-      {/* Table container */}
-      <div className="table-container">
-        {/* Table */}
-        <table {...getTableProps()}>
-          <thead>
-            {headerGroups.map((headerGroup) => {
-              const { key, ...headerGroupProps } =
-                headerGroup.getHeaderGroupProps(); // Extract key for <tr>
-              return (
-                <tr key={key} {...headerGroupProps}>
-                  {headerGroup.headers.map((column) => {
-                    const { key: headerKey, ...headerProps } =
-                      column.getHeaderProps(column.getSortByToggleProps()); // Extract key for <th>
-                    return (
-                      <th key={headerKey} {...headerProps}>
-                        {column.render("Header")}
-                        <span>
-                          {column.isSorted
-                            ? column.isSortedDesc
-                              ? " 🔽"
-                              : " 🔼"
-                            : ""}
-                        </span>
-                      </th>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </thead>
+          {/* Name Filter Input */}
 
-          <tbody {...getTableBodyProps()}>
-            {page.map((row) => {
-              prepareRow(row);
-              const { key, ...rowProps } = row.getRowProps(); // Extract key for <tr>
-              return (
-                <tr key={key} {...rowProps}>
-                  {row.cells.map((cell) => {
-                    const { key: cellKey, ...cellProps } = cell.getCellProps(); // Extract key for <td>
-                    return (
-                      <td key={cellKey} {...cellProps}>
-                        {cell.render("Cell")}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-
-        {/* Pagination Controls */}
-        <div className="pagination">
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-            Anterior
-          </button>
-          <span>
-            Página <strong>{pageIndex + 1}</strong>
-          </span>
-          <button onClick={() => nextPage()} disabled={!canNextPage}>
-            Siguiente
-          </button>
-          <select
-            value={pageSize}
-            onChange={(e) => setPageSize(Number(e.target.value))}
-          >
-            {[10, 20, 30, 40, 50].map((size) => (
-              <option key={size} value={size}>
-                Mostrar {size}
-              </option>
-            ))}
-          </select>
+          <div className="name-filter">
+            <label>Buscar por nombre:</label>
+            <input
+              type="text"
+              placeholder="Filtrar por nombre"
+              value={nameFilter}
+              onChange={(e) => setNameFilter(e.target.value)}
+              className="name-filter-input"
+            />
+          </div>
+          {/* Date Range Filter Inputs */}
+          <div className="date-range-filter">
+            <label>Fecha de inicio:</label>
+            <input
+              type="date"
+              value={inputStartDate}
+              onChange={(e) => setInputStartDate(e.target.value)}
+              className="date-input"
+              max={formattedToday}
+            />
+            <label>Fecha fin:</label>
+            <input
+              type="date"
+              value={inputEndDate}
+              onChange={(e) => setInputEndDate(e.target.value)}
+              className="date-input"
+              max={formattedToday}
+            />
+            <button className="search-button" onClick={applyDateFilter}>
+              Search
+            </button>
+            <button className="clear-button" onClick={clearDateFilter}>
+              Clear Filter
+            </button>
+          </div>
         </div>
-      </div>
+        {/* Table container */}
+        <div className="table-container">
+          {/* Table */}
+          <table {...getTableProps()}>
+            <thead>
+              {headerGroups.map((headerGroup) => {
+                const { key, ...headerGroupProps } =
+                  headerGroup.getHeaderGroupProps(); // Extract key for <tr>
+                return (
+                  <tr key={key} {...headerGroupProps}>
+                    {headerGroup.headers.map((column) => {
+                      const { key: headerKey, ...headerProps } =
+                        column.getHeaderProps(column.getSortByToggleProps()); // Extract key for <th>
+                      return (
+                        <th key={headerKey} {...headerProps}>
+                          {column.render("Header")}
+                          <span>
+                            {column.isSorted
+                              ? column.isSortedDesc
+                                ? " 🔽"
+                                : " 🔼"
+                              : ""}
+                          </span>
+                        </th>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </thead>
 
-      <button onClick={handleBackClick} className="back-button">
-        Volver
-      </button>
+            <tbody {...getTableBodyProps()}>
+              {page.map((row) => {
+                prepareRow(row);
+                const { key, ...rowProps } = row.getRowProps(); // Extract key for <tr>
+                return (
+                  <tr key={key} {...rowProps}>
+                    {row.cells.map((cell) => {
+                      const { key: cellKey, ...cellProps } =
+                        cell.getCellProps(); // Extract key for <td>
+                      return (
+                        <td key={cellKey} {...cellProps}>
+                          {cell.render("Cell")}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+
+          {/* Pagination Controls */}
+          <div className="pagination">
+            <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+              Anterior
+            </button>
+            <span>
+              Página <strong>{pageIndex + 1}</strong>
+            </span>
+            <button onClick={() => nextPage()} disabled={!canNextPage}>
+              Siguiente
+            </button>
+            <select
+              value={pageSize}
+              onChange={(e) => setPageSize(Number(e.target.value))}
+            >
+              {[10, 20, 30, 40, 50].map((size) => (
+                <option key={size} value={size}>
+                  Mostrar {size}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <button onClick={handleBackClick} className="back-button">
+          Volver
+        </button>
+      </div>
     </div>
   );
 };
