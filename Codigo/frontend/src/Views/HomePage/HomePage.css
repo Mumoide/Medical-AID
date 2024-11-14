@@ -14,7 +14,6 @@
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
-
 }
 
 .hero-content-homepage h1 {
@@ -27,7 +26,7 @@
 }
 
 .cta-button-homepage {
-  background-color: #0388A6;
+  background-color: #0388a6;
   border: none;
   padding: 25px 70px;
   color: white;
@@ -57,7 +56,7 @@
 }
 
 .texto-mision h1 {
-  color: #0388A6; /* Color del título */
+  color: #0388a6; /* Color del título */
   font-size: 1.8rem; /* Tamaño del título */
   margin: 0 0 10px 0; /* Espaciado debajo del título */
   font-weight: bold; /* Negrita para destacar */
@@ -226,20 +225,19 @@
 }
 @media (max-width: 768px) {
   .funciona-content-homepage {
-      flex-direction: column; /* Stack image and text vertically */
-      text-align: center; /* Center text on smaller screens */
-      gap: 10px; /* Adjust gap for mobile */
-    }
-  
-    .funciona-text-homepage {
-      margin-left: 0;
-      text-align: center;
-    }
-  
-    .funciona-image-homepage img {
-      max-width: 200px; /* Reduce image size for smaller screens */
-    }
+    flex-direction: column; /* Stack image and text vertically */
+    text-align: center; /* Center text on smaller screens */
+    gap: 10px; /* Adjust gap for mobile */
+  }
 
+  .funciona-text-homepage {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .funciona-image-homepage img {
+    max-width: 200px; /* Reduce image size for smaller screens */
+  }
 
   .funciona-text-homepage h2 {
     font-size: 2rem; /* Adjust heading size for mobile */
@@ -293,7 +291,7 @@
 .beneficios-section-homepage h2 {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #0388A6;
+  color: #0388a6;
 }
 
 .beneficios-section-homepage p {
@@ -309,13 +307,12 @@
 }
 
 .beneficio-homepage {
-  
   border-radius: 20px;
-  padding: 40px; 
+  padding: 40px;
   max-width: 300px;
   margin: 20px;
   text-align: center;
-  
+
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación para el hover */
 }
 
@@ -325,7 +322,7 @@
 }
 
 .beneficio-homepage img {
-  width: 60%; 
+  width: 60%;
   height: auto;
   margin-bottom: 15px;
   border-radius: 10px; /* Agrega bordes redondeados a la imagen */
@@ -341,7 +338,6 @@
   font-size: 1rem;
   color: #555;
 }
-
 
 @media (max-width: 1024px) {
   .beneficio-homepage {
@@ -476,6 +472,10 @@
   background-color: #2980b9;
 }
 
+.subscribe-form input {
+  color: white;
+}
+
 .privacy-note-homepage {
   font-size: 0.9rem;
   color: #bdc3c7;
@@ -491,16 +491,15 @@
 .diagnostic-container-inteligente {
   display: flex;
   flex-direction: row; /* Flex para organizar contenido en columnas */
-  justify-content:space-around; /* Coloca los elementos en los extremos */
+  justify-content: space-around; /* Coloca los elementos en los extremos */
   align-items: center; /* Centra verticalmente */
   height: 50vh;
-  background-color: #022E40;
+  background-color: #022e40;
   text-align: left; /* Alineación del texto a la izquierda */
   padding: 20px; /* Espacio interior para separar el contenido del borde */
   margin-bottom: 90px;
   max-width: 100%;
 }
-
 
 /* Desktop view */
 @media (max-width: 768px) {
@@ -511,13 +510,11 @@
   }
 }
 
-
-
 .diagnostic-image {
   display: flex;
   justify-content: center; /* Centra la imagen horizontalmente */
   align-items: center; /* Centra la imagen verticalmente si es necesario */
-  margin-top:50px;
+  margin-top: 50px;
 }
 
 .diagnostic-image img {
@@ -532,7 +529,7 @@
 @media (max-width: 1200px) {
   .diagnostic-image img {
     width: 40%;
-    height:auto;
+    height: auto;
     margin-left: 125px;
   }
 }
@@ -540,7 +537,7 @@
 @media (max-width: 1024px) {
   .diagnostic-image img {
     width: 45%;
-    height:auto;
+    height: auto;
     margin-left: 100px;
   }
 }
@@ -548,7 +545,7 @@
 @media (max-width: 768px) {
   .diagnostic-image img {
     width: 40%;
-    height:auto;
+    height: auto;
     margin-left: 50px;
   }
 }
@@ -561,14 +558,16 @@
 
 /* Definición de la animación float */
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0); /* Posición inicial y final sin desplazamiento */
   }
   50% {
-    transform: translateY(-10px); /* Mover hacia arriba 10px en el punto medio */
+    transform: translateY(
+      -10px
+    ); /* Mover hacia arriba 10px en el punto medio */
   }
 }
-
 
 .diagnostic-content {
   color: white;
@@ -615,7 +614,8 @@
   }
 }
 
-.start-diagnostic, .more-info {
+.start-diagnostic,
+.more-info {
   background-color: #3498db;
   border: none;
   padding: 15px 30px;
@@ -639,7 +639,6 @@
   background-color: #3498db;
   color: white;
 }
-
 
 .comments-section {
   display: flex;
@@ -694,7 +693,7 @@
 }
 
 .comment-stars {
-  color: #FFD700; /* Gold color for stars */
+  color: #ffd700; /* Gold color for stars */
   font-size: 1.2rem;
   margin-bottom: 10px;
 }
@@ -715,24 +714,24 @@
 @media (max-width: 393px) {
   /* Hero Section */
   .hero-section-homepage {
-      height: 70vh; /* Reduce height for smaller screens */
+    height: 70vh; /* Reduce height for smaller screens */
   }
 
   .hero-content-homepage h1 {
-      font-size: 1.8rem; /* Adjust heading size */
+    font-size: 1.8rem; /* Adjust heading size */
   }
 
   .hero-content-homepage p {
-      font-size: 1rem; /* Adjust paragraph size */
+    font-size: 1rem; /* Adjust paragraph size */
   }
 
   /* Comments Section */
   .comments-section {
-      flex-direction: column;
-      align-items: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .comment-card {
-      width: 90%; /* Full width for comments */
+    width: 90%; /* Full width for comments */
   }
 }

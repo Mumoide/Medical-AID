@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define('NewsletterSubscribers', {
     id_subscriber: {
       autoIncrement: true,
@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
       unique: "newslettersubscribers_email_unique"
     },
     subscribed_at: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false
     },
     confirmed: {
@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: false
     },
     unsubscribed_at: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: true
     }
   }, {

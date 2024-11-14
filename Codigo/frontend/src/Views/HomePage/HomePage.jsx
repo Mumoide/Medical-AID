@@ -1,8 +1,49 @@
+import React, { useState } from "react";
+import Swal from "sweetalert2";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "./HomePage.css";
 import "../LoginForm/LoginForm.css";
 
 const HomePage = () => {
+  const [email, setEmail] = useState("");
+
+  const subscribeToNewsletter = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(
+        "http://localhost:3001/api/newsletter/subscribe",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Error al suscribirse.");
+      }
+
+      Swal.fire({
+        icon: "success",
+        title: "Suscripción Exitosa",
+        text: "Gracias por suscribirte a nuestro boletín.",
+        confirmButtonColor: "#3690a4",
+      });
+      setEmail(""); // Clear the email input field after success
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message || "Por favor, intenta nuevamente.",
+        confirmButtonColor: "#d33",
+      });
+    }
+  };
+
   return (
     <div className="main-container">
       {/* Hero Section */}
@@ -187,13 +228,18 @@ const HomePage = () => {
           Subscríbete a nuestros informativos vía correo electrónico y recibe
           todas nuestras noticias y actualizaciones.
         </p>
-        <form className="subscribe-form">
+        <form className="subscribe-form" onSubmit={subscribeToNewsletter}>
           <input
-            type="text"
+            type="email"
             placeholder="Ingresa tu email"
             className="subscribe-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
-          <button className="subscribe-button">Suscribirse</button>
+          <button type="submit" className="subscribe-button">
+            Suscribirse
+          </button>
         </form>
         <p>Al suscribirte aceptas nuestra Política de Privacidad</p>
         <hr className="custom-line"></hr>

@@ -1,4 +1,8 @@
 /* Modern Table Styling */
+.user-admincontainer {
+  margin-top: 130px;
+}
+
 .table-container {
   margin: 20px auto;
   width: 90%;
@@ -101,37 +105,123 @@ td {
   color: #007bff;
 }
 
-/* Role Filter Buttons - Updated */
-.role-filter-buttons {
+/* Users.css */
+
+/* Filter Section Styles */
+.filter-user-admin-container {
+  width: 90%;
+  margin: auto;
+}
+
+.role-filter-buttons,
+.name-filter,
+.date-range-filter {
   display: flex;
-  justify-content: flex-start;
-  margin: 120px auto;
-  width: 95%;
-  max-width: 1200px;
-  gap: 0; /* Remove the gap between buttons */
-  margin-bottom: 20px;
-  border-radius: 4px; /* Rounded corners */
-  overflow: hidden;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.role-filter-buttons {
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
 }
 
 .role-filter-buttons button {
-  padding: 10px 20px;
-  background-color: #ffffff;
-  color: #007bff;
+  padding: 8px 15px;
   border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-size: 16px;
-  border-bottom: 4px solid transparent; /* Default no underline */
+  transition: background-color 0.3s;
 }
 
-.role-filter-buttons button.active {
-  color: #0056b3; /* Darker blue text when active */
-  border-bottom: 4px solid #0056b3; /* Dark blue underline */
-}
-
+.role-filter-buttons button.active,
 .role-filter-buttons button:hover {
-  background-color: #e9f2fc; /* Light blue-greyish hover effect */
+  background-color: #0056b3;
+}
+
+.create-button {
+  background-color: #28a745;
+  padding: 8px 15px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.create-button:hover {
+  background-color: #218838;
+}
+
+/* Name Filter Input */
+.name-filter-input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 200px;
+  outline: none;
+}
+
+.name-filter-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.name-filter label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+/* Date Range Filter */
+.date-range-filter label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.date-input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 150px;
+  outline: none;
+}
+
+.date-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Filter Buttons */
+.search-button,
+.clear-button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+.clear-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.clear-button:hover {
+  background-color: #c82333;
 }
 
 .create-button {

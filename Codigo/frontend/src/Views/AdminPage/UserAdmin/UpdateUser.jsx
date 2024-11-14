@@ -163,10 +163,10 @@ const UpdateUser = () => {
   if (loading) return <p>Loading user data...</p>;
 
   return (
-    <div className="register-page">
+    <div className="register-user-admin-page">
       <ToastContainer />
       <div className="spacer"></div>
-      <header className="register-header">
+      <header className="register-user-admin-header">
         <h1>Actualizar Usuario</h1>
       </header>
 

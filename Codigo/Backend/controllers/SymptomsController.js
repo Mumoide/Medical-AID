@@ -7,7 +7,7 @@ const getAllSymptomNames = async (req, res) => {
     try {
         // Fetch all the symptoms from the database, selecting only the 'name' field
         const symptoms = await Symptoms.findAll({
-            attributes: ['nombre', 'model_order'], // Select only the 'name' field
+            attributes: ['nombre', 'model_order', 'grupo_sintomatico'], // Select only the 'name' field
         });
 
         // Send the result as a JSON response

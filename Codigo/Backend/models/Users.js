@@ -25,6 +25,28 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       defaultValue: true,
     },
+    failed_attempts: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0, // Track failed attempts
+    },
+    lockout_until: {
+      type: DataTypes.DATE, // Store lockout expiration time
+      allowNull: true,
+    },
+    lockout_count: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0, // Track number of lockouts to calculate lockout time
+    },
+    recovery_code: {
+      type: DataTypes.INTEGER,
+      allowNull: true, // Allows null when no code is generated
+      comment: "Stores the recovery code for password reset",
+    },
+    recovery_code_expiration: {
+      type: DataTypes.DATE,
+      allowNull: true, // Allows null when no expiration is set
+      comment: "Expiration time for the recovery code",
+    },
   }, {
     sequelize,
     tableName: 'Users',

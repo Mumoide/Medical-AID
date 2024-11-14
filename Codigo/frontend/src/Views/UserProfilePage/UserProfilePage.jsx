@@ -133,6 +133,14 @@ function UserProfilePage() {
           >
             <FaPen className="button-icon" /> Editar mi Información
           </button>
+          <button
+            className="profile-button"
+            onClick={() =>
+              navigate("/update-password", { state: { userProfile } })
+            } // Pass userProfile as state
+          >
+            <FaPen className="button-icon" /> Cambiar contraseña
+          </button>
         </div>
       </div>
     </div>

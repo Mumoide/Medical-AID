@@ -26,16 +26,15 @@
 }
 
 .diagnosis-container h2 {
-  font-size: 2.0rem;
+  font-size: 2rem;
   color: #fff;
   margin: auto;
   margin-top: 35px;
 }
 
-.introduction{
-display: flex;
+.introduction {
+  display: flex;
 }
-
 
 @keyframes spin {
   0% {
@@ -78,14 +77,19 @@ display: flex;
   font-size: 4rem;
   margin-bottom: 10px;
   margin-top: 180px;
-  color: #0388A6;
+  color: #0388a6;
   margin-left: 50px;
 }
 
-.text-content p{
+.text-content p {
   color: #393e46;
   font-size: 1.5rem;
   margin-left: 50px;
+}
+
+.button-container-symptom-form {
+  display: flex;
+  flex-direction: row;
 }
 
 .cta-button-form {
@@ -114,41 +118,40 @@ display: flex;
 }
 
 .combobox-container {
-  align-items: center;  /* Alinea el contenido verticalmente */
-  justify-content: space-between;  /* Añade espacio entre el Select y el botón */
-  background-color: #4e9197;  /* Fondo claro */
-  padding: 15px;  /* Espacio interno para que el contenido no esté pegado al borde */
-  margin: auto;  /* Centrar horizontalmente y añadir espacio vertical */
-  min-width: 80%;  /* Ancho máximo para el combobox */
+  align-items: center; /* Alinea el contenido verticalmente */
+  justify-content: space-between; /* Añade espacio entre el Select y el botón */
+  background-color: #4e9197; /* Fondo claro */
+  padding: 15px; /* Espacio interno para que el contenido no esté pegado al borde */
+  margin: auto; /* Centrar horizontalmente y añadir espacio vertical */
+  min-width: 80%; /* Ancho máximo para el combobox */
   margin-top: 30px;
 }
 
 .combobox-container label {
   margin-top: 50px;
-  color:rgb(34, 61, 82);
+  color: rgb(34, 61, 82);
   font-size: 1rem;
 }
 
-.symptom-combobox{
+.symptom-combobox {
   display: flex;
-  margin-top:10px;
+  margin-top: 10px;
   max-width: 700px;
   margin-left: 190px;
 }
 
-.buttons-container{
+.buttons-container {
   align-items: center;
   margin: auto;
 }
 
 .seleccionar-sintoma {
   min-width: 500px;
-
 }
 
 /*Botones*/
 .buttons-container button {
-  background-color: #393E46; 
+  background-color: #393e46;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -178,7 +181,7 @@ display: flex;
   border-radius: 50%;
   padding: 5px;
   font-size: 24px;
-  margin-top:2px;
+  margin-top: 2px;
 }
 
 .eliminar-btn:hover {
@@ -207,7 +210,7 @@ display: flex;
   color: #333; /* Color del texto */
   margin-left: 350px;
 }
-.combobox-categorias{
+.combobox-categorias {
   display: flex;
   flex-direction: column;
   background-color: #4e9197;
@@ -218,11 +221,9 @@ display: flex;
   margin-bottom: 100px;
 }
 
-.combobox-categorias h2{
-text-align: center;
-
+.combobox-categorias h2 {
+  text-align: center;
 }
-
 
 /* Footer Section */
 .footer {
@@ -256,13 +257,12 @@ text-align: center;
   text-decoration: underline;
 }
 
-
 .footer-links {
   display: flex;
   justify-content: flex-start;
 }
 
-.footer-copyright{
+.footer-copyright {
   display: flex;
   justify-content: flex-end;
   align-items: center;

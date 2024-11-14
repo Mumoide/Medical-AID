@@ -1,5 +1,5 @@
 /* Container that wraps everything */
-.register-page {
+.register-user-admin-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,12 +8,15 @@
   background-color: #f0f0f0;
   min-height: 100vh;
   font-family: "Montserrat", sans-serif; /* Set Montserrat font for the whole page */
+  background: url("../../../../public/images/backgrounds/registro.jpg")
+    no-repeat center;
 }
 
 /* Header styling */
-.register-header {
+.register-user-admin-header {
   text-align: center;
   margin-bottom: 20px;
+  color: white;
 }
 
 .spacer {

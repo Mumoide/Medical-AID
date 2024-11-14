@@ -18,7 +18,7 @@
 
 /* Estilos para el Texto de la Introducción */
 .intro-section p {
-  font-family: 'Arial', sans-serif; /* Fuente limpia y fácil de leer */
+  font-family: "Arial", sans-serif; /* Fuente limpia y fácil de leer */
   font-size: 1rem; /* Tamaño de la fuente */
   line-height: 1.6; /* Espaciado de línea para mejorar la legibilidad */
   color: #333; /* Color del texto */
@@ -27,10 +27,9 @@
   text-align: justify; /* Justificar el texto */
 }
 
-
 /* Heading and Image Flex Container */
 .intro-section h1 {
-  font-family: 'Georgia', serif;
+  font-family: "Georgia", serif;
   font-size: 2rem; /* Slightly smaller font size */
   font-weight: bold;
   color: #333;
@@ -44,7 +43,6 @@
   vertical-align: middle;
   color: #333;
 }
-
 
 /* Subheading Style */
 .intro-section h1 span {
@@ -62,12 +60,11 @@
 
 /* Body Text Style */
 .intro-section p {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 0.95rem; /* Slightly smaller font size */
   line-height: 1.4; /* Tighter line height */
   color: #555;
   margin-bottom: 10px; /* Reduced spacing between paragraphs */
-  
 }
 
 /* Underline Separator */
@@ -80,10 +77,10 @@
 }
 
 .intro-section hr {
-  border: none; 
-  height: 7px; 
-  background-color: #C3E5F8; 
-  width: 50%; 
+  border: none;
+  height: 7px;
+  background-color: #c3e5f8;
+  width: 50%;
   margin: 20px auto; /* Centrar la línea horizontalmente y ajustar el espaciado */
   border-radius: 25px; /* Bordes redondeados */
 }
@@ -105,12 +102,13 @@
   object-fit: cover;
 }
 
-.header-section h1, .header-section h2, .header-section p {
+.header-section h1,
+.header-section h2,
+.header-section p {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
-
 
 /* Resaltar Número de Diagnósticos */
 .highlight {
@@ -118,7 +116,6 @@
   color: #000000; /* Mantener el color blanco para el número */
   font-size: 1.5rem;
 }
-
 
 /* CTA Section Styling */
 .cta-section {
@@ -198,11 +195,9 @@
 .mission-item p {
   font-size: 1rem;
   color: #555;
-  
 }
 
 /* Subscription Section */
-
 
 .subscribe-section {
   background-color: #1e272e; /* Fondo oscuro */
@@ -212,10 +207,9 @@
   max-width: 100%; /* Limitar el ancho de la sección */
   margin: 40px auto; /* Centrar la sección */
   margin-bottom: -45px;
-  
 }
 
-.subscribe-section img{
+.subscribe-section img {
   width: 10%;
   height: 10%;
   margin-left: 30px;
@@ -224,9 +218,9 @@
 }
 
 .subscribe-title {
-  font-size: 2rem; 
-  font-weight: bold; 
-  margin-bottom: 30px; 
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
   margin-left: 30px;
 }
 
@@ -253,7 +247,7 @@
   padding: 15px 25px;
   color: white;
   background-color: transparent;
-  border: 3px solid #008A90;
+  border: 3px solid #008a90;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
@@ -264,25 +258,25 @@
 }
 
 .subscribe-section p {
-  margin-top: 20px; 
-  font-size: 0.9rem; 
-  color: #ffffff; 
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #ffffff;
   margin-left: 300px;
 }
 
 /* Sección del Botón */
 .button-section {
   margin-top: 80px;
-  margin-bottom: 80px; 
-} 
+  margin-bottom: 80px;
+}
 
 /* Contenedor del Botón */
 .button-wrapper {
   display: flex;
-  align-items: center; 
+  align-items: center;
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
 }
 
 .cta-button {
@@ -300,13 +294,13 @@
 
 /* Efecto hover para el botón */
 .cta-button:hover {
-  background-color: #2980b9; 
+  background-color: #2980b9;
   transform: scale(1.05);
 }
 
 /* Texto dentro del Botón */
 .button-text {
-  margin-right: 20px; 
+  margin-right: 20px;
 }
 
 /* Imagen dentro del Botón */
@@ -331,56 +325,22 @@
 
 /* Imagen dentro del Botón */
 .button-image {
-  width: 8%; 
+  width: 8%;
   height: 8%;
-  position: relative; 
+  position: relative;
   animation: move-circle 6s linear infinite; /* Animación circular continua */
   transition: transform 0.3s ease; /* Transición para el efecto hover */
 }
 
-
-/* Footer Section */
-.footer {
-  display: flex;
-  justify-content: space-between; /* Distribuir los elementos a lo largo del contenedor */
-  align-items: center; /* Alinear todos los elementos verticalmente al centro */
-  padding: 20px;
-  background-color: #1e272e; /* Fondo del pie de página */
-  color: #ffffff; /* Color de los textos del pie de página */
-  flex-wrap: wrap; /* En caso de pantallas pequeñas, los elementos pueden moverse */
-}
-
-.footer-links {
-  display: flex;
-  gap: 20px; /* Espacio entre los enlaces */
-}
-
-.footer-copyright {
-  display: flex;
-  justify-content: flex-end; /* Alinear el copyright a la derecha */
-  align-items: center; /* Asegurarse de que estén a la misma altura */
-}
-
-.footer a {
-  text-decoration: none;
-  color: #ffffff;
-  font-size: 0.9rem;
-}
-
-.footer a:hover {
-  text-decoration: underline;
-}
-
-
-.footer-links {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.footer-copyright{
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+/* Custom line to separate AboutUsPage footer from the global footer */
+.custom-line {
+  border: none;
+  height: 2px; /* Set the thickness of the line */
+  background-color: #bdc3c7; /* Light color for separation */
+  width: 80%; /* Adjust width as needed */
+  margin: 30px auto; /* Center the line with top and bottom spacing */
+  opacity: 0.7; /* Slight transparency for a subtle effect */
+  border-radius: 25px; /* Rounded edges for a modern look */
 }
 
 /* Media Queries para Adaptabilidad */
@@ -445,26 +405,25 @@
     height: 155px;
   }
 
-  .subscribe-section img{
+  .subscribe-section img {
     width: 20%;
     margin-bottom: -50px;
     margin-left: 160px;
-   
   }
 
   .subscribe-title {
-    font-size: 1rem; 
-    font-weight: bold; 
+    font-size: 1rem;
+    font-weight: bold;
     margin-bottom: 20px;
     text-align: center;
   }
 
   .subscribe-input {
-  margin-left: 20px;
+    margin-left: 20px;
   }
 
   .subscribe-section p {
-    margin-top: 70px; 
+    margin-top: 70px;
     margin-left: 20px;
     margin-bottom: 10px;
   }
@@ -475,10 +434,9 @@
 
   .footer a {
     font-size: 0.65rem;
-
   }
 
-  .footer-copyright{
+  .footer-copyright {
     margin-left: 40px;
     margin-top: 15px;
   }
@@ -500,5 +458,3 @@
     max-width: 80%;
   }
 }
-
-
