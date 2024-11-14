@@ -7,16 +7,20 @@ import "./DiagnosticRecordsPage.css";
 
 const DiagnosticRecordsPage = () => {
   const [data, setData] = useState([]);
-  const userId = localStorage.getItem("user_id");
   const navigate = useNavigate();
+  const [diseaseNameFilter, setDiseaseNameFilter] = useState(""); // Filter by name
+  const [startDiagnosisDate, setStartDiagnosisDate] = useState(""); // Start date filter
+  const [endDiagnosisDate, setEndDiagnosisDate] = useState(""); // End date filter
+  const [inputStartDate, setInputStartDate] = useState(""); // Input for start date
+  const [inputEndDate, setInputEndDate] = useState(""); // Input for end date
+  const userId = localStorage.getItem("user_id");
 
-  const formatSymptomName = (symptomName) => {
-    let formattedName = symptomName.replace(/_/g, " ");
-    return (
-      formattedName.charAt(0).toUpperCase() +
-      formattedName.slice(1).toLowerCase()
-    );
-  };
+  // Get today's date in YYYY-MM-DD format
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+  const day = String(today.getDate()).padStart(2, "0");
+  const formattedToday = `${year}-${month}-${day}`;
 
   useEffect(() => {
     const fetchDiagnosticRecords = async () => {
@@ -41,9 +45,8 @@ const DiagnosticRecordsPage = () => {
             window.location.href = "/login";
           });
           return;
-        } else if (!response.ok) {
+        } else if (!response.ok)
           throw new Error("Failed to fetch diagnostic records");
-        }
 
         let data = await response.json();
 
@@ -71,7 +74,56 @@ const DiagnosticRecordsPage = () => {
     };
 
     fetchDiagnosticRecords();
-  }, [userId]);
+  }, []);
+
+  // Apply filters based on name and date range
+  const applyFilters = () => {
+    setStartDiagnosisDate(inputStartDate);
+    setEndDiagnosisDate(inputEndDate);
+  };
+
+  // Clear filters and reset input fields
+  const clearFilters = () => {
+    setDiseaseNameFilter("");
+    setStartDiagnosisDate("");
+    setEndDiagnosisDate("");
+    setInputStartDate("");
+    setInputEndDate("");
+  };
+
+  const filteredData = useMemo(() => {
+    console.log(data);
+    return data.filter((disease) => {
+      const matchesName = disease.disease_name
+        .toLowerCase()
+        .includes(diseaseNameFilter.toLowerCase());
+
+      // Convert diagnosis_date to YYYY-MM-DD format
+      const diagnosisDate = new Date(disease.diagnosis_date)
+        .toISOString()
+        .split("T")[0];
+      const startDate = startDiagnosisDate ? startDiagnosisDate : null;
+      const endDate = endDiagnosisDate ? endDiagnosisDate : null;
+
+      // Check if diagnosisDate is within the date range, inclusive
+      const withinDateRange =
+        (!startDate || diagnosisDate >= startDate) &&
+        (!endDate || diagnosisDate <= endDate);
+
+      return matchesName && withinDateRange;
+    });
+  }, [data, diseaseNameFilter, startDiagnosisDate, endDiagnosisDate]);
+
+  useEffect(() => {
+    if (filteredData.length === 0 && (startDiagnosisDate || endDiagnosisDate)) {
+      Swal.fire({
+        title: "No Data Found",
+        text: "No diseases found within the selected filters.",
+        icon: "info",
+        confirmButtonText: "OK",
+      });
+    }
+  }, [filteredData, startDiagnosisDate, endDiagnosisDate]);
 
   const columns = useMemo(
     () => [
@@ -94,7 +146,7 @@ const DiagnosticRecordsPage = () => {
         accessor: "symptoms",
         Cell: ({ value }) =>
           value
-            .map((symptom) => formatSymptomName(symptom.symptom_name))
+            .map((symptom) => symptom.symptom_name.replace(/_/g, " "))
             .join(", "),
       },
       {
@@ -132,7 +184,7 @@ const DiagnosticRecordsPage = () => {
   } = useTable(
     {
       columns,
-      data,
+      data: filteredData, // Apply filtered data here
       initialState: { pageIndex: 0 },
     },
     useSortBy,
@@ -142,6 +194,44 @@ const DiagnosticRecordsPage = () => {
   return (
     <div className="diagnostic-records-page">
       <h1>Historial de Diagnósticos</h1>
+
+      {/* Filter Section */}
+      <div className="filter-section">
+        <div className="name-filter">
+          <label>Buscar por nombre:</label>
+          <input
+            type="text"
+            placeholder="Filtrar por diagnóstico"
+            value={diseaseNameFilter}
+            onChange={(e) => setDiseaseNameFilter(e.target.value)}
+            className="name-filter-input"
+          />
+        </div>
+        <div className="date-range-filter">
+          <label>Fecha de inicio:</label>
+          <input
+            type="date"
+            value={inputStartDate}
+            onChange={(e) => setInputStartDate(e.target.value)}
+            max={formattedToday}
+          />
+          <label>Fecha fin:</label>
+          <input
+            type="date"
+            value={inputEndDate}
+            onChange={(e) => setInputEndDate(e.target.value)}
+            max={formattedToday}
+          />
+          <button className="search-button" onClick={applyFilters}>
+            Search
+          </button>
+          <button className="clear-button" onClick={clearFilters}>
+            Clear Filter
+          </button>
+        </div>
+      </div>
+
+      {/* Diagnostic Table */}
       <table {...getTableProps()} className="diagnostic-table">
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -198,7 +288,6 @@ const DiagnosticRecordsPage = () => {
         </select>
       </div>
 
-      {/* Back button */}
       <button onClick={() => navigate(-1)} className="back-button-records">
         Volver
       </button>
