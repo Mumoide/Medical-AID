@@ -111,8 +111,8 @@
 }
 
 .diagnostic-image-form {
-  margin-top: 100px;
-  max-width: 70%; /* Reducir ligeramente el ancho máximo para darle más espacio al contenedor */
+  margin-top: 150px;
+  max-width: 50%; /* Reducir ligeramente el ancho máximo para darle más espacio al contenedor */
   height: auto; /* Mantiene la proporción de la imagen */
   margin-left: 190px;
 }
@@ -129,7 +129,7 @@
 
 .combobox-container label {
   margin-top: 50px;
-  color: rgb(34, 61, 82);
+  color: rgb(249, 251, 253);
   font-size: 1rem;
 }
 
@@ -202,13 +202,15 @@
 .icono-categoria {
   max-width: 150px; /* Ajusta el tamaño de la imagen según sea necesario */
   height: auto; /* Mantén la proporción de la imagen */
+
 }
 .categoria h2 {
   font-size: 1.5rem; /* Ajusta el tamaño del texto */
   font-weight: bold;
   margin: 0; /* Elimina el margen superior e inferior */
   color: #333; /* Color del texto */
-  margin-left: 350px;
+  margin: auto;
+  margin-bottom: 25px;
 }
 .combobox-categorias {
   display: flex;
@@ -216,13 +218,13 @@
   background-color: #4e9197;
   border-radius: 20px;
   width: 72%;
-  margin-left: 190px;
   height: 100%;
   margin-bottom: 100px;
 }
 
 .combobox-categorias h2 {
   text-align: center;
+  color: white;
 }
 
 /* Footer Section */
@@ -266,4 +268,38 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+
+.group-buttons {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Define exactamente 7 columnas */
+  gap: 15px; /* Espacio entre botones */
+  max-width: 50%; /* Ancho máximo del contenedor para controlar el diseño */
+  margin: 0 auto; /* Centrar el contenedor en la página */
+  margin-top: 20px; /* Separación superior */
+  justify-content: center; /* Centra los botones horizontalmente dentro del contenedor */
+}
+
+.group-button {
+  background-color: #e0f7f7;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.9;
+  color: #333;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  width: 140px;
+  margin: 0 auto; /* Centrar el contenedor en la página */
+}
+
+.group-button:hover {
+  background-color: #b2e2e2;
+  color: #000;
+}
+
+.group-button.active {
+  background-color: #0388a6;
+  color: #fff;
 }

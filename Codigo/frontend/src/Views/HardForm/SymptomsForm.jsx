@@ -463,7 +463,7 @@ const SymptomComboBox = () => {
                 </div>
               </div>
               <div className="combobox-categorias">
-                <h2>Formulario intuitivo</h2>
+                <h2>Formulario Intuitivo</h2>
                 {easyComboBoxes.map((comboBox, index) => (
                   <div className="combobox-container" key={comboBox.id}>
                     <label htmlFor={`symptom-combobox-${comboBox.id}`}>
