@@ -8,6 +8,7 @@
   background-color: #f0f0f0;
   min-height: 100vh;
   font-family: "Montserrat", sans-serif; /* Set Montserrat font for the whole page */
+  background-image: url("../../../../public/images/backgrounds/view-hands.jpg");
 }
 
 /* Header styling */
@@ -18,8 +19,8 @@
 
 /* Header styling */
 .user-update-page h1 {
-  font-size: 36px;
-  color: #3690a4;
+  font-size: 3rem;
+  color: #f7f6f6;
   font-weight: bold;
   margin-bottom: 30px;
   text-align: center;
@@ -44,7 +45,7 @@
   font-size: 28px;
   font-weight: 700;
   text-align: center;
-  color: rgb(0, 0, 0);
+  color: #3690a4;
   margin-bottom: 20px;
 }
 

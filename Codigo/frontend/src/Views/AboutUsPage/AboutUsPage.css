@@ -96,10 +96,32 @@
   margin-right: -50vw; */
 }
 
+.header-container-about-us {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centrado vertical y horizontal */
+  height: 100vh; /* O ajustar según la altura deseada */
+  position: relative;
+  overflow: hidden;
+}
+
+.header-container-about-us h1 {
+  margin: 0;
+  font-size: 3.5rem; /* Ajusta el tamaño según sea necesario */
+  color: #ffffff; /* Color de texto para contraste */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para mayor visibilidad */
+  position: absolute; /* Asegura que el texto esté centrado sin afectar el flujo */
+  z-index: 1; /* Asegura que el texto esté por encima de la imagen de fondo */
+}
+
 .header-image {
-  width: 97%;
-  height: 650px;
+  width: 100%;
+  height: 100vh; /* Asegura que la imagen cubra toda la pantalla */
   object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0; /* Imagen de fondo detrás del texto */
 }
 
 .header-section h1,
@@ -111,7 +133,7 @@
 }
 
 /* Resaltar Número de Diagnósticos */
-.highlight {
+.highlight h1{
   font-weight: bold; /* Resaltar el número de diagnósticos */
   color: #000000; /* Mantener el color blanco para el número */
   font-size: 1.5rem;
@@ -186,11 +208,6 @@
   margin-bottom: 15px;
 }
 
-.mission-item h3 {
-  font-size: 1.3rem;
-  color: #333;
-  margin-top: 0;
-}
 
 .mission-item p {
   font-size: 1rem;
@@ -341,6 +358,64 @@
   margin: 30px auto; /* Center the line with top and bottom spacing */
   opacity: 0.7; /* Slight transparency for a subtle effect */
   border-radius: 25px; /* Rounded edges for a modern look */
+}
+
+/* FAQ Section Styling */
+.faq-section {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.faq-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* FAQ Item Style */
+.faq {
+  margin-bottom: 15px;
+}
+
+.faq h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4a90e2;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #e3f2fd;
+  margin: 0;
+  transition: background-color 0.3s;
+}
+
+.faq h3:hover {
+  background-color: #bbdefb;
+}
+
+.faq p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  margin: 10px 0 0;
+  padding: 0 15px;
+  display: none; /* Hide the answer by default */
+}
+
+/* Toggle answer visibility */
+.faq.open p {
+  display: block; /* Show answer when question is clicked */
+}
+
+/* Add transition for smooth opening/closing */
+.faq p {
+  transition: max-height 0.3s ease;
+  overflow: hidden;
 }
 
 /* Media Queries para Adaptabilidad */

@@ -72,9 +72,10 @@ function UserProfilePage() {
   }
 
   return (
+    
     <div className="user-profile-page">
       <div className="profile-card">
-        <h1 className="profile-title">Perfil De Usuario</h1>
+        <h1 className="profile-title">Mi Perfil</h1>
         <div className="profile-info">
           <p>
             <strong>Nombre:</strong> <span>{userProfile.nombre}</span>

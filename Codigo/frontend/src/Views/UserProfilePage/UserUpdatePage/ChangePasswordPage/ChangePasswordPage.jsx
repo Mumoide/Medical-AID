@@ -54,7 +54,8 @@ function ChangePasswordPage({ onLogout }) {
 
   return (
     <div className="change-password-container">
-      <h2 className="change-password-title">Actualizar ontraseña</h2>
+      <h1 className="change-password-title">Actualizar Contraseña</h1>
+      <p>Crea una contraseña segura, con una combinación de letras, números y símbolos.</p>
       <form onSubmit={handleSubmit} className="change-password-form">
         <div className="change-password-field">
           <label>Contraseña:</label>

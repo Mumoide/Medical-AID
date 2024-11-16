@@ -12,13 +12,15 @@ const AboutUsPage = () => {
   return (
     <div className="about-us-container">
       <header className="header-section">
-        {" "}
-        {/* Updated container class name */}
+      {/* Updated container class name */}
+      <div className="header-container-about-us">
+        <h1>Puedes acceder a <highlight>41 Diagnósticos</highlight><br />Médicos diferentes.</h1>
         <img
           src="/images/backgrounds/hand-medical.jpg"
           alt="Header AI and Doctor"
           className="header-image"
-        />
+          />
+      </div>
         <header className="intro-section">
           <img
             src="/images/logos/LogoRound.png"
@@ -33,10 +35,6 @@ const AboutUsPage = () => {
             learning y un enfoque en la salud accesible, te ayudamos a obtener
             respuestas claras y confiables sobre tu bienestar.
           </p>
-          <h3>
-            Puedes acceder a <span className="highlight">41 Diagnósticos</span>{" "}
-            médicos diferentes.
-          </h3>
           <hr className="line" />
         </header>
       </header>
@@ -102,6 +100,18 @@ const AboutUsPage = () => {
           </div>
         </div>
       </section>
+      <section className="faq-section">
+        <h2>Preguntas Frecuentes</h2>
+        <div className="faq">
+          <h3>¿Es seguro el diagnóstico?</h3>
+          <p>Medical AID utiliza tecnología de machine learning avanzada y está diseñado para proporcionar diagnósticos precisos.</p>
+        </div>
+        <div className="faq">
+          <h3>¿Cuánto tiempo tarda en obtener el diagnóstico?</h3>
+          <p>En promedio, el diagnóstico se obtiene en cuestión de segundos.</p>
+        </div>
+      </section>
+
 
       <section className="button-section">
         <div className="button-wrapper">
