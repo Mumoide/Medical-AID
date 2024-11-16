@@ -41,11 +41,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
-// Load SSL certificate and key
-const sslOptions = {
-  key: fs.readFileSync(process.env.SSL_KEY_PATH),
-  cert: fs.readFileSync(process.env.SSL_CERT_PATH),
-};
+// ACTIVAR ESTA CONFIGURACION PARA LEVANTAR SERVIDOR HTTPS
+// // Load SSL certificate and key
+// const sslOptions = {
+//   key: fs.readFileSync(process.env.SSL_KEY_PATH),
+//   cert: fs.readFileSync(process.env.SSL_CERT_PATH),
+// };
 
 // Middleware configuration
 app.use(cors(corsOptions));
@@ -79,12 +80,13 @@ app.use('/api/dashboard', dashboardRoutes)
 app.use('/api/auth', authRoutes);
 app.use('/api/newsletter', newsletterRoutes);
 
-
+// DESACTIVAR ESTA CONFIGURACION PARA LEVANTAR SERVIDOR HTTPS
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
+// ACTIVAR ESTA CONFIGURACION PARA LEVANTAR SERVIDOR HTTPS
 // // Create HTTPS server
 // const port = process.env.PORT || 3001;
 // https.createServer(sslOptions, app).listen(port, () => {

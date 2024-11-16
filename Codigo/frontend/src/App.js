@@ -41,7 +41,7 @@ function App() {
     localStorage.removeItem('email');
     setIsLoggedIn(false); // Set login state to false
     setUserEmail('');
-    window.location.href = '/'; // Redirect to home page after logout
+    window.location.href = '/inicio-de-sesion'; // Redirect to home page after logout
   };
 
   useEffect(() => {
