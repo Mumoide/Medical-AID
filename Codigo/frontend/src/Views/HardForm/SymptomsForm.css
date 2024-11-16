@@ -130,7 +130,8 @@
 .combobox-container label {
   margin-top: 50px;
   color: rgb(249, 251, 253);
-  font-size: 1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 .symptom-combobox {

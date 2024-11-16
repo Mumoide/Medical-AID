@@ -27,7 +27,7 @@
 
 /* Form container styling */
 .user-update-form-container {
-  background-color: #3690a4;
+  background-color: #dddddd;
   padding: 30px;
   border-radius: 10px;
   width: 100%;
@@ -44,7 +44,7 @@
   font-size: 28px;
   font-weight: 700;
   text-align: center;
-  color: white;
+  color: rgb(0, 0, 0);
   margin-bottom: 20px;
 }
 
@@ -142,4 +142,8 @@
 .submit-button-update-page:hover,
 .back-button-update-page:hover {
   background-color: #555;
+}
+
+.mandatory-fields-update{
+  color: black;
 }

@@ -91,8 +91,13 @@ const Diagnosis = () => {
 
   return (
     <div>
-      <h1>Diagnosis Results</h1>
-      <div className="diagnosis-container">
+      <div className="portada">
+        <h1>Tus Resultados</h1>
+      </div>
+      <div className="titulo-diagnosis-result">
+      <h1>Resultados Del Diagnóstico</h1>
+      </div>
+      <div className="diagnosis-container-resultado">
         {diseaseData.length > 0 ? (
           diseaseData.map((disease, index) => (
             <div key={index} className="diagnosis-card">

@@ -1,27 +1,42 @@
 .user-profile-page {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background-color: #f4f4f9;
-  min-height: 100vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  width: 80%;
+  overflow: hidden;
 }
 
+/* Sección de imagen */
+.user-profile-page::before {
+  content: '';
+  background-image: url("../../../public/images/backgrounds/view-hands.jpg"); /* Reemplaza con la URL de tu imagen */
+  background-size: cover;
+  background-position: center;
+  width: 50%; /* La mitad para la imagen de fondo */
+  display: block;
+  margin-bottom: 30px;
+  height: 600px;
+} 
+
 .profile-card {
-  width: 400px;
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  text-align: center;
   font-family: Arial, sans-serif;
-  margin-top: 85px;
+  margin-top: 95px;
+  width: 60%; /* La otra mitad para el formulario */
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-bottom: 30px;
 }
 
 .profile-title {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 1.8rem;
   color: #333;
+  font-weight: bold;
+  margin-bottom: 30px;
 }
 
 .profile-info {
@@ -48,28 +63,33 @@
 
 .profile-buttons {
   display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
+  justify-content: space-between;
+  width: 100%;
+  gap: 15px; 
+  margin-top: 70px;
 }
 
 .profile-button {
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #4a90e2;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
-  font-size: 16px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 .profile-button:hover {
-  background-color: #0056b3;
+  background-color: #0388a6;
 }
 
 .button-icon {
   margin-right: 8px;
   font-size: 18px;
 }
+

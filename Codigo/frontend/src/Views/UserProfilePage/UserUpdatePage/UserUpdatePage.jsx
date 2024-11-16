@@ -237,7 +237,7 @@ function UserUpdatePage() {
               className="full-width-update-page"
             />
           </label>
-          <p className="mandatory-fields">
+          <p className="mandatory-fields-update">
             <span className="red-asterisk">*</span> Campos Obligatorios
           </p>
           <div className="button-container-update-page">

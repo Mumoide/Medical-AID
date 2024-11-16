@@ -223,10 +223,10 @@ const DiagnosticRecordsPage = () => {
             max={formattedToday}
           />
           <button className="search-button" onClick={applyFilters}>
-            Search
+          Buscar
           </button>
           <button className="clear-button" onClick={clearFilters}>
-            Clear Filter
+          Borrar filtro
           </button>
         </div>
       </div>

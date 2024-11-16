@@ -843,7 +843,9 @@ exports.resetPassword = async (req, res) => {
         recovery_code: null,
         recovery_code_expiration: null,
       },
-      { where: { email } }
+      { where: { 
+        
+       } }
     );
 
     console.log('Password updated successfully for user:', user.email);

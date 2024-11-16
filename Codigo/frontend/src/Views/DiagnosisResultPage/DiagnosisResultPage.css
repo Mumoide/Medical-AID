@@ -1,5 +1,5 @@
 /* Diagnosis.css */
-.diagnosis-container {
+.diagnosis-container-resultado {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -7,6 +7,27 @@
   flex-wrap: wrap; /* Allow elements to wrap in case there are too many */
 }
 
+.titulo-diagnosis-result h1{
+  margin-top: 150px;
+  text-align: center;
+}
+
+.portada{
+  background-image: url("../../../public/images/backgrounds/Diagnostic\ \(2\).jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: calc(70vh - 50px); /* Corrected calculation */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+}
+
+.portada h1 {
+  font-size: 5rem;
+  font-weight: bold;
+  color: white;
+}
 .diagnosis-card {
   border: 1px solid #ddd;
   border-radius: 8px;

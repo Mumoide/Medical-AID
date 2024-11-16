@@ -68,13 +68,13 @@ function UserProfilePage() {
   }, [userId]);
 
   if (!userProfile) {
-    return <div>Loading profile...</div>;
+    return <div>Cargando perfil...</div>;
   }
 
   return (
     <div className="user-profile-page">
       <div className="profile-card">
-        <h1 className="profile-title">Perfil de Usuario</h1>
+        <h1 className="profile-title">Perfil De Usuario</h1>
         <div className="profile-info">
           <p>
             <strong>Nombre:</strong> <span>{userProfile.nombre}</span>
@@ -123,7 +123,7 @@ function UserProfilePage() {
             className="profile-button"
             onClick={() => navigate("/diagnostic-records")}
           >
-            <FaFileAlt className="button-icon" /> Historial de diagnosticos
+            <FaFileAlt className="button-icon" /> Historial de Diagnósticos
           </button>
           <button
             className="profile-button"
@@ -139,7 +139,7 @@ function UserProfilePage() {
               navigate("/update-password", { state: { userProfile } })
             } // Pass userProfile as state
           >
-            <FaPen className="button-icon" /> Cambiar contraseña
+            <FaPen className="button-icon" /> Cambiar Contraseña
           </button>
         </div>
       </div>

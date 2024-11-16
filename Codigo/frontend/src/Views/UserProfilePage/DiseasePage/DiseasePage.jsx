@@ -43,7 +43,7 @@ function DiseasePage() {
   }, [disease_name]);
 
   if (!disease) {
-    return <div>Loading disease information...</div>;
+    return <div>Cargando información de enfermedades...</div>;
   }
 
   return (
@@ -51,28 +51,28 @@ function DiseasePage() {
       <h1>{disease.nombre}</h1>
       <div className="disease-card">
         <p>
-          <strong>Description:</strong> {disease.descripcion}
+          <strong>Descripción:</strong> {disease.descripcion}
         </p>
         <div className="precautions-disease-page">
           <p className="precaution-item-disease-page">
-            <strong>Precaution 1:</strong> {disease.precaucion_1}
+            <strong>Precaución 1:</strong> {disease.precaucion_1}
           </p>
           <p className="precaution-item-disease-page">
-            <strong>Precaution 2:</strong> {disease.precaucion_2}
+            <strong>Precaución 2:</strong> {disease.precaucion_2}
           </p>
           <p className="precaution-item-disease-page">
-            <strong>Precaution 3:</strong> {disease.precaucion_3}
+            <strong>Precaución 3:</strong> {disease.precaucion_3}
           </p>
           <p className="precaution-item-disease-page">
-            <strong>Precaution 4:</strong> {disease.precaucion_4}
+            <strong>Precaución 4:</strong> {disease.precaucion_4}
           </p>
           <p className="precaution-item-disease-page">
-            <strong>Precaution 5:</strong> {disease.precaucion_5}
+            <strong>Precaución 5:</strong> {disease.precaucion_5}
           </p>
         </div>
       </div>
       <button onClick={() => navigate(-1)} className="back-button-disease">
-        Back
+        Volver
       </button>
     </div>
   );
