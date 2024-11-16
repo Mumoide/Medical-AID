@@ -113,9 +113,14 @@ td {
   margin: auto;
 }
 
+.top-buttons-admin {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .role-filter-buttons,
-.name-filter,
-.date-range-filter {
+.name-filter {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -143,19 +148,6 @@ td {
   background-color: #0056b3;
 }
 
-.create-button {
-  background-color: #28a745;
-  padding: 8px 15px;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.create-button:hover {
-  background-color: #218838;
-}
-
 /* Name Filter Input */
 .name-filter-input {
   padding: 8px;
@@ -177,6 +169,24 @@ td {
 }
 
 /* Date Range Filter */
+.date-range-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.date-range-filter-item {
+  display: flex;
+  width: 100%;
+}
+
+.date-range-filter-item button {
+  margin: auto;
+  min-width: 100px;
+}
+
 .date-range-filter label {
   font-weight: bold;
   margin-right: 5px;
@@ -224,7 +234,7 @@ td {
   background-color: #c82333;
 }
 
-.create-button {
+.create-button-admin {
   background-color: #28a745;
   padding: 10px 20px;
   color: white;
@@ -234,6 +244,6 @@ td {
   border: none;
 }
 
-.create-button:hover {
+.create-button-admin:hover {
   background-color: #218838;
 }

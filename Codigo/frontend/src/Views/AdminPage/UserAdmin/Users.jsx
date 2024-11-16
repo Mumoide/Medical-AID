@@ -382,21 +382,23 @@ const Users = () => {
       {/* Role Filter Buttons outside of table-container */}
       <div className="user-admincontainer">
         <div className="filter-user-admin-container">
-          <div className="role-filter-buttons">
+          <div className="top-buttons-admin">
+            <div className="role-filter-buttons">
+              <button
+                className={roleFilter === "User" ? "active" : ""}
+                onClick={() => setRoleFilter("User")}
+              >
+                Filtrar por usuario
+              </button>
+              <button
+                className={roleFilter === "Admin" ? "active" : ""}
+                onClick={() => setRoleFilter("Admin")}
+              >
+                Filtrar por administrador
+              </button>
+            </div>
             <button
-              className={roleFilter === "User" ? "active" : ""}
-              onClick={() => setRoleFilter("User")}
-            >
-              Filtrar por usuario
-            </button>
-            <button
-              className={roleFilter === "Admin" ? "active" : ""}
-              onClick={() => setRoleFilter("Admin")}
-            >
-              Filtrar por administrador
-            </button>
-            <button
-              className="create-button"
+              className="create-button-admin"
               onClick={() => (window.location.href = "/admin/create")}
             >
               Crear nuevo usuario
@@ -417,28 +419,32 @@ const Users = () => {
           </div>
           {/* Date Range Filter Inputs */}
           <div className="date-range-filter">
-            <label>Fecha de inicio:</label>
-            <input
-              type="date"
-              value={inputStartDate}
-              onChange={(e) => setInputStartDate(e.target.value)}
-              className="date-input"
-              max={formattedToday}
-            />
-            <label>Fecha fin:</label>
-            <input
-              type="date"
-              value={inputEndDate}
-              onChange={(e) => setInputEndDate(e.target.value)}
-              className="date-input"
-              max={formattedToday}
-            />
-            <button className="search-button" onClick={applyDateFilter}>
-              Search
-            </button>
-            <button className="clear-button" onClick={clearDateFilter}>
-              Clear Filter
-            </button>
+            <div className="date-range-filter-item">
+              <label>Fecha de inicio:</label>
+              <input
+                type="date"
+                value={inputStartDate}
+                onChange={(e) => setInputStartDate(e.target.value)}
+                className="date-input"
+                max={formattedToday}
+              />
+              <label>Fecha fin:</label>
+              <input
+                type="date"
+                value={inputEndDate}
+                onChange={(e) => setInputEndDate(e.target.value)}
+                className="date-input"
+                max={formattedToday}
+              />
+            </div>
+            <div className="date-range-filter-item">
+              <button className="search-button" onClick={applyDateFilter}>
+                Buscar
+              </button>
+              <button className="clear-button" onClick={clearDateFilter}>
+                Limpiar Filtros
+              </button>
+            </div>
           </div>
         </div>
         {/* Table container */}
