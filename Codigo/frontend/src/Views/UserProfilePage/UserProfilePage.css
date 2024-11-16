@@ -1,0 +1,75 @@
+.user-profile-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f9;
+  min-height: 100vh;
+}
+
+.profile-card {
+  width: 400px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin-top: 85px;
+}
+
+.profile-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.profile-info p {
+  font-size: 16px;
+  color: #555;
+  margin: 8px 0;
+}
+
+.profile-info strong {
+  font-weight: 600;
+  color: #333;
+}
+
+.profile-info p span {
+  color: #777;
+  font-weight: 400;
+}
+
+.profile-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.profile-button {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-button:hover {
+  background-color: #0056b3;
+}
+
+.button-icon {
+  margin-right: 8px;
+  font-size: 18px;
+}

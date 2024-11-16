@@ -1,208 +1,191 @@
-/* Container that wraps everything */
+/* Configuración General */
 .register-page {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 50px;
-  background-color: #f0f0f0;
-  min-height: 100vh;
-  font-family: "Montserrat", sans-serif; /* Set Montserrat font for the whole page */
-}
-
-/* Header styling */
-.register-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.spacer {
-  padding-top: 50px;
-}
-
-.register-header h1 {
-  font-size: 36px;
-  color: #3690a4;
-  font-weight: bold;
-  margin-bottom: 30px;
-}
-
-/* Form container styling */
-.register-form-container {
-  background-color: #3690a4;
-  padding: 30px;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 600px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  font-family: "Montserrat", sans-serif; /* Ensure Montserrat is applied here too */
+  min-height: 100vh;
+  background: linear-gradient(135deg, #283048, #859398);
+  padding: 20px;
+  box-sizing: border-box;
+  background: url("../../../public/images/backgrounds/registro.jpg") no-repeat center;
 }
 
-/* Form title styling */
-.register-form-container h2 {
-  font-size: 28px; /* Increase font size */
-  font-weight: 700; /* Make it bold */
-  text-align: center;
-  color: white;
-  margin-bottom: 20px;
+/* Contenedor Principal */
+.register-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  margin-top: 75px;
 }
 
-/* Form element styling */
-.register-form {
+/* Sección de la Imagen */
+.image-section {
+  flex: 1;
+  background: url("../../../public/images/backgrounds/close-up.jpg") no-repeat center;
+  background-size: cover;
+  min-height: 600px; /* Asegura que haya suficiente alto para la imagen */
+  position: relative;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Sección del Formulario */
+.form-section {
+  flex: 1.5;
+  padding: 40px;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  justify-content: center;
+  background-color: #f8f8f8;
+  min-height: 600px; /* Asegura que el formulario tenga suficiente alto */
+}
+
+.form-section h2 {
+  font-size: 30px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Estilo del Formulario */
+.register-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+  gap: 25px 20px; /* Espaciado entre filas y columnas */
 }
 
 .register-form label {
-  font-size: 16px;
-  color: black;
-  margin-bottom: 5px;
-  font-weight: 600;
-  font-family: "Montserrat", sans-serif; /* Montserrat for labels */
+  display: block;
+  font-size: 14px;
+  color: #555555;
 }
 
 .register-form input,
 .register-form select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
   font-size: 16px;
-  padding: 10px;
   margin-top: 5px;
-  border: none;
-  border-radius: 5px;
-  outline: none;
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif; /* Montserrat for inputs */
 }
 
-.register-form input::placeholder,
-.register-form select::placeholder {
-  font-family: "Montserrat", sans-serif; /* Montserrat for placeholders */
-  color: #888; /* Placeholder color */
+/* Campos de ancho completo */
+.register-form .full-width {
+  grid-column: span 2; /* Ocupa ambas columnas */
 }
 
-/* Red asterisk for mandatory fields */
-.red-asterisk {
+/* Contenedor de Checkbox */
+.checkbox-container {
+  grid-column: span 2; /* Ocupa ambas columnas en la cuadrícula del formulario */
+  display: flex;
+  align-items: center; /* Alinea verticalmente el checkbox con el texto */
+  gap: 10px; /* Espacio entre el checkbox y el texto */
+  margin-top: 20px; /* Espacio extra en la parte superior */
+  margin-bottom: 20px; /* Espacio extra en la parte inferior */
+}
+
+/* Ajuste del Checkbox */
+.checkbox-container input[type="checkbox"] {
+  width: 20px; /* Tamaño del checkbox */
+  height: 20px; /* Tamaño del checkbox */
+}
+
+/* Texto al lado del Checkbox */
+.checkbox-container label {
+  font-size: 16px;
+  color: #555555;
+  cursor: pointer; /* Cambia el cursor para indicar que es interactivo */
+}
+
+/* Estilo del asterisco de campo obligatorio */
+.checkbox-container .required-asterisk {
   color: red;
   font-weight: bold;
+  margin-left: 4px;
 }
 
-/* Full-width inputs */
-.full-width {
-  width: 100%;
-}
 
-/* Two-column layout for inputs */
-.two-column {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.two-column label {
-  width: 100%;
-}
-
-.two-column input,
-.register-form select {
-  width: 100%;
-}
-
-/* Two-column inputs */
-.two-column label input,
-.register-form select {
-  width: 100%;
-}
-
-.two-column > label {
-  width: 48%;
-}
-
-.mandatory-fields {
-  font-size: 12px;
-  color: white;
-  text-align: left;
-  margin-bottom: 10px;
-  font-weight: 600;
-  font-family: "Montserrat", sans-serif; /* Montserrat for this text */
-}
-
-/* Button styling */
 .register-button {
-  font-size: 18px;
+  grid-column: span 2; /* Ocupa ambas columnas */
   padding: 15px;
-  background-color: #333;
-  color: white;
+  background-color: #4e3f91;
+  color: #ffffff;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
-  width: 35%;
-  margin: 0 auto;
-  display: block;
-  font-family: "Montserrat", sans-serif; /* Montserrat for button text */
 }
 
 .register-button:hover {
-  background-color: #555;
+  background-color: #3b2f72;
 }
 
-/* Adjusting for smaller screens */
-@media screen and (max-width: 768px) {
-  .register-form-container {
-    padding: 20px;
-    width: 90%;
-  }
+/* Ya tienes una cuenta */
+.already-member {
+  grid-column: span 2; /* Ocupa ambas columnas */
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
 
-  .register-header h1 {
-    font-size: 28px;
-  }
+.already-member a {
+  color: #4e3f91;
+  text-decoration: none;
+  font-weight: bold;
+}
 
-  .register-form input,
-  .register-form select {
-    padding: 10px;
-  }
+.already-member a:hover {
+  text-decoration: underline;
+}
 
-  .two-column {
+/* Asterisco rojo para campos obligatorios */
+.required-asterisk {
+  color: red;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+/* Media Queries para Pantallas Pequeñas */
+@media (max-width: 768px) {
+  .register-container {
     flex-direction: column;
+    height: auto;
   }
 
-  .two-column input,
-  .register-form select {
-    width: 100%;
+  .image-section {
+    height: 300px; /* Reduce el alto para dispositivos pequeños */
+    background-size: cover;
   }
-}
 
-/* Make sure all inputs use the full width */
-.full-width {
-  width: 100%;
-  margin: 0;
-  padding: 12px;
-  box-sizing: border-box;
-}
+  .form-section {
+    padding: 20px;
+  }
 
-/* Adjust individual input fields */
-.register-form input,
-.register-form select {
-  font-size: 16px;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  box-sizing: border-box;
-  font-family: "Montserrat", sans-serif; /* Ensure Montserrat for inputs */
-}
+  .register-form {
+    grid-template-columns: 1fr; /* Cambia a una sola columna */
+  }
 
-/* Full-width for specific inputs */
-.register-form input[type="email"],
-.register-form input[type="text"],
-.register-form input[type="tel"],
-.register-form input[type="password"],
-.register-form input[type="date"],
-.register-form input[type="number"] {
-  width: 100%;
-  box-sizing: border-box;
+  .form-section h2 {
+    font-size: 24px;
+  }
+
+  .register-button {
+    font-size: 16px;
+  }
 }

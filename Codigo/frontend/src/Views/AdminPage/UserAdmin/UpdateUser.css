@@ -1,0 +1,249 @@
+/* Container that wraps everything */
+.register-user-admin-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  font-family: "Montserrat", sans-serif; /* Set Montserrat font for the whole page */
+  background: url("../../../../public/images/backgrounds/registro.jpg")
+    no-repeat center;
+}
+
+/* Header styling */
+.register-user-admin-header {
+  text-align: center;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.spacer {
+  padding-top: 50px;
+}
+
+.register-header h1 {
+  font-size: 36px;
+  color: #3690a4;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* Form container styling */
+.register-form-update-page-container {
+  background-color: #3690a4;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Montserrat", sans-serif; /* Ensure Montserrat is applied here too */
+}
+
+/* Form title styling */
+.register-form-update-page-container h2 {
+  font-size: 28px; /* Increase font size */
+  font-weight: 700; /* Make it bold */
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Form element styling */
+.register-form-update-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.register-form-update-page label {
+  font-size: 16px;
+  color: black;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif; /* Montserrat for labels */
+}
+
+.register-form-update-page input,
+.register-form-update-page select {
+  font-size: 16px;
+  padding: 10px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif; /* Montserrat for inputs */
+}
+
+.register-form-update-page input::placeholder,
+.register-form-update-page select::placeholder {
+  font-family: "Montserrat", sans-serif; /* Montserrat for placeholders */
+  color: #888; /* Placeholder color */
+}
+
+/* Red asterisk for mandatory fields */
+.red-asterisk {
+  color: red;
+  font-weight: bold;
+}
+
+/* Full-width inputs */
+.full-width {
+  width: 100%;
+}
+
+/* Two-column layout for inputs */
+.two-column-update-user {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.two-column-update-user label {
+  width: 100%;
+}
+
+.two-column-update-user input,
+.register-form-update-page select {
+  width: 100%;
+}
+
+/* Two-column inputs */
+.two-column-update-user label input,
+.register-form-update-page select {
+  width: 100%;
+}
+
+.two-column-update-user > label {
+  width: 48%;
+}
+
+.mandatory-fields {
+  font-size: 12px;
+  color: white;
+  text-align: left;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif; /* Montserrat for this text */
+}
+
+/* Adjusting for smaller screens */
+@media screen and (max-width: 768px) {
+  .register-form-update-page-container {
+    padding: 30px;
+    width: 100%;
+  }
+
+  .register-header h1 {
+    font-size: 28px;
+  }
+
+  .register-form-update-page input,
+  .register-form-update-page select {
+    padding: 10px;
+  }
+
+  .two-column-update-user {
+    flex-direction: column;
+  }
+
+  .two-column-update-user input,
+  .register-form-update-page select {
+    width: 100%;
+  }
+
+  .two-column-update-user-update-user {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .two-column-update-user-update-user input,
+  .register-form-update-page select {
+    width: 100%;
+  }
+
+  /* Full-width inputs */
+  .register-form-update-page input,
+  .register-form-update-page select {
+    width: 100%; /* Ensure all inputs and selects use 100% width */
+    box-sizing: border-box;
+  }
+
+  /* Remove the two-column-update-user layout so each input uses the full width */
+  .two-column-update-user {
+    display: block; /* Display block so each label spans the full row */
+    width: 100%; /* Ensure container width matches input width */
+  }
+
+  /* Remove any specific widths for labels inside two-column-update-user */
+  .two-column-update-user > label {
+    width: 100%; /* Make labels full-width to match inputs */
+  }
+}
+
+/* Make sure all inputs use the full width */
+.full-width {
+  width: 100%;
+  margin: 0;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* Adjust individual input fields */
+.register-form-update-page input,
+.register-form-update-page select {
+  font-size: 16px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif; /* Ensure Montserrat for inputs */
+}
+
+/* Full-width for specific inputs */
+.register-form-update-page input[type="email"],
+.register-form-update-page input[type="text"],
+.register-form-update-page input[type="tel"],
+.register-form-update-page input[type="password"],
+.register-form-update-page input[type="date"],
+.register-form-update-page input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  align-items: center; /* Align the buttons vertically */
+  gap: 20px; /* Space between the buttons */
+  width: 100%; /* Ensure container spans full width */
+}
+
+.register-button,
+.back-button {
+  width: 200px;
+  height: 45px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #393e46;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  font-family: "Montserrat", sans-serif;
+  padding: 0; /* Remove extra padding */
+  margin: 0 auto; /* Center align each button in its container */
+}
+
+.register-button:hover,
+.back-button:hover {
+  background-color: #555;
+}

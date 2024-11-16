@@ -1,0 +1,244 @@
+/* Container that wraps everything */
+.register-page-create-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  font-family: "Montserrat", sans-serif; /* Set Montserrat font for the whole page */
+}
+
+/* Header styling */
+.register-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.spacer {
+  padding-top: 50px;
+}
+
+.register-header h1 {
+  font-size: 36px;
+  color: #3690a4;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* Form container styling */
+.register-form-create-user-container {
+  background-color: #3690a4;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Montserrat", sans-serif; /* Ensure Montserrat is applied here too */
+}
+
+/* Form title styling */
+.register-form-create-user-container h2 {
+  font-size: 28px; /* Increase font size */
+  font-weight: 700; /* Make it bold */
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Form element styling */
+.register-form-create-user {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.register-form-create-user label {
+  font-size: 16px;
+  color: black;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif; /* Montserrat for labels */
+}
+
+.register-form-create-user input,
+.register-form-create-user select {
+  font-size: 16px;
+  padding: 10px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif; /* Montserrat for inputs */
+}
+
+.rregister-form-create-userinput::placeholder,
+.register-form-create-user select::placeholder {
+  font-family: "Montserrat", sans-serif; /* Montserrat for placeholders */
+  color: #888; /* Placeholder color */
+}
+
+/* Red asterisk for mandatory fields */
+.red-asterisk {
+  color: red;
+  font-weight: bold;
+}
+
+/* two-column-create-user layout for inputs */
+.two-column-create-user {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.two-column-create-user label {
+  width: 100%;
+}
+
+.two-column-create-user input,
+.register-form-create-user select {
+  width: 100%;
+}
+
+/* two-column-create-user inputs */
+.two-column-create-user label input,
+.register-form-create-user select {
+  width: 100%;
+}
+
+.two-column-create-user > label {
+  width: 48%;
+}
+
+.mandatory-fields {
+  font-size: 12px;
+  color: white;
+  text-align: left;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif; /* Montserrat for this text */
+}
+
+/* Adjusting for smaller screens */
+@media screen and (max-width: 768px) {
+  .register-form-container {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .register-header h1 {
+    font-size: 28px;
+  }
+
+  .register-form-create-user input,
+  .register-form-create-user select {
+    padding: 10px;
+  }
+
+  .two-column-create-user {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .two-column-create-user input,
+  .register-form-create-user select {
+    width: 100%;
+  }
+
+  /* Full-width inputs */
+  .register-form-create-user input,
+  .register-form-create-user select {
+    width: 100%; /* Ensure all inputs and selects use 100% width */
+    box-sizing: border-box;
+  }
+
+  /* Remove the two-column layout so each input uses the full width */
+  .two-column-create-user {
+    display: block; /* Display block so each label spans the full row */
+    width: 100%; /* Ensure container width matches input width */
+  }
+
+  /* Remove any specific widths for labels inside two-column */
+  .two-column-create-user > label {
+    width: 100%; /* Make labels full-width to match inputs */
+  }
+}
+
+/* Make sure all inputs use the full width */
+.full-width {
+  width: 100%;
+  margin: 0;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* Adjust individual input fields */
+.register-form-create-user input,
+.register-form-create-user select {
+  font-size: 16px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif; /* Ensure Montserrat for inputs */
+}
+
+/* Full-width for specific inputs */
+.register-form-create-user input[type="email"],
+.register-form-create-user input[type="text"],
+.register-form-create-user input[type="tel"],
+.register-form-create-user input[type="password"],
+.register-form-create-user input[type="date"],
+.register-form-create-user input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.button-container-create {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* Center buttons horizontally */
+  align-items: center; /* Align buttons vertically */
+  gap: 20px; /* Space between buttons */
+  width: fit-content; /* Adjust width to fit content */
+  margin: 20px auto; /* Center the container itself */
+}
+
+.button-container-create {
+  display: flex;
+  justify-content: center; /* Center buttons horizontally */
+  align-items: center; /* Center buttons vertically within container */
+  gap: 20px; /* Space between buttons */
+  width: 100%; /* Ensures container spans full width of form */
+  margin-top: 20px;
+}
+
+.register-button-create,
+.back-button-create {
+  display: flex;
+  justify-content: center; /* Center text horizontally */
+  align-items: center; /* Center text vertically */
+  width: 200px; /* Set consistent button width */
+  height: 45px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #393e46;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  font-family: "Montserrat", sans-serif;
+}
+
+.register-button-create:hover,
+.back-button-create:hover {
+  background-color: #555;
+}

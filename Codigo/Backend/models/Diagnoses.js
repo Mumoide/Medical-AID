@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
+
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('Diagnoses', {
+
+  const Diagnoses = sequelize.define('Diagnoses', {
     id_diagnosis: {
       autoIncrement: true,
       type: DataTypes.BIGINT,
@@ -31,6 +33,11 @@ module.exports = function (sequelize, DataTypes) {
     probability: {
       type: DataTypes.FLOAT,
       allowNull: false
+    },
+    diagnosis_session_id: {
+      type: DataTypes.STRING, // UUID as a unique identifier
+      allowNull: false,
+      unique: true, // Ensure uniqueness
     }
   }, {
     sequelize,
@@ -51,13 +58,21 @@ module.exports = function (sequelize, DataTypes) {
           { name: "id_user" },
         ]
       },
-      {
-        name: "diagnoses_id_user_unique",
-        unique: true,
-        fields: [
-          { name: "id_user" },
-        ]
-      },
     ]
-  });
+  }
+  );
+
+  Diagnoses.associate = function (models) {
+    // Associations for Diagnoses
+    Diagnoses.hasMany(models.DiagnosisDisease, {
+      foreignKey: 'id_diagnosis',
+      as: 'diagnosisDiseases'
+    });
+    Diagnoses.hasMany(models.DiagnosisSymptoms, {
+      foreignKey: 'id_diagnosis',
+      as: 'diagnosisSymptoms'
+    });
+  };
+
+  return Diagnoses;
 };

@@ -1,17 +1,19 @@
 /* Navbar Styles */
 .navbar {
-  background-color: white;
+  background-color: #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 40px;
-  margin: 20px 20px auto;
   width: 90%;
   border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: absolute;
   top: 20px;
+  left: 50%; /* Mueve el navbar al centro del eje X */
+  transform: translateX(-50%); /* Ajusta para centrar el elemento */
   z-index: 1000;
+  margin: 10px auto;
 }
 
 .navbar-logo {
@@ -69,12 +71,14 @@
 }
 
 .dropdown-menu {
-  background-color: white;
+  background-color: rgba(0, 138, 144, 1);
   border-radius: 10px;
   position: absolute;
   top: 70px;
-  right: 10px;
-  width: 100%;
+  right: 0;
+  left: 0;
+  width: 30%;
+  margin: 0 auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 15px 0;
   display: flex;
@@ -83,10 +87,9 @@
 
 .dropdown-item {
   padding: 10px 20px;
-  text-align: center;
   text-decoration: none;
   font-size: 1rem;
-  color: #333;
+  color: #ffffff;
 }
 
 .dropdown-item:hover {
@@ -94,19 +97,19 @@
 }
 
 .dropdown-item:active {
-  background-color: #3498db;
+  background-color: #ffffff4f;
   color: white;
 }
 
 /* Show Dropdown Button on Mobile */
-@media (max-width: 1015px) {
+@media (max-width: 1024px) {
   .navbar {
-    margin: 20px 10px auto;
+    width: 87%; /* Aumentar el ancho del navbar para ocupar más espacio disponible */
   }
 }
+
 @media (max-width: 915px) {
   .navbar {
-    margin: 20px 25px auto;
     width: 85%;
   }
   .nav-list {
@@ -118,18 +121,14 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 720px) {
   .navbar {
-    margin: 20px 25px auto;
-    width: 80%;
+    padding: 10px 20px; /* Reducir padding para ahorrar espacio */
+    width: 85%; /* Aumentar el ancho del navbar para ocupar más espacio disponible */
   }
 }
 
 @media (max-width: 480px) {
-  .navbar {
-    margin: 20px 3px auto;
-    width: 75%;
-  }
   .navbar-logo img {
     height: 25px; /* Smaller logo for smaller screens */
   }

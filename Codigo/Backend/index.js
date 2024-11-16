@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
-const adminRoutes = require('./routes/adminRoutes');
 const db = require('./db'); // Database connection
 // console.log('Registering /admin routes');
 const predictionRoutes = require('./routes/predictionRoutes');
@@ -11,16 +10,30 @@ const symptomsRoutes = require('./routes/symptomsRoutes');
 const diseaseRoutes = require('./routes/diseaseRoutes')
 const userRoutes = require('./routes/userRoutes');
 const diagnosisRoutes = require('./routes/diagnosesRoutes'); // Adjust path if needed
-const authenticateToken = require('./middleware/authMiddleware'); // Import the middleware
-app.use('/admin', adminRoutes);
-
+const dashboardRoutes = require('./routes/dashboardRoutes')
+const newsletterRoutes = require('./routes/subscribeNewsLetterRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const corsOptions = {
-  origin: 'http://localhost:3000', // Allow the front-end domain
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+  origin: (origin, callback) => {
+    // List allowed origins
+    const allowedOrigins = ['http://localhost:3000'];
+    
+    // Check if the origin matches localhost or falls within the IP range
+    if (
+      allowedOrigins.includes(origin) ||
+      /^http:\/\/192\.168\.1\.(\d|[1-9]\d|1\d\d|2[0-5][0-5]):3000$/.test(origin) // Regex for IP range 192.168.1.1 to 192.168.1.255
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 };
+
 // Middleware configuration
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -44,12 +57,15 @@ app.get('/test-root', (req, res) => {
 });
 
 // Routes
-app.use('/admin', adminRoutes); // Admin routes with /admin prefix
 app.use('/api', predictionRoutes); // Use the prediction route
 app.use('/api', symptomsRoutes); // Use the symptoms route
 app.use('/api/disease', diseaseRoutes)
 app.use('/api/users', userRoutes);
 app.use('/api/diagnosis', diagnosisRoutes);
+app.use('/api/dashboard', dashboardRoutes)
+app.use('/api/auth', authRoutes);
+app.use('/api/newsletter', newsletterRoutes);
+
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

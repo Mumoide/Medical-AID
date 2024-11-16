@@ -1,0 +1,239 @@
+/* Modern Table Styling */
+.user-admincontainer {
+  margin-top: 130px;
+}
+
+.table-container {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1200px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Arial", sans-serif;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+  background-color: #007bff;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  font-family: "Montserrat";
+  font-weight: 700;
+}
+
+.table-container th,
+.table-container td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.table-container th {
+  background-color: #f1f1f1;
+}
+
+th:hover {
+  background-color: #0056b3;
+  cursor: pointer;
+}
+
+tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+td {
+  padding: 12px 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination select,
+.pagination button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
+
+.pagination button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.pagination select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  background-color: white;
+}
+
+.icon-buttons-users-admin {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-buttons-users-admin svg {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.icon-buttons-users-admin svg:hover {
+  color: #007bff;
+}
+
+/* Users.css */
+
+/* Filter Section Styles */
+.filter-user-admin-container {
+  width: 90%;
+  margin: auto;
+}
+
+.role-filter-buttons,
+.name-filter,
+.date-range-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.role-filter-buttons {
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.role-filter-buttons button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.role-filter-buttons button.active,
+.role-filter-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.create-button {
+  background-color: #28a745;
+  padding: 8px 15px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.create-button:hover {
+  background-color: #218838;
+}
+
+/* Name Filter Input */
+.name-filter-input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 200px;
+  outline: none;
+}
+
+.name-filter-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.name-filter label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+/* Date Range Filter */
+.date-range-filter label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.date-input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 150px;
+  outline: none;
+}
+
+.date-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Filter Buttons */
+.search-button,
+.clear-button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+.clear-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.clear-button:hover {
+  background-color: #c82333;
+}
+
+.create-button {
+  background-color: #28a745;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: auto;
+  border: none;
+}
+
+.create-button:hover {
+  background-color: #218838;
+}

@@ -1,0 +1,61 @@
+.verify-code-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #f0f4f8,
+    #d9e2ec
+  ); /* Subtle gradient for background */
+}
+
+.verify-code-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+  text-align: center;
+}
+
+.verify-code-container h2 {
+  color: #333;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.verify-code-input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px; /* More rounded for a modern feel */
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.verify-code-input:focus {
+  border-color: #2d798b;
+  outline: none;
+}
+
+.verify-code-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 25px;
+  background-color: #5a9ca8; /* Slightly different color from PasswordRecoveryPage */
+  color: white;
+  border: none;
+  border-radius: 8px; /* Matches the input’s rounded corners */
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.verify-code-button:hover {
+  background-color: #4a8a97;
+}

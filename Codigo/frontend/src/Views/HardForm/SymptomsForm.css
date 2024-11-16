@@ -14,6 +14,28 @@
   margin-bottom: 40px;
 }
 
+.diagnosis-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #4e9197;
+  border-radius: 20px;
+  width: 90%;
+  text-align: center;
+  margin-left: 50px;
+  height: 100%;
+}
+
+.diagnosis-container h2 {
+  font-size: 2rem;
+  color: #fff;
+  margin: auto;
+  margin-top: 35px;
+}
+
+.introduction {
+  display: flex;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -39,4 +61,245 @@
 
 .back-button:hover {
   background-color: #555; /* Slightly lighter gray on hover */
+}
+.hero-container-form {
+  display: flex;
+  align-items: flex-start; /* Alinea ambos elementos hacia la parte superior */
+  justify-content: space-between; /* Coloca el texto y la imagen a cada lado del contenedor */
+  flex-direction: column;
+  padding: 40px;
+  max-width: 1200px; /* Define el ancho máximo del contenedor */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+}
+
+.text-content h1 {
+  max-width: 500px;
+  font-size: 4rem;
+  margin-bottom: 10px;
+  margin-top: 180px;
+  color: #0388a6;
+  margin-left: 50px;
+}
+
+.text-content p {
+  color: #393e46;
+  font-size: 1.5rem;
+  margin-left: 50px;
+}
+
+.button-container-symptom-form {
+  display: flex;
+  flex-direction: row;
+}
+
+.cta-button-form {
+  padding: 10px 20px;
+  background-color: #393e46;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 50px;
+  margin-bottom: 90px;
+  width: 210px;
+  font-size: 1rem;
+}
+
+.cta-button-form :hover {
+  background-color: #644cba;
+}
+
+.diagnostic-image-form {
+  margin-top: 150px;
+  max-width: 50%; /* Reducir ligeramente el ancho máximo para darle más espacio al contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  margin-left: 190px;
+}
+
+.combobox-container {
+  align-items: center; /* Alinea el contenido verticalmente */
+  justify-content: space-between; /* Añade espacio entre el Select y el botón */
+  background-color: #4e9197; /* Fondo claro */
+  padding: 15px; /* Espacio interno para que el contenido no esté pegado al borde */
+  margin: auto; /* Centrar horizontalmente y añadir espacio vertical */
+  min-width: 80%; /* Ancho máximo para el combobox */
+  margin-top: 30px;
+}
+
+.combobox-container label {
+  margin-top: 50px;
+  color: rgb(249, 251, 253);
+  font-size: 1rem;
+}
+
+.symptom-combobox {
+  display: flex;
+  margin-top: 10px;
+  max-width: 700px;
+  margin-left: 190px;
+}
+
+.buttons-container {
+  align-items: center;
+  margin: auto;
+}
+
+.seleccionar-sintoma {
+  min-width: 500px;
+}
+
+/*Botones*/
+.buttons-container button {
+  background-color: #393e46;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente los botones */
+  gap: 15px; /* Espacio entre botones */
+  margin-bottom: 40px;
+}
+
+.eliminar-btn-container {
+  margin-left: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+}
+
+.eliminar-btn {
+  margin-left: 10px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(196, 22, 22);
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 24px;
+  margin-top: 2px;
+}
+
+.eliminar-btn:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(124, 16, 16);
+}
+
+.categoria {
+  display: flex;
+  flex-direction: column; /* Coloca la imagen arriba del texto */
+  align-items: center; /* Alinea horizontalmente ambos elementos */
+  text-align: center; /* Centra el texto debajo de la imagen */
+  padding: 20px; /* Espacio alrededor del contenido */
+  margin-right: 390px;
+  margin-bottom: 30px;
+}
+
+.icono-categoria {
+  max-width: 150px; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: auto; /* Mantén la proporción de la imagen */
+
+}
+.categoria h2 {
+  font-size: 1.5rem; /* Ajusta el tamaño del texto */
+  font-weight: bold;
+  margin: 0; /* Elimina el margen superior e inferior */
+  color: #333; /* Color del texto */
+  margin: auto;
+  margin-bottom: 25px;
+}
+.combobox-categorias {
+  display: flex;
+  flex-direction: column;
+  background-color: #4e9197;
+  border-radius: 20px;
+  width: 72%;
+  height: 100%;
+  margin-bottom: 100px;
+}
+
+.combobox-categorias h2 {
+  text-align: center;
+  color: white;
+}
+
+/* Footer Section */
+.footer {
+  display: flex;
+  justify-content: space-between; /* Distribuir los elementos a lo largo del contenedor */
+  align-items: center; /* Alinear todos los elementos verticalmente al centro */
+  padding: 20px;
+  background-color: #1e272e; /* Fondo del pie de página */
+  color: #ffffff; /* Color de los textos del pie de página */
+  flex-wrap: wrap; /* En caso de pantallas pequeñas, los elementos pueden moverse */
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px; /* Espacio entre los enlaces */
+}
+
+.footer-copyright {
+  display: flex;
+  justify-content: flex-end; /* Alinear el copyright a la derecha */
+  align-items: center; /* Asegurarse de que estén a la misma altura */
+}
+
+.footer a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.footer-copyright {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.group-buttons {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Define exactamente 7 columnas */
+  gap: 15px; /* Espacio entre botones */
+  max-width: 50%; /* Ancho máximo del contenedor para controlar el diseño */
+  margin: 0 auto; /* Centrar el contenedor en la página */
+  margin-top: 20px; /* Separación superior */
+  justify-content: center; /* Centra los botones horizontalmente dentro del contenedor */
+}
+
+.group-button {
+  background-color: #e0f7f7;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.9;
+  color: #333;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  width: 140px;
+  margin: 0 auto; /* Centrar el contenedor en la página */
+}
+
+.group-button:hover {
+  background-color: #b2e2e2;
+  color: #000;
+}
+
+.group-button.active {
+  background-color: #0388a6;
+  color: #fff;
 }
