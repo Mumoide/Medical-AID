@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Slider from "react-slick";
+import API_BASE_URL from "../../apiConfig";  // Import the dynamic base URL
 import "./DiagnosticLibraryPage.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -13,9 +14,7 @@ const DiagnosticLibraryPage = () => {
   useEffect(() => {
     const fetchDiseases = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3001/api/disease/diseases"
-        );
+        const response = await axios.get(`http://localhost:3001/api/disease/diseases`);
         setDiseases(response.data);
       } catch (error) {
         setError("Failed to load diseases");
