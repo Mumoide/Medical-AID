@@ -16,6 +16,7 @@ import Diagnosis from './Views/DiagnosisResultPage/DiagnosisResultPage'
 import AboutUsPage from './Views/AboutUsPage/AboutUsPage';
 import DiagnosticLibraryPage from './Views/DiagnosticLibraryPage/DiagnosticLibraryPage';
 import DashboardPage from './Views/AdminPage/Dashboard/DashboardView'
+import AlertsPage from './Views/AdminPage/Alerts/AlertsView'
 import UserProfilePage from './Views/UserProfilePage/UserProfilePage'
 import DiagnosticRecordsPage from './Views/UserProfilePage/DiagnosticRecordsPage/DiagnosticRecordsPage'
 import DiseasePage from './Views/UserProfilePage/DiseasePage/DiseasePage'
@@ -123,9 +124,10 @@ function App() {
           <Route path='/admin/create' element={<CreateUserAdmin />} />
           <Route path='/admin/user/:id' element={<ViewUser />} />
           <Route path='/admin/updateuser/:id' element={<UpdateUser />} />
-
           {/* Dashboard administration */}
           <Route path='/admin/dashboard' element={<DashboardPage />} />
+          {/* Alerts administration */}
+          <Route path='/admin/alerts' element={<AlertsPage />} />
 
           {/* Form Page */}
           <Route path="/form" element={<FormPage />} />

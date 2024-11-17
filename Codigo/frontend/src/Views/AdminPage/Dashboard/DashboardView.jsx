@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
@@ -7,7 +8,7 @@ import { Bar, Pie } from "react-chartjs-2"; // Import Bar chart from react-chart
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import Swal from "sweetalert2"; // Import SweetAlert2
-import MapView from "./MapView";
+import MapView from "../../../Components/MapView/MapView";
 import "./DashboardView.css";
 
 const DashboardView = () => {
@@ -21,6 +22,8 @@ const DashboardView = () => {
 
   // Disable future dates
   const today = new Date().toISOString().split("T")[0];
+
+  const navigate = useNavigate();
 
   const formatText = (text) =>
     text
@@ -333,6 +336,14 @@ const DashboardView = () => {
         <div className="map-container">
           <MapView filteredData={filteredData} />
           {/* Pass filteredData to MapView as data prop */}
+        </div>
+        <div className="dashboard-alert-button-admin-container">
+          <button
+            className="dashboard-alert-button-admin"
+            onClick={() => navigate("/admin/alerts")}
+          >
+            Ir a Alertas
+          </button>
         </div>
       </div>
 

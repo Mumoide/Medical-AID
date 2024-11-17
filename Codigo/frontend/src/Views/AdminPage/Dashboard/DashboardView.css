@@ -45,6 +45,31 @@
   justify-content: center;
 }
 
+.dashboard-alert-button-admin-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.dashboard-alert-button-admin {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  min-width: 100px;
+  gap: 20px;
+}
+
+.dashboard-alert-button-admin {
+  background-color: #f8e800;
+  color: black;
+}
+
+.dashboard-alert-button-admin:hover {
+  background-color: #dfd10f;
+}
+
 .ag-theme-alpine .ag-filter-body-wrapper::before {
   content: "Buscar"; /* Add your title here */
   display: block;
@@ -105,26 +130,6 @@
 .indicator {
   text-align: center;
   font-size: 16px;
-}
-
-/* Name Filter Input */
-.name-filter-input {
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  width: 100%;
-  max-width: 200px;
-  outline: none;
-}
-
-.name-filter-input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.name-filter label {
-  font-weight: bold;
-  margin-right: 5px;
 }
 
 /* Sección de filtro */

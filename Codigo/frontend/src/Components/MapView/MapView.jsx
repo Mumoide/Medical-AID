@@ -9,7 +9,7 @@ const MapView = ({ filteredData = [] }) => {
 
   return (
     <MapContainer
-      center={[-33.15, -71.65]}
+      center={[-33.46, -70.65]}
       zoom={6}
       style={{ height: "500px", width: "100%" }}
     >

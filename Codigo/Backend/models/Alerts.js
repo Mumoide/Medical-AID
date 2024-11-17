@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define('Alerts', {
     id_alert: {
       autoIncrement: true,
@@ -29,19 +29,13 @@ module.exports = function(sequelize, DataTypes) {
     tableName: 'Alerts',
     schema: 'public',
     timestamps: true,
+    underscored: true,
     indexes: [
       {
         name: "Alerts_pkey",
         unique: true,
         fields: [
           { name: "id_alert" },
-        ]
-      },
-      {
-        name: "alerts_id_admin_unique",
-        unique: true,
-        fields: [
-          { name: "id_admin" },
         ]
       },
       {
