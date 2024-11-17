@@ -10,21 +10,55 @@
 
 /* Intro Section - Centered Heading and Body */
 .intro-section {
-  text-align: center;
-  max-width: 800px; /* Reduced width for a more compact layout */
-  margin: 100px auto 10px; /* Espacio superior para la imagen */
-  padding: 20px 15px;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap; /* Evita que los elementos se apilen */
+  justify-content: space-between;
+  padding: 40px 20px;
+  border-radius: 15px;
+  margin: 0 auto;
+  max-width: 1200px;
+  margin-top: 35px;
+  margin-bottom: 15px;
+}
+
+/* Contenedor de texto */
+.intro-content {
+  flex: 1; /* Ocupa el espacio disponible en el contenedor */
+  max-width: 55%; /* Limita el ancho del texto para evitar que ocupe demasiado espacio */
+}
+
+.intro-section h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 15px;
 }
 
 /* Estilos para el Texto de la Introducción */
 .intro-section p {
-  font-family: "Arial", sans-serif; /* Fuente limpia y fácil de leer */
-  font-size: 1rem; /* Tamaño de la fuente */
-  line-height: 1.6; /* Espaciado de línea para mejorar la legibilidad */
-  color: #333; /* Color del texto */
-  margin: 0 auto; /* Centrado horizontal */
-  max-width: 700px; /* Limitar el ancho del párrafo */
-  text-align: justify; /* Justificar el texto */
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* Estilo de la imagen al lado derecho */
+.intro-image-right {
+  flex: 1;
+  width: 50%; /* Ancho ajustado de la imagen */
+  height: auto;
+  border-radius: 20px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1); /* Tamaño inicial y final */
+  }
+  50% {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+  }
 }
 
 /* Heading and Image Flex Container */
@@ -36,46 +70,9 @@
   margin-bottom: 5px; /* Reduced margin for compact spacing */
 }
 
-/* Subheading Style */
-.intro-section h1 span {
-  font-size: 1.6rem; /* Slightly smaller for the second line */
-  display: inline-block;
-  vertical-align: middle;
-  color: #333;
+.image-about{
+  width: 20%;
 }
-
-/* Subheading Style */
-.intro-section h1 span {
-  font-size: 1.8rem; /* Slightly smaller for emphasis */
-  display: inline-block;
-  vertical-align: middle;
-  color: #333;
-}
-
-/* Image Styling */
-.intro-image {
-  width: 400px; /* Adjust size as needed */
-  height: auto; /* Maintains aspect ratio */
-}
-
-/* Body Text Style */
-.intro-section p {
-  font-family: "Arial", sans-serif;
-  font-size: 0.95rem; /* Slightly smaller font size */
-  line-height: 1.4; /* Tighter line height */
-  color: #555;
-  margin-bottom: 10px; /* Reduced spacing between paragraphs */
-}
-
-/* Underline Separator */
-.intro-section .separator {
-  display: block;
-  width: 60px; /* Slightly narrower underline */
-  height: 2px; /* Thinner line */
-  background-color: #b0c4de;
-  margin: 10px auto; /* Reduced margin */
-}
-
 .intro-section hr {
   border: none;
   height: 7px;
@@ -89,11 +86,6 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  /* width: 100vw; */
-  /* left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw; */
 }
 
 .header-container-about-us {
@@ -124,12 +116,12 @@
   z-index: 0; /* Imagen de fondo detrás del texto */
 }
 
-.header-section h1,
 .header-section h2,
 .header-section p {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  font-size: 1.5rem;
 }
 
 /* Resaltar Número de Diagnósticos */
@@ -150,16 +142,6 @@
   display: flex;
   margin: 0 auto;
   transform: scale(0.5); /* Scales the entire section to 50% */
-}
-
-.cta-section img {
-  transition: transform 0.3s ease; /* Smooth transition for both effects */
-  border-radius: 55px; /* Adjust the value for roundness */
-}
-
-.cta-section img:hover {
-  transform: scale(1.05); /* Slightly scales up the image */
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
 }
 
 .mission-section {
@@ -360,63 +342,76 @@
   border-radius: 25px; /* Rounded edges for a modern look */
 }
 
-/* FAQ Section Styling */
-.faq-section {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+/* Estilo para el CTA Separator */
+.cta-separator-about {
+  background: linear-gradient(90deg, #0a1f44, #0d3b66);
+  color: #ffffff;
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 45px;
 }
 
-.faq-section h2 {
-  text-align: center;
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 30px;
+.cta-content-about {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 40px;
+  border-radius: 50px;
+  position: relative;
 }
 
-/* FAQ Item Style */
-.faq {
-  margin-bottom: 15px;
+.cta-icon-about {
+  width: 50px;
+  height: 50px;
 }
 
-.faq h3 {
+.cta-content-about p {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #4a90e2;
-  cursor: pointer;
-  padding: 15px;
-  border-radius: 5px;
-  background-color: #e3f2fd;
+  color: #ffffff;
   margin: 0;
-  transition: background-color 0.3s;
 }
 
-.faq h3:hover {
-  background-color: #bbdefb;
+.cta-button-small {
+  background-color: #1c6dd0;
+  color: #ffffff;
+  border: none;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.faq p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.6;
-  margin: 10px 0 0;
-  padding: 0 15px;
-  display: none; /* Hide the answer by default */
+.cta-button-small:hover {
+  background-color: #155a9a;
 }
 
-/* Toggle answer visibility */
-.faq.open p {
-  display: block; /* Show answer when question is clicked */
+/* Animación para el icono de avión */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* Mover hacia arriba */
+  }
+  100% {
+    transform: translateY(0); /* Regresar a la posición inicial */
+  }
 }
 
-/* Add transition for smooth opening/closing */
-.faq p {
-  transition: max-height 0.3s ease;
-  overflow: hidden;
+/* Aplicación de la animación al icono */
+.cta-icon-about {
+  width: 50px;
+  height: 50px;
+  animation: float 3s ease-in-out infinite; /* Ajusta la duración y repetición */
 }
+
 
 /* Media Queries para Adaptabilidad */
 

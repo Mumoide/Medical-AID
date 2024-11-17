@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import "./AboutUsPage.css";
+import FAQAccordion from '../../Components/FAQAccordion/FAQAccordion'
 
 const AboutUsPage = () => {
   const navigate = useNavigate(); // Initialize navigate
@@ -22,11 +23,7 @@ const AboutUsPage = () => {
           />
       </div>
         <header className="intro-section">
-          <img
-            src="/images/logos/LogoRound.png"
-            alt="Imagen Principal"
-            className="image"
-          />
+        <div className="intro-content">
           <h2>¡Bienvenidos A Medical AID!</h2>
           <p>
             Estamos encantados de que formes parte de nuestra comunidad. Medical
@@ -36,19 +33,22 @@ const AboutUsPage = () => {
             respuestas claras y confiables sobre tu bienestar.
           </p>
           <hr className="line" />
+
+            </div>
+          <div className="intro-image-right">
+            <img
+              src="/images/backgrounds/human.png"
+              alt="Imagen Principal2"
+              className="intro-image-right"
+            />
+          </div>
+
+
         </header>
       </header>
 
-      <section className="cta-section">
-        <center>
-          <a href="/inicio-de-sesion">
-            <img src="/images/path-to-us.png" alt="Call to Action" />
-          </a>
-        </center>
-      </section>
-
       <section className="mission-section">
-        <h2>¿Quiénes somos?</h2>
+        <h2>Te Ofrecemos</h2>
         <div className="mission-items">
           <div className="mission-item">
             <img
@@ -100,18 +100,19 @@ const AboutUsPage = () => {
           </div>
         </div>
       </section>
-      <section className="faq-section">
-        <h2>Preguntas Frecuentes</h2>
-        <div className="faq">
-          <h3>¿Es seguro el diagnóstico?</h3>
-          <p>Medical AID utiliza tecnología de machine learning avanzada y está diseñado para proporcionar diagnósticos precisos.</p>
-        </div>
-        <div className="faq">
-          <h3>¿Cuánto tiempo tarda en obtener el diagnóstico?</h3>
-          <p>En promedio, el diagnóstico se obtiene en cuestión de segundos.</p>
-        </div>
-      </section>
 
+      <section className="cta-separator-about">
+  <div className="cta-content-about">
+    <img src="/images/icons/ia.png" alt="Paper Plane Icon" className="cta-icon-about" />
+    <p>¡Comienza tu camino hacia una mejor Salud con nosotros!</p>
+    <button className="cta-button-small" onClick={() =>navigate("/form")}>Realizar Diagnósticos</button>
+  </div>
+</section>
+
+
+      <section className="faq-section-container">
+        < FAQAccordion />
+      </section>
 
       <section className="button-section">
         <div className="button-wrapper">
