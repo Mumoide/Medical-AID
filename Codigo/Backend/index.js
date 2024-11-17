@@ -13,8 +13,10 @@ const diseaseRoutes = require('./routes/diseaseRoutes')
 const userRoutes = require('./routes/userRoutes');
 const diagnosisRoutes = require('./routes/diagnosesRoutes'); // Adjust path if needed
 const dashboardRoutes = require('./routes/dashboardRoutes')
+const alertRoutes = require("./routes/alertRoutes");
 const newsletterRoutes = require('./routes/subscribeNewsLetterRoutes');
 const authRoutes = require('./routes/authRoutes');
+
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -79,6 +81,7 @@ app.use('/api/diagnosis', diagnosisRoutes);
 app.use('/api/dashboard', dashboardRoutes)
 app.use('/api/auth', authRoutes);
 app.use('/api/newsletter', newsletterRoutes);
+app.use("/api/alerts", alertRoutes);
 
 // DESACTIVAR ESTA CONFIGURACION PARA LEVANTAR SERVIDOR HTTPS
 const port = process.env.PORT || 3001;

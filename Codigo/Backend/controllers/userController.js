@@ -325,7 +325,14 @@ exports.loginUser = async (req, res) => {
 
     // Generate token and store session
     const sessionToken = jwt.sign(
-      { id_user: user.id_user, email: user.email },
+      {
+        id_user: user.id_user,
+        email: user.email,
+        nombre: user.profile ?
+          user.profile.names + " " + (user.profile.last_names ? user.profile.last_names.split(" ")[0]
+            : "")
+          : null
+      },
       process.env.SECRET_KEY,
       { expiresIn: '1h' }
     );
@@ -843,9 +850,11 @@ exports.resetPassword = async (req, res) => {
         recovery_code: null,
         recovery_code_expiration: null,
       },
-      { where: { 
-        
-       } }
+      {
+        where: {
+
+        }
+      }
     );
 
     console.log('Password updated successfully for user:', user.email);

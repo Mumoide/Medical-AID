@@ -54,7 +54,7 @@ const AdminPage = () => {
           <div className="admin-action-card">
             <img src="/images/icons/alert-icon.png" alt="Alerts" />
             <h2>Alertas</h2>
-            <button>Ver</button>
+            <button onClick={() => navigate("/admin/alerts")}>Ver</button>
           </div>
         </div>
       </div>
