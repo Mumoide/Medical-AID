@@ -60,8 +60,8 @@ function AlertsView() {
     if (!formData.title || formData.title.length > 50) {
       Swal.fire({
         icon: "error",
-        title: "Invalid Title",
-        text: "Title is required and must not exceed 50 characters.",
+        title: "Título inválido",
+        text: "El título es requreid ay no puede exceder 50 caracteres.",
       });
       return false;
     }
@@ -70,8 +70,8 @@ function AlertsView() {
     if (!formData.description || formData.description.length > 255) {
       Swal.fire({
         icon: "error",
-        title: "Invalid Description",
-        text: "Description is required and must not exceed 255 characters.",
+        title: "Descripción inválida",
+        text: "LA descripción es requerida y no puede exceder 255 caracteres.",
       });
       return false;
     }
@@ -80,8 +80,8 @@ function AlertsView() {
     if (!allowedAlertTypes.includes(formData.alertType)) {
       Swal.fire({
         icon: "error",
-        title: "Invalid Alert Type",
-        text: "Alert type must be one of Grave, Moderada, or Leve.",
+        title: "Tipo de alerta inválido",
+        text: "El tipo de alerta sólo puede ser Grave, Moderada, o Leve.",
       });
       return false;
     }
@@ -90,8 +90,8 @@ function AlertsView() {
     if (!allowedRegions.includes(formData.region)) {
       Swal.fire({
         icon: "error",
-        title: "Invalid Region",
-        text: "Please select a valid region.",
+        title: "Región inválida",
+        text: "Por favor selecciona una región válida.",
       });
       return false;
     }
@@ -105,8 +105,8 @@ function AlertsView() {
     ) {
       Swal.fire({
         icon: "error",
-        title: "Invalid Latitude",
-        text: "Latitude must be a number between -90 and 90.",
+        title: "Latitud inválida",
+        text: "La Latitud debe ser un número entre -90 a 90.",
       });
       return false;
     }
@@ -117,8 +117,8 @@ function AlertsView() {
     ) {
       Swal.fire({
         icon: "error",
-        title: "Invalid Longitude",
-        text: "Longitude must be a number between -180 and 180.",
+        title: "Longitud inválida",
+        text: "La longitud debe ser un número entre -180 a 180.",
       });
       return false;
     }
@@ -150,7 +150,7 @@ function AlertsView() {
 
       Swal.fire({
         icon: "success",
-        title: "Alert Created",
+        title: "Alerta Creada",
         text: response.data.message,
       });
 
@@ -163,10 +163,10 @@ function AlertsView() {
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Error Creating Alert",
+        title: "Error creando alerta",
         text:
           error.response?.data?.message ||
-          "An error occurred. Please try again.",
+          "Ha ocurrido un error en el servidor.",
       });
     }
   };
@@ -188,71 +188,78 @@ function AlertsView() {
   }, [selectedLocation]);
 
   return (
-    <div className="alerts-container">
-      <form className="alert-form" onSubmit={handleSubmit}>
-        <h2>Manage Alert</h2>
-        <label>
-          Title:
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Description:
-          <input
-            type="text"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Alert Type:
-          <select
-            name="alertType"
-            value={formData.alertType}
-            onChange={handleChange}
-          >
-            <option value="Grave">Grave</option>
-            <option value="Moderada">Moderada</option>
-            <option value="Leve">Leve</option>
-          </select>
-        </label>
-        <label>
-          Region:
-          <select name="region" value={formData.region} onChange={handleChange}>
-            {allowedRegions.map((region) => (
-              <option key={region} value={region}>
-                {region}
-              </option>
-            ))}
-          </select>
-        </label>
-        <button type="submit">Submit Alert</button>
-      </form>
+    <div className="alert-page-container">
+      <h2>Administración de Alertas</h2>
+      <div className="alerts-container">
+        <form className="alert-form" onSubmit={handleSubmit}>
+          <h2>Generar Alerta</h2>
+          <label>
+            Título:
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Descripción:
+            <input
+              type="text"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Severidad de alerta:
+            <select
+              name="alertType"
+              value={formData.alertType}
+              onChange={handleChange}
+            >
+              <option value="Grave">Grave</option>
+              <option value="Moderada">Moderada</option>
+              <option value="Leve">Leve</option>
+            </select>
+          </label>
+          <label>
+            Región:
+            <select
+              name="region"
+              value={formData.region}
+              onChange={handleChange}
+            >
+              {allowedRegions.map((region) => (
+                <option key={region} value={region}>
+                  {region}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button type="submit">Crear Alerta</button>
+        </form>
 
-      <div className="map-container">
-        <label>Seleccione ubicación:</label>
-        <MapContainer
-          center={[selectedLocation.lat, selectedLocation.lng]}
-          zoom={8}
-          style={{ height: "100%", width: "100%" }}
-        >
-          <TileLayer
-            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-          />
-          <Marker
-            position={[selectedLocation.lat, selectedLocation.lng]}
-            icon={markerIcon}
-          />
-          <LocationSelector />
-        </MapContainer>
+        <div className="map-container">
+          <label>Seleccione ubicación:</label>
+          <MapContainer
+            center={[selectedLocation.lat, selectedLocation.lng]}
+            zoom={8}
+            style={{ height: "100%", width: "100%" }}
+          >
+            <TileLayer
+              url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <Marker
+              position={[selectedLocation.lat, selectedLocation.lng]}
+              icon={markerIcon}
+            />
+            <LocationSelector />
+          </MapContainer>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('Alerts', {
+  const Alerts = sequelize.define('Alerts', {
     id_alert: {
       autoIncrement: true,
       type: DataTypes.BIGINT,
@@ -46,4 +46,17 @@ module.exports = function (sequelize, DataTypes) {
       },
     ]
   });
+
+  Alerts.associate = function (models) {
+    Alerts.hasMany(models.UserAlerts, {
+      foreignKey: 'id_alert',
+      as: 'userAlerts'
+    });
+    Alerts.hasOne(models.AlertGeoLocation, {
+      foreignKey: 'id_alert',
+      as: 'geoLocation'
+    });
+  };
+
+  return Alerts;
 };

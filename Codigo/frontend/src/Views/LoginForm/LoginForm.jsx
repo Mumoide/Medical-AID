@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./LoginForm.css";
+import { jwtDecode } from "jwt-decode";
 
 function LoginForm({ onLoginSuccess }) {
   const [email, setEmail] = useState("");
@@ -26,12 +27,14 @@ function LoginForm({ onLoginSuccess }) {
 
       const data = await response.json();
       localStorage.setItem("token", data.token);
-      localStorage.setItem("email", data.email);
+      const decodedToken = jwtDecode(data.token);
+      const nombre = decodedToken.nombre;
+      const role_id = decodedToken.role_id;
+
       localStorage.setItem("user_id", data.userId);
-      localStorage.setItem("user_name", data.nombre);
 
       // Llama al callback onLoginSuccess para actualizar el estado
-      onLoginSuccess(data.nombre);
+      onLoginSuccess(nombre, role_id);
 
       Swal.fire({
         icon: "success",
@@ -79,7 +82,7 @@ function LoginForm({ onLoginSuccess }) {
               required
             />
             <button type="submit" className="login-button">
-             Acceder
+              Acceder
             </button>
           </form>
           <a
@@ -95,7 +98,10 @@ function LoginForm({ onLoginSuccess }) {
         </div>
         <div className="register-container-form">
           <h2>¿No estás registrado?</h2>
-          <p>Si aún no tienes una cuenta, puedes registrarte ahora para acceder a Medical AID.</p>
+          <p>
+            Si aún no tienes una cuenta, puedes registrarte ahora para acceder a
+            Medical AID.
+          </p>
           <br />
           <button
             className="register-button"

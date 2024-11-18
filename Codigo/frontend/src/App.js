@@ -26,15 +26,22 @@ import Spinner from './Spinner'; // Import the Spinner component
 import Swal from "sweetalert2";
 import NotFoundRedirect from './Components/NotFoundRedirect/NotFoundRedirect'; // Import the NotFoundRedirect component
 import { checkTokenExpiration } from "./utils/tokenUtils";
+import { jwtDecode } from "jwt-decode";
 // import ProtectedRoute from './ProtectedRoute'; // Protección de rutas
 
 function App() {
+  const token = localStorage.getItem("token");
+  const decodedToken = token ? jwtDecode(token) : null;
+  const nombre = decodedToken?.nombre || '';
+  const roleId = decodedToken?.role_id || '';
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token')); // Initialize based on token in localStorage
-  const [userEmail, setUserEmail] = useState(localStorage.getItem('user_name') || '');
+  const [userEmail, setUserEmail] = useState(nombre || '');
+  const [userRoleId, setUserRoleId] = useState(roleId || '');
 
-  const handleLoginSuccess = (email) => {
+  const handleLoginSuccess = (email, role_id) => {
     setIsLoggedIn(true); // Set login state to true
     setUserEmail(email); // Set user email
+    setUserRoleId(role_id); // Set user role id
   };
 
   const handleLogout = () => {
@@ -52,20 +59,20 @@ function App() {
       if (expired) {
         // Token has expired, log the user out
         Swal.fire({
-          title: "Session Expired",
-          text: "Your session has expired. Please log in again.",
+          title: "Sesión expirada",
+          text: "Tu sesión ha expirado. Por favor inicia sesión nuevamente.",
           icon: "warning",
           confirmButtonText: "OK",
         }).then(() => {
           localStorage.removeItem("token");
-          window.location.href = "/inicio-de-sesion";
+          handleLogout();
         });
         clearInterval(interval); // Stop the interval once the session has expired
       } else if (timeRemaining < 5 * 60) { // Less than 5 minutes remaining
         // Show a warning if the token will expire soon
         Swal.fire({
-          title: "Session Expiring Soon",
-          text: "Your session will expire in less than 5 minutes. Would you like to refresh?",
+          title: "Sesión expira pronto",
+          text: "Tu sesión va a expirar en menos de 5 minutos. ¿Actualizar la sesión?",
           icon: "info",
           showCancelButton: true,
           confirmButtonText: "Refresh",
@@ -86,8 +93,8 @@ function App() {
                 }
               })
               .catch(() => {
-                Swal.fire("Error", "Unable to refresh session. Please log in again.", "error");
-                localStorage.removeItem("token");
+                Swal.fire("Error", "No se pudo actualizar la sesión. Por favor inicia sesión nuevamente.", "error");
+                handleLogout();
                 window.location.href = "/inicio-de-sesion";
               });
           }
@@ -102,7 +109,7 @@ function App() {
     <Router>
       <div>
         {/* Render the Navbar */}
-        <Navbar isLoggedIn={isLoggedIn} userEmail={userEmail} onLogout={handleLogout} />
+        <Navbar isLoggedIn={isLoggedIn} roleId={userRoleId} userEmail={userEmail} onLogout={handleLogout} />
 
         <Routes>
           {/* Home Page */}
