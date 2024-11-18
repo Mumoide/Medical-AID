@@ -93,4 +93,45 @@ const createAlert = async (req, res) => {
     }
 };
 
-module.exports = { createAlert };
+const getUserAlerts = async (req, res) => {
+    const userId = req.user.id_user; // Assumes user ID is available from the authenticated request
+
+    try {
+        const alerts = await UserAlerts.findAll({
+            where: { id_user: userId },
+            attributes: ['readed'],
+            include: [
+                {
+                    model: Alerts,
+                    as: 'alert',
+                    attributes: ['title', 'description', 'alert_type', 'createdAt'],
+                    include: [
+                        {
+                            model: AlertGeoLocation,
+                            as: 'geoLocation',
+                            attributes: ['latitude', 'longitude', 'region']
+                        }
+                    ]
+                }
+            ]
+        });
+
+        const formattedAlerts = alerts.map(alert => ({
+            title: alert.alert.title,
+            description: alert.alert.description,
+            alert_type: alert.alert.alert_type,
+            created_at: alert.alert.createdAt,
+            readed: alert.readed,
+            latitude: alert.alert.geoLocation.latitude,
+            longitude: alert.alert.geoLocation.longitude,
+            region: alert.alert.geoLocation.region
+        }));
+
+        return res.status(200).json(formattedAlerts);
+    } catch (error) {
+        console.error('Error retrieving user alerts:', error);
+        res.status(500).json({ message: 'Error retrieving alerts' });
+    }
+};
+
+module.exports = { createAlert, getUserAlerts };

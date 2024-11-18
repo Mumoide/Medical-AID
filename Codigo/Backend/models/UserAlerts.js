@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('UserAlerts', {
+  const UserAlerts = sequelize.define('UserAlerts', {
     id_user_alert: {
       autoIncrement: true,
       type: DataTypes.BIGINT,
@@ -59,4 +59,13 @@ module.exports = function (sequelize, DataTypes) {
       },
     ]
   });
+  // Association setup
+  UserAlerts.associate = function (models) {
+    UserAlerts.belongsTo(models.Alerts, {
+      foreignKey: 'id_alert',
+      as: 'alert'
+    });
+  };
+
+  return UserAlerts;
 };

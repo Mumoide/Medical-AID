@@ -273,6 +273,11 @@ exports.loginUser = async (req, res) => {
           as: 'profile',
           attributes: ['names', 'last_names'],
         },
+        {
+          model: UserRoles,
+          as: "roles",
+          attributes: ["id_role"],
+        },
       ],
     });
 
@@ -323,6 +328,8 @@ exports.loginUser = async (req, res) => {
       });
     }
 
+    // Extract role_id
+    const roleId = user.roles && user.roles.length > 0 ? user.roles[0].id_role : null;
     // Generate token and store session
     const sessionToken = jwt.sign(
       {
@@ -331,7 +338,8 @@ exports.loginUser = async (req, res) => {
         nombre: user.profile ?
           user.profile.names + " " + (user.profile.last_names ? user.profile.last_names.split(" ")[0]
             : "")
-          : null
+          : null,
+        role_id: roleId,
       },
       process.env.SECRET_KEY,
       { expiresIn: '1h' }
