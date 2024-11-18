@@ -92,7 +92,7 @@
   display: flex;
   justify-content: center;
   align-items: center; /* Centrado vertical y horizontal */
-  height: 100vh; /* O ajustar según la altura deseada */
+  height: 80vh; /* O ajustar según la altura deseada */
   position: relative;
   overflow: hidden;
 }
@@ -108,13 +108,14 @@
 
 .header-image {
   width: 100%;
-  height: 100vh; /* Asegura que la imagen cubra toda la pantalla */
+  height: 80vh; /* Asegura que la imagen cubra toda la pantalla */
   object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 0; /* Imagen de fondo detrás del texto */
 }
+
 
 .header-section h2,
 .header-section p {
@@ -415,48 +416,6 @@
 
 /* Media Queries para Adaptabilidad */
 
-/* Dispositivos muy pequeños (max-width: 480px) */
-@media (max-width: 480px) {
-  .intro-section {
-    margin: 50px auto 10px;
-    padding: 15px;
-  }
-
-  .header-image {
-    height: 300px;
-  }
-
-  .cta-box {
-    font-size: 1rem;
-    padding: 10px 15px;
-  }
-
-  .subscribe-title {
-    font-size: 1.5rem;
-  }
-
-  .subscribe-input {
-    width: 90%;
-    margin-bottom: 10px;
-  }
-
-  .subscribe-button {
-    width: 90%;
-  }
-
-  .footer-links {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .footer a {
-    font-size: 0.8rem;
-  }
-
-  .footer-copyright {
-    font-size: 0.7rem;
-  }
-}
 
 /* Dispositivos medianos (max-width: 768px) */
 @media (max-width: 768px) {
@@ -464,9 +423,44 @@
     max-width: 90%;
     margin: 75px auto 10px;
   }
-
+  .header-container-about-us{
+    height: 40vh;
+  }
+  .header-container-about-us h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 55px;
+  }
+  
   .header-image {
-    height: 400px;
+    height: 40vh; 
+  }
+
+  .header-section h2{
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .header-section p{
+    width: 400px;
+    margin-left: -100px;
+    font-size: 15px;
+  }
+  .intro-section {
+    flex-direction: column; /* Cambia la dirección de los elementos a columna */
+    align-items: center; /* Centra los elementos */
+    padding: 20px; /* Reduce el padding para pantallas pequeñas */ 
+  }
+
+  .intro-image-right {
+    margin-top: 25px;
+    width: 75%; /* Ajusta el ancho de la imagen para que no ocupe toda la pantalla */
+    margin-bottom: 20px; /* Añade un margen inferior para separar de texto */
+  }
+
+  .intro-text {
+    text-align: center; /* Centra el texto */
+    padding: 0 15px; /* Ajusta el padding para que el texto tenga un margen */
   }
 
   .cta-box {
@@ -510,21 +504,187 @@
     margin-left: 40px;
     margin-top: 15px;
   }
+
+
 }
 
-/* Dispositivos grandes (max-width: 1024px) */
-@media (max-width: 1024px) {
+/* Dispositivos muy pequeños (max-width: 480px) */
+
+@media (max-width: 480px) {
   .intro-section {
-    margin: 80px auto;
+    margin: 50px auto 10px;
+    padding: 15px;
+  }
+
+  .header-image {
+    height: 30vh;
   }
 
   .cta-box {
-    top: -5%;
-    padding: 20px 30px;
+    font-size: 1rem;
+    padding: 10px 15px;
   }
 
-  .subscribe-input,
+  .subscribe-title {
+    font-size: 1.5rem;
+  }
+
+  .subscribe-input {
+    width: 90%;
+    margin-bottom: 10px;
+  }
+
   .subscribe-button {
-    max-width: 80%;
+    width: 90%;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer a {
+    font-size: 0.8rem;
+  }
+
+  .footer-copyright {
+    font-size: 0.7rem;
   }
 }
+/* Dispositivos muy pequeños (max-width: 431px) */
+@media (max-width: 431px){
+  .header-container-about-us{
+   height: 30vh;
+  }
+  .header-container-about-us h1 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 55px;
+  }
+
+  .header-image {
+    height: 30vh; 
+  }
+
+  .header-section p{
+    width: 350px;
+    margin-left: -90px;
+    font-size: 15px;
+  }
+}
+
+/* Dispositivos muy pequeños (max-width: 415px) */
+@media (max-width: 415px){
+  .header-container-about-us{
+   height: 30vh;
+  }
+  .header-container-about-us h1 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 55px;
+  }
+
+  .header-image {
+    height: 30vh; 
+  }
+  .header-section h2{
+    text-align: center;
+    font-size: 1.4rem;
+  }
+
+  .header-section p{
+    width: 350px;
+    margin-left: -90px;
+    font-size: 15px;
+  }
+}
+/* Dispositivos muy pequeños (max-width: 412px) */
+@media (max-width: 413px){
+  .header-container-about-us{
+   height: 30vh;
+  }
+  .header-container-about-us h1 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 55px;
+  }
+
+  .header-image {
+    height: 30vh; 
+  }
+
+  .header-section p{
+    width: 100%;
+  }
+
+  .intro-section p {
+    width: 250px;
+    margin-left: -63px;
+    font-size: 15px;
+  }
+
+  .header-section h2{
+    width: 100%;
+    margin-left: -30px;
+  }
+  .cta-content-about p{
+    font-size: 12px;
+  }
+  .cta-button{
+    width: 60%;
+    font-size: 15px;
+  }
+
+}
+
+/* Dispositivos muy pequeños (max-width: 375px) */
+
+@media (max-width: 376px){
+  .header-container-about-us{
+    height: 40vh;
+  }
+    .header-container-about-us h1 {
+    font-size: 1.2rem;
+  }
+
+  .intro-section p {
+    margin-left: -75px;
+  }
+}
+
+/* Dispositivos muy pequeños (max-width: 361px) */
+@media (max-width: 361px){
+  .header-container-about-us{
+    height: 30vh;
+  }
+  .header-container-about-us h1 {
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 55px;
+  }
+  .intro-section p {
+    max-width: 250px;
+  }
+
+  .header-section p{
+    width: 350px;
+    margin-left: -60px;
+    font-size: 15px;
+  }
+}
+
+/* Dispositivos muy pequeños (max-width: 344px) */
+@media (max-width: 344px){
+  .header-container-about-us{
+    height: 30vh;
+  }
+  .header-container-about-us h1 {
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 35px;
+  }
+  .intro-section p {
+    max-width: 250px;
+  }
+}
+   

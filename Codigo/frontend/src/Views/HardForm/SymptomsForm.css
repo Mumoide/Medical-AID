@@ -17,20 +17,27 @@
 .diagnosis-container {
   display: flex;
   flex-direction: column;
-  background-color: #4e9197;
-  border-radius: 20px;
   width: 90%;
   text-align: center;
   margin-left: 50px;
   height: 100%;
+  background-color: #ffffff; /* Cambia a blanco para un look más limpio */
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra sutil para resaltar el contenedor */
+  transition: transform 0.3s ease; /* Transición suave para el hover */
+}
+
+.diagnosis-container:hover {
+  transform: scale(1.02); /* Efecto de aumento al pasar el mouse */
 }
 
 .diagnosis-container h2 {
   font-size: 2rem;
-  color: #fff;
+  color: black;
   margin: auto;
   margin-top: 35px;
 }
+
 
 .introduction {
   display: flex;
@@ -83,7 +90,7 @@
 
 .text-content p {
   color: #393e46;
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin-left: 50px;
 }
 
@@ -111,25 +118,80 @@
 }
 
 .diagnostic-image-form {
-  margin-top: 150px;
-  max-width: 50%; /* Reducir ligeramente el ancho máximo para darle más espacio al contenedor */
+  margin-top: 160px;
+  max-width: 90%; /* Reducir ligeramente el ancho máximo para darle más espacio al contenedor */
   height: auto; /* Mantiene la proporción de la imagen */
-  margin-left: 190px;
+
 }
+
+.seccion-symptoms {
+  text-align: center;
+  padding: 40px 20px;
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+.seccion-symptoms h2 {
+  font-size: 2rem;
+  color: #4e3f91; /* Color de tu elección */
+  margin-bottom: 10px;
+}
+
+.seccion-symptoms p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.seccion-symptomsForm {
+  display: inline-block;
+  width: 250px; /* Ajuste del ancho de cada tarjeta */
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.seccion-symptomsForm:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.seccion-symptomsForm img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+.seccion-symptomsForm h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.seccion-symptomsForm p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+}
+
 
 .combobox-container {
   align-items: center; /* Alinea el contenido verticalmente */
   justify-content: space-between; /* Añade espacio entre el Select y el botón */
-  background-color: #4e9197; /* Fondo claro */
   padding: 15px; /* Espacio interno para que el contenido no esté pegado al borde */
   margin: auto; /* Centrar horizontalmente y añadir espacio vertical */
   min-width: 80%; /* Ancho máximo para el combobox */
   margin-top: 30px;
+  border-radius: 25px;
 }
 
 .combobox-container label {
   margin-top: 50px;
-  color: rgb(249, 251, 253);
+  color: rgb(0, 0, 0);
   font-size: 1.3rem;
   font-weight: bold;
 }
@@ -216,16 +278,22 @@
 .combobox-categorias {
   display: flex;
   flex-direction: column;
-  background-color: #4e9197;
+  background-color: #ffffff; /* Cambia a blanco para un look más limpio */
   border-radius: 20px;
   width: 72%;
   height: 100%;
   margin-bottom: 100px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra sutil para resaltar el contenedor */
+  transition: transform 0.3s ease; /* Transición suave para el hover */
+}
+
+.combobox-categorias:hover {
+  transform: scale(1.02); /* Efecto de aumento al pasar el mouse */
 }
 
 .combobox-categorias h2 {
   text-align: center;
-  color: white;
+  color: black;
 }
 
 /* Footer Section */

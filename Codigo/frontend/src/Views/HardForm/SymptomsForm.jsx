@@ -346,6 +346,9 @@ const SymptomComboBox = () => {
           <div className="introduction">
             <div className="text-content">
               <h1>Diagnósticos Remotos</h1>
+              <p className="intro-text">
+                Bienvenido a la herramienta de diagnóstico remoto de Medical AID. Aquí podrás identificar tus síntomas y recibir orientación en unos pocos pasos.
+              </p>
               <p>
                 ¿No sabes cómo identificar tus síntomas?
                 <br />
@@ -368,16 +371,31 @@ const SymptomComboBox = () => {
               />
             </div>
           </div>
+
+          <section className="seccion-symptoms">
+        <h2>Puedes agregar hasta 16 síntomas. Selecciona al menos uno antes de iniciar el diagnóstico.</h2>
+
+        <div className="seccion-symptoms">
+          <div className="seccion-symptomsForm">
+            <img src="/images/icons/precision.png" alt="Precisión" />
+            <p>Al hacer clic en "Iniciar Diagnóstico," procesaremos tus síntomas para ofrecerte un diagnóstico preliminar. Asegúrate de haber seleccionado todos los síntomas relevantes.</p>
+          </div>
+          <div className="seccion-symptomsForm">
+            <img src="/images/icons/rapidez.png" alt="Rapidez" />
+            <p>Nuestros resultados no reemplazan una consulta médica. Te recomendamos que acudas a un profesional de la salud para una evaluación completa.</p>
+          </div>
+        </div>
+      </section>
+
           {normalForm && (
             <div className="diagnosis-container">
               <h2>
-                Si estás seguro de tus síntomas,
-                <br /> ¡ingrésalos a continuación!
+                Por favor, selecciona los síntomas que mejor describan tu situación actual.
               </h2>
               {comboBoxes.map((comboBox, index) => (
                 <div className="combobox-container" key={comboBox.id}>
                   <label htmlFor={`symptom-combobox-${comboBox.id}`}>
-                    Selecciona tus síntomas:
+                    Selecciona un síntoma:
                   </label>
                   <div className="symptom-combobox">
                     <Select
