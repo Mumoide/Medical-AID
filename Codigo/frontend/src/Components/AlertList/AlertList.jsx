@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "./AlertList.css";
 
 function formatDateDifference(createdAt) {
@@ -17,6 +18,7 @@ function formatDateDifference(createdAt) {
 }
 
 function AlertList({ alertsData, onClose }) {
+  const navigate = useNavigate();
   const alertListRef = useRef(null);
 
   useEffect(() => {
@@ -33,7 +35,9 @@ function AlertList({ alertsData, onClose }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  const latestAlerts = alertsData.slice(0, 5);
+  const latestAlerts = [...alertsData]
+    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+    .slice(0, 5); // Sort by created_at in descending order and take the latest 5
 
   return (
     <div className="alert-list-overlay">
@@ -46,10 +50,20 @@ function AlertList({ alertsData, onClose }) {
         ) : (
           <ul>
             {latestAlerts.map((alert, index) => (
-              <li key={index} className="alert-item">
+              <li
+                key={index}
+                className="alert-item"
+                onClick={() => {
+                  navigate("/notifications");
+                  onClose();
+                }}
+              >
                 <p className="alert-item-message">
                   Se ha detectado una emergencia de severidad{" "}
-                  <strong>{alert.alert_type}</strong> en la región{" "}
+                  <strong>{alert.alert_type}</strong>{" "}
+                  {alert.region === "Todas las regiones"
+                    ? "en"
+                    : "en la región "}
                   <strong>{alert.region}</strong>.
                 </p>
                 <p className="alert-item-time">

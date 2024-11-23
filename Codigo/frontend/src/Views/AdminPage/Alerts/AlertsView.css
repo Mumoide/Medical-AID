@@ -1,66 +1,104 @@
-.alert-page-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; /* Center horizontally */
+.alerts-view {
   padding: 20px;
-  margin: 100px auto 30px auto;
+  font-family: Arial, sans-serif;
+  margin-top: 100px;
 }
 
-.alerts-container {
-  display: flex;
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
+.alerts-view h2 {
+  margin-bottom: 20px;
 }
 
-.alert-form {
+.alerts-table {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 20px;
+  border-collapse: collapse;
+}
+
+.alerts-table th,
+.alerts-table td {
   border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-}
-
-.alert-form label,
-.map-container label {
-  display: flex;
-  flex-direction: column;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.alert-form input,
-.alert-form select {
   padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
+  text-align: left;
 }
 
-.alert-form button {
-  padding: 10px 15px;
-  font-size: 16px;
+.alerts-table th {
+  background-color: #3498db;
   color: white;
-  background-color: #007bff;
+}
+
+.alerts-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 50px;
+}
+
+.button-container-alert-view {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn-alert-view {
+  padding: 10px 20px;
+  font-size: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.alert-form button:hover {
-  background-color: #0056b3;
+.create-alert-btn {
+  background-color: #3498db;
+  color: white;
 }
 
-.map-container {
+.create-alert-btn:hover {
+  background-color: #2980b9;
+}
+
+.go-back-btn {
+  background-color: #95a5a6;
+  color: white;
+}
+
+.go-back-btn:hover {
+  background-color: #7f8c8d;
+}
+
+.icon-buttons-alerts {
   display: flex;
-  flex-direction: column;
-  margin: auto;
-  width: 100%;
-  height: 500px;
+  gap: 10px;
+}
+
+.icon-buttons-alerts svg {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.alert-blue {
+  color: #007bff;
+}
+
+.alert-green {
+  color: #17b103;
+}
+
+.alert-red {
+  color: #ce0000;
+}
+
+.alert-blue:hover {
+  color: #003f83;
+}
+
+.alert-green:hover {
+  color: #0e7001;
+}
+
+.alert-red:hover {
+  color: #9c0000;
 }

@@ -1,265 +1,173 @@
-import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
-import "./AlertsView.css"; // Custom CSS for styling
+import React, { useEffect, useState, useMemo } from "react";
+import { useTable } from "react-table";
+import { useNavigate } from "react-router-dom";
+import "./AlertsView.css"; // Add custom styles if needed
 import Swal from "sweetalert2";
-import axios from "axios";
-
-// Initial icon setup for Leaflet (Optional customization)
-const markerIcon = new L.Icon({
-  iconUrl: "https://leafletjs.com/examples/custom-icons/leaf-red.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowUrl: "https://leafletjs.com/examples/custom-icons/leaf-shadow.png",
-  shadowSize: [41, 41],
-});
+import { useWindowWidth } from "../../../utils/useWindowWidth"; // Import the custom hook
+import { FaEye, FaEdit, FaTrash, FaCheck } from "react-icons/fa";
 
 function AlertsView() {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    alertType: "Grave",
-    region: "Metropolitana",
-  });
+  const [alertsData, setAlertsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const windowWidth = useWindowWidth(); // Get the window width
 
-  const [selectedLocation, setSelectedLocation] = useState({
-    lat: -33.46,
-    lng: -70.65,
-  });
-
-  const allowedAlertTypes = ["Grave", "Moderada", "Leve"];
-  const allowedRegions = [
-    "Arica-Parinacota",
-    "Tarapacá",
-    "Antofagasta",
-    "Atacama",
-    "Coquimbo",
-    "Valparaíso",
-    "Metropolitana",
-    "O'Higgins",
-    "Maule",
-    "Ñuble",
-    "Bío Bío",
-    "Araucanía",
-    "Los Ríos",
-    "Los Lagos",
-    "Aysén",
-    "Magallanes y Antártica Chilena",
-    "Todas las regiones",
-  ];
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const validateForm = () => {
-    // Title validation
-    if (!formData.title || formData.title.length > 50) {
-      Swal.fire({
-        icon: "error",
-        title: "Título inválido",
-        text: "El título es requreid ay no puede exceder 50 caracteres.",
-      });
-      return false;
-    }
-
-    // Description validation
-    if (!formData.description || formData.description.length > 255) {
-      Swal.fire({
-        icon: "error",
-        title: "Descripción inválida",
-        text: "LA descripción es requerida y no puede exceder 255 caracteres.",
-      });
-      return false;
-    }
-
-    // Alert type validation
-    if (!allowedAlertTypes.includes(formData.alertType)) {
-      Swal.fire({
-        icon: "error",
-        title: "Tipo de alerta inválido",
-        text: "El tipo de alerta sólo puede ser Grave, Moderada, o Leve.",
-      });
-      return false;
-    }
-
-    // Region validation
-    if (!allowedRegions.includes(formData.region)) {
-      Swal.fire({
-        icon: "error",
-        title: "Región inválida",
-        text: "Por favor selecciona una región válida.",
-      });
-      return false;
-    }
-
-    // Latitude and longitude validation
-    const isValidCoordinate = (coord) => /^-?\d+(\.\d+)?$/.test(coord);
-    if (
-      !isValidCoordinate(selectedLocation.lat) ||
-      selectedLocation.lat < -90 ||
-      selectedLocation.lat > 90
-    ) {
-      Swal.fire({
-        icon: "error",
-        title: "Latitud inválida",
-        text: "La Latitud debe ser un número entre -90 a 90.",
-      });
-      return false;
-    }
-    if (
-      !isValidCoordinate(selectedLocation.lng) ||
-      selectedLocation.lng < -180 ||
-      selectedLocation.lng > 180
-    ) {
-      Swal.fire({
-        icon: "error",
-        title: "Longitud inválida",
-        text: "La longitud debe ser un número entre -180 a 180.",
-      });
-      return false;
-    }
-
-    return true;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validateForm()) return;
-
-    try {
-      const response = await axios.post(
-        "http://localhost:3001/api/alerts/create",
-        {
-          title: formData.title,
-          description: formData.description,
-          alert_type: formData.alertType,
-          latitude: selectedLocation.lat,
-          longitude: selectedLocation.lng,
-          region: formData.region,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token from storage
-          },
-        }
-      );
-
-      Swal.fire({
-        icon: "success",
-        title: "Alerta Creada",
-        text: response.data.message,
-      });
-
-      setFormData({
-        title: "",
-        description: "",
-        alertType: "Grave",
-        region: "Metropolitana",
-      });
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Error creando alerta",
-        text:
-          error.response?.data?.message ||
-          "Ha ocurrido un error en el servidor.",
-      });
-    }
-  };
-
-  const LocationSelector = () => {
-    useMapEvents({
-      click(e) {
-        setSelectedLocation({
-          lat: e.latlng.lat,
-          lng: e.latlng.lng,
-        });
-      },
-    });
-    return null;
-  };
-
+  // Fetch alerts data
   useEffect(() => {
-    console.log(selectedLocation);
-  }, [selectedLocation]);
+    const fetchAlerts = async () => {
+      const token = localStorage.getItem("token");
+
+      try {
+        const response = await fetch(
+          "http://localhost:3001/api/alerts/all-alerts",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+        setAlertsData(data);
+      } catch (error) {
+        Swal.fire("Error", "Failed to load alerts. Please try again.", "error");
+        console.error("Error fetching alerts:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAlerts();
+  }, []);
+
+  // Define table columns
+  const columns = useMemo(() => {
+    const baseColumns = [
+      {
+        Header: "Título",
+        accessor: "title", // Accesses `title` field
+      },
+      {
+        Header: "Severidad",
+        accessor: "alert_type", // Accesses `alert_type` field
+      },
+      {
+        Header: "Región",
+        accessor: "geoLocation.region", // Accesses nested `geoLocation.region` field
+      },
+    ];
+
+    if (windowWidth > 1080) {
+      baseColumns.splice(2, 0, {
+        Header: "Descripción",
+        accessor: "description", // Accesses `description` field
+      });
+    }
+
+    if (windowWidth > 1080) {
+      baseColumns.splice(0, 0, {
+        Header: "ID",
+        accessor: "id_alert", // Accesses `description` field
+      });
+    }
+
+    if (windowWidth > 920) {
+      baseColumns.push({
+        Header: "Veces leído",
+        accessor: "readed_count", // Accesses `readed_count` field
+      });
+    }
+
+    if (windowWidth > 768) {
+      baseColumns.push({
+        Header: "Fecha creación",
+        accessor: "created_at", // Accesses `created_at` field
+        Cell: ({ value }) => {
+          const date = new Date(value);
+          return !isNaN(date)
+            ? date.toLocaleString(undefined, {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+              })
+            : "Invalid Date";
+        },
+      });
+    }
+
+    baseColumns.push({
+      Header: "Acciones",
+      Cell: ({ row }) => (
+        <div className="icon-buttons-alerts">
+          <FaEye className="alert-blue" style={{ cursor: "pointer" }} />
+          <FaEdit className="alert-green" style={{ cursor: "pointer" }} />
+          <FaTrash className="alert-red" style={{ cursor: "pointer" }} />
+        </div>
+      ),
+      disableFilters: true, // Disable filters for this column
+    });
+    return baseColumns;
+  }, [windowWidth]);
+
+  // Use React Table
+  const tableInstance = useTable({ columns, data: alertsData });
+
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    tableInstance;
+
+  // Render loading state
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
 
   return (
-    <div className="alert-page-container">
+    <div className="alerts-view">
       <h2>Administración de Alertas</h2>
-      <div className="alerts-container">
-        <form className="alert-form" onSubmit={handleSubmit}>
-          <h2>Generar Alerta</h2>
-          <label>
-            Título:
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Descripción:
-            <input
-              type="text"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Severidad de alerta:
-            <select
-              name="alertType"
-              value={formData.alertType}
-              onChange={handleChange}
-            >
-              <option value="Grave">Grave</option>
-              <option value="Moderada">Moderada</option>
-              <option value="Leve">Leve</option>
-            </select>
-          </label>
-          <label>
-            Región:
-            <select
-              name="region"
-              value={formData.region}
-              onChange={handleChange}
-            >
-              {allowedRegions.map((region) => (
-                <option key={region} value={region}>
-                  {region}
-                </option>
+      <table {...getTableProps()} className="alerts-table">
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
               ))}
-            </select>
-          </label>
-          <button type="submit">Crear Alerta</button>
-        </form>
-
-        <div className="map-container">
-          <label>Seleccione ubicación:</label>
-          <MapContainer
-            center={[selectedLocation.lat, selectedLocation.lng]}
-            zoom={8}
-            style={{ height: "100%", width: "100%" }}
-          >
-            <TileLayer
-              url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-            <Marker
-              position={[selectedLocation.lat, selectedLocation.lng]}
-              icon={markerIcon}
-            />
-            <LocationSelector />
-          </MapContainer>
-        </div>
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => (
+                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      {/* Buttons for navigation */}
+      <div className="button-container-alert-view">
+        <button
+          className="btn-alert-view create-alert-btn"
+          onClick={() => navigate("/admin/create_alert")}
+        >
+          Crear Alerta
+        </button>
+        <button
+          className="btn-alert-view go-back-btn"
+          onClick={() => navigate(-1)}
+        >
+          Volver
+        </button>
       </div>
     </div>
   );
