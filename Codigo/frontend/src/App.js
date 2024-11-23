@@ -17,6 +17,8 @@ import AboutUsPage from './Views/AboutUsPage/AboutUsPage';
 import DiagnosticLibraryPage from './Views/DiagnosticLibraryPage/DiagnosticLibraryPage';
 import DashboardPage from './Views/AdminPage/Dashboard/DashboardView'
 import AlertsPage from './Views/AdminPage/Alerts/AlertsView'
+import CreateAlertPage from './Views/AdminPage/Alerts/CreateAlert'
+import PublicAlertsPage from './Views/PublicAlerts/PublicAlertsPage'
 import UserProfilePage from './Views/UserProfilePage/UserProfilePage'
 import DiagnosticRecordsPage from './Views/UserProfilePage/DiagnosticRecordsPage/DiagnosticRecordsPage'
 import DiseasePage from './Views/UserProfilePage/DiseasePage/DiseasePage'
@@ -27,6 +29,7 @@ import Swal from "sweetalert2";
 import NotFoundRedirect from './Components/NotFoundRedirect/NotFoundRedirect'; // Import the NotFoundRedirect component
 import { checkTokenExpiration } from "./utils/tokenUtils";
 import { jwtDecode } from "jwt-decode";
+import ScrollToTop from './utils/scrollToTop'
 // import ProtectedRoute from './ProtectedRoute'; // Protección de rutas
 
 function App() {
@@ -59,20 +62,20 @@ function App() {
       if (expired) {
         // Token has expired, log the user out
         Swal.fire({
-          title: "Sesión expirada",
-          text: "Tu sesión ha expirado. Por favor inicia sesión nuevamente.",
+          title: "Session Expired",
+          text: "Your session has expired. Please log in again.",
           icon: "warning",
           confirmButtonText: "OK",
         }).then(() => {
           localStorage.removeItem("token");
-          handleLogout();
+          window.location.href = "/inicio-de-sesion";
         });
         clearInterval(interval); // Stop the interval once the session has expired
       } else if (timeRemaining < 5 * 60) { // Less than 5 minutes remaining
         // Show a warning if the token will expire soon
         Swal.fire({
-          title: "Sesión expira pronto",
-          text: "Tu sesión va a expirar en menos de 5 minutos. ¿Actualizar la sesión?",
+          title: "Session Expiring Soon",
+          text: "Your session will expire in less than 5 minutes. Would you like to refresh?",
           icon: "info",
           showCancelButton: true,
           confirmButtonText: "Refresh",
@@ -93,8 +96,8 @@ function App() {
                 }
               })
               .catch(() => {
-                Swal.fire("Error", "No se pudo actualizar la sesión. Por favor inicia sesión nuevamente.", "error");
-                handleLogout();
+                Swal.fire("Error", "Unable to refresh session. Please log in again.", "error");
+                localStorage.removeItem("token");
                 window.location.href = "/inicio-de-sesion";
               });
           }
@@ -110,7 +113,7 @@ function App() {
       <div>
         {/* Render the Navbar */}
         <Navbar isLoggedIn={isLoggedIn} roleId={userRoleId} userEmail={userEmail} onLogout={handleLogout} />
-
+        <ScrollToTop />
         <Routes>
           {/* Home Page */}
           <Route path="/" element={<HomePage />} />
@@ -135,6 +138,7 @@ function App() {
           <Route path='/admin/dashboard' element={<DashboardPage />} />
           {/* Alerts administration */}
           <Route path='/admin/alerts' element={<AlertsPage />} />
+          <Route path='/admin/create_alert' element={<CreateAlertPage />} />
 
           {/* Form Page */}
           <Route path="/form" element={<FormPage />} />
@@ -153,7 +157,8 @@ function App() {
           <Route path="/update-password" element={<ChangePasswordPage onLogout={handleLogout} />} />
           <Route path="/disease" element={<DiseasePage />} />
 
-
+          {/* Profile Page */}
+          <Route path="/notifications" element={<PublicAlertsPage />} />
           {/* Catch-all route to redirect to home for undefined routes */}
           <Route path="*" element={<NotFoundRedirect />} />
         </Routes>

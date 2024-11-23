@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { FaEye, FaEdit, FaTrash, FaCheck } from "react-icons/fa";
 import "./Users.css";
 import axios from "axios"; // Import axios for making the delete request
-import { useWindowWidth } from "./useWindowWidth"; // Import the custom hook correctly
+import { useWindowWidth } from "../../../utils/useWindowWidth"; // Import the custom hook correctly
 import Swal from "sweetalert2"; // Import SweetAlert
 
 const Users = () => {
@@ -322,12 +322,14 @@ const Users = () => {
       Cell: ({ row }) => (
         <div className="icon-buttons-users-admin">
           <FaEye
+            className="user-admin-blue"
             style={{ cursor: "pointer" }}
             onClick={() =>
               (window.location.href = `user/${row.original.id_user}`)
             }
           />
           <FaEdit
+            className="user-admin-green"
             style={{ cursor: "pointer" }}
             onClick={() =>
               (window.location.href = `updateuser/${row.original.id_user}`)
@@ -335,11 +337,13 @@ const Users = () => {
           />
           {row.original.active ? (
             <FaTrash
+              className="user-admin-red"
               style={{ cursor: "pointer" }}
               onClick={() => handleDeleteUser(row.original.id_user)}
             />
           ) : (
             <FaCheck
+              className="user-admin-green"
               style={{ cursor: "pointer" }}
               onClick={() => handleReactivateUser(row.original.id_user)}
             />

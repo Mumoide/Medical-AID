@@ -53,7 +53,7 @@ const DashboardView = () => {
               .join(", "),
           }))
         );
-        console.log(transformedData);
+
         setDiagnosisData(transformedData);
         setFilteredData(transformedData);
       } catch (err) {
@@ -340,9 +340,9 @@ const DashboardView = () => {
         <div className="dashboard-alert-button-admin-container">
           <button
             className="dashboard-alert-button-admin"
-            onClick={() => navigate("/admin/alerts")}
+            onClick={() => navigate("/admin/create_alert")}
           >
-            Ir a Alertas
+            Crear Alerta
           </button>
         </div>
       </div>

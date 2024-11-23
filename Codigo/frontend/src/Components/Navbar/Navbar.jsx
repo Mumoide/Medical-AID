@@ -14,6 +14,7 @@ function Navbar({ isLoggedIn, roleId, userEmail, onLogout }) {
   };
 
   useEffect(() => {
+    console.log("navbar roleid: ", roleId);
     // Function to fetch alerts data
     const fetchAlerts = async () => {
       try {
@@ -32,8 +33,8 @@ function Navbar({ isLoggedIn, roleId, userEmail, onLogout }) {
         }
 
         const alertsData = await response.json();
-        setAlertsData(alertsData); // Store alerts data
         console.log(alertsData);
+        setAlertsData(alertsData); // Store alerts data
         const unreadCount = alertsData.filter(
           (alert) => alert.readed === false
         ).length;

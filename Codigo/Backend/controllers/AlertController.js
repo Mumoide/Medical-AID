@@ -1,5 +1,6 @@
 // alerts.controller.js
 const { Alerts, AlertGeoLocation, UserAlerts, Users } = require("../models");
+const { Sequelize } = require("sequelize");
 
 const createAlert = async (req, res) => {
     const { title, description, alert_type, latitude, longitude, region } = req.body;
@@ -134,4 +135,63 @@ const getUserAlerts = async (req, res) => {
     }
 };
 
-module.exports = { createAlert, getUserAlerts };
+
+const getAlertsWithReadedCount = async (req, res) => {
+    try {
+        // Fetch all alerts with associated geolocation and count of readed alerts
+        const alerts = await Alerts.findAll({
+            attributes: [
+                "id_alert",
+                "id_admin",
+                "title",
+                "description",
+                "alert_type",
+                "created_at",
+                "updated_at",
+                // Use Sequelize literal to count readed alerts
+                [
+                    Sequelize.literal(
+                        `(SELECT COUNT(*) FROM "UserAlerts" AS ua WHERE ua.id_alert = "Alerts".id_alert AND ua.readed = true)`
+                    ),
+                    "readed_count"
+                ]
+            ],
+            include: [
+                {
+                    model: AlertGeoLocation,
+                    as: "geoLocation",
+                    attributes: ["id_geolocation", "latitude", "longitude", "region"],
+                }
+            ],
+        });
+
+        // Format response data
+        const formattedAlerts = alerts.map(alert => ({
+            id_alert: alert.id_alert,
+            id_admin: alert.id_admin,
+            title: alert.title,
+            description: alert.description,
+            alert_type: alert.alert_type,
+            created_at: alert.created_at,
+            updated_at: alert.updated_at,
+            readed_count: alert.dataValues.readed_count, // Access the computed readed_count
+            geoLocation: {
+                id_geolocation: alert.geoLocation.id_geolocation,
+                latitude: alert.geoLocation.latitude,
+                longitude: alert.geoLocation.longitude,
+                region: alert.geoLocation.region,
+            }
+        }));
+        console.log('alerts: ', alerts)
+        console.log('formattedAlerts: ', formattedAlerts)
+        res.status(200).json(formattedAlerts);
+    } catch (error) {
+        console.error("Error fetching alerts with readed count:", error);
+        res.status(500).json({
+            message: "Error retrieving alerts",
+            error: error.message,
+        });
+    }
+};
+
+module.exports = { getAlertsWithReadedCount, createAlert, getUserAlerts };

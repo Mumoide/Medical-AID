@@ -5,8 +5,6 @@ import MarkerClusterGroup from "react-leaflet-cluster";
 import "./MapView.css";
 
 const MapView = ({ filteredData = [] }) => {
-  console.log("MapView", filteredData);
-
   return (
     <MapContainer
       center={[-33.46, -70.65]}

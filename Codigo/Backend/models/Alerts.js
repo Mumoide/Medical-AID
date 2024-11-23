@@ -23,7 +23,15 @@ module.exports = function (sequelize, DataTypes) {
     alert_type: {
       type: DataTypes.STRING(255),
       allowNull: false
-    }
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      field: "created_at", // Map to snake_case field in DB
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      field: "updated_at", // Map to snake_case field in DB
+    },
   }, {
     sequelize,
     tableName: 'Alerts',

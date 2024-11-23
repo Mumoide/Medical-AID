@@ -5,7 +5,7 @@ const { Sessions } = require('../models');
 const refreshToken = async (req, res) => {
     try {
         const newToken = jwt.sign(
-            { id_user: req.user.id_user, email: req.user.email },
+            { id_user: req.user.id_user, email: req.user.email, nombre: req.user.nombre, role_id: req.user.role_id },
             process.env.SECRET_KEY,
             { expiresIn: '1h' }
         );

@@ -1,0 +1,82 @@
+.alert-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Center horizontally */
+  padding: 20px;
+  margin: 100px auto 5px auto;
+}
+
+.alerts-container {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.alert-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.alert-form label,
+.map-container label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.alert-form input,
+.alert-form select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.alert-form button {
+  padding: 10px 15px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.alert-form button:hover {
+  background-color: #0056b3;
+}
+
+.map-container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+  height: 500px;
+}
+
+.go-back-btn-create-alert {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #95a5a6;
+  color: white;
+}
+
+.go-back-btn-create-alert:hover {
+  background-color: #7f8c8d;
+}

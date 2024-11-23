@@ -101,8 +101,28 @@ td {
   transition: color 0.3s ease;
 }
 
-.icon-buttons-users-admin svg:hover {
+.user-admin-blue {
   color: #007bff;
+}
+
+.user-admin-green {
+  color: #17b103;
+}
+
+.user-admin-red {
+  color: #ce0000;
+}
+
+.user-admin-blue:hover {
+  color: #003f83;
+}
+
+.user-admin-green:hover {
+  color: #0e7001;
+}
+
+.user-admin-red:hover {
+  color: #9c0000;
 }
 
 /* Users.css */
