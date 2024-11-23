@@ -16,13 +16,15 @@ const AdminPage = () => {
             className="admin-header-image"
           />
           <div className="header-overlay">
-            <h1>Administración de Usuarios</h1>
-            <p>
-              Administra y monitorea a los usuarios, sus diagnósticos y alertas.
-            </p>
+            <h1>Bienvenido a la sección <br />De administración.</h1>
           </div>
         </div>
       </header>
+      <div className="admin-text-section">
+        <h1>
+          Aquí puedes gestionar a los usuarios, acceder al panel de diagnósticos y crear alertas importantes.
+        </h1>
+      </div>
 
       <section className="logo_medicalAid">
         <img
@@ -32,9 +34,9 @@ const AdminPage = () => {
         />
       </section>
 
-      <div className="spacer"></div>
-      <div className="spacer"></div>
-      <div className="spacer"></div>
+      <div className="spacer-admin"></div>
+      <div className="spacer-admin"></div>
+      <div className="spacer-admin"></div>
       {/* Buttons container */}
       <div className="admin-image-container">
         <img

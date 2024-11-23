@@ -12,13 +12,13 @@
 /* Contenedor Principal */
 .register-container {
   display: flex;
-  width: 100%;
+  width: 98%;
   max-width: 100%;
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  margin-top: 75px;
+  margin-top: 115px;
 }
 
 /* Sección de la Imagen */
@@ -193,6 +193,8 @@
     padding: 16px;
   }
 }
+
+
 /* Pantallas medianas-grandes (hasta 1024px) */
 @media (max-width: 1024px) {
   .register-container {
@@ -221,6 +223,48 @@
   .register-button {
     font-size: 18px;
     padding: 15px;
+  }
+}
+
+/* Pantallas pequeñas (hasta 375px) */
+@media (max-width: 821px) {
+  .register-container {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .image-section {
+    height: 250px; /* Altura más pequeña para pantallas muy pequeñas */
+    background-size: cover;
+    max-width: 100%;
+  }
+
+  .form-section {
+    padding: 15px;
+  }
+
+  .form-section h2 {
+    font-size: 22px;
+  }
+
+  .register-form {
+    gap: 15px 10px; /* Espaciado reducido entre filas y columnas */
+    grid-template-columns: 1fr 1fr; /* Dos columnas para campos */
+
+  }
+  .register-form label{
+    font-size: 15px;
+  }
+
+  .register-button {
+    font-size: 14px;
+    padding: 12px;
+  }
+  .register-form input, .register-form select{
+    width: 100%; 
+    padding: 8px;
+    font-size: 10px;
+    
   }
 }
 
@@ -285,6 +329,49 @@
     padding: 14px;
   }
 }
+
+/* Pantallas pequeñas (hasta 540px) */
+@media (max-width: 541px) {
+  .register-container {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .image-section {
+    height: 250px; /* Altura más pequeña para pantallas muy pequeñas */
+    background-size: cover;
+    max-width: 100%;
+  }
+
+  .form-section {
+    padding: 15px;
+  }
+
+  .form-section h2 {
+    font-size: 22px;
+  }
+
+  .register-form {
+    gap: 15px 10px; /* Espaciado reducido entre filas y columnas */
+    grid-template-columns: 1fr 1fr; /* Dos columnas para campos */
+  }
+
+  .register-button {
+    font-size: 14px;
+    padding: 12px;
+  }
+  .register-form input, .register-form select{
+    width: 100%; 
+    padding: 8px;
+    font-size: 10px;
+  }
+
+  .register-form label{
+    font-size: 12px;
+  }
+}
+
+
 /* Pantallas pequeñas (hasta 480px) */
 @media (max-width: 481px) {
   .register-container {
@@ -308,6 +395,52 @@
 
   .register-form {
     gap: 15px 10px; /* Espaciado reducido entre filas y columnas */
+    grid-template-columns: 1fr 1fr; /* Dos columnas para campos */
+  }
+
+  .register-button {
+    font-size: 14px;
+    padding: 12px;
+  }
+  .register-form input, .register-form select{
+    width: 100%; 
+    padding: 8px;
+    font-size: 10px;
+  }
+
+  .register-form label{
+    font-size: 12px;
+  }
+}
+
+/* Pantallas pequeñas (hasta 375px) */
+@media (max-width: 376px) {
+  .register-container {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .image-section {
+    height: 250px; /* Altura más pequeña para pantallas muy pequeñas */
+    background-size: cover;
+    max-width: 100%;
+  }
+
+  .form-section {
+    padding: 15px;
+  }
+
+  .form-section h2 {
+    font-size: 22px;
+  }
+
+  .register-form {
+    gap: 15px 10px; /* Espaciado reducido entre filas y columnas */
+    grid-template-columns: 1fr 1fr; /* Dos columnas para campos */
+
+  }
+  .register-form label{
+    font-size: 10px;
   }
 
   .register-button {

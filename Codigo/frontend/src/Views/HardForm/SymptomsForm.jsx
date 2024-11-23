@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef  } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import Select from "react-select";
@@ -26,6 +26,12 @@ const SymptomComboBox = () => {
   const [easyComboBoxes, setEasyComboBoxes] = useState([{ id: uuidv4() }]);
   const [selectedEasySymptoms, setSelectedEasySymptoms] = useState({});
 
+  const [shouldScrollToEasy, setShouldScrollToEasy] = useState(false); // Track if scrolling is needed
+  const easySectionRef = useRef(null); // Reference for the easy section
+
+  const [shouldScrollToNormal, setShouldScrollToNormal] = useState(false); // Track if scrolling is needed
+  const normalSectionRef = useRef(null); // Reference for the easy section
+  
   useEffect(() => {
     const fetchSymptoms = async () => {
       try {
@@ -314,6 +320,7 @@ const SymptomComboBox = () => {
         return false;
       } else {
         setEasyForm(false);
+        setShouldScrollToNormal(true); // Trigger scroll after rendering
         return true;
       }
     });
@@ -325,11 +332,30 @@ const SymptomComboBox = () => {
         return false;
       } else {
         setNormalForm(false);
+        setShouldScrollToEasy(true); // Trigger scroll after rendering
         return true;
       }
     });
   };
 
+  useEffect(() => {
+    if (easyForm && shouldScrollToEasy && easySectionRef.current) {
+      // Perform scrolling only if easyForm is active and shouldScrollToEasy is true
+      const topPosition = easySectionRef.current.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: topPosition, behavior: "smooth" });
+      setShouldScrollToEasy(false); // Reset the scrolling trigger
+    }
+  }, [easyForm, shouldScrollToEasy]);
+
+  useEffect(() => {
+    if (normalForm && shouldScrollToNormal && normalSectionRef.current) {
+      // Perform scrolling only if normalForm is active and shouldScrollToNormal is true
+      const topPosition = normalSectionRef.current.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: topPosition, behavior: "smooth" });
+      setShouldScrollToNormal(false); // Reset the scrolling trigger
+    }
+  }, [normalForm, shouldScrollToNormal]);
+  
   // Extract unique grupo_sintomatico values and sort alphabetically
   const uniqueGroups = [
     ...new Set(symptoms.flatMap((symptom) => symptom.categories)),
@@ -371,27 +397,29 @@ const SymptomComboBox = () => {
               />
             </div>
           </div>
-
           <section className="seccion-symptoms">
-        <h2>Puedes agregar hasta 16 síntomas. Selecciona al menos uno antes de iniciar el diagnóstico.</h2>
-
-        <div className="seccion-symptoms">
-          <div className="seccion-symptomsForm">
-            <img src="/images/icons/precision.png" alt="Precisión" />
-            <p>Al hacer clic en "Iniciar Diagnóstico," procesaremos tus síntomas para ofrecerte un diagnóstico preliminar. Asegúrate de haber seleccionado todos los síntomas relevantes.</p>
-          </div>
-          <div className="seccion-symptomsForm">
-            <img src="/images/icons/rapidez.png" alt="Rapidez" />
-            <p>Nuestros resultados no reemplazan una consulta médica. Te recomendamos que acudas a un profesional de la salud para una evaluación completa.</p>
-          </div>
-        </div>
+        
       </section>
 
           {normalForm && (
+            <div className="easy-section-container" ref={normalSectionRef}>
+            <div className="easy-section-instruction-title"><h2>Instrucciones</h2></div>
+        <div className="seccion-symptoms">
+          <div className="seccion-symptomsForm">
+            <img src="/images/icons/seleccion.png" alt="form" />
+            <p>Selecciona los síntomas que describan mejor tu situación actual. Puedes agregar hasta 16 síntomas. Selecciona al menos uno antes de iniciar el diagnóstico.</p>
+          </div>
+          <div className="seccion-symptomsForm">
+            <img src="/images/icons/rapidez.png" alt="resultados" />
+            <p>Al hacer clic en "Iniciar Diagnóstico," procesaremos tus síntomas para ofrecerte un diagnóstico preliminar. Asegúrate de haber seleccionado todos los síntomas relevantes.</p>
+          </div>
+          <div className="seccion-symptomsForm">
+            <img src="/images/icons/exploratory.png" alt="form" />
+            <p>Nuestros resultados no reemplazan una consulta médica. Te recomendamos que acudas a un profesional de la salud para una evaluación completa.</p>
+          </div>
+        </div>
             <div className="diagnosis-container">
-              <h2>
-                Por favor, selecciona los síntomas que mejor describan tu situación actual.
-              </h2>
+
               {comboBoxes.map((comboBox, index) => (
                 <div className="combobox-container" key={comboBox.id}>
                   <label htmlFor={`symptom-combobox-${comboBox.id}`}>
@@ -454,26 +482,39 @@ const SymptomComboBox = () => {
                 <button onClick={handleBackClick}>Volver</button>
               </div>
             </div>
+            </div>
           )}
           {easyForm && (
+            <div className="easy-section-container" ref={easySectionRef}>
+                <div className="easy-section-instruction-title"><h2>Instrucciones</h2></div>
+ 
+            <div className="seccion-symptoms">
+              <div className="seccion-symptomsForm">
+                <img src="/images/icons/seleccion.png" alt="form" />
+                <p>Selecciona una categoría de síntomas que describa mejor tu situación actual.  Puedes agregar hasta 16 síntomas. Selecciona al menos uno antes de iniciar el diagnóstico.</p>
+              </div>
+              <div className="seccion-symptomsForm">
+                <img src="/images/icons/rapidez.png" alt="resultados" />
+                <p>Al hacer clic en "Iniciar Diagnóstico," procesaremos tus síntomas para ofrecerte un diagnóstico preliminar. Asegúrate de haber seleccionado todos los síntomas relevantes.</p>
+              </div>
+              <div className="seccion-symptomsForm">
+                <img src="/images/icons/exploratory.png" alt="form" />
+                <p>Nuestros resultados no reemplazan una consulta médica. Te recomendamos que acudas a un profesional de la salud para una evaluación completa.</p>
+              </div>
+            </div>
             <div className="easy-form-container">
               <div className="categoria">
-                <img
-                  src="/images/backgrounds/letter_icon.png"
-                  alt="icono-cat"
-                  className="icono-categoria"
-                ></img>
                 <h2>Selecciona una Categoria</h2>
                 <div className="group-buttons">
                   {uniqueGroups.map((group) => (
                     <button
-                      key={group}
-                      onClick={() => {
-                        setSelectedGroup(group);
-                      }}
-                      className={`group-button ${
-                        selectedGroup === group ? "active" : ""
-                      }`}
+                    key={group}
+                    onClick={() => {
+                      setSelectedGroup(group);
+                    }}
+                    className={`group-button ${
+                      selectedGroup === group ? "active" : ""
+                    }`}
                     >
                       {group}
                     </button>
@@ -481,6 +522,7 @@ const SymptomComboBox = () => {
                 </div>
               </div>
               <div className="combobox-categorias">
+
                 <h2>Formulario Intuitivo</h2>
                 {easyComboBoxes.map((comboBox, index) => (
                   <div className="combobox-container" key={comboBox.id}>
@@ -502,20 +544,20 @@ const SymptomComboBox = () => {
                         placeholder="Type to search..."
                         isDisabled={index !== easyComboBoxes.length - 1}
                         className="seleccionar-sintoma"
-                      />
+                        />
                       <button
                         className="eliminar-btn-container"
                         onClick={() => removeEasyComboBox(comboBox.id)}
                         disabled={easyComboBoxes.length === 1}
                         style={{
                           cursor:
-                            easyComboBoxes.length === 1
-                              ? "not-allowed"
-                              : "pointer",
+                          easyComboBoxes.length === 1
+                          ? "not-allowed"
+                          : "pointer",
                           opacity: easyComboBoxes.length === 1 ? 0.5 : 1,
                         }}
                         aria-label="Delete ComboBox"
-                      >
+                        >
                         <RxCrossCircled className="eliminar-btn" />
                       </button>
                     </div>
@@ -524,17 +566,18 @@ const SymptomComboBox = () => {
                 <div
                   className="buttons-container"
                   style={{ marginTop: "20px" }}
-                >
+                  >
                   <button onClick={addNewEasyComboBox}>Añadir Nuevo</button>
 
                   <button
                     style={{ padding: "10px 20px", fontSize: "16px" }}
                     onClick={handleEasyDiagnosis}
-                  >
+                    >
                     Iniciar Diagnóstico
                   </button>
 
                   <button onClick={handleBackClick}>Volver</button>
+                    </div>
                 </div>
               </div>
             </div>

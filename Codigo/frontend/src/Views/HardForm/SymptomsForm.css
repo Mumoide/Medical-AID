@@ -32,8 +32,8 @@
 }
 
 .diagnosis-container h2 {
-  font-size: 2rem;
-  color: black;
+  font-size: 1.5rem;
+  color: #0388a6;
   margin: auto;
   margin-top: 35px;
 }
@@ -81,7 +81,7 @@
 
 .text-content h1 {
   max-width: 500px;
-  font-size: 4rem;
+  font-size: 3rem;
   margin-bottom: 10px;
   margin-top: 180px;
   color: #0388a6;
@@ -126,8 +126,8 @@
 
 .seccion-symptoms {
   text-align: center;
-  padding: 40px 20px;
-  margin: 20px auto;
+  padding: 20px 20px;
+  margin: 0px auto;
   max-width: 1200px;
 }
 
@@ -140,11 +140,11 @@
 .seccion-symptoms p {
   font-size: 1rem;
   color: #666;
-  margin-bottom: 30px;
 }
 
 .seccion-symptomsForm {
   display: inline-block;
+height: 168.6px;
   width: 250px; /* Ajuste del ancho de cada tarjeta */
   padding: 20px;
   background-color: #ffffff;
@@ -161,9 +161,8 @@
 }
 
 .seccion-symptomsForm img {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 15px;
+  width: 35px;
+  height: 35px;
 }
 
 .seccion-symptomsForm h3 {
@@ -173,7 +172,7 @@
 }
 
 .seccion-symptomsForm p {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   color: #555;
   line-height: 1.5;
 }
@@ -252,21 +251,23 @@
   background-color: rgb(124, 16, 16);
 }
 
+.easy-section-container{
+width:100%;
+}
+
+.easy-section-instruction-title h2{
+  text-align: center;
+}
+
 .categoria {
   display: flex;
   flex-direction: column; /* Coloca la imagen arriba del texto */
   align-items: center; /* Alinea horizontalmente ambos elementos */
   text-align: center; /* Centra el texto debajo de la imagen */
   padding: 20px; /* Espacio alrededor del contenido */
-  margin-right: 390px;
   margin-bottom: 30px;
 }
 
-.icono-categoria {
-  max-width: 150px; /* Ajusta el tamaño de la imagen según sea necesario */
-  height: auto; /* Mantén la proporción de la imagen */
-
-}
 .categoria h2 {
   font-size: 1.5rem; /* Ajusta el tamaño del texto */
   font-weight: bold;
@@ -278,6 +279,7 @@
 .combobox-categorias {
   display: flex;
   flex-direction: column;
+  margin: auto;
   background-color: #ffffff; /* Cambia a blanco para un look más limpio */
   border-radius: 20px;
   width: 72%;
@@ -341,10 +343,10 @@
 
 .group-buttons {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* Define exactamente 7 columnas */
-  gap: 15px; /* Espacio entre botones */
+  grid-template-columns: repeat(8, 1fr); /* Define exactamente 7 columnas */
   max-width: 50%; /* Ancho máximo del contenedor para controlar el diseño */
   margin: 0 auto; /* Centrar el contenedor en la página */
+  gap:10px;
   margin-top: 20px; /* Separación superior */
   justify-content: center; /* Centra los botones horizontalmente dentro del contenedor */
 }
@@ -354,12 +356,13 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
-  font-size: 0.9;
+  font-size: 0.7rem;
   color: #333;
   cursor: pointer;
   text-align: center;
   transition: background-color 0.3s ease;
-  width: 140px;
+  width: 110px;
+  min-height: 40px;;
   margin: 0 auto; /* Centrar el contenedor en la página */
 }
 
@@ -371,4 +374,10 @@
 .group-button.active {
   background-color: #0388a6;
   color: #fff;
+}
+
+@media (max-width: 1024px) {
+  .group-buttons{
+    grid-template-columns: repeat(6, 1fr); /* Define exactamente 7 columnas */
+  }
 }
