@@ -1,7 +1,7 @@
 // alerts.routes.js
 const express = require("express");
 const router = express.Router();
-const { createAlert, getUserAlerts, getAlertsWithReadedCount } = require("../controllers/AlertController");
+const { createAlert, getUserAlerts, getAlertsWithReadedCount, updateAlertReadStatus, updateAllAlertsReadStatus } = require("../controllers/AlertController");
 const authenticateAdminToken = require('../middleware/authenticateAdminToken'); // Correct path to middleware
 const authenticateToken = require('../middleware/authenticateToken');
 
@@ -11,5 +11,9 @@ router.post("/create", authenticateAdminToken, createAlert);
 router.get('/user-alerts', authenticateToken, getUserAlerts);
 // Route to retrieve all alerts
 router.get('/all-alerts', authenticateAdminToken, getAlertsWithReadedCount);
+// Route to update an alert
+router.patch('/update-alert', authenticateToken, updateAlertReadStatus);
+// Route to update all alerts
+router.patch('/update-all-alerts', authenticateToken, updateAllAlertsReadStatus);
 
 module.exports = router;

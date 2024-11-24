@@ -2,52 +2,21 @@ import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import AlertList from "../AlertList/AlertList"; // Adjust path as needed
 
-function Navbar({ isLoggedIn, roleId, userEmail, onLogout }) {
+function Navbar({
+  isLoggedIn,
+  roleId,
+  userEmail,
+  onLogout,
+  alertsData,
+  alertsCount,
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [alertsCount, setAlertsCount] = useState(0);
-  const [alertsData, setAlertsData] = useState([]); // State for alerts data
   const [showAlertList, setShowAlertList] = useState(false); // State for alert list visibility
   const dropdownRef = useRef(null); // Create a ref for the dropdown
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
-  useEffect(() => {
-    console.log("navbar roleid: ", roleId);
-    // Function to fetch alerts data
-    const fetchAlerts = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:3001/api/alerts/user-alerts",
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-
-        if (!response.ok) {
-          console.log(`Error: ${response.status} ${response.statusText}`);
-          throw new Error("Failed to fetch alerts");
-        }
-
-        const alertsData = await response.json();
-        console.log(alertsData);
-        setAlertsData(alertsData); // Store alerts data
-        const unreadCount = alertsData.filter(
-          (alert) => alert.readed === false
-        ).length;
-        setAlertsCount(unreadCount);
-      } catch (error) {
-        console.error("Error fetching alerts:", error);
-      }
-    };
-
-    if (isLoggedIn) {
-      fetchAlerts(); // Only fetch alerts if the user is logged in
-    }
-  }, [isLoggedIn]); // Fetch alerts whenever the logged-in state changes
 
   // Detect clicks outside the dropdown
   useEffect(() => {

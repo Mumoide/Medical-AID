@@ -40,6 +40,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token')); // Initialize based on token in localStorage
   const [userEmail, setUserEmail] = useState(nombre || '');
   const [userRoleId, setUserRoleId] = useState(roleId || '');
+  const [alertsCount, setAlertsCount] = useState(0);
+  const [alertsData, setAlertsData] = useState([]); // State for alerts data
 
   const handleLoginSuccess = (email, role_id) => {
     setIsLoggedIn(true); // Set login state to true
@@ -53,6 +55,67 @@ function App() {
     setIsLoggedIn(false); // Set login state to false
     setUserEmail('');
     window.location.href = '/inicio-de-sesion'; // Redirect to home page after logout
+  };
+
+  useEffect(() => {
+    // Function to fetch alerts data
+    const fetchAlerts = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:3001/api/alerts/user-alerts",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          console.log(`Error: ${response.status} ${response.statusText}`);
+          throw new Error("Failed to fetch alerts");
+        }
+
+        const alertsData = await response.json();
+        setAlertsData(alertsData); // Store alerts data
+        const unreadCount = alertsData.filter(
+          (alert) => alert.readed === false
+        ).length;
+        setAlertsCount(unreadCount);
+      } catch (error) {
+        console.error("Error fetching alerts:", error);
+      }
+    };
+
+    if (isLoggedIn) {
+      fetchAlerts(); // Only fetch alerts if the user is logged in
+    }
+  }, [isLoggedIn]); // Fetch alerts whenever the logged-in state changes
+
+  const fetchAlerts = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:3001/api/alerts/user-alerts",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        console.log(`Error: ${response.status} ${response.statusText}`);
+        throw new Error("Failed to fetch alerts");
+      }
+
+      const alertsData = await response.json();
+      setAlertsData(alertsData); // Store alerts data
+      const unreadCount = alertsData.filter(
+        (alert) => alert.readed === false
+      ).length;
+      setAlertsCount(unreadCount);
+    } catch (error) {
+      console.error("Error fetching alerts:", error);
+    }
   };
 
   useEffect(() => {
@@ -112,7 +175,7 @@ function App() {
     <Router>
       <div>
         {/* Render the Navbar */}
-        <Navbar isLoggedIn={isLoggedIn} roleId={userRoleId} userEmail={userEmail} onLogout={handleLogout} />
+        <Navbar isLoggedIn={isLoggedIn} roleId={userRoleId} userEmail={userEmail} onLogout={handleLogout} alertsData={alertsData} alertsCount={alertsCount} />
         <ScrollToTop />
         <Routes>
           {/* Home Page */}
@@ -138,7 +201,7 @@ function App() {
           <Route path='/admin/dashboard' element={<DashboardPage />} />
           {/* Alerts administration */}
           <Route path='/admin/alerts' element={<AlertsPage />} />
-          <Route path='/admin/create_alert' element={<CreateAlertPage />} />
+          <Route path='/admin/create_alert' element={<CreateAlertPage fetchAlerts={fetchAlerts} />} />
 
           {/* Form Page */}
           <Route path="/form" element={<FormPage />} />
@@ -157,8 +220,9 @@ function App() {
           <Route path="/update-password" element={<ChangePasswordPage onLogout={handleLogout} />} />
           <Route path="/disease" element={<DiseasePage />} />
 
-          {/* Profile Page */}
-          <Route path="/notifications" element={<PublicAlertsPage />} />
+          {/* Public Alerts Page */}
+          <Route path="/notifications" element={<PublicAlertsPage fetchAlerts={fetchAlerts} />} />
+
           {/* Catch-all route to redirect to home for undefined routes */}
           <Route path="*" element={<NotFoundRedirect />} />
         </Routes>
