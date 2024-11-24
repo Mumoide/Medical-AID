@@ -123,23 +123,32 @@ function Navbar({
         />
       )}
       <div className="dropdown" ref={dropdownRef}>
-        <a className="dropdown-name" href="/profile">
-          <p>{userEmail}</p>
-          <img
-            src="/images/icons/profile-icon.png"
-            target="/"
-            alt="profile-icon"
-          />
-        </a>
-        <div
-          className="alert-icon-container"
-          onClick={() => setShowAlertList(true)}
-        >
-          <img src="/images/icons/bell-icon.png" target="/" alt="bell-icon" />
-          {alertsCount > 0 && (
-            <span className="alert-count">{alertsCount}</span>
-          )}
-        </div>
+        {isLoggedIn && (
+          <>
+            <a className="dropdown-name" href="/profile">
+              <p>{userEmail}</p>
+              <img
+                src="/images/icons/profile-icon.png"
+                target="/"
+                alt="profile-icon"
+              />
+            </a>
+            <div
+              className="alert-icon-container"
+              onClick={() => setShowAlertList(true)}
+            >
+              <img
+                src="/images/icons/bell-icon.png"
+                target="/"
+                alt="bell-icon"
+              />
+              {alertsCount > 0 && (
+                <span className="alert-count">{alertsCount}</span>
+              )}
+            </div>
+          </>
+        )}
+
         <button className="dropdown-toggle" onClick={toggleMenu}>
           Menu
         </button>
@@ -151,9 +160,13 @@ function Navbar({
           <a className="dropdown-item" href="/biblioteca-de-diagnosticos">
             Biblioteca de diagnosticos
           </a>
-          <a className="dropdown-item" href="/admin">
-            Administración
-          </a>
+          {[1, 2, "1", "2"].includes(roleId) ? (
+            <a className="dropdown-item" href="/admin">
+              Administración
+            </a>
+          ) : (
+            <></>
+          )}
           <a className="dropdown-item" href="/about-us">
             Nosotros
           </a>

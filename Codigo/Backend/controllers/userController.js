@@ -374,16 +374,24 @@ exports.loginUser = async (req, res) => {
 
 
 exports.logoutUser = async (req, res) => {
-  const token = req.headers['authorization'];
+  const token = req.headers['authorization']?.split(' ')[1]; // Extract token from Authorization header
+  if (!token) {
+    return res.status(400).json({ message: 'Token not provided.' });
+  }
+  console.log("aaaaaaaaaaaaaaaaaaaaaaa", token)
 
   try {
-    // Eliminar la sesión de la base de datos
-    await Sessions.destroy({ where: { session_token: token } });
+    // Delete the session associated with the token
+    const deletedSession = await Sessions.destroy({ where: { session_token: token } });
 
-    return res.status(200).json({ message: 'Sesión cerrada correctamente' });
+    if (!deletedSession) {
+      return res.status(404).json({ message: 'Session not found or already logged out.' });
+    }
+
+    return res.status(200).json({ message: 'Logged out successfully.' });
   } catch (error) {
     console.error('Error during logout:', error);
-    return res.status(500).json({ error: 'Error del servidor' });
+    return res.status(500).json({ message: 'Server error during logout.' });
   }
 };
 
@@ -517,6 +525,11 @@ exports.deleteUser = async (req, res) => {
 // Function to fetch all user data by user_id
 exports.getUserById = async (req, res) => {
   const userId = req.params.id;
+
+  // Validate the userId
+  if (!/^\d+$/.test(userId)) {
+    return res.status(400).json({ error: 'Invalid user ID provided.' });
+  }
 
   try {
     // Find the user by id with related profile and roles data

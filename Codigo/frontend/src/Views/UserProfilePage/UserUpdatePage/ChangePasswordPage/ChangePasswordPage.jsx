@@ -39,8 +39,15 @@ function ChangePasswordPage({ onLogout }) {
       );
 
       if (response.status === 200) {
-        // Success: remove token and redirect to login page
-        onLogout();
+        Swal.fire({
+          icon: "success",
+          title: "Contraseña cambiada",
+          text: "Se ha cerrado su sesión.",
+          confirmButtonText: "Aceptar",
+          confirmButtonColor: "#3690a4",
+        }).then(() => {
+          onLogout();
+        });
       }
     } catch (error) {
       // Error handling
@@ -55,7 +62,10 @@ function ChangePasswordPage({ onLogout }) {
   return (
     <div className="change-password-container">
       <h1 className="change-password-title">Actualizar Contraseña</h1>
-      <p>Crea una contraseña segura, con una combinación de letras, números y símbolos.</p>
+      <p>
+        Crea una contraseña segura, con una combinación de letras, números y
+        símbolos.
+      </p>
       <form onSubmit={handleSubmit} className="change-password-form">
         <div className="change-password-field">
           <label>Contraseña:</label>

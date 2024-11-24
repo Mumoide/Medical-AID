@@ -31,8 +31,6 @@ function LoginForm({ onLoginSuccess }) {
       const nombre = decodedToken.nombre;
       const role_id = decodedToken.role_id;
 
-      localStorage.setItem("user_id", data.userId);
-
       // Llama al callback onLoginSuccess para actualizar el estado
       onLoginSuccess(nombre, role_id);
 

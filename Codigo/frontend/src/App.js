@@ -49,12 +49,44 @@ function App() {
     setUserRoleId(role_id); // Set user role id
   };
 
+  const logoutUser = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      console.error("No token available for logout.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3001/api/users/logout", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        console.log(`Error: ${response.status} ${response.statusText}`);
+        throw new Error("Failed to logout");
+      }
+
+      console.log("Logged out successfully.");
+    } catch (error) {
+      console.error("Error during logout:", error);
+    } finally {
+      // Clear local storage and reset app state
+      localStorage.removeItem("token");
+      localStorage.removeItem("email");
+      setIsLoggedIn(false);
+      setUserEmail('');
+      setUserRoleId('');
+      window.location.href = '/inicio-de-sesion';
+    }
+  };
+
+
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('email');
-    setIsLoggedIn(false); // Set login state to false
-    setUserEmail('');
-    window.location.href = '/inicio-de-sesion'; // Redirect to home page after logout
+    logoutUser();
   };
 
   useEffect(() => {
