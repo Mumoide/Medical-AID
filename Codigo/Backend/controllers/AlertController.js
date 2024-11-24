@@ -105,7 +105,7 @@ const getUserAlerts = async (req, res) => {
                 {
                     model: Alerts,
                     as: 'alert',
-                    attributes: ['title', 'description', 'alert_type', 'createdAt'],
+                    attributes: ['id_alert', 'title', 'description', 'alert_type', 'createdAt', 'updatedAt'],
                     include: [
                         {
                             model: AlertGeoLocation,
@@ -118,10 +118,12 @@ const getUserAlerts = async (req, res) => {
         });
 
         const formattedAlerts = alerts.map(alert => ({
+            id_alert: alert.alert.id_alert,
             title: alert.alert.title,
             description: alert.alert.description,
             alert_type: alert.alert.alert_type,
             created_at: alert.alert.createdAt,
+            updated_at: alert.alert.updatedAt,
             readed: alert.readed,
             latitude: alert.alert.geoLocation.latitude,
             longitude: alert.alert.geoLocation.longitude,
@@ -194,4 +196,81 @@ const getAlertsWithReadedCount = async (req, res) => {
     }
 };
 
-module.exports = { getAlertsWithReadedCount, createAlert, getUserAlerts };
+const updateAlertReadStatus = async (req, res) => {
+    const userId = req.user.id_user; // Extract user ID from the authenticated request token
+    console.log(userId)
+    const { alert_id } = req.body; // Extract alert ID from the request body
+
+    if (!alert_id) {
+        return res.status(400).json({ message: "Alert ID is required." });
+    }
+
+    try {
+        // Find the UserAlert record to ensure it exists before updating
+        const userAlert = await UserAlerts.findOne({
+            where: {
+                id_user: userId,
+                id_alert: alert_id
+            }
+        });
+
+        if (!userAlert) {
+            return res.status(404).json({ message: "UserAlert not found." });
+        }
+
+        // Update the readed column
+        userAlert.readed = !userAlert.readed; // Toggle the value
+        await userAlert.save();
+
+        return res.status(200).json({
+            message: "Alert read status updated successfully.",
+            alert_id: alert_id,
+            readed: userAlert.readed
+        });
+    } catch (error) {
+        console.error("Error updating alert read status:", error);
+        res.status(500).json({
+            message: "Error updating alert read status.",
+            error: error.message
+        });
+    }
+};
+
+const updateAllAlertsReadStatus = async (req, res) => {
+    const userId = req.user.id_user; // Extract user ID from the authenticated request token
+
+    try {
+        // Start a transaction
+        const result = await UserAlerts.sequelize.transaction(async (transaction) => {
+            // Retrieve all alerts for the user
+            const userAlerts = await UserAlerts.findAll({
+                where: { id_user: userId },
+                transaction,
+            });
+
+            if (!userAlerts || userAlerts.length === 0) {
+                return res.status(404).json({ message: "No alerts found for the user." });
+            }
+
+            await UserAlerts.update(
+                { readed: true },
+                { where: { id_user: userId }, transaction }
+            );
+
+            return true; // Return the new status
+        });
+
+        res.status(200).json({
+            message: "All alerts read status updated successfully.",
+            readed: result, // The new read status for all alerts
+        });
+    } catch (error) {
+        console.error("Error updating all alert read statuses:", error);
+        res.status(500).json({
+            message: "Error updating all alert read statuses.",
+            error: error.message,
+        });
+    }
+};
+
+module.exports = { updateAllAlertsReadStatus, updateAlertReadStatus, getAlertsWithReadedCount, createAlert, getUserAlerts };

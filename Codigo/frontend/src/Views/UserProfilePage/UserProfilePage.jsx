@@ -3,10 +3,20 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./UserProfilePage.css";
 import { FaFileAlt, FaPen } from "react-icons/fa"; // Import icons
+import { jwtDecode } from "jwt-decode";
 
 function UserProfilePage() {
   const [userProfile, setUserProfile] = useState(null);
-  const userId = localStorage.getItem("user_id");
+  const token = localStorage.getItem("token");
+  const userId = token ? jwtDecode(token)?.id_user : null;
+  if (!userId) {
+    Swal.fire("Error", "Invalid token. Please log in again.", "error").then(
+      () => {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }
+    );
+  }
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -72,7 +82,6 @@ function UserProfilePage() {
   }
 
   return (
-    
     <div className="user-profile-page">
       <div className="profile-card">
         <h1 className="profile-title">Mi Perfil</h1>
@@ -113,11 +122,11 @@ function UserProfilePage() {
           <p>
             <strong>Correo:</strong> <span>{userProfile.correo}</span>
           </p>
-          {userProfile.role !== "User" && (
+          {/* {userProfile.role !== "User" && (
             <p>
               <strong>Role:</strong> <span>{userProfile.role}</span>
             </p>
-          )}
+          )} */}
         </div>
         <div className="profile-buttons">
           <button

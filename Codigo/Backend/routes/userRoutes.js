@@ -5,6 +5,8 @@ const authenticateToken = require('../middleware/authenticateToken'); // Correct
 
 // POST route to register a new user
 router.post('/register', userController.registerUser); // Use registerUser method
+// Route to logout user
+router.post('/logout', userController.logoutUser);
 // Route to handle user login
 router.post('/login', userController.loginUser); // Use loginUser method
 // Route to retrieve all users and their roles
@@ -21,8 +23,6 @@ router.put('/profile', authenticateToken, userController.updateProfile);
 router.put('/:id', authenticateToken, userController.updateUser);
 // Route to register an admin user
 router.post('/register-admin', authenticateToken, userController.registerAdmin);
-// Route to logout user
-router.post('/logout', userController.logoutUser);
 // Route to change password of user
 router.post('/update-password', authenticateToken, userController.changePassword)
 // Route to send code for recovery password

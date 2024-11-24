@@ -17,7 +17,7 @@ const markerIcon = new L.Icon({
   shadowSize: [41, 41],
 });
 
-function AlertsView() {
+function AlertsView({ fetchAlerts }) {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -150,6 +150,7 @@ function AlertsView() {
         }
       );
 
+      fetchAlerts();
       Swal.fire({
         icon: "success",
         title: "Alerta Creada",
