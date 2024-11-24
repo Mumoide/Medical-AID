@@ -10,7 +10,7 @@
 }
 
 .ag-header {
-  background-color: #155a9a;
+  background-color: #0388a6;
   color: white;
 }
 
@@ -132,13 +132,14 @@
   justify-content: space-around;
   margin: 20px 0;
   padding: 10px;
-  background-color: #f4f4f4;
+  background-color: #0388a6;
   border-radius: 8px;
 }
 
 .indicator {
   text-align: center;
   font-size: 16px;
+  color: white;
 }
 
 /* Sección de filtro */
