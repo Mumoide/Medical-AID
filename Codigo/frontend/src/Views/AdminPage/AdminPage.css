@@ -1,6 +1,6 @@
 /* General page styling */
 .admin-page {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background-color: rgb(255, 254, 254);
 }
 
@@ -30,8 +30,8 @@
   background-color: rgba(0, 0, 0, 0.4); /* Optional dark overlay */
 }
 
-.header-overlay h1{
-text-align: center;
+.header-overlay h1 {
+  text-align: center;
 }
 
 /* Inicio Sección de texto con fondo */
@@ -48,13 +48,11 @@ text-align: center;
 }
 /* Fin Sección de texto con fondo */
 
-.logo_medicalAid img{
-  position: absolute;
-  top: 125%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.logo_medicalAid img {
+  position: relative;
+  margin-top: 25px;
+  left: calc(50% - 20px); /* Fixed spacing around the operator */
   width: 9%;
-
 }
 
 .admin-header h1 {
@@ -62,21 +60,19 @@ text-align: center;
   margin-bottom: 10px;
 }
 
-
 /* Image container and buttons */
 .admin-image-container {
   position: relative;
   text-align: center;
   margin-bottom: 150px;
   margin-top: 25px;
-  
 }
 
 .admin-background-image {
   width: 80%;
   max-height: 400px;
   object-fit: cover;
-  margin-top: 260px;
+  margin-top: 80px;
   border-radius: 125px;
 }
 
@@ -95,6 +91,10 @@ text-align: center;
 
 /* Card styling */
 .admin-action-card {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: white; /* Slight transparency */
   padding: 20px;
   border-radius: 8px;
@@ -102,17 +102,22 @@ text-align: center;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-  font-size: 0.85rem;
+}
+
+/* Card styling */
+.admin-action-card p {
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 /* Specific styling for the alert icon inside the third card */
 .admin-action-card:nth-child(3) img {
-  width: 50px;  /* Adjust the size */
-  height: auto;  /* Maintain aspect ratio */
-  float: left;  /* Moves the icon to the left */
-  margin-right: 150px;  /* Add some space between the icon and the text */
+  width: 50px; /* Adjust the size */
+  height: auto; /* Maintain aspect ratio */
+  float: left; /* Moves the icon to the left */
+  margin-right: 150px; /* Add some space between the icon and the text */
 }
-.admin-action-card img{
+.admin-action-card img {
   margin-left: 60px;
 }
 
@@ -122,19 +127,18 @@ text-align: center;
 
 /* Specific card colors */
 .admin-action-card:nth-child(1) {
-  background-color: #4EABDF;
+  background-color: #4eabdf;
   height: 150px;
 }
 
 .admin-action-card:nth-child(2) {
-  background-color: #D1F8CB;
+  background-color: #d1f8cb;
   color: #333;
   height: 150px;
-
 }
 
 .admin-action-card:nth-child(3) {
-  background-color: #F5BD2D;
+  background-color: #f5bd2d;
   height: 150px;
 }
 
@@ -181,17 +185,15 @@ text-align: center;
     display: block; /* Asegurar flujo adecuado */
     margin: 0 auto;
     max-width: 25px; /* Ajustar tamaño del icono */
-
   }
   .admin-action-card:nth-child(1) {
     height: 160px;
   }
-  
+
   .admin-action-card:nth-child(2) {
     height: 160px;
-  
   }
-  
+
   .admin-action-card:nth-child(3) {
     height: 160px;
   }
@@ -209,15 +211,13 @@ text-align: center;
     gap: 5px; /* Reduce gap between buttons */
   }
 
-  .admin-buttons h2{
-   text-align: center;
+  .admin-buttons h2 {
+    text-align: center;
   }
 
-  .logo_medicalAid img{
+  .logo_medicalAid img {
     position: relative;
-    margin-top: 85px;
   }
-
 }
 @media (max-width: 1025px) {
   .admin-header h1 {
@@ -247,17 +247,15 @@ text-align: center;
     display: block; /* Asegurar flujo adecuado */
     margin: 0 auto;
     max-width: 25px; /* Ajustar tamaño del icono */
-
   }
   .admin-action-card:nth-child(1) {
     height: 160px;
   }
-  
+
   .admin-action-card:nth-child(2) {
     height: 160px;
-  
   }
-  
+
   .admin-action-card:nth-child(3) {
     height: 160px;
   }
@@ -275,15 +273,14 @@ text-align: center;
     gap: 5px; /* Reduce gap between buttons */
   }
 
-  .admin-buttons h2{
-   text-align: center;
+  .admin-buttons h2 {
+    text-align: center;
   }
 
-  .logo_medicalAid img{
+  .logo_medicalAid img {
     position: relative;
     margin-top: 85px;
   }
-
 }
 
 @media (max-width: 913px) {
@@ -315,17 +312,15 @@ text-align: center;
     display: block; /* Asegurar flujo adecuado */
     margin: 0 auto;
     max-width: 35px; /* Ajustar tamaño del icono */
-
   }
   .admin-action-card:nth-child(1) {
     height: 120px;
   }
-  
+
   .admin-action-card:nth-child(2) {
     height: 120px;
-  
   }
-  
+
   .admin-action-card:nth-child(3) {
     height: 120px;
   }
@@ -345,12 +340,10 @@ text-align: center;
     height: 95%;
   }
 
-
-  .logo_medicalAid img{
+  .logo_medicalAid img {
     position: relative;
     width: 18%;
   }
-
 }
 
 @media (max-width: 854px) {
@@ -382,17 +375,15 @@ text-align: center;
     display: block; /* Asegurar flujo adecuado */
     margin: 0 auto;
     max-width: 35px; /* Ajustar tamaño del icono */
-
   }
   .admin-action-card:nth-child(1) {
     height: 120px;
   }
-  
+
   .admin-action-card:nth-child(2) {
     height: 120px;
-  
   }
-  
+
   .admin-action-card:nth-child(3) {
     height: 120px;
   }
@@ -412,12 +403,10 @@ text-align: center;
     height: 95%;
   }
 
-
-  .logo_medicalAid img{
+  .logo_medicalAid img {
     position: relative;
     width: 18%;
   }
-
 }
 
 @media (max-width: 821px) {
@@ -448,17 +437,15 @@ text-align: center;
     display: block; /* Asegurar flujo adecuado */
     margin: 0 auto;
     max-width: 35px; /* Ajustar tamaño del icono */
-
   }
   .admin-action-card:nth-child(1) {
     height: 120px;
   }
-  
+
   .admin-action-card:nth-child(2) {
     height: 120px;
-  
   }
-  
+
   .admin-action-card:nth-child(3) {
     height: 120px;
   }
@@ -476,12 +463,10 @@ text-align: center;
     gap: 5px; /* Reduce gap between buttons */
   }
 
-  .logo_medicalAid img{
+  .logo_medicalAid img {
     position: relative;
     margin-top: 145px;
   }
-
-
 }
 
 @media (max-width: 768px) {
@@ -512,17 +497,15 @@ text-align: center;
     display: block; /* Asegurar flujo adecuado */
     margin: 0 auto;
     max-width: 15px; /* Ajustar tamaño del icono */
-
   }
   .admin-action-card:nth-child(1) {
     height: 100px;
   }
-  
+
   .admin-action-card:nth-child(2) {
     height: 100px;
-  
   }
-  
+
   .admin-action-card:nth-child(3) {
     height: 100px;
   }
@@ -540,7 +523,7 @@ text-align: center;
     gap: 5px; /* Reduce gap between buttons */
   }
 
-  .logo_medicalAid img{
+  .logo_medicalAid img {
     position: relative;
     width: 150px;
     height: 130px;
@@ -549,8 +532,6 @@ text-align: center;
   .admin-image-container {
     margin-bottom: 50px;
   }
-
-
 }
 @media (max-width: 431px) {
   /* Ajuste del encabezado */
@@ -565,15 +546,15 @@ text-align: center;
   }
 
   .admin-buttons {
-    position:relative;
+    position: relative;
     margin-bottom: 0px;
   }
 
-  .Logotipo_MedicalAID{
+  .Logotipo_MedicalAID {
     width: 60px;
   }
 
-  .logo_medicalAid img{
+  .logo_medicalAid img {
     position: relative;
     margin: 0;
     transform: translateX(calc(0% - 70px));
@@ -616,18 +597,16 @@ text-align: center;
     display: block; /* Asegurar flujo adecuado */
     margin: 0 auto;
     max-width: 35px; /* Ajustar tamaño del icono */
-
   }
 
   .admin-action-card:nth-child(1) {
     height: 120px;
   }
-  
+
   .admin-action-card:nth-child(2) {
     height: 120px;
-  
   }
-  
+
   .admin-action-card:nth-child(3) {
     height: 120px;
   }
@@ -644,7 +623,6 @@ text-align: center;
   }
 }
 
-
 @media (max-width: 415px) {
   /* Ajuste del encabezado */
   .admin-header h1 {
@@ -658,15 +636,15 @@ text-align: center;
   }
 
   .admin-buttons {
-    position:relative;
+    position: relative;
     margin-bottom: 0px;
   }
 
-  .Logotipo_MedicalAID{
+  .Logotipo_MedicalAID {
     width: 60px;
   }
 
-  .logo_medicalAid img{
+  .logo_medicalAid img {
     position: relative;
     transform: translateX(calc(0% - 20px));
     margin-top: 25px;
@@ -708,18 +686,16 @@ text-align: center;
     display: block; /* Asegurar flujo adecuado */
     margin: 0 auto;
     max-width: 35px; /* Ajustar tamaño del icono */
-
   }
 
   .admin-action-card:nth-child(1) {
     height: 120px;
   }
-  
+
   .admin-action-card:nth-child(2) {
     height: 120px;
-  
   }
-  
+
   .admin-action-card:nth-child(3) {
     height: 120px;
   }
@@ -749,11 +725,11 @@ text-align: center;
   }
 
   .admin-buttons {
-    position:relative;
+    position: relative;
     margin-bottom: 0px;
   }
 
-  .logo_medicalAid img{
+  .logo_medicalAid img {
     height: 60%;
     width: 30%;
     margin: 0;
@@ -761,7 +737,7 @@ text-align: center;
     margin-top: 25px;
     margin-left: -35px;
   }
-  .logo_medicalAid{
+  .logo_medicalAid {
     margin-top: 0;
   }
 
@@ -801,18 +777,16 @@ text-align: center;
     display: block; /* Asegurar flujo adecuado */
     margin: 0 auto;
     max-width: 35px; /* Ajustar tamaño del icono */
-
   }
 
   .admin-action-card:nth-child(1) {
     height: 120px;
   }
-  
+
   .admin-action-card:nth-child(2) {
     height: 120px;
-  
   }
-  
+
   .admin-action-card:nth-child(3) {
     height: 120px;
   }
@@ -842,15 +816,15 @@ text-align: center;
   }
 
   .admin-buttons {
-    position:relative;
+    position: relative;
     margin-bottom: 0px;
   }
 
-  .Logotipo_MedicalAID{
+  .Logotipo_MedicalAID {
     width: 60px;
   }
 
-  .logo_medicalAid img{
+  .logo_medicalAid img {
     position: relative;
     transform: translateX(calc(0% - 10px));
     margin-top: 25px;
@@ -892,18 +866,16 @@ text-align: center;
     display: block; /* Asegurar flujo adecuado */
     margin: 0 auto;
     max-width: 35px; /* Ajustar tamaño del icono */
-
   }
 
   .admin-action-card:nth-child(1) {
     height: 120px;
   }
-  
+
   .admin-action-card:nth-child(2) {
     height: 120px;
-  
   }
-  
+
   .admin-action-card:nth-child(3) {
     height: 120px;
   }

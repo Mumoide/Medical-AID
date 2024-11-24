@@ -378,8 +378,6 @@ exports.logoutUser = async (req, res) => {
   if (!token) {
     return res.status(400).json({ message: 'Token not provided.' });
   }
-  console.log("aaaaaaaaaaaaaaaaaaaaaaa", token)
-
   try {
     // Delete the session associated with the token
     const deletedSession = await Sessions.destroy({ where: { session_token: token } });

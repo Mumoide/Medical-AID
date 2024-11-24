@@ -424,6 +424,9 @@ const DashboardView = () => {
           />
         </div>
       </div>
+      <button className="go-back-btn-dasboard" onClick={() => navigate(-1)}>
+        Volver
+      </button>
     </div>
   );
 };

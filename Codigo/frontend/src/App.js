@@ -27,9 +27,11 @@ import ChangePasswordPage from './Views/UserProfilePage/UserUpdatePage/ChangePas
 import Spinner from './Spinner'; // Import the Spinner component
 import Swal from "sweetalert2";
 import NotFoundRedirect from './Components/NotFoundRedirect/NotFoundRedirect'; // Import the NotFoundRedirect component
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import { checkTokenExpiration } from "./utils/tokenUtils";
 import { jwtDecode } from "jwt-decode";
 import ScrollToTop from './utils/scrollToTop'
+
 // import ProtectedRoute from './ProtectedRoute'; // Protección de rutas
 
 function App() {
@@ -88,6 +90,7 @@ function App() {
   const handleLogout = () => {
     logoutUser();
   };
+
 
   useEffect(() => {
     // Function to fetch alerts data
@@ -222,18 +225,56 @@ function App() {
 
 
           {/* Admin Page */}
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin" element={
+            <ProtectedRoute roleId={userRoleId}>
+              <AdminPage />
+            </ProtectedRoute>} />
 
           {/* User administration */}
-          <Route path="/admin/users" element={<UsersAdmin />} />
-          <Route path='/admin/create' element={<CreateUserAdmin />} />
-          <Route path='/admin/user/:id' element={<ViewUser />} />
-          <Route path='/admin/updateuser/:id' element={<UpdateUser />} />
+          <Route path="/admin/users" element={
+            <ProtectedRoute roleId={userRoleId}>
+              <UsersAdmin />
+
+            </ProtectedRoute>
+          } />
+          <Route path='/admin/create' element={
+            <ProtectedRoute roleId={userRoleId}>
+
+              <CreateUserAdmin />
+            </ProtectedRoute>
+          } />
+          <Route path='/admin/user/:id' element={
+            <ProtectedRoute roleId={userRoleId}>
+
+              <ViewUser />
+            </ProtectedRoute>
+          } />
+          <Route path='/admin/updateuser/:id' element={
+            <ProtectedRoute roleId={userRoleId}>
+
+              <UpdateUser />
+            </ProtectedRoute>
+          } />
           {/* Dashboard administration */}
-          <Route path='/admin/dashboard' element={<DashboardPage />} />
+          <Route path='/admin/dashboard' element={
+            <ProtectedRoute roleId={userRoleId}>
+
+              <DashboardPage />
+            </ProtectedRoute>
+          } />
           {/* Alerts administration */}
-          <Route path='/admin/alerts' element={<AlertsPage />} />
-          <Route path='/admin/create_alert' element={<CreateAlertPage fetchAlerts={fetchAlerts} />} />
+          <Route path='/admin/alerts' element={
+            <ProtectedRoute roleId={userRoleId}>
+
+              <AlertsPage />
+            </ProtectedRoute>
+          } />
+          <Route path='/admin/create_alert' element={
+            <ProtectedRoute roleId={userRoleId}>
+
+              <CreateAlertPage fetchAlerts={fetchAlerts} />
+            </ProtectedRoute>
+          } />
 
           {/* Form Page */}
           <Route path="/form" element={<FormPage />} />
