@@ -202,105 +202,121 @@ const DiagnosticRecordsPage = () => {
   );
 
   return (
-    <div className="diagnostic-records-page">
-      <h1>Historial de Diagnósticos</h1>
+    <div className="diagnostic-records-page-container">
+      <div className="diagnostic-records-page">
+        <h1>Historial de Diagnósticos</h1>
 
-      {/* Filter Section */}
-      <div className="filter-section">
-        <div className="name-filter">
-          <label>Buscar por nombre:</label>
-          <input
-            type="text"
-            placeholder="Filtrar por diagnóstico"
-            value={diseaseNameFilter}
-            onChange={(e) => setDiseaseNameFilter(e.target.value)}
-            className="name-filter-input"
-          />
+        {/* Filter Section */}
+        <div className="user-diagnostic-filter-section">
+          <div className="user-diagnostic-name-filter">
+            <label>Buscar por nombre:</label>
+            <input
+              type="text"
+              placeholder="Filtrar por diagnóstico"
+              value={diseaseNameFilter}
+              onChange={(e) => setDiseaseNameFilter(e.target.value)}
+              className="user-diagnostic-name-filter-input"
+            />
+          </div>
+          <div className="user-diagnostic-date-range-filter">
+            <div className="user-diagnostic-date-range-filter-item-label">
+              <label>Fecha de inicio:</label>
+            </div>
+            <input
+              type="date"
+              value={inputStartDate}
+              onChange={(e) => setInputStartDate(e.target.value)}
+              max={formattedToday}
+              className="user-diagnostic-date-input"
+            />
+            <div className="user-diagnostic-date-range-filter-item-label">
+              <label>Fecha fin:</label>
+            </div>
+            <input
+              type="date"
+              value={inputEndDate}
+              onChange={(e) => setInputEndDate(e.target.value)}
+              max={formattedToday}
+              className="user-diagnostic-date-input"
+            />
+            <div className="user-diagnostic-button-container">
+              <button
+                className="user-diagnostic-search-button"
+                onClick={applyFilters}
+              >
+                Buscar
+              </button>
+              <button
+                className="user-diagnostic-clear-button"
+                onClick={clearFilters}
+              >
+                Borrar filtro
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="date-range-filter">
-          <label>Fecha de inicio:</label>
-          <input
-            type="date"
-            value={inputStartDate}
-            onChange={(e) => setInputStartDate(e.target.value)}
-            max={formattedToday}
-          />
-          <label>Fecha fin:</label>
-          <input
-            type="date"
-            value={inputEndDate}
-            onChange={(e) => setInputEndDate(e.target.value)}
-            max={formattedToday}
-          />
-          <button className="search-button" onClick={applyFilters}>
-            Buscar
-          </button>
-          <button className="clear-button" onClick={clearFilters}>
-            Borrar filtro
-          </button>
-        </div>
-      </div>
 
-      {/* Diagnostic Table */}
-      <table {...getTableProps()} className="diagnostic-table">
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}
-                  <span>
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? " 🔽"
-                        : " 🔼"
-                      : ""}
-                  </span>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+        {/* Diagnostic Table */}
+        <table {...getTableProps()} className="diagnostic-table">
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    {column.render("Header")}
+                    <span>
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? " 🔽"
+                          : " 🔼"
+                        : ""}
+                    </span>
+                  </th>
                 ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
 
-      {/* Pagination controls */}
-      <div className="pagination">
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          Anterior
+        {/* Pagination controls */}
+        <div className="pagination">
+          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+            Anterior
+          </button>
+          <span>
+            Página <strong>{pageIndex + 1}</strong>
+          </span>
+          <button onClick={() => nextPage()} disabled={!canNextPage}>
+            Siguiente
+          </button>
+          <select
+            value={pageSize}
+            onChange={(e) => setPageSize(Number(e.target.value))}
+          >
+            {[10, 20, 30, 40, 50].map((size) => (
+              <option key={size} value={size}>
+                Mostrar {size}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <button onClick={() => navigate(-1)} className="back-button-records">
+          Volver
         </button>
-        <span>
-          Página <strong>{pageIndex + 1}</strong>
-        </span>
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          Siguiente
-        </button>
-        <select
-          value={pageSize}
-          onChange={(e) => setPageSize(Number(e.target.value))}
-        >
-          {[10, 20, 30, 40, 50].map((size) => (
-            <option key={size} value={size}>
-              Mostrar {size}
-            </option>
-          ))}
-        </select>
       </div>
-
-      <button onClick={() => navigate(-1)} className="back-button-records">
-        Volver
-      </button>
     </div>
   );
 };
