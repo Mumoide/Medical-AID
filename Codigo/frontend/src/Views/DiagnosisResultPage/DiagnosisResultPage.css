@@ -7,12 +7,12 @@
   flex-wrap: wrap; /* Allow elements to wrap in case there are too many */
 }
 
-.titulo-diagnosis-result h1{
+.titulo-diagnosis-result h1 {
   margin-top: 150px;
   text-align: center;
 }
 
-.portada{
+.portada {
   background-image: url("../../../public/images/backgrounds/Diagnostic\ \(2\).jpg");
   background-size: cover;
   background-position: center;
@@ -36,9 +36,33 @@
   height: 400px; /* Set a fixed height to make all cards the same size */
   margin: 10px;
   text-align: center;
-  background-color: purple; /* Change card background to purple */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #34aeb3; /* Change card background to purple */
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.2);
   color: white; /* Set default text color to white */
+}
+
+.diagnosis-recommendations-container::-webkit-scrollbar,
+.diagnosis-description-container::-webkit-scrollbar {
+  width: 1em;
+}
+
+.diagnosis-recommendations-container::-webkit-scrollbar-track,
+.diagnosis-description-container::-webkit-scrollbar-track {
+  background: #f0f0f5;
+  border-radius: 10px; /* Rounded track */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.diagnosis-recommendations-container::-webkit-scrollbar-thumb,
+.diagnosis-description-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px; /* Rounded thumb */
+  border: 3px solid #f0f0f5; /* Adds padding for a modern look */
+}
+
+.diagnosis-recommendations-container::-webkit-scrollbar-thumb:hover,
+.diagnosis-description-container::-webkit-scrollbar-thumb:hover {
+  background-color: #777; /* Darken on hover */
 }
 
 .diagnosis-title-container {
@@ -48,6 +72,7 @@
   color: black; /* Ensure text is black inside the title container */
   font-size: 18px;
   font-weight: bold;
+  border-radius: 15px;
 }
 
 .diagnosis-title {
@@ -103,7 +128,6 @@
   background-color: #555; /* Slightly lighter gray on hover */
 }
 
-
 /* Inicio sección de "Que hacer después*/
 .next-steps {
   background-color: #f8f9fa; /* Fondo suave */
@@ -134,7 +158,6 @@
   list-style: none; /* Quitar viñetas predeterminadas */
   padding: 0; /* Quitar espaciado */
   margin: 0; /* Quitar márgenes */
-  
 }
 
 .next-steps ul li {
@@ -162,7 +185,6 @@
   margin: 40px auto;
   max-width: 800px; /* Limita el ancho de la sección */
   text-align: center;
- 
 }
 
 .feedback-section h2 {
@@ -185,6 +207,7 @@
 .feedback-positive {
   background-color: #4caf50; /* Color verde para el botón positivo */
   color: #ffffff;
+  min-width: 250px;
 }
 
 .feedback-positive:hover {
@@ -196,6 +219,7 @@
 .feedback-negative {
   background-color: #f44336; /* Color rojo para el botón negativo */
   color: #ffffff;
+  min-width: 250px;
 }
 
 .feedback-negative:hover {
@@ -240,7 +264,8 @@
     font-size: 1.8rem;
   }
 
-  .next-steps p, .next-steps ul li {
+  .next-steps p,
+  .next-steps ul li {
     font-size: 1.1rem;
   }
 
@@ -249,12 +274,12 @@
     padding: 30px;
   }
 
-  .feedback-positive{
-    max-width: 30%;
+  .feedback-positive {
+    min-width: 50%;
   }
 
-  .feedback-negative{
-    max-width: 30%;
+  .feedback-negative {
+    min-width: 50%;
   }
 
   .feedback-section h2 {
@@ -294,7 +319,7 @@
   .feedback-section h2 {
     font-size: 1.8rem;
   }
-} 
+}
 
 /* Mobile devices (max-width: 700px) */
 @media (max-width: 760px) {
@@ -309,7 +334,7 @@
     font-size: 1.5rem;
     text-align: center;
   }
-  .portada{
+  .portada {
     min-height: 40vh;
   }
 
@@ -334,7 +359,8 @@
     font-size: 1.3rem;
   }
 
-  .next-steps p, .next-steps ul li {
+  .next-steps p,
+  .next-steps ul li {
     font-size: 0.8rem;
   }
 
@@ -348,11 +374,11 @@
     padding: 15px;
     font-size: 1rem;
   }
-  .feedback-positive{
+  .feedback-positive {
     max-width: 30%;
   }
 
-  .feedback-negative{
+  .feedback-negative {
     max-width: 50%;
   }
 

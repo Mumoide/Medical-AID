@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa"; // Import the eye icon
 import Swal from "sweetalert2";
 import "./DiagnosticRecordsPage.css";
+import { jwtDecode } from "jwt-decode";
 
 const DiagnosticRecordsPage = () => {
   const [data, setData] = useState([]);
@@ -13,7 +14,16 @@ const DiagnosticRecordsPage = () => {
   const [endDiagnosisDate, setEndDiagnosisDate] = useState(""); // End date filter
   const [inputStartDate, setInputStartDate] = useState(""); // Input for start date
   const [inputEndDate, setInputEndDate] = useState(""); // Input for end date
-  const userId = localStorage.getItem("user_id");
+  const token = localStorage.getItem("token");
+  const userId = token ? jwtDecode(token)?.id_user : null;
+  if (!userId) {
+    Swal.fire("Error", "Invalid token. Please log in again.", "error").then(
+      () => {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }
+    );
+  }
 
   // Get today's date in YYYY-MM-DD format
   const today = new Date();
@@ -74,7 +84,7 @@ const DiagnosticRecordsPage = () => {
     };
 
     fetchDiagnosticRecords();
-  }, []);
+  }, [userId]);
 
   // Apply filters based on name and date range
   const applyFilters = () => {
@@ -223,10 +233,10 @@ const DiagnosticRecordsPage = () => {
             max={formattedToday}
           />
           <button className="search-button" onClick={applyFilters}>
-          Buscar
+            Buscar
           </button>
           <button className="clear-button" onClick={clearFilters}>
-          Borrar filtro
+            Borrar filtro
           </button>
         </div>
       </div>

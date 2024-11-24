@@ -4,11 +4,13 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import "./DiagnosisResultPage.css";
 
-
 const handleFeedback = (type) => {
   Swal.fire({
     title: "Gracias por tu opinión",
-    text: type === "positive" ? "¡Nos alegra saberlo!" : "Trabajaremos para mejorar.",
+    text:
+      type === "positive"
+        ? "¡Nos alegra saberlo!"
+        : "Trabajaremos para mejorar.",
     icon: type === "positive" ? "success" : "info",
   });
 };
@@ -104,7 +106,7 @@ const Diagnosis = () => {
         <h1>Tus Resultados</h1>
       </div>
       <div className="titulo-diagnosis-result">
-      <h1>Los síntomas ingresados indican:</h1>
+        <h1>Los síntomas ingresados indican:</h1>
       </div>
       <div className="diagnosis-container-resultado">
         {diseaseData.length > 0 ? (
@@ -139,38 +141,37 @@ const Diagnosis = () => {
         <button onClick={handleBackClick} className="back-button">
           Volver al Formulario
         </button>
-        <button className="back-button">Descargar PDF</button >
+        {/* <button className="back-button">Descargar PDF</button > */}
 
-        <div className="next-steps">
+        {/* <div className="next-steps">
           <h2>¿Qué hacer después?</h2>
           <p>Recomendamos:</p>
           <ul>
             <li>Contactar a un médico para evaluación presencial.</li>
             <li>
-              Descargar los resultados en PDF para llevarlos a tu próxima consulta.
+              Descargar los resultados en PDF para llevarlos a tu próxima
+              consulta.
             </li>
             <li>Compartir este diagnóstico con un profesional.</li>
           </ul>
-        </div>
+        </div> */}
       </div>
       <div className="feedback-section">
         <h2>¿Cómo calificarías este diagnóstico?</h2>
-        <button 
-          className="feedback-positive" 
+        <button
+          className="feedback-positive"
           onClick={() => handleFeedback("positive")}
         >
           👍 Bueno
         </button>
-        <button 
-          className="feedback-negative" 
+        <button
+          className="feedback-negative"
           onClick={() => handleFeedback("negative")}
         >
           👎 Necesita Mejoras
         </button>
       </div>
-
     </div>
-    
   );
 };
 

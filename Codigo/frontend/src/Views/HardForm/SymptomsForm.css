@@ -17,9 +17,9 @@
 .diagnosis-container {
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 100%;
   text-align: center;
-  margin-left: 50px;
+  margin: auto;
   height: 100%;
   background-color: #ffffff; /* Cambia a blanco para un look más limpio */
   border-radius: 20px;
@@ -37,7 +37,6 @@
   margin: auto;
   margin-top: 35px;
 }
-
 
 .introduction {
   display: flex;
@@ -121,7 +120,6 @@
   margin-top: 160px;
   max-width: 90%; /* Reducir ligeramente el ancho máximo para darle más espacio al contenedor */
   height: auto; /* Mantiene la proporción de la imagen */
-
 }
 
 .seccion-symptoms {
@@ -144,7 +142,7 @@
 
 .seccion-symptomsForm {
   display: inline-block;
-height: 168.6px;
+  height: 168.6px;
   width: 250px; /* Ajuste del ancho de cada tarjeta */
   padding: 20px;
   background-color: #ffffff;
@@ -177,7 +175,6 @@ height: 168.6px;
   line-height: 1.5;
 }
 
-
 .combobox-container {
   align-items: center; /* Alinea el contenido verticalmente */
   justify-content: space-between; /* Añade espacio entre el Select y el botón */
@@ -197,9 +194,8 @@ height: 168.6px;
 
 .symptom-combobox {
   display: flex;
-  margin-top: 10px;
   max-width: 700px;
-  margin-left: 190px;
+  margin: 10px auto;
 }
 
 .buttons-container {
@@ -209,6 +205,8 @@ height: 168.6px;
 
 .seleccionar-sintoma {
   min-width: 500px;
+  justify-content: center;
+  margin: auto;
 }
 
 /*Botones*/
@@ -251,11 +249,11 @@ height: 168.6px;
   background-color: rgb(124, 16, 16);
 }
 
-.easy-section-container{
-width:100%;
+.easy-section-container {
+  width: 100%;
 }
 
-.easy-section-instruction-title h2{
+.easy-section-instruction-title h2 {
   text-align: center;
 }
 
@@ -279,12 +277,12 @@ width:100%;
 .combobox-categorias {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  text-align: center;
   margin: auto;
+  height: 100%;
   background-color: #ffffff; /* Cambia a blanco para un look más limpio */
   border-radius: 20px;
-  width: 72%;
-  height: 100%;
-  margin-bottom: 100px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra sutil para resaltar el contenedor */
   transition: transform 0.3s ease; /* Transición suave para el hover */
 }
@@ -346,7 +344,7 @@ width:100%;
   grid-template-columns: repeat(8, 1fr); /* Define exactamente 7 columnas */
   max-width: 50%; /* Ancho máximo del contenedor para controlar el diseño */
   margin: 0 auto; /* Centrar el contenedor en la página */
-  gap:10px;
+  gap: 10px;
   margin-top: 20px; /* Separación superior */
   justify-content: center; /* Centra los botones horizontalmente dentro del contenedor */
 }
@@ -362,7 +360,7 @@ width:100%;
   text-align: center;
   transition: background-color 0.3s ease;
   width: 110px;
-  min-height: 40px;;
+  min-height: 40px;
   margin: 0 auto; /* Centrar el contenedor en la página */
 }
 
@@ -377,7 +375,19 @@ width:100%;
 }
 
 @media (max-width: 1024px) {
-  .group-buttons{
+  .group-buttons {
     grid-template-columns: repeat(6, 1fr); /* Define exactamente 7 columnas */
+  }
+
+  .symptom-combobox {
+    width: 80%;
+  }
+
+  .seleccionar-sintoma {
+    min-width: 80%;
+  }
+
+  .combobox-container {
+    margin-top: auto;
   }
 }
