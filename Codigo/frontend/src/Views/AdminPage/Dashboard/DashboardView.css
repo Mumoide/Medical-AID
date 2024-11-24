@@ -9,6 +9,15 @@
   display: flex;
 }
 
+.ag-header {
+  background-color: #155a9a;
+  color: white;
+}
+
+.ag-header-cell-text{
+  color: white;
+}
+
 .dashboard-table {
   width: 100%;
   border-collapse: collapse;

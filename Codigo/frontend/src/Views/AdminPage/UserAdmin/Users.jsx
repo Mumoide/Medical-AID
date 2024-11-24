@@ -410,38 +410,50 @@ const Users = () => {
           </div>
 
           {/* Name Filter Input */}
-
+<div className="filters-user-admin">
           <div className="name-filter">
-            <label>Buscar por nombre:</label>
+            <label>Buscar por nombre</label>
             <input
               type="text"
               placeholder="Filtrar por nombre"
               value={nameFilter}
               onChange={(e) => setNameFilter(e.target.value)}
               className="name-filter-input"
-            />
+              />
           </div>
           {/* Date Range Filter Inputs */}
           <div className="date-range-filter">
             <div className="date-range-filter-item">
-              <label>Fecha de inicio:</label>
+              <div className="date-filter-user-admin">
+
+              <div className="date-range-filter-item-label">
+
+                <label>Fecha de inicio</label>
+              </div>
               <input
                 type="date"
                 value={inputStartDate}
                 onChange={(e) => setInputStartDate(e.target.value)}
                 className="date-input"
                 max={formattedToday}
-              />
-              <label>Fecha fin:</label>
+                />
+                </div>
+
+              <div className="date-filter-user-admin">
+              <div className="date-range-filter-item-label">
+                <label>Fecha fin</label>
+              </div>
               <input
                 type="date"
                 value={inputEndDate}
                 onChange={(e) => setInputEndDate(e.target.value)}
                 className="date-input"
                 max={formattedToday}
-              />
+                />
+                </div>
             </div>
-            <div className="date-range-filter-item">
+              </div>
+            <div className="filter-buttons-user-admin">
               <button className="search-button" onClick={applyDateFilter}>
                 Buscar
               </button>
@@ -458,7 +470,7 @@ const Users = () => {
             <thead>
               {headerGroups.map((headerGroup) => {
                 const { key, ...headerGroupProps } =
-                  headerGroup.getHeaderGroupProps(); // Extract key for <tr>
+                headerGroup.getHeaderGroupProps(); // Extract key for <tr>
                 return (
                   <tr key={key} {...headerGroupProps}>
                     {headerGroup.headers.map((column) => {

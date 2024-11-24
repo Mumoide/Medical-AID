@@ -131,17 +131,17 @@ const DashboardView = () => {
 
   const columns = [
     {
-      headerName: "Diagnosis Date",
+      headerName: "Fecha del Diagnóstico",
       field: "diagnosis_date",
       valueFormatter: (params) => new Date(params.value).toLocaleString(),
     },
     {
-      headerName: "Probability",
+      headerName: "Probabilidad",
       field: "probability",
       valueFormatter: (params) => `${params.value}%`,
     },
     {
-      headerName: "Disease Name",
+      headerName: "Nombre del Diagnóstico",
       field: "disease_name",
       filter: "agTextColumnFilter",
 
@@ -169,7 +169,7 @@ const DashboardView = () => {
       },
     },
     {
-      headerName: "Symptoms",
+      headerName: "Síntomas",
       field: "symptoms",
       filter: "agTextColumnFilter", // Enable text filter
       filterParams: {
@@ -332,7 +332,7 @@ const DashboardView = () => {
     <div className="dashboard-container">
       {/* Map Section */}
       <div className="map-section-admin">
-        <h1>Diagnosis Dashboard</h1>
+        <h1>Dashboard</h1>
         <div className="map-container">
           <MapView filteredData={filteredData} />
           {/* Pass filteredData to MapView as data prop */}
