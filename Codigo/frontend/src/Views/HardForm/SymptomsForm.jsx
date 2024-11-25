@@ -194,14 +194,7 @@ const SymptomComboBox = () => {
           const token = localStorage.getItem("token");
           const userId = token ? jwtDecode(token)?.id_user : null;
           if (!userId) {
-            Swal.fire(
-              "Error",
-              "Invalid token. Please log in again.",
-              "error"
-            ).then(() => {
-              localStorage.removeItem("token");
-              window.location.href = "/login";
-            });
+            localStorage.removeItem("token");
           }
 
           // Create a new unique diagnosisSessionId directly
@@ -281,14 +274,7 @@ const SymptomComboBox = () => {
           const token = localStorage.getItem("token");
           const userId = token ? jwtDecode(token)?.id_user : null;
           if (!userId) {
-            Swal.fire(
-              "Error",
-              "Invalid token. Please log in again.",
-              "error"
-            ).then(() => {
-              localStorage.removeItem("token");
-              window.location.href = "/login";
-            });
+            localStorage.removeItem("token");
           }
 
           // Generate a unique diagnosis session ID

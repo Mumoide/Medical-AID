@@ -84,6 +84,10 @@ const Diagnosis = () => {
         } catch (error) {
           if (error.response && error.response.status === 409) {
             console.warn("El Diagnóstico ya fue registrado para esta sesión.");
+          } else if (error.response && error.response.status === 403) {
+            console.warn(
+              "El Diagnóstico no fue registrado: No se encuentra sesión iniciada."
+            );
           } else {
             console.error("Error saving diagnosis data:", error);
           }
