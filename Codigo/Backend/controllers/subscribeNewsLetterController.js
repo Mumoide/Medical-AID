@@ -42,7 +42,6 @@ exports.subscribeNewsletter = async (req, res) => {
         await transporter.sendMail(mailOptions);
         res.status(201).json({ message: '¡Suscripción exitosa!', subscriber: newSubscriber });
     } catch (error) {
-        console.error('Error subscribing to newsletter:', error);
         res.status(500).json({ error: 'Error al suscribirse al boletín informativo.' });
     }
 };

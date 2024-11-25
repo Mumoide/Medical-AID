@@ -1,27 +1,58 @@
 const request = require('supertest'); // For making HTTP requests to the app
-const app = require('../..//app'); // Import your Express app
+const app = require('../../indextest'); // Import your Express app
 const { NewsletterSubscribers } = require('../../models');
 const nodemailer = require('nodemailer');
+const db = require('../../dbtest'); // Import the modified db.js
+
 
 // Mock Nodemailer transport
-jest.mock('nodemailer', () => ({
-    createTransport: jest.fn(() => ({
-        sendMail: jest.fn().mockResolvedValue('Mock email sent'),
-    })),
-}));
+jest.mock('nodemailer', () => {
+    const sendMailMock = jest.fn().mockResolvedValue('Mock email sent');
+    return {
+        createTransport: jest.fn(() => ({
+            sendMail: sendMailMock,
+        })),
+        sendMailMock, // Export the mock for easier verification
+    };
+});
+
 
 describe('Integration Test: subscribeNewsletter', () => {
+    let client;
     let mockSendMail;
 
     beforeAll(async () => {
+        // Explicitly connect to the database
+        client = await db.connect();
+        console.log('Connected to the test database');
         // Initialize the test database (if using SQLite or another setup)
         await NewsletterSubscribers.sync({ force: true }); // Recreate table
         mockSendMail = nodemailer.createTransport().sendMail;
     });
 
     afterAll(async () => {
-        // Cleanup the database after tests
-        await NewsletterSubscribers.destroy({ where: {}, truncate: true });
+        try {
+            // Cleanup the database
+            if (client) {
+                client.release();
+                console.log('Database client released');
+            }
+            if (db.end) {
+                await db.end(); // Ensure the pool is closed
+                console.log('Database connection pool closed');
+            }
+            if (NewsletterSubscribers.sequelize) {
+                await NewsletterSubscribers.sequelize.close(); // Close Sequelize connection
+                console.log('Sequelize connection closed');
+            }
+            if (app && app.server) {
+                await app.server.close(); // Close the server if it's running
+                console.log('Server closed');
+            }
+        } catch (error) {
+            console.error('Error during teardown:', error);
+            throw error;
+        }
     });
 
     it('should successfully subscribe a new user and send an email', async () => {
@@ -39,6 +70,7 @@ describe('Integration Test: subscribeNewsletter', () => {
         expect(subscriber.email).toBe('test@example.com');
 
         // Verify email sent
+        expect(nodemailer.createTransport).toHaveBeenCalled();
         expect(mockSendMail).toHaveBeenCalledWith({
             from: process.env.EMAIL_USER,
             to: 'test@example.com',

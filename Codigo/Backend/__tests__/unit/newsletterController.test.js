@@ -11,14 +11,16 @@ jest.mock('../../models', () => ({
 }));
 
 // Mock Nodemailer
-jest.mock('nodemailer', () => ({
-    createTransport: jest.fn(() => ({
-        sendMail: jest.fn().mockResolvedValue('Mock email sent'),
-    })),
-}));
+jest.mock('nodemailer', () => {
+    const sendMail = jest.fn().mockResolvedValue('Mock email sent');
+    return {
+        createTransport: jest.fn(() => ({ sendMail })),
+        __mockSendMail: sendMail, // Expose the mocked sendMail for validation
+    };
+});
 
 describe('subscribeNewsletter', () => {
-    let req, res;
+    let req, res, mockSendMail;
 
     beforeEach(() => {
         req = { body: { email: 'test@example.com' } };
@@ -26,13 +28,12 @@ describe('subscribeNewsletter', () => {
             status: jest.fn().mockReturnThis(),
             json: jest.fn(),
         };
+        mockSendMail = nodemailer.__mockSendMail;
 
-        // Clear all mocks before each test
-        jest.clearAllMocks();
+        jest.clearAllMocks(); // Clear all mocks before each test
     });
 
     it('should return 400 if the email is already subscribed', async () => {
-        // Mock an existing subscriber
         NewsletterSubscribers.findOne.mockResolvedValue({ email: 'test@example.com' });
 
         await subscribeNewsletter(req, res);
@@ -45,19 +46,12 @@ describe('subscribeNewsletter', () => {
     });
 
     it('should add a new subscriber and send a confirmation email', async () => {
-        // Mock no existing subscriber and a successful create operation
         NewsletterSubscribers.findOne.mockResolvedValue(null);
         NewsletterSubscribers.create.mockResolvedValue({
             id: 1,
             email: 'test@example.com',
             subscribed_at: new Date(),
             confirmed: false,
-        });
-
-        // Mock Nodemailer transport
-        const mockSendMail = jest.fn();
-        nodemailer.createTransport.mockReturnValue({
-            sendMail: mockSendMail,
         });
 
         await subscribeNewsletter(req, res);
@@ -84,7 +78,6 @@ describe('subscribeNewsletter', () => {
     });
 
     it('should return 500 if an error occurs', async () => {
-        // Mock an error during subscriber creation
         NewsletterSubscribers.findOne.mockRejectedValue(new Error('Database error'));
 
         await subscribeNewsletter(req, res);
