@@ -57,7 +57,7 @@ const Diagnosis = () => {
           title: "Advertencia de baja probabilidad",
           text: "Su diagnóstico tiene una probabilidad baja, considere consultar a un profesional de la salud.",
           icon: "warning",
-          confirmButtonText: "Understood",
+          confirmButtonText: "Entendido",
           confirmButtonColor: "#3085d6",
         });
       }

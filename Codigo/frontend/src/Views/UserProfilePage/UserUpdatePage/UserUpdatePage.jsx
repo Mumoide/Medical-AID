@@ -86,8 +86,8 @@ function UserUpdatePage() {
       }
 
       Swal.fire({
-        title: "Success",
-        text: "Profile updated successfully!",
+        title: "Éxito",
+        text: "¡Perfil actualizado correctamente!",
         icon: "success",
         confirmButtonText: "OK",
       }).then(() => navigate("/profile"));

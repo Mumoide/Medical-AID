@@ -172,11 +172,11 @@ function App() {
       } else if (timeRemaining < 5 * 60) { // Less than 5 minutes remaining
         // Show a warning if the token will expire soon
         Swal.fire({
-          title: "Session Expiring Soon",
-          text: "Your session will expire in less than 5 minutes. Would you like to refresh?",
+          title: "¡Pronto expirará tu sesión!",
+          text: "Tu sesión va a expirar en menos de 5 minutos. ¿Quieres actualizar tu sesión?",
           icon: "info",
           showCancelButton: true,
-          confirmButtonText: "Refresh",
+          confirmButtonText: "Actualizar",
         }).then((result) => {
           if (result.isConfirmed) {
             // Call endpoint to refresh the session
@@ -233,7 +233,7 @@ function App() {
           {/* User administration */}
           <Route path="/admin/users" element={
             <ProtectedRoute roleId={userRoleId}>
-              <UsersAdmin />
+              <UsersAdmin roleId={userRoleId} />
 
             </ProtectedRoute>
           } />

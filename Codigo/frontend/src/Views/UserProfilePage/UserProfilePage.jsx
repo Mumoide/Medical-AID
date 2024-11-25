@@ -33,8 +33,8 @@ function UserProfilePage() {
 
         if (response.status === 403) {
           Swal.fire({
-            title: "Session Expired",
-            text: "Please log in again.",
+            title: "La sesión expiró",
+            text: "Por favor inicia sesión.",
             icon: "warning",
             confirmButtonText: "OK",
           }).then(() => {
@@ -67,7 +67,7 @@ function UserProfilePage() {
         console.error("Error fetching user profile:", error);
         Swal.fire({
           title: "Error",
-          text: "An error occurred while fetching your profile. Please try again.",
+          text: "Ha ocurrido un error al buscar tu perfil. Por favor intenta nuevamente.",
           icon: "error",
           confirmButtonText: "OK",
         });

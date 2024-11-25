@@ -3,6 +3,11 @@
   margin-top: 130px;
 }
 
+.user-admin-title {
+  display: flex;
+  justify-content: center;
+}
+
 .table-container {
   margin: 20px auto;
   width: 90%;
@@ -27,11 +32,11 @@ thead {
   background-color: #007bff;
   color: rgb(0, 0, 0);
   font-size: 1rem;
-  font-family: "Arial", sans-serif;;
+  font-family: "Arial", sans-serif;
 }
 
 .table-container th {
-  font-weight : 500;
+  font-weight: 500;
 }
 
 .table-container th,
@@ -43,12 +48,12 @@ thead {
 
 .table-container th {
   background-color: #0056b3;
-  color:white;
+  color: white;
 }
 
 th:hover {
   background-color: #f1f1f1;
-  color:black;
+  color: black;
   cursor: pointer;
 }
 
@@ -158,10 +163,10 @@ td {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  gap:20px;
+  gap: 20px;
 }
 
-.name-filter{
+.name-filter {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -238,15 +243,14 @@ td {
   min-width: 100px;
 }
 
-
 .date-filter-user-admin {
-  display:flex;
+  display: flex;
   flex-direction: column;
-width: 400px;
-justify-content: space-between;
+  width: 400px;
+  justify-content: space-between;
 }
 
-.date-filter-user-admin label{
+.date-filter-user-admin label {
   font-weight: bold;
   margin-right: 5px;
 }
@@ -258,7 +262,7 @@ justify-content: space-between;
   width: 100%;
   outline: none;
   margin-top: 10px;
-width: 90%;
+  width: 90%;
   gap: 10px;
 }
 
@@ -269,11 +273,11 @@ width: 90%;
 
 /* Filter Buttons */
 
-.filter-buttons-user-admin{
-display:flex;
-flex-direction: row;
-margin: auto;
-gap: 40px;
+.filter-buttons-user-admin {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  gap: 40px;
 }
 
 .search-button,
@@ -328,7 +332,7 @@ gap: 40px;
     padding: 15px;
   }
 
-  .name-filter-input{
+  .name-filter-input {
     width: 95%;
   }
 
@@ -384,7 +388,7 @@ gap: 40px;
     flex-direction: column;
     align-items: center;
     max-width: 100%;
-    margin-top: 65px;
+    margin-top: 10px;
     margin-left: 0px;
   }
 
@@ -392,12 +396,12 @@ gap: 40px;
     flex-direction: row;
     align-items: center;
     max-width: 60%;
-    margin-top: 65px;
+    margin-top: 10px;
     margin-left: 55px;
   }
 
   .role-filter-buttons button {
-min-width: 250px;
+    min-width: 250px;
   }
 
   .top-buttons-admin {
@@ -406,7 +410,7 @@ min-width: 250px;
     margin: auto;
   }
 
-  .create-button-admin{
+  .create-button-admin {
     margin: 0;
   }
 
@@ -439,14 +443,13 @@ min-width: 250px;
     margin-bottom: 15px;
   }
 
-  .name-filter{
+  .name-filter {
     margin-bottom: 0;
   }
 
   .date-filter-user-admin {
-  width: 100%;
-}
-
+    width: 100%;
+  }
 }
 
 /* Mobile (max-width: 600px) */
@@ -478,15 +481,15 @@ min-width: 250px;
   }
 
   .role-filter-buttons button,
-  .create-button-admin{
+  .create-button-admin {
     min-width: 250px;
-    margin-left:0px;
-  }
-
-  .role-filter-buttons{
     margin-left: 0px;
   }
-  
+
+  .role-filter-buttons {
+    margin-left: 0px;
+  }
+
   .search-button,
   .clear-button {
     min-width: 130px;
@@ -499,19 +502,19 @@ min-width: 250px;
     padding: 10px;
     overflow-x: auto;
   }
-  .filters-user-admin{
-    flex-wrap:nowrap;
-    width:80%;
+  .filters-user-admin {
+    flex-wrap: nowrap;
+    width: 80%;
   }
 
   .filter-buttons-user-admin {
     flex-direction: column;
-    gap:15px;
+    gap: 15px;
     width: 100%;
   }
 
   .date-input,
   .name-filter-input {
-    width:90%;
+    width: 90%;
   }
 }

@@ -11,6 +11,17 @@ function AlertsView() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const windowWidth = useWindowWidth(); // Get the window width
+  const [nameFilter, setNameFilter] = useState(""); // Add name filter state
+  const [startDate, setStartDate] = useState(""); // State for start date filter
+  const [endDate, setEndDate] = useState(""); // State for end date filter
+  const [inputStartDate, setInputStartDate] = useState("");
+  const [inputEndDate, setInputEndDate] = useState("");
+
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+  const day = String(today.getDate()).padStart(2, "0");
+  const formattedToday = `${year}-${month}-${day}`;
 
   // Fetch alerts data
   useEffect(() => {
@@ -44,6 +55,79 @@ function AlertsView() {
 
     fetchAlerts();
   }, []);
+
+  const applyDateFilter = () => {
+    const start = new Date(inputStartDate);
+    const end = new Date(inputEndDate);
+    const currentDate = new Date();
+
+    if (end > currentDate) {
+      Swal.fire({
+        title: "Fecha fin inválida",
+        text: "La fecha de fin no puede ser mayor a la fecha actual.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    } else if (start > end) {
+      Swal.fire({
+        title: "Rango de fecha inválido",
+        text: "La fecha inical debe ser menor o igual a la fecha de fin..",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    } else {
+      setStartDate(inputStartDate);
+      setEndDate(inputEndDate);
+    }
+  };
+
+  // Function to clear date filter
+  const clearDateFilter = () => {
+    setStartDate("");
+    setEndDate("");
+    setInputStartDate("");
+    setInputEndDate("");
+    setNameFilter("");
+  };
+
+  const filteredData = useMemo(() => {
+    if (!Array.isArray(alertsData)) return [];
+    let filtered = alertsData;
+
+    if (nameFilter) {
+      const lowerCaseFilter = nameFilter.toLowerCase();
+      filtered = filtered.filter((alert) => {
+        const fullName = `${alert?.title || ""}`.toLowerCase();
+        return fullName.includes(lowerCaseFilter);
+      });
+    }
+
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+
+      filtered = filtered.filter((alert) => {
+        const createdAt = new Date(alert.created_at);
+        return createdAt >= start && createdAt <= end;
+      });
+    }
+
+    return filtered;
+  }, [alertsData, nameFilter, startDate, endDate]);
+
+  useEffect(() => {
+    // Check if no data is found within the range and alert if empty
+
+    if (filteredData.length === 0 && startDate && endDate) {
+      clearDateFilter();
+      Swal.fire({
+        title: "No hay data",
+        text: "No se encontraron usuarios dentro del rango de fechas indicado.",
+        icon: "info",
+        confirmButtonText: "OK",
+      });
+    }
+  }, [filteredData, startDate, endDate]);
 
   // Define table columns
   const columns = useMemo(() => {
@@ -118,7 +202,7 @@ function AlertsView() {
   }, [windowWidth]);
 
   // Use React Table
-  const tableInstance = useTable({ columns, data: alertsData });
+  const tableInstance = useTable({ columns, data: filteredData });
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;
@@ -130,7 +214,62 @@ function AlertsView() {
 
   return (
     <div className="alerts-view">
-      <h2>Administración de Alertas</h2>
+      <div className="alerts-admin-title">
+        <h2>Administración de Alertas</h2>
+      </div>
+      <div className="filter-user-admin-container">
+        {/* Name Filter Input */}
+        <div className="filters-user-admin">
+          <div className="name-filter">
+            <label>Buscar por título</label>
+            <input
+              type="text"
+              placeholder="Filtrar por nombre"
+              value={nameFilter}
+              onChange={(e) => setNameFilter(e.target.value)}
+              className="name-filter-input"
+            />
+          </div>
+          {/* Date Range Filter Inputs */}
+          <div className="date-range-filter">
+            <div className="date-range-filter-item">
+              <div className="date-filter-user-admin">
+                <div className="date-range-filter-item-label">
+                  <label>Fecha de inicio</label>
+                </div>
+                <input
+                  type="date"
+                  value={inputStartDate}
+                  onChange={(e) => setInputStartDate(e.target.value)}
+                  className="date-input"
+                  max={formattedToday}
+                />
+              </div>
+
+              <div className="date-filter-user-admin">
+                <div className="date-range-filter-item-label">
+                  <label>Fecha fin</label>
+                </div>
+                <input
+                  type="date"
+                  value={inputEndDate}
+                  onChange={(e) => setInputEndDate(e.target.value)}
+                  className="date-input"
+                  max={formattedToday}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="filter-buttons-user-admin">
+            <button className="search-button" onClick={applyDateFilter}>
+              Buscar
+            </button>
+            <button className="clear-button" onClick={clearDateFilter}>
+              Limpiar Filtros
+            </button>
+          </div>
+        </div>
+      </div>
       <table {...getTableProps()} className="alerts-table">
         <thead>
           {headerGroups.map((headerGroup) => (

@@ -105,7 +105,7 @@ const DashboardView = () => {
       Swal.fire({
         icon: "warning",
         title: "Sin Data",
-        text: "No se encuentra data en los rangos de fehca seleccionados. Los filtros han sido reestablecidos.",
+        text: "No se encuentra data en los rangos de fecha seleccionados. Los filtros han sido reestablecidos.",
       });
     } else {
       setFilteredData(filtered);

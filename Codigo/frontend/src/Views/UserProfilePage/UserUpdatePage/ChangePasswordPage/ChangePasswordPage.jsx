@@ -15,7 +15,7 @@ function ChangePasswordPage({ onLogout }) {
 
     // Check if passwords match
     if (password !== confirmPassword) {
-      Swal.fire("Error", "Passwords do not match!", "error");
+      Swal.fire("Error", "¡Las contraseñas no coinciden!", "error");
       return;
     }
 

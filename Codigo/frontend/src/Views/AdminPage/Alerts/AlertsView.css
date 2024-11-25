@@ -4,6 +4,11 @@
   margin-top: 100px;
 }
 
+.alerts-admin-title {
+  display: flex;
+  justify-content: center;
+}
+
 .alerts-view h2 {
   margin-bottom: 20px;
 }
@@ -11,6 +16,7 @@
 .alerts-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 15px;
 }
 
 .alerts-table th,
@@ -21,8 +27,14 @@
 }
 
 .alerts-table th {
-  background-color: #3498db;
+  background-color: #0056b3;
   color: white;
+}
+
+.alerts-table th:hover {
+  background-color: #f1f1f1;
+  color: black;
+  cursor: pointer;
 }
 
 .alerts-table tr:hover {

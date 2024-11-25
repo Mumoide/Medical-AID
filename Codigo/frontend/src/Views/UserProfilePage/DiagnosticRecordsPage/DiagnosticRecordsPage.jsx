@@ -46,8 +46,8 @@ const DiagnosticRecordsPage = () => {
 
         if (response.status === 403) {
           Swal.fire({
-            title: "Session Expired",
-            text: "Please log in again.",
+            title: "La sesión ha expirado",
+            text: "Inicia sesión.",
             icon: "warning",
             confirmButtonText: "OK",
           }).then(() => {
@@ -76,7 +76,7 @@ const DiagnosticRecordsPage = () => {
         console.error("Error fetching diagnostic records:", error);
         Swal.fire({
           title: "Error",
-          text: "An error occurred while fetching diagnostic records.",
+          text: "Ha ocurrido un error al buscar el historial de diagnósticos",
           icon: "error",
           confirmButtonText: "OK",
         });
@@ -126,9 +126,10 @@ const DiagnosticRecordsPage = () => {
 
   useEffect(() => {
     if (filteredData.length === 0 && (startDiagnosisDate || endDiagnosisDate)) {
+      clearFilters();
       Swal.fire({
-        title: "No Data Found",
-        text: "No diseases found within the selected filters.",
+        title: "No hay datos",
+        text: "No se encontraron enfermedades con los filtros seleccionados.",
         icon: "info",
         confirmButtonText: "OK",
       });
