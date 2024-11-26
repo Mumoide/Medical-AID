@@ -20,6 +20,8 @@ const validateForm = (email, password, profile) => {
   if (!profile.birthdate) {
     return { isValid: false, message: "Debe ingresar su fecha de nacimiento." };
   }
+  const currentDate = new Date();
+  const birthDate = new Date(profile.birthdate);
   const currentYear = new Date().getFullYear();
   const birthYear = new Date(profile.birthdate).getFullYear();
   const age = currentYear - birthYear;
@@ -69,6 +71,11 @@ const validateForm = (email, password, profile) => {
 
   if (age > 110) {
     return { isValid: false, message: "La fecha de nacimiento no puede ser mayor de 110 años." };
+  }
+
+  // Check if the birthdate is in the future
+  if (birthDate > currentDate) {
+    return { isValid: false, message: "La fecha de nacimiento no puede estar en el futuro." };
   }
 
   if (profile.gender && (!['Masculino', 'Femenino', 'Prefiero no decirlo'].includes(profile.gender))) {
@@ -432,17 +439,22 @@ exports.getAllUsers = async (req, res) => {
 
 // Function to register an admin user
 exports.registerAdmin = async (req, res) => {
+  console.log('registerAdmin invoked');
   const { email, password, profile } = req.body;
-
   try {
     // Validate form data (reuse the existing validateForm function)
     const validation = validateForm(email, password, profile);
     if (!validation.isValid) {
+      console.log('registerAdmin invoked');
       return res.status(400).json({ error: validation.message });
     }
 
+    console.log('Validation passed. Checking Users.findOne');
     // Check if the email already exists
     const existingUser = await Users.findOne({ where: { email } });
+    console.log('Users.findOne result:', existingUser); // Debug log for Users.findOne result
+
+
     if (existingUser) {
       return res.status(400).json({ error: 'Correo ya registrado en el sistema.' });
     }
@@ -456,6 +468,8 @@ exports.registerAdmin = async (req, res) => {
       email,
       password_hash,
     });
+
+    console.log('New user created:', newUser);
 
     // Assign the "Admin" role (id_role = 2)
     await UserRoles.create({
