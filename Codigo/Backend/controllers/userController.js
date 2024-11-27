@@ -439,21 +439,16 @@ exports.getAllUsers = async (req, res) => {
 
 // Function to register an admin user
 exports.registerAdmin = async (req, res) => {
-  console.log('registerAdmin invoked');
   const { email, password, profile } = req.body;
   try {
     // Validate form data (reuse the existing validateForm function)
     const validation = validateForm(email, password, profile);
     if (!validation.isValid) {
-      console.log('registerAdmin invoked');
       return res.status(400).json({ error: validation.message });
     }
 
-    console.log('Validation passed. Checking Users.findOne');
     // Check if the email already exists
     const existingUser = await Users.findOne({ where: { email } });
-    console.log('Users.findOne result:', existingUser); // Debug log for Users.findOne result
-
 
     if (existingUser) {
       return res.status(400).json({ error: 'Correo ya registrado en el sistema.' });
@@ -468,8 +463,6 @@ exports.registerAdmin = async (req, res) => {
       email,
       password_hash,
     });
-
-    console.log('New user created:', newUser);
 
     // Assign the "Admin" role (id_role = 2)
     await UserRoles.create({
@@ -592,6 +585,7 @@ exports.getUserById = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   const userId = req.params.id;
+
   const {
     email,
     profile: { names, last_names, birthdate, gender, height, weight, phone_number, address, comune },
@@ -616,8 +610,11 @@ exports.updateUser = async (req, res) => {
       return res.status(400).json({ error: "Role not found." });
     }
 
+
     // Update user details
+    console.log('Updating user email:', email);
     await user.update({ email });
+    console.log('User updated');
 
     // Fetch or create UserProfile
     let userProfile = await UserProfiles.findOne({ where: { id_user: userId } });
@@ -652,6 +649,7 @@ exports.updateUser = async (req, res) => {
 
     // Fetch or create UserRole
     let userRole = await UserRoles.findOne({ where: { id_user: userId } });
+
     if (userRole) {
       // Update UserRole if it’s different
       if (userRole.id_role !== roleRecord.id_role) {
@@ -691,7 +689,6 @@ exports.reactivateUser = async (req, res) => {
 
 // Define the updateProfile function
 exports.updateProfile = async (req, res) => {
-  console.log("Request body:", req.body);
   const userId = req.user.id_user; // Use the authenticated user's ID
   const {
     email,
@@ -809,7 +806,7 @@ exports.sendRecoveryCode = async (req, res) => {
       from: process.env.EMAIL_USER,
       to: email,
       subject: 'Password Recovery Code',
-      text: `Your password recovery code is: ${recoveryCode}. It is valid for 15 minutes.`,
+      text: `Tu código de recuperación de contraseña es: ${recoveryCode}. Es válido por 15 minutes.`,
     };
 
     await transporter.sendMail(mailOptions);
@@ -825,7 +822,6 @@ exports.verifyRecoveryCode = async (req, res) => {
   const { email, recoveryCode } = req.body;
 
   try {
-    console.log("Email:", email, "Recovery Code:", recoveryCode);
     const user = await Users.findOne({ where: { email } });
 
     if (!user) {
@@ -854,7 +850,6 @@ exports.verifyRecoveryCode = async (req, res) => {
 
 exports.resetPassword = async (req, res) => {
   const { email, recoveryCode, newPassword } = req.body;
-  console.log(newPassword);
 
   try {
     const user = await Users.findOne({ where: { email } });
@@ -890,8 +885,6 @@ exports.resetPassword = async (req, res) => {
       }
     );
 
-    console.log('Password updated successfully for user:', user.email);
-
     // Nodemailer transporter setup
     const transporter = nodemailer.createTransport({
       service: 'Gmail', // or use 'SMTP' for custom configurations
@@ -906,7 +899,7 @@ exports.resetPassword = async (req, res) => {
       from: process.env.EMAIL_USER,
       to: email,
       subject: 'Password Change Confirmation',
-      text: `Hello! Your password has been successfully changed. If you did not make this change, please contact our support immediately.`,
+      text: `¡Hola! Tu contraseña ha sido cambiada exitosamente. Si no realizaste este cambio, favor contactar con soporte.`,
     };
 
     // Send the email
