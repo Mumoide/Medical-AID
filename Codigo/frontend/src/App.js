@@ -51,6 +51,27 @@ function App() {
     setUserRoleId(role_id); // Set user role id
   };
 
+  const refreshtoken = async () => {
+    fetch("http://localhost:3001/api/auth/refresh-token", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.newToken) {
+          localStorage.setItem("token", data.newToken);
+        } else {
+          throw new Error("Token refresh failed");
+        }
+      })
+      .catch(() => {
+        Swal.fire("Error", "Unable to refresh session. Please log in again.", "error");
+        localStorage.removeItem("token");
+        window.location.href = "/inicio-de-sesion";
+      });
+  }
+
   const logoutUser = async () => {
     const token = localStorage.getItem("token");
 
@@ -214,7 +235,7 @@ function App() {
         <ScrollToTop />
         <Routes>
           {/* Home Page */}
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage refreshToken={refreshtoken} />} />
 
           {/* Registration Page */}
           <Route path="/registro" element={<RegisterPage />} />

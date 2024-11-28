@@ -270,7 +270,7 @@ exports.registerUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
-
+  console.log("Entrando al login")
   try {
     const user = await Users.findOne({
       where: { email },
@@ -292,18 +292,40 @@ exports.loginUser = async (req, res) => {
       return res.status(400).json({ error: 'Correo o contraseña incorrectos' });
     }
 
+    // Check for any existing session for the user
+    const existingSession = await Sessions.findOne({
+      where: { id_user: user.id_user },
+    });
+
+    if (existingSession) {
+      const now = new Date();
+
+      if (existingSession.expires_at <= now.toISOString()) {
+        // If the session has expired, delete it
+        console.log("Deleting expired session:", existingSession.id);
+        await Sessions.destroy({ where: { id_user: user.id_user } });
+      } else {
+        // If the session is active, return a response
+        console.log("Active session found:", existingSession);
+        return res.status(200).json({
+          message: 'Ya existe una sesión activa',
+          session: existingSession,
+        });
+      }
+    }
+
     // Check if the user is currently locked out
     const now = new Date();
     if (user.lockout_until && user.lockout_until > now) {
       const minutesLeft = Math.ceil((user.lockout_until - now) / (60 * 1000));
       return res.status(403).json({ error: `Cuenta bloqueada. Intente nuevamente en ${minutesLeft} minutos.` });
     }
-
     // Compare the provided password with the hashed password stored in the database
     const isPasswordValid = await bcrypt.compare(password, user.password_hash);
 
     if (!isPasswordValid) {
       // Increment failed attempts
+
       await user.increment('failed_attempts');
 
       // Lockout logic if failed attempts reach 3
@@ -311,7 +333,6 @@ exports.loginUser = async (req, res) => {
         const lockoutCount = user.lockout_count + 1;
         const lockoutDuration = lockoutDurations[lockoutCount] || lockoutDurations[lockoutDurations.length - 1];
         const lockoutUntil = new Date(now.getTime() + lockoutDuration);
-
         await user.update({
           failed_attempts: 0,
           lockout_until: lockoutUntil,
@@ -353,7 +374,7 @@ exports.loginUser = async (req, res) => {
     );
 
     const expirationTime = new Date(now.getTime() + 60 * 60 * 1000);
-
+    // Create session
     await Sessions.create({
       id_user: user.id_user,
       session_token: sessionToken,

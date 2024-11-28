@@ -9,9 +9,10 @@ const refreshToken = async (req, res) => {
             process.env.SECRET_KEY,
             { expiresIn: '1h' }
         );
-
+        const now = new Date();
+        const expirationTime = new Date(now.getTime() + 60 * 60 * 1000);
         await Sessions.update(
-            { session_token: newToken, updated_at: new Date() },
+            { session_token: newToken, expires_at: expirationTime.toISOString(), updated_at: new Date() },
             { where: { id_user: req.user.id_user } }
         );
 
