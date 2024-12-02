@@ -79,7 +79,112 @@ const UpdateUser = ({ roleId }) => {
   };
 
   const validateForm = () => {
-    // Validation logic...
+    const currentDate = new Date();
+    const birthDate = new Date(formData.fechaNacimiento);
+    const currentYear = currentDate.getFullYear();
+    const birthYear = birthDate.getFullYear();
+    const age = currentYear - birthYear;
+
+    const lettersRegex = /^[a-zA-ZÀ-ÿ\s]+$/; // Regex to allow only letters and spaces
+    const numbersRegex = /^[0-9]+$/; // Regex to allow only integer numbers
+    const decimalNumbersRegex = /^[0-9]+(\.[0-9]+)?$/; // Regex to allow integers or decimals
+
+    if (formData.nombre.length > 30 || !lettersRegex.test(formData.nombre)) {
+      toast.error(
+        "El nombre no debe tener más de 30 caracteres y solo debe incluir letras."
+      );
+      return false;
+    }
+
+    if (birthDate > currentDate) {
+      toast.error("La fecha de nacimiento no puede estar en el futuro.");
+      return false;
+    }
+
+    if (
+      formData.apellidoPaterno.length > 20 ||
+      !lettersRegex.test(formData.apellidoPaterno)
+    ) {
+      toast.error(
+        "El apellido paterno no debe tener más de 20 caracteres y solo debe incluir letras."
+      );
+      return false;
+    }
+
+    if (
+      formData.apellidoMaterno.length > 20 ||
+      !lettersRegex.test(formData.apellidoMaterno)
+    ) {
+      toast.error(
+        "El apellido materno no debe tener más de 20 caracteres y solo debe incluir letras."
+      );
+      return false;
+    }
+
+    if (age > 110) {
+      toast.error("La fecha de nacimiento no puede ser mayor de 110 años.");
+      return false;
+    }
+
+    if (
+      formData.genero &&
+      !["Masculino", "Femenino", "Prefiero no decirlo"].includes(
+        formData.genero
+      )
+    ) {
+      toast.error("Género inválido.");
+      return false;
+    }
+
+    if (
+      formData.altura &&
+      (!decimalNumbersRegex.test(formData.altura) ||
+        formData.altura < 30 ||
+        formData.altura > 220)
+    ) {
+      toast.error(
+        "La altura debe estar entre 30 y 220 cm, y solo debe incluir números."
+      );
+      return false;
+    }
+
+    if (
+      formData.peso &&
+      (!decimalNumbersRegex.test(formData.peso) ||
+        formData.peso < 2 ||
+        formData.peso > 300)
+    ) {
+      toast.error(
+        "El peso debe estar entre 2 y 300 kg, y solo debe incluir números."
+      );
+      return false;
+    }
+
+    if (
+      formData.telefono.length !== 9 ||
+      !numbersRegex.test(formData.telefono)
+    ) {
+      toast.error(
+        "El número de teléfono debe tener 9 dígitos y solo debe incluir números."
+      );
+      return false;
+    }
+
+    if (formData.direccion.length > 50) {
+      toast.error("La dirección no debe tener más de 50 caracteres.");
+      return false;
+    }
+
+    if (formData.comuna.length > 50) {
+      toast.error("La comuna no debe tener más de 50 caracteres.");
+      return false;
+    }
+
+    if (formData.correo.length > 60) {
+      toast.error("El correo no debe tener más de 60 caracteres.");
+      return false;
+    }
+
     return true;
   };
 

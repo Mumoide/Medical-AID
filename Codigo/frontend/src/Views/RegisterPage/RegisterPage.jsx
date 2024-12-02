@@ -47,6 +47,8 @@ const RegisterPage = () => {
   };
 
   const validateForm = () => {
+    const currentDate = new Date();
+    const birthDate = new Date(formData.fechaNacimiento);
     const currentYear = new Date().getFullYear();
     const birthYear = new Date(formData.fechaNacimiento).getFullYear();
     const age = currentYear - birthYear;
@@ -59,6 +61,11 @@ const RegisterPage = () => {
       toast.error(
         "El nombre no debe tener más de 30 caracteres y solo debe incluir letras."
       );
+      return false;
+    }
+
+    if (birthDate > currentDate) {
+      toast.error("La fecha de nacimiento no puede estar en el futuro.");
       return false;
     }
 
