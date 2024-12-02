@@ -6,7 +6,8 @@
   min-height: 100%;
   padding: 20px;
   box-sizing: border-box;
-  background: url("../../../public/images/backgrounds/registro.jpg") no-repeat center;
+  background: url("../../../public/images/backgrounds/registro.jpg") no-repeat
+    center;
 }
 
 /* Contenedor Principal */
@@ -24,7 +25,8 @@
 /* Sección de la Imagen */
 .image-section {
   flex: 1;
-  background: url("../../../public/images/backgrounds/close-up.jpg") no-repeat center;
+  background: url("../../../public/images/backgrounds/close-up.jpg") no-repeat
+    center;
   background-size: cover;
   min-height: 100%; /* Asegura que haya suficiente alto para la imagen */
   position: relative;
@@ -95,8 +97,20 @@
   display: flex;
   align-items: center; /* Alinea verticalmente el checkbox con el texto */
   gap: 10px; /* Espacio entre el checkbox y el texto */
-  margin-top: 20px; /* Espacio extra en la parte superior */
-  margin-bottom: 20px; /* Espacio extra en la parte inferior */
+}
+
+/* Contenedor de Checkbox */
+.terms-and-conditions-container {
+  grid-column: span 2; /* Ocupa ambas columnas en la cuadrícula del formulario */
+  display: flex;
+  align-items: center; /* Alinea verticalmente el checkbox con el texto */
+  gap: 10px; /* Espacio entre el checkbox y el texto */
+  margin-top: -25px;
+  margin-bottom: 10px;
+}
+
+.terms-and-conditions-container p {
+  font-size: 0.6rem;
 }
 
 /* Ajuste del Checkbox */
@@ -118,7 +132,6 @@
   font-weight: bold;
   margin-left: 4px;
 }
-
 
 .register-button {
   grid-column: span 2; /* Ocupa ambas columnas */
@@ -162,6 +175,14 @@
   margin-left: 4px;
 }
 
+.view-terms-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 10px;
+}
 
 /* Pantallas grandes (hasta 1440px) */
 @media (max-width: 1440px) {
@@ -193,7 +214,6 @@
     padding: 16px;
   }
 }
-
 
 /* Pantallas medianas-grandes (hasta 1024px) */
 @media (max-width: 1024px) {
@@ -250,9 +270,8 @@
   .register-form {
     gap: 15px 10px; /* Espaciado reducido entre filas y columnas */
     grid-template-columns: 1fr 1fr; /* Dos columnas para campos */
-
   }
-  .register-form label{
+  .register-form label {
     font-size: 15px;
   }
 
@@ -260,11 +279,11 @@
     font-size: 14px;
     padding: 12px;
   }
-  .register-form input, .register-form select{
-    width: 100%; 
+  .register-form input,
+  .register-form select {
+    width: 100%;
     padding: 8px;
     font-size: 10px;
-    
   }
 }
 
@@ -296,7 +315,6 @@
     font-size: 16px;
   }
 }
-
 
 /* Pantallas medianas (hasta 720px) */
 @media (max-width: 721px) {
@@ -360,17 +378,17 @@
     font-size: 14px;
     padding: 12px;
   }
-  .register-form input, .register-form select{
-    width: 100%; 
+  .register-form input,
+  .register-form select {
+    width: 100%;
     padding: 8px;
     font-size: 10px;
   }
 
-  .register-form label{
+  .register-form label {
     font-size: 12px;
   }
 }
-
 
 /* Pantallas pequeñas (hasta 480px) */
 @media (max-width: 481px) {
@@ -402,13 +420,14 @@
     font-size: 14px;
     padding: 12px;
   }
-  .register-form input, .register-form select{
-    width: 100%; 
+  .register-form input,
+  .register-form select {
+    width: 100%;
     padding: 8px;
     font-size: 10px;
   }
 
-  .register-form label{
+  .register-form label {
     font-size: 12px;
   }
 }
@@ -437,9 +456,8 @@
   .register-form {
     gap: 15px 10px; /* Espaciado reducido entre filas y columnas */
     grid-template-columns: 1fr 1fr; /* Dos columnas para campos */
-
   }
-  .register-form label{
+  .register-form label {
     font-size: 10px;
   }
 
@@ -447,10 +465,10 @@
     font-size: 14px;
     padding: 12px;
   }
-  .register-form input, .register-form select{
-    width: 100%; 
+  .register-form input,
+  .register-form select {
+    width: 100%;
     padding: 8px;
     font-size: 10px;
-    
   }
 }

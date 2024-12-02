@@ -26,6 +26,7 @@ function LoginForm({ onLoginSuccess }) {
       }
 
       const data = await response.json();
+      console.log(data);
       localStorage.setItem("token", data.token);
       const decodedToken = jwtDecode(data.token);
       const nombre = decodedToken.nombre;

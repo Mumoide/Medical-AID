@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaCheck } from "react-icons/fa"; // Import the check icon
 import Swal from "sweetalert2";
 
-const UpdateUser = () => {
+const UpdateUser = ({ roleId }) => {
   const { id } = useParams(); // Get user ID from URL params
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -297,19 +297,23 @@ const UpdateUser = () => {
               className="full-width"
             />
           </label>
-          <label>
-            Rol del Usuario <span className="red-asterisk">*</span>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              required
-              className="full-width"
-            >
-              <option value="User">User</option>
-              <option value="Admin">Admin</option>
-            </select>
-          </label>
+          {[1, "1"].includes(roleId) ? (
+            <label>
+              Rol del Usuario <span className="red-asterisk">*</span>
+              <select
+                name="role"
+                value={formData.role}
+                onChange={handleChange}
+                required
+                className="full-width"
+              >
+                <option value="User">User</option>
+                <option value="Admin">Admin</option>
+              </select>
+            </label>
+          ) : (
+            <></>
+          )}
           <div className="button-container">
             <button type="submit" className="register-button">
               Actualizar Usuario

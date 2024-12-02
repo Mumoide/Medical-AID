@@ -270,7 +270,6 @@ exports.registerUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
-  console.log("Entrando al login")
   try {
     const user = await Users.findOne({
       where: { email },
@@ -302,24 +301,49 @@ exports.loginUser = async (req, res) => {
 
       if (existingSession.expires_at <= now.toISOString()) {
         // If the session has expired, delete it
-        console.log("Deleting expired session:", existingSession.id);
+
         await Sessions.destroy({ where: { id_user: user.id_user } });
       } else {
-        // If the session is active, return a response
-        console.log("Active session found:", existingSession);
+        // If the session is active, update the expiration time and regenerate the token
+
+        // Generate a new token with the updated expiration
+        const sessionToken = jwt.sign(
+          {
+            id_user: user.id_user,
+            email: user.email,
+            nombre: user.profile
+              ? user.profile.names + " " + (user.profile.last_names ? user.profile.last_names.split(" ")[0] : "")
+              : null,
+            role_id: user.roles && user.roles.length > 0 ? user.roles[0].id_role : null,
+          },
+          process.env.SECRET_KEY,
+          { expiresIn: '1h' }
+        );
+
+        const newExpirationTime = new Date(now.getTime() + 60 * 60 * 1000).toISOString();
+
+        // Update the session in the database
+        await Sessions.update(
+          { session_token: sessionToken, expires_at: newExpirationTime },
+          { where: { id_user: user.id_user } }
+        );
+
         return res.status(200).json({
           message: 'Ya existe una sesión activa',
-          session: existingSession,
+          token: sessionToken,
         });
       }
     }
 
     // Check if the user is currently locked out
     const now = new Date();
-    if (user.lockout_until && user.lockout_until > now) {
-      const minutesLeft = Math.ceil((user.lockout_until - now) / (60 * 1000));
-      return res.status(403).json({ error: `Cuenta bloqueada. Intente nuevamente en ${minutesLeft} minutos.` });
+    if (user.lockout_until && new Date(user.lockout_until) > now) {
+      const minutesLeft = Math.ceil((new Date(user.lockout_until) - now) / (60 * 1000));
+      return res.status(403).json({
+        error: `Cuenta bloqueada. Intente nuevamente en ${minutesLeft} minutos.`,
+      });
     }
+
     // Compare the provided password with the hashed password stored in the database
     const isPasswordValid = await bcrypt.compare(password, user.password_hash);
 
@@ -397,8 +421,6 @@ exports.loginUser = async (req, res) => {
     return res.status(500).json({ error: 'Error del servidor' });
   }
 };
-
-
 
 
 exports.logoutUser = async (req, res) => {
@@ -614,33 +636,33 @@ exports.updateUser = async (req, res) => {
   } = req.body;
 
   try {
-    // Fetch user to update
+    // Check if the user exists
     const user = await Users.findOne({ where: { id_user: userId } });
+
     if (!user) {
       return res.status(404).json({ error: "User not found." });
     }
 
-    // Validate and fetch role ID based on the provided role name
+    // Validate the provided role
     const validRoles = ["Admin", "User"];
     if (!validRoles.includes(role)) {
       return res.status(400).json({ error: "Invalid role." });
     }
 
+    // Find the role record
     const roleRecord = await Roles.findOne({ where: { role_name: role } });
     if (!roleRecord) {
       return res.status(400).json({ error: "Role not found." });
     }
 
+    // Update user's email
 
-    // Update user details
-    console.log('Updating user email:', email);
     await user.update({ email });
-    console.log('User updated');
 
-    // Fetch or create UserProfile
+    // Find the user profile
     let userProfile = await UserProfiles.findOne({ where: { id_user: userId } });
+
     if (userProfile) {
-      // Update UserProfile if it exists
       await userProfile.update({
         names,
         last_names,
@@ -653,8 +675,7 @@ exports.updateUser = async (req, res) => {
         comune,
       });
     } else {
-      // Create UserProfile if it doesn’t exist
-      userProfile = await UserProfiles.create({
+      await UserProfiles.create({
         id_user: userId,
         names,
         last_names,
@@ -668,17 +689,17 @@ exports.updateUser = async (req, res) => {
       });
     }
 
-    // Fetch or create UserRole
+    // Find the user's role
     let userRole = await UserRoles.findOne({ where: { id_user: userId } });
 
     if (userRole) {
-      // Update UserRole if it’s different
+      // Update role if it is different
       if (userRole.id_role !== roleRecord.id_role) {
         await userRole.update({ id_role: roleRecord.id_role });
       }
     } else {
-      // Create UserRole if it doesn’t exist
-      userRole = await UserRoles.create({
+      // Create new role if it does not exist
+      await UserRoles.create({
         id_user: userId,
         id_role: roleRecord.id_role,
       });
@@ -686,10 +707,13 @@ exports.updateUser = async (req, res) => {
 
     res.json({ message: "User updated successfully." });
   } catch (error) {
-    console.error("Error updating user:", error);
+    console.error("Error in updateUser Controller:", error.message);
     res.status(500).json({ error: "An error occurred while updating the user." });
   }
+
 };
+
+
 
 exports.reactivateUser = async (req, res) => {
   const userId = req.params.id_user;
@@ -710,6 +734,7 @@ exports.reactivateUser = async (req, res) => {
 
 // Define the updateProfile function
 exports.updateProfile = async (req, res) => {
+
   const userId = req.user.id_user; // Use the authenticated user's ID
   const {
     email,
@@ -780,20 +805,19 @@ exports.updateProfile = async (req, res) => {
 };
 
 exports.changePassword = async (req, res) => {
-  const { userId, newPassword } = req.body;
-
+  const { newPassword } = req.body;
+  const userId = req.user.id_user;
   try {
-    // Check if the user exists
     const user = await Users.findOne({ where: { id_user: userId } });
+
     if (!user) {
       return res.status(404).json({ error: "User not found." });
     }
 
-    // Hash the new password
     const salt = await bcrypt.genSalt(10);
+
     const hashedPassword = await bcrypt.hash(newPassword, salt);
 
-    // Update the user's password
     await user.update({ password_hash: hashedPassword });
 
     res.status(200).json({ message: "Password updated successfully." });
@@ -802,6 +826,7 @@ exports.changePassword = async (req, res) => {
     res.status(500).json({ error: "An error occurred while changing the password." });
   }
 };
+
 
 exports.sendRecoveryCode = async (req, res) => {
   const { email } = req.body;
@@ -874,6 +899,7 @@ exports.resetPassword = async (req, res) => {
 
   try {
     const user = await Users.findOne({ where: { email } });
+    console.log(user)
     if (!user) {
       return res.status(400).json({ error: 'User not found.' });
     }
@@ -899,11 +925,7 @@ exports.resetPassword = async (req, res) => {
         recovery_code: null,
         recovery_code_expiration: null,
       },
-      {
-        where: {
-
-        }
-      }
+      { where: { email } }
     );
 
     // Nodemailer transporter setup

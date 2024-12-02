@@ -53,14 +53,12 @@ describe('registerUser Controller', () => {
         UserRoles.create.mockResolvedValue({}); // Mock role creation
         UserProfiles.create.mockResolvedValue({}); // Mock profile creation
 
-        console.log('Mocked Users.create:', Users.create.mockResolvedValue({ id_user: 1 }));
+        Users.create.mockResolvedValue({ id_user: 1 })
 
-        console.log('Before calling registerAdmin');
         await registerAdmin(req, res);
-        console.log('After calling registerAdmin');
 
-        console.log('Users.create mock calls:', Users.create.mock.calls);
-        console.log('res.json mock calls:', res.json.mock.calls);
+        Users.create.mock.calls
+        res.json.mock.calls
 
         expect(Users.findOne).toHaveBeenCalledTimes(1);
         expect(Users.findOne).toHaveBeenCalledWith({ where: { email: req.body.email } });

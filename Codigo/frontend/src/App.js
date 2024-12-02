@@ -175,14 +175,20 @@ function App() {
   };
 
   useEffect(() => {
+    let interactionOccurred = false;
+
+    const handleInteraction = () => {
+      interactionOccurred = true;
+    };
+
     const interval = setInterval(() => {
       const { expired, timeRemaining } = checkTokenExpiration();
 
       if (expired) {
         // Token has expired, log the user out
         Swal.fire({
-          title: "Session Expired",
-          text: "Your session has expired. Please log in again.",
+          title: "Sesión expirada",
+          text: "Por favor inicia sesión nuevamente.",
           icon: "warning",
           confirmButtonText: "OK",
         }).then(() => {
@@ -190,16 +196,20 @@ function App() {
           window.location.href = "/inicio-de-sesion";
         });
         clearInterval(interval); // Stop the interval once the session has expired
-      } else if (timeRemaining < 5 * 60) { // Less than 5 minutes remaining
-        // Show a warning if the token will expire soon
+      } else if (timeRemaining < 5 * 60) { // Warning for debugging purposes
+        // Add a one-time event listener for user interactions
+        document.addEventListener("click", handleInteraction, { once: true });
+
         Swal.fire({
           title: "¡Pronto expirará tu sesión!",
           text: "Tu sesión va a expirar en menos de 5 minutos. ¿Quieres actualizar tu sesión?",
           icon: "info",
-          showCancelButton: true,
           confirmButtonText: "Actualizar",
+          willClose: () => {
+            document.removeEventListener("click", handleInteraction); // Cleanup on close
+          },
         }).then((result) => {
-          if (result.isConfirmed) {
+          if (result.isConfirmed || interactionOccurred) {
             // Call endpoint to refresh the session
             fetch("http://localhost:3001/api/auth/refresh-token", {
               headers: {
@@ -222,9 +232,12 @@ function App() {
           }
         });
       }
-    }, 60 * 4000); // Check every 4 minutes
+    }, 60 * 500); // Check every 4 minutes
 
-    return () => clearInterval(interval); // Cleanup on component unmount
+    return () => {
+      clearInterval(interval); // Cleanup on component unmount
+      document.removeEventListener("click", handleInteraction); // Ensure no event listeners remain
+    };
   }, []);
 
   return (
@@ -273,7 +286,7 @@ function App() {
           <Route path='/admin/updateuser/:id' element={
             <ProtectedRoute roleId={userRoleId}>
 
-              <UpdateUser />
+              <UpdateUser roleId={userRoleId} />
             </ProtectedRoute>
           } />
           {/* Dashboard administration */}

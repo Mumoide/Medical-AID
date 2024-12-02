@@ -67,12 +67,12 @@ const HomePage = ({ refreshToken }) => {
           >
             Iniciar Diagnóstico
           </button>
-          <button
+          {/* <button
             className="cta-button-homepage"
             onClick={() => refreshToken()}
           >
             refreshtoken
-          </button>
+          </button> */}
         </div>
       </section>
 

@@ -6,9 +6,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaCheck } from "react-icons/fa"; // Import the check icon
 import Swal from "sweetalert2";
+import TermsAndPolicy from "../../Components/TermsAndPolicy/TermsAndPolicy"; // Import the Terms and Policy component
 
 const RegisterPage = () => {
   const navigate = useNavigate(); // Initialize useNavigate
+  const [showTerms, setShowTerms] = useState(false);
   // Check if the user is already logged in and redirect if necessary
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -38,6 +40,10 @@ const RegisterPage = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleToggleTerms = () => {
+    setShowTerms(!showTerms);
   };
 
   const validateForm = () => {
@@ -222,9 +228,9 @@ const RegisterPage = () => {
             backgroundColor: "#3690a4",
             minWidth: "500px",
           },
-          onClose: () => navigate("/inicio-de-sesion"), // Redirecciona al cerrar el toast          
+          onClose: () => navigate("/inicio-de-sesion"), // Redirecciona al cerrar el toast
         }
-      )
+      );
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -337,7 +343,7 @@ const RegisterPage = () => {
               />
             </label>
             <label>
-              Teléfono celular (+569) <span className="required-asterisk">*</span>
+              Teléfono (Sin +59) <span className="required-asterisk">*</span>
               <input
                 type="tel"
                 name="telefono"
@@ -407,18 +413,30 @@ const RegisterPage = () => {
             <div className="checkbox-container">
               <input type="checkbox" id="terms" required />
               <label htmlFor="terms">
-                Acepto todos los términos y la Política de Privacidad <span className="required-asterisk">*</span>
+                Acepto todos los términos y la Política de Privacidad{" "}
+                <span className="required-asterisk">*</span>
               </label>
+            </div>
+            <div className="terms-and-conditions-container">
+              <button
+                type="button"
+                onClick={handleToggleTerms}
+                className="view-terms-button"
+              >
+                <p>Ver Términos y Política de Privacidad</p>
+              </button>
             </div>
             <button type="submit" className="register-button">
               Crear Cuenta
             </button>
           </form>
           <p className="already-member">
-          ¿Ya tienes una cuenta?  <a href="/inicio-de-sesion">Iniciar Sesión</a>
+            ¿Ya tienes una cuenta?{" "}
+            <a href="/inicio-de-sesion">Iniciar Sesión</a>
           </p>
         </div>
       </div>
+      <TermsAndPolicy isVisible={showTerms} onClose={handleToggleTerms} />
     </div>
   );
 };
