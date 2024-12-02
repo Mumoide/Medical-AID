@@ -1,5 +1,5 @@
 /* Overlay */
-.modal-overlay {
+.modal-overlay-terms-and-policy {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@
 }
 
 /* Contenido del modal */
-.modal-content {
+.modal-content-terms-and-policy {
   background: #f9f9f9;
   padding: 30px;
   width: 90%;
@@ -41,7 +41,7 @@
 }
 
 /* Botón cerrar */
-.close-button {
+.close-button-terms-and-policy {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -59,12 +59,12 @@
   transition: background 0.3s;
 }
 
-.close-button:hover {
+.close-button-terms-and-policy:hover {
   background: #c0392b;
 }
 
 /* Título */
-.modal-title {
+.modal-title-terms-and-policy {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -73,42 +73,42 @@
 }
 
 /* Introducción */
-.modal-intro {
+.modal-intro-terms-and-policy {
   font-size: 16px;
   margin-bottom: 20px;
   line-height: 1.6;
 }
 
 /* Lista */
-.modal-list {
+.modal-list-terms-and-policy {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.modal-list li {
+.modal-list-terms-and-policy li {
   margin-bottom: 15px;
   font-size: 16px;
   line-height: 1.6;
 }
 
-.modal-list li strong {
+.modal-list-terms-and-policy li strong {
   color: #34495e;
 }
 
 /* Links */
-.modal-link {
+.modal-link-terms-and-policy {
   color: #3498db;
   text-decoration: none;
   font-weight: bold;
 }
 
-.modal-link:hover {
+.modal-link-terms-and-policy:hover {
   text-decoration: underline;
 }
 
 /* Footer */
-.modal-footer {
+.modal-footer-terms-and-policy {
   margin-top: 20px;
   font-size: 14px;
   text-align: center;

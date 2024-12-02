@@ -25,17 +25,19 @@ const TermsAndPolicy = ({ isVisible, onClose }) => {
   if (!isVisible) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content" ref={modalRef}>
-        <button className="close-button" onClick={onClose}>
+    <div className="modal-overlay-terms-and-policy">
+      <div className="modal-content-terms-and-policy" ref={modalRef}>
+        <button className="close-button-terms-and-policy" onClick={onClose}>
           ×
         </button>
-        <h2 className="modal-title">Términos y Política de Privacidad</h2>
-        <p className="modal-intro">
+        <h2 className="modal-title-terms-and-policy">
+          Términos y Política de Privacidad
+        </h2>
+        <p className="modal-intro-terms-and-policy">
           Bienvenido(a) a nuestra aplicación. Por favor, lee cuidadosamente
           nuestros términos y condiciones antes de proceder:
         </p>
-        <ul className="modal-list">
+        <ul className="modal-list-terms-and-policy">
           <li>
             <strong>Propósito de la aplicación:</strong> Esta aplicación tiene
             como objetivo proporcionar información y alertas relacionadas con
@@ -53,12 +55,9 @@ const TermsAndPolicy = ({ isVisible, onClose }) => {
           </li>
           <li>
             <strong>Privacidad de datos:</strong> Tus datos personales serán
-            tratados conforme a nuestra{" "}
-            <a href="/privacy-policy" className="modal-link">
-              Política de Privacidad
-            </a>
-            . Implementamos medidas para proteger tu información, pero no
-            garantizamos seguridad absoluta contra accesos no autorizados.
+            tratados conforme a nuestra Política de Privacidad. Implementamos
+            medidas para proteger tu información, pero no garantizamos seguridad
+            absoluta contra accesos no autorizados.
           </li>
           <li>
             <strong>Actualización de términos:</strong> Nos reservamos el
@@ -67,14 +66,10 @@ const TermsAndPolicy = ({ isVisible, onClose }) => {
           </li>
           <li>
             <strong>Contacto:</strong> Si tienes preguntas o inquietudes, puedes
-            comunicarte con nosotros a través de nuestra{" "}
-            <a href="/support" className="modal-link">
-              página de soporte
-            </a>
-            .
+            comunicarte con nosotros a través de nuestra página de soporte.
           </li>
         </ul>
-        <p className="modal-footer">
+        <p className="modal-footer-terms-and-policy">
           Gracias por confiar en nosotros. ¡Estamos aquí para ayudarte!
         </p>
       </div>
