@@ -9,13 +9,15 @@ function UserProfilePage() {
   const [userProfile, setUserProfile] = useState(null);
   const token = localStorage.getItem("token");
   const userId = token ? jwtDecode(token)?.id_user : null;
-  if (!userId) {
-    Swal.fire("Error", "Invalid token. Please log in again.", "error").then(
-      () => {
-        localStorage.removeItem("token");
-        window.location.href = "/login";
-      }
-    );
+  if (token) {
+    if (!userId) {
+      Swal.fire("Error", "Invalid token. Please log in again.", "error").then(
+        () => {
+          localStorage.removeItem("token");
+          window.location.href = "/login";
+        }
+      );
+    }
   }
   const navigate = useNavigate();
 

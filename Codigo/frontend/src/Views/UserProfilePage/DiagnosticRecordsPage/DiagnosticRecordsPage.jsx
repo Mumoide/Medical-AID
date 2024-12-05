@@ -16,13 +16,16 @@ const DiagnosticRecordsPage = () => {
   const [inputEndDate, setInputEndDate] = useState(""); // Input for end date
   const token = localStorage.getItem("token");
   const userId = token ? jwtDecode(token)?.id_user : null;
-  if (!userId) {
-    Swal.fire("Error", "Invalid token. Please log in again.", "error").then(
-      () => {
-        localStorage.removeItem("token");
-        window.location.href = "/login";
-      }
-    );
+
+  if (token) {
+    if (!userId) {
+      Swal.fire("Error", "Invalid token. Please log in again.", "error").then(
+        () => {
+          localStorage.removeItem("token");
+          window.location.href = "/login";
+        }
+      );
+    }
   }
 
   // Get today's date in YYYY-MM-DD format
