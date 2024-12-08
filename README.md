@@ -216,7 +216,7 @@ El proyecto utiliza PostgreSQL como sistema de gestión de bases de datos relaci
 
 ### Esquema de la Base de Datos
 
-<img src="Documentacion\Base%20de%20datos\Modelo%20ER%20Medical AID.png" height="50vh">
+<img src="Documentacion\Base%20de%20datos\Modelo%20ER%20Medical AID.png" height="500">
 
 El detalle del esquema de la base de datos se encuentra en el siguiente documento:
 [Documento Técnico de Base de Datos](Documentacion/Base%20de%20datos/Documento%20Técnico%20de%20Base%20de%20Datos.docx)
@@ -244,7 +244,7 @@ El detalle del esquema de la base de datos se encuentra en el siguiente document
 
 El proyecto sigue una arquitectura de cliente-servidor de tres capas, que separa las responsabilidades en diferentes niveles:
 
-<img src="images/tres_capas.png" height="600">
+<img src="images/tres_capas.png" height="400">
 
 ### 1. Capa de Presentación (Frontend)
 - **React**: Maneja las vistas de la aplicación, proporcionando una interfaz de usuario. Esta capa permite generar interacciones con el usuario y la presentación de los datos.
