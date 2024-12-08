@@ -86,10 +86,7 @@ const SymptomComboBox = () => {
 
   const addNewComboBox = () => {
     const latestComboBoxId = comboBoxes[comboBoxes.length - 1].id;
-    if (
-      selectedSymptoms[latestComboBoxId] === undefined ||
-      selectedSymptoms[latestComboBoxId] === null
-    ) {
+    if (!selectedSymptoms[latestComboBoxId]) {
       alert(
         "Seleccione una opción en el último ComboBox antes de agregar una nueva."
       );
@@ -115,10 +112,7 @@ const SymptomComboBox = () => {
 
   const addNewEasyComboBox = () => {
     const latestComboBoxId = easyComboBoxes[easyComboBoxes.length - 1].id;
-    if (
-      selectedSymptoms[latestComboBoxId] === undefined ||
-      selectedSymptoms[latestComboBoxId] === null
-    ) {
+    if (!selectedEasySymptoms[latestComboBoxId]) {
       alert(
         "Seleccione una opción en el último ComboBox antes de agregar una nueva."
       );
