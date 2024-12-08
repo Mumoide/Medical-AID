@@ -268,4 +268,4 @@ Express es un framework para Node.js, diseñado para construir aplicaciones web 
 ## Pasos_de_implementación
 
 Utilizar el siguiente documento para implementar el proyecto:
-[Manuel de despliegue](Documentacion/Manuales/Manual%20de%20Despliegue.docx)
+[Manual de despliegue](Documentacion/Manuales/Manual%20de%20Despliegue.docx)
