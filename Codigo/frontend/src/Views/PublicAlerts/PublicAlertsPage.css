@@ -1,0 +1,124 @@
+.public-alerts-view {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.public-alerts-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.public-alert-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row; /* Ensure the map is next to the data */
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+}
+
+.public-alert-card h3 {
+  margin: 0 0 10px;
+}
+
+.public-alert-card p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.alert-pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.alert-pagination-button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.alert-pagination-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.alert-pagination-info {
+  font-size: 14px;
+}
+
+.public-alert-info {
+  flex: 1;
+}
+
+.public-alert-map {
+  flex: 1;
+  max-width: 300px;
+}
+
+.public-alert-map-container {
+  height: 220px;
+  width: 100%;
+  border-radius: 8px;
+  pointer-events: none; /* Makes the map non-interactable */
+}
+
+.alert-status-button {
+  background: #7674e0;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  min-width: 200px;
+}
+
+.alert-status-button:hover {
+  background: #5c5baa;
+}
+
+.alert-status-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.update-all-alerts-button {
+  background: #2e66a1;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  min-width: 250px;
+}
+
+.update-all-alerts-button:hover {
+  background: #1a4774;
+}
+
+.public-alert-green {
+  color: #17b103;
+  font-size: 1.1rem;
+}
+
+.public-alert-red {
+  color: #ce0000;
+  font-size: 1.1rem;
+}

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link, useNavigate } from "react-router-dom"; // Import Link from react-router-dom
 import "./HomePage.css";
 import "../LoginForm/LoginForm.css";
 
-const HomePage = () => {
+const HomePage = ({ refreshToken }) => {
   const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
 
   const subscribeToNewsletter = async (e) => {
     e.preventDefault();
@@ -61,14 +63,16 @@ const HomePage = () => {
           </p>
           <button
             className="cta-button-homepage"
-            onClick={() =>
-              document
-                .getElementById("diagnostic-section")
-                .scrollIntoView({ behavior: "smooth" })
-            }
+            onClick={() => navigate("/form")}
           >
             Iniciar Diagnóstico
           </button>
+          {/* <button
+            className="cta-button-homepage"
+            onClick={() => refreshToken()}
+          >
+            refreshtoken
+          </button> */}
         </div>
       </section>
 

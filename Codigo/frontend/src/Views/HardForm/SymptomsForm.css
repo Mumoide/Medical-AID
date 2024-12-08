@@ -17,17 +17,23 @@
 .diagnosis-container {
   display: flex;
   flex-direction: column;
-  background-color: #4e9197;
-  border-radius: 20px;
-  width: 90%;
+  width: 100%;
   text-align: center;
-  margin-left: 50px;
+  margin: auto;
   height: 100%;
+  background-color: #ffffff; /* Cambia a blanco para un look más limpio */
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra sutil para resaltar el contenedor */
+  transition: transform 0.3s ease; /* Transición suave para el hover */
+}
+
+.diagnosis-container:hover {
+  transform: scale(1.02); /* Efecto de aumento al pasar el mouse */
 }
 
 .diagnosis-container h2 {
-  font-size: 2rem;
-  color: #fff;
+  font-size: 1.5rem;
+  color: #0388a6;
   margin: auto;
   margin-top: 35px;
 }
@@ -74,7 +80,7 @@
 
 .text-content h1 {
   max-width: 500px;
-  font-size: 4rem;
+  font-size: 3rem;
   margin-bottom: 10px;
   margin-top: 180px;
   color: #0388a6;
@@ -83,7 +89,7 @@
 
 .text-content p {
   color: #393e46;
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin-left: 50px;
 }
 
@@ -111,33 +117,85 @@
 }
 
 .diagnostic-image-form {
-  margin-top: 150px;
-  max-width: 50%; /* Reducir ligeramente el ancho máximo para darle más espacio al contenedor */
+  margin-top: 160px;
+  max-width: 90%; /* Reducir ligeramente el ancho máximo para darle más espacio al contenedor */
   height: auto; /* Mantiene la proporción de la imagen */
-  margin-left: 190px;
+}
+
+.seccion-symptoms {
+  text-align: center;
+  padding: 20px 20px;
+  margin: 0px auto;
+  max-width: 1200px;
+}
+
+.seccion-symptoms h2 {
+  font-size: 2rem;
+  color: #4e3f91; /* Color de tu elección */
+  margin-bottom: 10px;
+}
+
+.seccion-symptoms p {
+  font-size: 1rem;
+  color: #666;
+}
+
+.seccion-symptomsForm {
+  display: inline-block;
+  height: 168.6px;
+  width: 250px; /* Ajuste del ancho de cada tarjeta */
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.seccion-symptomsForm:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.seccion-symptomsForm img {
+  width: 35px;
+  height: 35px;
+}
+
+.seccion-symptomsForm h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.seccion-symptomsForm p {
+  font-size: 0.7rem;
+  color: #555;
+  line-height: 1.5;
 }
 
 .combobox-container {
   align-items: center; /* Alinea el contenido verticalmente */
   justify-content: space-between; /* Añade espacio entre el Select y el botón */
-  background-color: #4e9197; /* Fondo claro */
   padding: 15px; /* Espacio interno para que el contenido no esté pegado al borde */
   margin: auto; /* Centrar horizontalmente y añadir espacio vertical */
   min-width: 80%; /* Ancho máximo para el combobox */
   margin-top: 30px;
+  border-radius: 25px;
 }
 
 .combobox-container label {
   margin-top: 50px;
-  color: rgb(249, 251, 253);
-  font-size: 1rem;
+  color: rgb(0, 0, 0);
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 .symptom-combobox {
   display: flex;
-  margin-top: 10px;
   max-width: 700px;
-  margin-left: 190px;
+  margin: 10px auto;
 }
 
 .buttons-container {
@@ -147,6 +205,8 @@
 
 .seleccionar-sintoma {
   min-width: 500px;
+  justify-content: center;
+  margin: auto;
 }
 
 /*Botones*/
@@ -189,21 +249,23 @@
   background-color: rgb(124, 16, 16);
 }
 
+.easy-section-container {
+  width: 100%;
+}
+
+.easy-section-instruction-title h2 {
+  text-align: center;
+}
+
 .categoria {
   display: flex;
   flex-direction: column; /* Coloca la imagen arriba del texto */
   align-items: center; /* Alinea horizontalmente ambos elementos */
   text-align: center; /* Centra el texto debajo de la imagen */
   padding: 20px; /* Espacio alrededor del contenido */
-  margin-right: 390px;
   margin-bottom: 30px;
 }
 
-.icono-categoria {
-  max-width: 150px; /* Ajusta el tamaño de la imagen según sea necesario */
-  height: auto; /* Mantén la proporción de la imagen */
-
-}
 .categoria h2 {
   font-size: 1.5rem; /* Ajusta el tamaño del texto */
   font-weight: bold;
@@ -215,16 +277,23 @@
 .combobox-categorias {
   display: flex;
   flex-direction: column;
-  background-color: #4e9197;
-  border-radius: 20px;
-  width: 72%;
+  width: 100%;
+  text-align: center;
+  margin: auto;
   height: 100%;
-  margin-bottom: 100px;
+  background-color: #ffffff; /* Cambia a blanco para un look más limpio */
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra sutil para resaltar el contenedor */
+  transition: transform 0.3s ease; /* Transición suave para el hover */
+}
+
+.combobox-categorias:hover {
+  transform: scale(1.02); /* Efecto de aumento al pasar el mouse */
 }
 
 .combobox-categorias h2 {
   text-align: center;
-  color: white;
+  color: black;
 }
 
 /* Footer Section */
@@ -272,10 +341,10 @@
 
 .group-buttons {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* Define exactamente 7 columnas */
-  gap: 15px; /* Espacio entre botones */
+  grid-template-columns: repeat(8, 1fr); /* Define exactamente 7 columnas */
   max-width: 50%; /* Ancho máximo del contenedor para controlar el diseño */
   margin: 0 auto; /* Centrar el contenedor en la página */
+  gap: 10px;
   margin-top: 20px; /* Separación superior */
   justify-content: center; /* Centra los botones horizontalmente dentro del contenedor */
 }
@@ -285,12 +354,13 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
-  font-size: 0.9;
+  font-size: 0.7rem;
   color: #333;
   cursor: pointer;
   text-align: center;
   transition: background-color 0.3s ease;
-  width: 140px;
+  width: 110px;
+  min-height: 40px;
   margin: 0 auto; /* Centrar el contenedor en la página */
 }
 
@@ -302,4 +372,22 @@
 .group-button.active {
   background-color: #0388a6;
   color: #fff;
+}
+
+@media (max-width: 1024px) {
+  .group-buttons {
+    grid-template-columns: repeat(6, 1fr); /* Define exactamente 7 columnas */
+  }
+
+  .symptom-combobox {
+    width: 80%;
+  }
+
+  .seleccionar-sintoma {
+    min-width: 80%;
+  }
+
+  .combobox-container {
+    margin-top: auto;
+  }
 }

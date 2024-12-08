@@ -1,5 +1,5 @@
 /* Diagnosis.css */
-.diagnosis-container {
+.diagnosis-container-resultado {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -7,6 +7,27 @@
   flex-wrap: wrap; /* Allow elements to wrap in case there are too many */
 }
 
+.titulo-diagnosis-result h1 {
+  margin-top: 150px;
+  text-align: center;
+}
+
+.portada {
+  background-image: url("../../../public/images/backgrounds/Diagnostic\ \(2\).jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: calc(70vh - 50px); /* Corrected calculation */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+}
+
+.portada h1 {
+  font-size: 5rem;
+  font-weight: bold;
+  color: white;
+}
 .diagnosis-card {
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -15,9 +36,33 @@
   height: 400px; /* Set a fixed height to make all cards the same size */
   margin: 10px;
   text-align: center;
-  background-color: purple; /* Change card background to purple */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #34aeb3; /* Change card background to purple */
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.2);
   color: white; /* Set default text color to white */
+}
+
+.diagnosis-recommendations-container::-webkit-scrollbar,
+.diagnosis-description-container::-webkit-scrollbar {
+  width: 1em;
+}
+
+.diagnosis-recommendations-container::-webkit-scrollbar-track,
+.diagnosis-description-container::-webkit-scrollbar-track {
+  background: #f0f0f5;
+  border-radius: 10px; /* Rounded track */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.diagnosis-recommendations-container::-webkit-scrollbar-thumb,
+.diagnosis-description-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px; /* Rounded thumb */
+  border: 3px solid #f0f0f5; /* Adds padding for a modern look */
+}
+
+.diagnosis-recommendations-container::-webkit-scrollbar-thumb:hover,
+.diagnosis-description-container::-webkit-scrollbar-thumb:hover {
+  background-color: #777; /* Darken on hover */
 }
 
 .diagnosis-title-container {
@@ -27,6 +72,7 @@
   color: black; /* Ensure text is black inside the title container */
   font-size: 18px;
   font-weight: bold;
+  border-radius: 15px;
 }
 
 .diagnosis-title {
@@ -80,4 +126,263 @@
 
 .back-button:hover {
   background-color: #555; /* Slightly lighter gray on hover */
+}
+
+/* Inicio sección de "Que hacer después*/
+.next-steps {
+  background-color: #f8f9fa; /* Fondo suave */
+  padding: 40px 20px; /* Espaciado interno */
+  border-radius: 15px; /* Bordes redondeados */
+  text-align: center; /* Centrar el texto */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  margin: 30px auto; /* Espaciado externo */
+  width: 100%; /* Ancho máximo */
+  font-family: Arial, sans-serif; /* Fuente estándar */
+}
+
+.next-steps h2 {
+  font-size: 2rem; /* Tamaño del título */
+  font-weight: bold; /* Negrita para el título */
+  color: #333; /* Color oscuro para el texto */
+  margin-bottom: 20px; /* Separación debajo del título */
+}
+
+.next-steps p {
+  font-size: 1.2rem; /* Texto descriptivo más grande */
+  color: #666; /* Color suave para el texto */
+  margin-bottom: 25px; /* Separación debajo del párrafo */
+  margin-top: 35px;
+}
+
+.next-steps ul {
+  list-style: none; /* Quitar viñetas predeterminadas */
+  padding: 0; /* Quitar espaciado */
+  margin: 0; /* Quitar márgenes */
+}
+
+.next-steps ul li {
+  font-size: 1rem; /* Tamaño del texto */
+  color: #555; /* Color gris para el texto */
+  margin-bottom: 15px; /* Espaciado entre elementos */
+  display: flex; /* Mantiene el icono y texto en la misma línea */
+  align-items: center; /* Alinea verticalmente */
+  gap: 10px; /* Espacio entre el icono y el texto */
+  text-align: justify; /* Justifica el texto */
+  margin-top: 15px;
+}
+
+.next-steps ul li::before {
+  content: "✔️"; /* Icono de check */
+  font-size: 1.2rem; /* Tamaño del icono */
+  flex-shrink: 0; /* Asegura que el icono no cambie de tamaño */
+}
+/* Fin sección de "Que hacer después*/
+
+/* Inicio Sección de Feedback */
+.feedback-section {
+  padding: 40px 20px;
+  border-radius: 15px;
+  margin: 40px auto;
+  max-width: 800px; /* Limita el ancho de la sección */
+  text-align: center;
+}
+
+.feedback-section h2 {
+  font-size: 1.8rem;
+  color: #333333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.feedback-section button {
+  font-size: 1.2rem;
+  padding: 12px 30px;
+  margin: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feedback-positive {
+  background-color: #4caf50; /* Color verde para el botón positivo */
+  color: #ffffff;
+  min-width: 250px;
+}
+
+.feedback-positive:hover {
+  background-color: #388e3c;
+  transform: translateY(-3px); /* Efecto hover */
+  box-shadow: 0 6px 15px rgba(72, 239, 115, 0.4);
+}
+
+.feedback-negative {
+  background-color: #f44336; /* Color rojo para el botón negativo */
+  color: #ffffff;
+  min-width: 250px;
+}
+
+.feedback-negative:hover {
+  background-color: #d32f2f;
+  transform: translateY(-3px); /* Efecto hover */
+  box-shadow: 0 6px 15px rgba(244, 67, 54, 0.4);
+}
+/* Fin Sección de Feedback */
+
+/* Responsive Styles for Diagnosis.css */
+
+/* Tablets (min-width: 601px and max-width: 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .diagnosis-container-resultado {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 30px;
+  }
+
+  .titulo-diagnosis-result h1 {
+    margin-top: 100px;
+    font-size: 2rem;
+  }
+
+  .portada h1 {
+    font-size: 4rem;
+  }
+
+  .diagnosis-card {
+    max-width: 70%;
+    height: 350px;
+    margin: 15px;
+  }
+
+  .back-button {
+    max-width: 40%;
+    padding: 12px 24px;
+  }
+
+  .next-steps h2 {
+    font-size: 1.8rem;
+  }
+
+  .next-steps p,
+  .next-steps ul li {
+    font-size: 1.1rem;
+  }
+
+  .feedback-section {
+    max-width: 400px;
+    padding: 30px;
+  }
+
+  .feedback-positive {
+    min-width: 50%;
+  }
+
+  .feedback-negative {
+    min-width: 50%;
+  }
+
+  .feedback-section h2 {
+    font-size: 1.6rem;
+  }
+}
+
+/* Desktops (min-width: 1025px) */
+@media (min-width: 1025px) {
+  .diagnosis-container-resultado {
+    justify-content: center;
+    margin-top: 50px;
+  }
+
+  .titulo-diagnosis-result h1 {
+    font-size: 3rem;
+  }
+
+  .portada h1 {
+    font-size: 5rem;
+  }
+
+  .diagnosis-card {
+    width: 320px;
+    height: 400px;
+    margin: 20px;
+  }
+
+  .next-steps h2 {
+    font-size: 2rem;
+  }
+
+  .feedback-section {
+    max-width: 800px;
+  }
+
+  .feedback-section h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Mobile devices (max-width: 700px) */
+@media (max-width: 760px) {
+  .diagnosis-container-resultado {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .titulo-diagnosis-result h1 {
+    margin-top: 50px;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .portada {
+    min-height: 40vh;
+  }
+
+  .portada h1 {
+    margin-top: 6%;
+    font-size: 3rem;
+    margin-top: 70px;
+  }
+
+  .diagnosis-card {
+    width: 75%;
+    height: auto;
+    margin: 15px 0;
+  }
+
+  .back-button {
+    max-width: 40%;
+    padding: 15px;
+  }
+
+  .next-steps h2 {
+    font-size: 1.3rem;
+  }
+
+  .next-steps p,
+  .next-steps ul li {
+    font-size: 0.8rem;
+  }
+
+  .feedback-section {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .feedback-section button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+  }
+  .feedback-positive {
+    max-width: 30%;
+  }
+
+  .feedback-negative {
+    max-width: 50%;
+  }
+
+  .feedback-section h2 {
+    font-size: 1.4rem;
+  }
 }

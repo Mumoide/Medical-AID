@@ -4,6 +4,17 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import "./DiagnosisResultPage.css";
 
+const handleFeedback = (type) => {
+  Swal.fire({
+    title: "Gracias por tu opinión",
+    text:
+      type === "positive"
+        ? "¡Nos alegra saberlo!"
+        : "Trabajaremos para mejorar.",
+    icon: type === "positive" ? "success" : "info",
+  });
+};
+
 const Diagnosis = () => {
   const location = useLocation();
   const { top3, diagnosisData, diagnosisSessionId } = location.state; // Retrieve session ID from state
@@ -46,7 +57,7 @@ const Diagnosis = () => {
           title: "Advertencia de baja probabilidad",
           text: "Su diagnóstico tiene una probabilidad baja, considere consultar a un profesional de la salud.",
           icon: "warning",
-          confirmButtonText: "Understood",
+          confirmButtonText: "Entendido",
           confirmButtonColor: "#3085d6",
         });
       }
@@ -73,6 +84,10 @@ const Diagnosis = () => {
         } catch (error) {
           if (error.response && error.response.status === 409) {
             console.warn("El Diagnóstico ya fue registrado para esta sesión.");
+          } else if (error.response && error.response.status === 403) {
+            console.warn(
+              "El Diagnóstico no fue registrado: No se encuentra sesión iniciada."
+            );
           } else {
             console.error("Error saving diagnosis data:", error);
           }
@@ -91,8 +106,13 @@ const Diagnosis = () => {
 
   return (
     <div>
-      <h1>Diagnosis Results</h1>
-      <div className="diagnosis-container">
+      <div className="portada">
+        <h1>Tus Resultados</h1>
+      </div>
+      <div className="titulo-diagnosis-result">
+        <h1>Los síntomas ingresados indican:</h1>
+      </div>
+      <div className="diagnosis-container-resultado">
         {diseaseData.length > 0 ? (
           diseaseData.map((disease, index) => (
             <div key={index} className="diagnosis-card">
@@ -118,12 +138,41 @@ const Diagnosis = () => {
             </div>
           ))
         ) : (
-          <p>Loading disease information...</p>
+          <p>Cargando información sobre enfermedades...</p>
         )}
       </div>
       <div style={{ marginTop: "30px" }}>
         <button onClick={handleBackClick} className="back-button">
-          Volver
+          Volver al Formulario
+        </button>
+        {/* <button className="back-button">Descargar PDF</button > */}
+
+        {/* <div className="next-steps">
+          <h2>¿Qué hacer después?</h2>
+          <p>Recomendamos:</p>
+          <ul>
+            <li>Contactar a un médico para evaluación presencial.</li>
+            <li>
+              Descargar los resultados en PDF para llevarlos a tu próxima
+              consulta.
+            </li>
+            <li>Compartir este diagnóstico con un profesional.</li>
+          </ul>
+        </div> */}
+      </div>
+      <div className="feedback-section">
+        <h2>¿Cómo calificarías este diagnóstico?</h2>
+        <button
+          className="feedback-positive"
+          onClick={() => handleFeedback("positive")}
+        >
+          👍 Bueno
+        </button>
+        <button
+          className="feedback-negative"
+          onClick={() => handleFeedback("negative")}
+        >
+          👎 Necesita Mejoras
         </button>
       </div>
     </div>

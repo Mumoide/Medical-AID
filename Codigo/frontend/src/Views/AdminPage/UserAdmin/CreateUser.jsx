@@ -42,6 +42,8 @@ const RegisterPage = () => {
   };
 
   const validateForm = () => {
+    const currentDate = new Date();
+    const birthDate = new Date(formData.fechaNacimiento);
     const currentYear = new Date().getFullYear();
     const birthYear = new Date(formData.fechaNacimiento).getFullYear();
     const age = currentYear - birthYear;
@@ -79,6 +81,11 @@ const RegisterPage = () => {
 
     if (age > 110) {
       toast.error("La fecha de nacimiento no puede ser mayor de 110 años.");
+      return false;
+    }
+
+    if (birthDate > currentDate) {
+      toast.error("La fecha de nacimiento no puede estar en el futuro.");
       return false;
     }
 

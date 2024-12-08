@@ -2,6 +2,8 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const https = require('https'); // Import the https module
+const fs = require('fs'); // Import the file system module
 const bodyParser = require('body-parser');
 const db = require('./db'); // Database connection
 // console.log('Registering /admin routes');
@@ -11,28 +13,42 @@ const diseaseRoutes = require('./routes/diseaseRoutes')
 const userRoutes = require('./routes/userRoutes');
 const diagnosisRoutes = require('./routes/diagnosesRoutes'); // Adjust path if needed
 const dashboardRoutes = require('./routes/dashboardRoutes')
+const alertRoutes = require("./routes/alertRoutes");
 const newsletterRoutes = require('./routes/subscribeNewsLetterRoutes');
 const authRoutes = require('./routes/authRoutes');
 
+
 const corsOptions = {
   origin: (origin, callback) => {
-    // List allowed origins
-    const allowedOrigins = ['http://localhost:3000'];
-    
-    // Check if the origin matches localhost or falls within the IP range
-    if (
-      allowedOrigins.includes(origin) ||
-      /^http:\/\/192\.168\.1\.(\d|[1-9]\d|1\d\d|2[0-5][0-5]):3000$/.test(origin) // Regex for IP range 192.168.1.1 to 192.168.1.255
-    ) {
+    console.log(`Origin: ${origin}`); // Log incoming origins for debugging
+    const allowedOrigins = [
+      'https://localhost:3000',
+      'https://localhost:3001',
+      'https://190.21.45.46',
+      'http://localhost:3000',
+      'http://190.21.45.46',
+    ];
+
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.error(`Blocked by CORS: ${origin}`);
       callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 };
+app.use(cors(corsOptions));
+
+
+// ACTIVAR ESTA CONFIGURACION PARA LEVANTAR SERVIDOR HTTPS
+// // Load SSL certificate and key
+// const sslOptions = {
+//   key: fs.readFileSync(process.env.SSL_KEY_PATH),
+//   cert: fs.readFileSync(process.env.SSL_CERT_PATH),
+// };
 
 // Middleware configuration
 app.use(cors(corsOptions));
@@ -65,9 +81,18 @@ app.use('/api/diagnosis', diagnosisRoutes);
 app.use('/api/dashboard', dashboardRoutes)
 app.use('/api/auth', authRoutes);
 app.use('/api/newsletter', newsletterRoutes);
+app.use("/api/alerts", alertRoutes);
 
 
+// DESACTIVAR ESTA CONFIGURACION PARA LEVANTAR SERVIDOR HTTPS
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
+// ACTIVAR ESTA CONFIGURACION PARA LEVANTAR SERVIDOR HTTPS
+// // Create HTTPS server
+// const port = process.env.PORT || 3001;
+// https.createServer(sslOptions, app).listen(port, () => {
+//   console.log(`HTTPS Server running on port ${port}`);
+// });

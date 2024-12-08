@@ -1,0 +1,116 @@
+.alerts-view {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin-top: 100px;
+}
+
+.alerts-admin-title {
+  display: flex;
+  justify-content: center;
+}
+
+.alerts-view h2 {
+  margin-bottom: 20px;
+}
+
+.alerts-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.alerts-table th,
+.alerts-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.alerts-table th {
+  background-color: #0056b3;
+  color: white;
+}
+
+.alerts-table th:hover {
+  background-color: #f1f1f1;
+  color: black;
+  cursor: pointer;
+}
+
+.alerts-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 50px;
+}
+
+.button-container-alert-view {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn-alert-view {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.create-alert-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.create-alert-btn:hover {
+  background-color: #2980b9;
+}
+
+.go-back-btn {
+  background-color: #95a5a6;
+  color: white;
+}
+
+.go-back-btn:hover {
+  background-color: #7f8c8d;
+}
+
+.icon-buttons-alerts {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-buttons-alerts svg {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.alert-blue {
+  color: #007bff;
+}
+
+.alert-green {
+  color: #17b103;
+}
+
+.alert-red {
+  color: #ce0000;
+}
+
+.alert-blue:hover {
+  color: #003f83;
+}
+
+.alert-green:hover {
+  color: #0e7001;
+}
+
+.alert-red:hover {
+  color: #9c0000;
+}

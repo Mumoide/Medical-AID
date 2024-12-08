@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('UserAlerts', {
+module.exports = function (sequelize, DataTypes) {
+  const UserAlerts = sequelize.define('UserAlerts', {
     id_user_alert: {
       autoIncrement: true,
       type: DataTypes.BIGINT,
@@ -27,9 +27,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATEONLY,
       allowNull: true
     },
-    id_read: {
+    readed: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
+      allowNull: false,
+      defaultValue: false,
     }
   }, {
     sequelize,
@@ -58,4 +59,13 @@ module.exports = function(sequelize, DataTypes) {
       },
     ]
   });
+  // Association setup
+  UserAlerts.associate = function (models) {
+    UserAlerts.belongsTo(models.Alerts, {
+      foreignKey: 'id_alert',
+      as: 'alert'
+    });
+  };
+
+  return UserAlerts;
 };

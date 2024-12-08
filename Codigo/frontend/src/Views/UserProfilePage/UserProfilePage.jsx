@@ -3,10 +3,22 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./UserProfilePage.css";
 import { FaFileAlt, FaPen } from "react-icons/fa"; // Import icons
+import { jwtDecode } from "jwt-decode";
 
 function UserProfilePage() {
   const [userProfile, setUserProfile] = useState(null);
-  const userId = localStorage.getItem("user_id");
+  const token = localStorage.getItem("token");
+  const userId = token ? jwtDecode(token)?.id_user : null;
+  if (token) {
+    if (!userId) {
+      Swal.fire("Error", "Invalid token. Please log in again.", "error").then(
+        () => {
+          localStorage.removeItem("token");
+          window.location.href = "/login";
+        }
+      );
+    }
+  }
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,8 +35,8 @@ function UserProfilePage() {
 
         if (response.status === 403) {
           Swal.fire({
-            title: "Session Expired",
-            text: "Please log in again.",
+            title: "La sesión expiró",
+            text: "Por favor inicia sesión.",
             icon: "warning",
             confirmButtonText: "OK",
           }).then(() => {
@@ -57,7 +69,7 @@ function UserProfilePage() {
         console.error("Error fetching user profile:", error);
         Swal.fire({
           title: "Error",
-          text: "An error occurred while fetching your profile. Please try again.",
+          text: "Ha ocurrido un error al buscar tu perfil. Por favor intenta nuevamente.",
           icon: "error",
           confirmButtonText: "OK",
         });
@@ -68,13 +80,13 @@ function UserProfilePage() {
   }, [userId]);
 
   if (!userProfile) {
-    return <div>Loading profile...</div>;
+    return <div>Cargando perfil...</div>;
   }
 
   return (
     <div className="user-profile-page">
       <div className="profile-card">
-        <h1 className="profile-title">Perfil de Usuario</h1>
+        <h1 className="profile-title">Mi Perfil</h1>
         <div className="profile-info">
           <p>
             <strong>Nombre:</strong> <span>{userProfile.nombre}</span>
@@ -112,18 +124,18 @@ function UserProfilePage() {
           <p>
             <strong>Correo:</strong> <span>{userProfile.correo}</span>
           </p>
-          {userProfile.role !== "User" && (
+          {/* {userProfile.role !== "User" && (
             <p>
               <strong>Role:</strong> <span>{userProfile.role}</span>
             </p>
-          )}
+          )} */}
         </div>
         <div className="profile-buttons">
           <button
             className="profile-button"
             onClick={() => navigate("/diagnostic-records")}
           >
-            <FaFileAlt className="button-icon" /> Historial de diagnosticos
+            <FaFileAlt className="button-icon" /> Historial de Diagnósticos
           </button>
           <button
             className="profile-button"
@@ -139,7 +151,7 @@ function UserProfilePage() {
               navigate("/update-password", { state: { userProfile } })
             } // Pass userProfile as state
           >
-            <FaPen className="button-icon" /> Cambiar contraseña
+            <FaPen className="button-icon" /> Cambiar Contraseña
           </button>
         </div>
       </div>

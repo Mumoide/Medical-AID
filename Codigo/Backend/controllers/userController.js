@@ -20,6 +20,8 @@ const validateForm = (email, password, profile) => {
   if (!profile.birthdate) {
     return { isValid: false, message: "Debe ingresar su fecha de nacimiento." };
   }
+  const currentDate = new Date();
+  const birthDate = new Date(profile.birthdate);
   const currentYear = new Date().getFullYear();
   const birthYear = new Date(profile.birthdate).getFullYear();
   const age = currentYear - birthYear;
@@ -69,6 +71,11 @@ const validateForm = (email, password, profile) => {
 
   if (age > 110) {
     return { isValid: false, message: "La fecha de nacimiento no puede ser mayor de 110 años." };
+  }
+
+  // Check if the birthdate is in the future
+  if (birthDate > currentDate) {
+    return { isValid: false, message: "La fecha de nacimiento no puede estar en el futuro." };
   }
 
   if (profile.gender && (!['Masculino', 'Femenino', 'Prefiero no decirlo'].includes(profile.gender))) {
@@ -263,7 +270,6 @@ exports.registerUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
-
   try {
     const user = await Users.findOne({
       where: { email },
@@ -273,6 +279,11 @@ exports.loginUser = async (req, res) => {
           as: 'profile',
           attributes: ['names', 'last_names'],
         },
+        {
+          model: UserRoles,
+          as: "roles",
+          attributes: ["id_role"],
+        },
       ],
     });
 
@@ -280,11 +291,57 @@ exports.loginUser = async (req, res) => {
       return res.status(400).json({ error: 'Correo o contraseña incorrectos' });
     }
 
+    // Check for any existing session for the user
+    const existingSession = await Sessions.findOne({
+      where: { id_user: user.id_user },
+    });
+
+    if (existingSession) {
+      const now = new Date();
+
+      if (existingSession.expires_at <= now.toISOString()) {
+        // If the session has expired, delete it
+
+        await Sessions.destroy({ where: { id_user: user.id_user } });
+      } else {
+        // If the session is active, update the expiration time and regenerate the token
+
+        // Generate a new token with the updated expiration
+        const sessionToken = jwt.sign(
+          {
+            id_user: user.id_user,
+            email: user.email,
+            nombre: user.profile
+              ? user.profile.names + " " + (user.profile.last_names ? user.profile.last_names.split(" ")[0] : "")
+              : null,
+            role_id: user.roles && user.roles.length > 0 ? user.roles[0].id_role : null,
+          },
+          process.env.SECRET_KEY,
+          { expiresIn: '1h' }
+        );
+
+        const newExpirationTime = new Date(now.getTime() + 60 * 60 * 1000).toISOString();
+
+        // Update the session in the database
+        await Sessions.update(
+          { session_token: sessionToken, expires_at: newExpirationTime },
+          { where: { id_user: user.id_user } }
+        );
+
+        return res.status(200).json({
+          message: 'Ya existe una sesión activa',
+          token: sessionToken,
+        });
+      }
+    }
+
     // Check if the user is currently locked out
     const now = new Date();
-    if (user.lockout_until && user.lockout_until > now) {
-      const minutesLeft = Math.ceil((user.lockout_until - now) / (60 * 1000));
-      return res.status(403).json({ error: `Cuenta bloqueada. Intente nuevamente en ${minutesLeft} minutos.` });
+    if (user.lockout_until && new Date(user.lockout_until) > now) {
+      const minutesLeft = Math.ceil((new Date(user.lockout_until) - now) / (60 * 1000));
+      return res.status(403).json({
+        error: `Cuenta bloqueada. Intente nuevamente en ${minutesLeft} minutos.`,
+      });
     }
 
     // Compare the provided password with the hashed password stored in the database
@@ -292,6 +349,7 @@ exports.loginUser = async (req, res) => {
 
     if (!isPasswordValid) {
       // Increment failed attempts
+
       await user.increment('failed_attempts');
 
       // Lockout logic if failed attempts reach 3
@@ -299,7 +357,6 @@ exports.loginUser = async (req, res) => {
         const lockoutCount = user.lockout_count + 1;
         const lockoutDuration = lockoutDurations[lockoutCount] || lockoutDurations[lockoutDurations.length - 1];
         const lockoutUntil = new Date(now.getTime() + lockoutDuration);
-
         await user.update({
           failed_attempts: 0,
           lockout_until: lockoutUntil,
@@ -323,15 +380,25 @@ exports.loginUser = async (req, res) => {
       });
     }
 
+    // Extract role_id
+    const roleId = user.roles && user.roles.length > 0 ? user.roles[0].id_role : null;
     // Generate token and store session
     const sessionToken = jwt.sign(
-      { id_user: user.id_user, email: user.email },
+      {
+        id_user: user.id_user,
+        email: user.email,
+        nombre: user.profile ?
+          user.profile.names + " " + (user.profile.last_names ? user.profile.last_names.split(" ")[0]
+            : "")
+          : null,
+        role_id: roleId,
+      },
       process.env.SECRET_KEY,
       { expiresIn: '1h' }
     );
 
     const expirationTime = new Date(now.getTime() + 60 * 60 * 1000);
-
+    // Create session
     await Sessions.create({
       id_user: user.id_user,
       session_token: sessionToken,
@@ -356,19 +423,23 @@ exports.loginUser = async (req, res) => {
 };
 
 
-
-
 exports.logoutUser = async (req, res) => {
-  const token = req.headers['authorization'];
-
+  const token = req.headers['authorization']?.split(' ')[1]; // Extract token from Authorization header
+  if (!token) {
+    return res.status(400).json({ message: 'Token not provided.' });
+  }
   try {
-    // Eliminar la sesión de la base de datos
-    await Sessions.destroy({ where: { session_token: token } });
+    // Delete the session associated with the token
+    const deletedSession = await Sessions.destroy({ where: { session_token: token } });
 
-    return res.status(200).json({ message: 'Sesión cerrada correctamente' });
+    if (!deletedSession) {
+      return res.status(404).json({ message: 'Session not found or already logged out.' });
+    }
+
+    return res.status(200).json({ message: 'Logged out successfully.' });
   } catch (error) {
     console.error('Error during logout:', error);
-    return res.status(500).json({ error: 'Error del servidor' });
+    return res.status(500).json({ message: 'Server error during logout.' });
   }
 };
 
@@ -412,7 +483,6 @@ exports.getAllUsers = async (req, res) => {
 // Function to register an admin user
 exports.registerAdmin = async (req, res) => {
   const { email, password, profile } = req.body;
-
   try {
     // Validate form data (reuse the existing validateForm function)
     const validation = validateForm(email, password, profile);
@@ -422,6 +492,7 @@ exports.registerAdmin = async (req, res) => {
 
     // Check if the email already exists
     const existingUser = await Users.findOne({ where: { email } });
+
     if (existingUser) {
       return res.status(400).json({ error: 'Correo ya registrado en el sistema.' });
     }
@@ -503,6 +574,11 @@ exports.deleteUser = async (req, res) => {
 exports.getUserById = async (req, res) => {
   const userId = req.params.id;
 
+  // Validate the userId
+  if (!/^\d+$/.test(userId)) {
+    return res.status(400).json({ error: 'Invalid user ID provided.' });
+  }
+
   try {
     // Find the user by id with related profile and roles data
     const user = await Users.findOne({
@@ -552,6 +628,7 @@ exports.getUserById = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   const userId = req.params.id;
+
   const {
     email,
     profile: { names, last_names, birthdate, gender, height, weight, phone_number, address, comune },
@@ -559,30 +636,33 @@ exports.updateUser = async (req, res) => {
   } = req.body;
 
   try {
-    // Fetch user to update
+    // Check if the user exists
     const user = await Users.findOne({ where: { id_user: userId } });
+
     if (!user) {
       return res.status(404).json({ error: "User not found." });
     }
 
-    // Validate and fetch role ID based on the provided role name
+    // Validate the provided role
     const validRoles = ["Admin", "User"];
     if (!validRoles.includes(role)) {
       return res.status(400).json({ error: "Invalid role." });
     }
 
+    // Find the role record
     const roleRecord = await Roles.findOne({ where: { role_name: role } });
     if (!roleRecord) {
       return res.status(400).json({ error: "Role not found." });
     }
 
-    // Update user details
+    // Update user's email
+
     await user.update({ email });
 
-    // Fetch or create UserProfile
+    // Find the user profile
     let userProfile = await UserProfiles.findOne({ where: { id_user: userId } });
+
     if (userProfile) {
-      // Update UserProfile if it exists
       await userProfile.update({
         names,
         last_names,
@@ -595,8 +675,7 @@ exports.updateUser = async (req, res) => {
         comune,
       });
     } else {
-      // Create UserProfile if it doesn’t exist
-      userProfile = await UserProfiles.create({
+      await UserProfiles.create({
         id_user: userId,
         names,
         last_names,
@@ -610,16 +689,17 @@ exports.updateUser = async (req, res) => {
       });
     }
 
-    // Fetch or create UserRole
+    // Find the user's role
     let userRole = await UserRoles.findOne({ where: { id_user: userId } });
+
     if (userRole) {
-      // Update UserRole if it’s different
+      // Update role if it is different
       if (userRole.id_role !== roleRecord.id_role) {
         await userRole.update({ id_role: roleRecord.id_role });
       }
     } else {
-      // Create UserRole if it doesn’t exist
-      userRole = await UserRoles.create({
+      // Create new role if it does not exist
+      await UserRoles.create({
         id_user: userId,
         id_role: roleRecord.id_role,
       });
@@ -627,10 +707,13 @@ exports.updateUser = async (req, res) => {
 
     res.json({ message: "User updated successfully." });
   } catch (error) {
-    console.error("Error updating user:", error);
+    console.error("Error in updateUser Controller:", error.message);
     res.status(500).json({ error: "An error occurred while updating the user." });
   }
+
 };
+
+
 
 exports.reactivateUser = async (req, res) => {
   const userId = req.params.id_user;
@@ -651,7 +734,7 @@ exports.reactivateUser = async (req, res) => {
 
 // Define the updateProfile function
 exports.updateProfile = async (req, res) => {
-  console.log("Request body:", req.body);
+
   const userId = req.user.id_user; // Use the authenticated user's ID
   const {
     email,
@@ -722,20 +805,19 @@ exports.updateProfile = async (req, res) => {
 };
 
 exports.changePassword = async (req, res) => {
-  const { userId, newPassword } = req.body;
-
+  const { newPassword } = req.body;
+  const userId = req.user.id_user;
   try {
-    // Check if the user exists
     const user = await Users.findOne({ where: { id_user: userId } });
+
     if (!user) {
       return res.status(404).json({ error: "User not found." });
     }
 
-    // Hash the new password
     const salt = await bcrypt.genSalt(10);
+
     const hashedPassword = await bcrypt.hash(newPassword, salt);
 
-    // Update the user's password
     await user.update({ password_hash: hashedPassword });
 
     res.status(200).json({ message: "Password updated successfully." });
@@ -744,6 +826,7 @@ exports.changePassword = async (req, res) => {
     res.status(500).json({ error: "An error occurred while changing the password." });
   }
 };
+
 
 exports.sendRecoveryCode = async (req, res) => {
   const { email } = req.body;
@@ -769,7 +852,7 @@ exports.sendRecoveryCode = async (req, res) => {
       from: process.env.EMAIL_USER,
       to: email,
       subject: 'Password Recovery Code',
-      text: `Your password recovery code is: ${recoveryCode}. It is valid for 15 minutes.`,
+      text: `Tu código de recuperación de contraseña es: ${recoveryCode}. Es válido por 15 minutes.`,
     };
 
     await transporter.sendMail(mailOptions);
@@ -785,7 +868,6 @@ exports.verifyRecoveryCode = async (req, res) => {
   const { email, recoveryCode } = req.body;
 
   try {
-    console.log("Email:", email, "Recovery Code:", recoveryCode);
     const user = await Users.findOne({ where: { email } });
 
     if (!user) {
@@ -814,10 +896,10 @@ exports.verifyRecoveryCode = async (req, res) => {
 
 exports.resetPassword = async (req, res) => {
   const { email, recoveryCode, newPassword } = req.body;
-  console.log(newPassword);
 
   try {
     const user = await Users.findOne({ where: { email } });
+    console.log(user)
     if (!user) {
       return res.status(400).json({ error: 'User not found.' });
     }
@@ -846,8 +928,6 @@ exports.resetPassword = async (req, res) => {
       { where: { email } }
     );
 
-    console.log('Password updated successfully for user:', user.email);
-
     // Nodemailer transporter setup
     const transporter = nodemailer.createTransport({
       service: 'Gmail', // or use 'SMTP' for custom configurations
@@ -862,7 +942,7 @@ exports.resetPassword = async (req, res) => {
       from: process.env.EMAIL_USER,
       to: email,
       subject: 'Password Change Confirmation',
-      text: `Hello! Your password has been successfully changed. If you did not make this change, please contact our support immediately.`,
+      text: `¡Hola! Tu contraseña ha sido cambiada exitosamente. Si no realizaste este cambio, favor contactar con soporte.`,
     };
 
     // Send the email

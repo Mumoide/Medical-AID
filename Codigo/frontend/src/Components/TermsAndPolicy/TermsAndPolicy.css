@@ -1,0 +1,116 @@
+/* Overlay */
+.modal-overlay-terms-and-policy {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Más opaco para mayor contraste */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Contenido del modal */
+.modal-content-terms-and-policy {
+  background: #f9f9f9;
+  padding: 30px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 80vh; /* Altura máxima del modal */
+  overflow-y: auto; /* Activar desplazamiento vertical si es necesario */
+  border-radius: 15px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  font-family: "Arial", sans-serif;
+  color: #333;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Botón cerrar */
+.close-button-terms-and-policy {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  transition: background 0.3s;
+}
+
+.close-button-terms-and-policy:hover {
+  background: #c0392b;
+}
+
+/* Título */
+.modal-title-terms-and-policy {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #2c3e50;
+}
+
+/* Introducción */
+.modal-intro-terms-and-policy {
+  font-size: 16px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* Lista */
+.modal-list-terms-and-policy {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-list-terms-and-policy li {
+  margin-bottom: 15px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.modal-list-terms-and-policy li strong {
+  color: #34495e;
+}
+
+/* Links */
+.modal-link-terms-and-policy {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.modal-link-terms-and-policy:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.modal-footer-terms-and-policy {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+  color: #7f8c8d;
+}

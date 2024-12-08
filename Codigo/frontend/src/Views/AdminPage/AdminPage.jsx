@@ -16,13 +16,19 @@ const AdminPage = () => {
             className="admin-header-image"
           />
           <div className="header-overlay">
-            <h1>Administración de Usuarios</h1>
-            <p>
-              Administra y monitorea a los usuarios, sus diagnósticos y alertas.
-            </p>
+            <h1>
+              Bienvenido a la sección <br />
+              De administración.
+            </h1>
           </div>
         </div>
       </header>
+      <div className="admin-text-section">
+        <h1>
+          Aquí puedes gestionar a los usuarios, acceder al panel de diagnósticos
+          y crear alertas importantes.
+        </h1>
+      </div>
 
       <section className="logo_medicalAid">
         <img
@@ -32,9 +38,9 @@ const AdminPage = () => {
         />
       </section>
 
-      <div className="spacer"></div>
-      <div className="spacer"></div>
-      <div className="spacer"></div>
+      <div className="spacer-admin"></div>
+      <div className="spacer-admin"></div>
+      <div className="spacer-admin"></div>
       {/* Buttons container */}
       <div className="admin-image-container">
         <img
@@ -43,18 +49,23 @@ const AdminPage = () => {
           className="admin-background-image"
         />
         <div className="admin-buttons">
-          <div className="admin-action-card">
-            <h2>Administración de Usuarios</h2>
-            <button onClick={() => navigate("/admin/users")}>Ver</button>
+          <div
+            className="admin-action-card"
+            onClick={() => navigate("/admin/users")}
+          >
+            <p>Administración de Usuarios</p>
           </div>
-          <div className="admin-action-card">
-            <h2>Dashboard de Diagnósticos</h2>
-            <button onClick={() => navigate("/admin/dashboard")}>Ver</button>
+          <div
+            className="admin-action-card"
+            onClick={() => navigate("/admin/dashboard")}
+          >
+            <p>Dashboard de Diagnósticos</p>
           </div>
-          <div className="admin-action-card">
-            <img src="/images/icons/alert-icon.png" alt="Alerts" />
-            <h2>Alertas</h2>
-            <button>Ver</button>
+          <div
+            className="admin-action-card"
+            onClick={() => navigate("/admin/alerts")}
+          >
+            <p>Alertas</p>
           </div>
         </div>
       </div>

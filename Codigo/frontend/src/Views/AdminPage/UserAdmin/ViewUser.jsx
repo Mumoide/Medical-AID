@@ -64,28 +64,28 @@ const UserDetails = () => {
           <strong>Email:</strong> {email}
         </p>
         <p>
-          <strong>Status:</strong> {status}
+          <strong>Estado:</strong> {status}
         </p>
         <p>
-          <strong>Role:</strong> {role}
+          <strong>Rol:</strong> {role}
         </p>
         <p>
-          <strong>First Name:</strong> {firstName}
+          <strong>Nombres:</strong> {firstName}
         </p>
         <p>
-          <strong>Last Name:</strong> {lastName}
+          <strong>Apellidos:</strong> {lastName}
         </p>
         <p>
-          <strong>Address:</strong> {address}
+          <strong>Dirección:</strong> {address}
         </p>
         <p>
-          <strong>Comune:</strong> {comune}
+          <strong>Comuna:</strong> {comune}
         </p>
         <p>
-          <strong>Date of Birth:</strong> {birthdate}
+          <strong>Fecha de nacimiento:</strong> {birthdate}
         </p>
         <p>
-          <strong>Phone Number:</strong> {phoneNumber}
+          <strong>Nro telefónico:</strong> {phoneNumber}
         </p>
         <div style={{ marginTop: "30px" }}>
           <button onClick={handleBackClick} className="back-button">

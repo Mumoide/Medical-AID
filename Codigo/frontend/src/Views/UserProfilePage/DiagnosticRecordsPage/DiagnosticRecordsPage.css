@@ -1,8 +1,18 @@
+.diagnostic-records-page-container {
+  display: flex;
+  background-color: #f4f4f9;
+  width: 100%;
+  min-height: 100vh;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+}
+
 .diagnostic-records-page {
   padding: 20px;
-  margin-top: 80px;
   font-family: Arial, sans-serif;
   background-color: #f4f4f9;
+  margin-top:100px;
+  width:95%;
 }
 
 .diagnostic-records-page h1 {
@@ -24,7 +34,7 @@
 }
 
 .diagnostic-table th {
-  background-color: #007bff;
+  background-color: #0388a6;
   color: white;
   font-weight: bold;
 }
@@ -70,4 +80,124 @@
 
 .icon-buttons-register svg:hover {
   color: #007bff;
+}
+
+/* Filter section */
+
+.user-diagnostic-filter-section{
+  width: 70%;
+  margin: auto;
+}
+
+.user-diagnostic-date-range-filter{
+  display: flex;
+  flex-direction: column;
+}
+
+.user-diagnostic-date-input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  outline: none;
+  margin-top: 10px;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.user-diagnostic-date-range-filter-item-label {
+  min-width: 180px;
+}
+
+.user-diagnostic-name-filter{
+  margin-bottom: 10px;
+}
+.user-diagnostic-name-filter label,
+.user-diagnostic-date-range-filter-item-label label {
+  font-weight: bold;
+  margin: 10px auto 10px auto;
+}
+
+.user-diagnostic-name-filter-input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  outline: none;
+}
+
+.user-diagnostic-name-filter-input:focus,
+.user-diagnostic-date-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.user-diagnostic-search-button,
+.user-diagnostic-clear-button {
+  margin-top:5px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  min-width: 120px;
+  width:50%;
+}
+
+.user-diagnostic-search-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.user-diagnostic-search-button:hover {
+  background-color: #0056b3;
+}
+
+.user-diagnostic-clear-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.user-diagnostic-clear-button:hover {
+  background-color: #c82333;
+}
+
+.user-diagnostic-button-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 1081px) {
+  .user-diagnostic-filter-section{
+    width: 80%;
+  }
+  .user-diagnostic-search-button, .user-diagnostic-clear-button {
+    width: 70%;
+  }
+}
+
+@media (max-width: 769px) {
+  .user-diagnostic-filter-section{
+    width: 90%;
+  }
+  .user-diagnostic-search-button, .user-diagnostic-clear-button {
+    width: 80%;
+  }
+}
+
+@media (max-width: 601px) {
+  .user-diagnostic-filter-section{
+    width: 95%;
+  }
+}
+
+@media (max-width: 481px) {
+  .user-diagnostic-filter-section{
+    width: 100%;
+  }
+
+  .user-diagnostic-search-button, .user-diagnostic-clear-button {
+    width: 90%;
+  }
 }

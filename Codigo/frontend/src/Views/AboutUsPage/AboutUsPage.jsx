@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import "./AboutUsPage.css";
+import FAQAccordion from '../../Components/FAQAccordion/FAQAccordion'
 
 const AboutUsPage = () => {
   const navigate = useNavigate(); // Initialize navigate
@@ -12,19 +13,17 @@ const AboutUsPage = () => {
   return (
     <div className="about-us-container">
       <header className="header-section">
-        {" "}
-        {/* Updated container class name */}
+      {/* Updated container class name */}
+      <div className="header-container-about-us">
+        <h1>Puedes acceder a <highlight>41 Diagnósticos</highlight><br />Médicos diferentes.</h1>
         <img
           src="/images/backgrounds/hand-medical.jpg"
           alt="Header AI and Doctor"
           className="header-image"
-        />
-        <header className="intro-section">
-          <img
-            src="/images/logos/LogoRound.png"
-            alt="Imagen Principal"
-            className="image"
           />
+      </div>
+        <header className="intro-section">
+        <div className="intro-content">
           <h2>¡Bienvenidos A Medical AID!</h2>
           <p>
             Estamos encantados de que formes parte de nuestra comunidad. Medical
@@ -33,24 +32,23 @@ const AboutUsPage = () => {
             learning y un enfoque en la salud accesible, te ayudamos a obtener
             respuestas claras y confiables sobre tu bienestar.
           </p>
-          <h3>
-            Puedes acceder a <span className="highlight">41 Diagnósticos</span>{" "}
-            médicos diferentes.
-          </h3>
           <hr className="line" />
+
+            </div>
+          <div className="intro-image-right">
+            <img
+              src="/images/backgrounds/human.png"
+              alt="Imagen Principal2"
+              className="intro-image-right"
+            />
+          </div>
+
+
         </header>
       </header>
 
-      <section className="cta-section">
-        <center>
-          <a href="/inicio-de-sesion">
-            <img src="/images/path-to-us.png" alt="Call to Action" />
-          </a>
-        </center>
-      </section>
-
       <section className="mission-section">
-        <h2>¿Quiénes somos?</h2>
+        <h2>Te Ofrecemos</h2>
         <div className="mission-items">
           <div className="mission-item">
             <img
@@ -101,6 +99,19 @@ const AboutUsPage = () => {
             </p>
           </div>
         </div>
+      </section>
+
+      <section className="cta-separator-about">
+  <div className="cta-content-about">
+    <img src="/images/icons/ia.png" alt="Paper Plane Icon" className="cta-icon-about" />
+    <p>¡Comienza tu camino hacia una mejor Salud con nosotros!</p>
+    <button className="cta-button-small" onClick={() =>navigate("/form")}>Realizar Diagnósticos</button>
+  </div>
+</section>
+
+
+      <section className="faq-section-container">
+        < FAQAccordion />
       </section>
 
       <section className="button-section">

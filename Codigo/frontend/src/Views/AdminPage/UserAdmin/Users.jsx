@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { FaEye, FaEdit, FaTrash, FaCheck } from "react-icons/fa";
 import "./Users.css";
 import axios from "axios"; // Import axios for making the delete request
-import { useWindowWidth } from "./useWindowWidth"; // Import the custom hook correctly
+import { useWindowWidth } from "../../../utils/useWindowWidth"; // Import the custom hook correctly
 import Swal from "sweetalert2"; // Import SweetAlert
 
-const Users = () => {
+const Users = ({ roleId }) => {
   const windowWidth = useWindowWidth(); // Get window width
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -39,8 +39,8 @@ const Users = () => {
         if (response.status === 403) {
           // Token is invalid or expired
           Swal.fire({
-            title: "Session Expired",
-            text: "Please log in again.",
+            title: "Sesión expirada",
+            text: "Por favor inicia sesión.",
             icon: "warning",
             confirmButtonText: "OK",
           }).then((result) => {
@@ -61,7 +61,7 @@ const Users = () => {
         console.error("Error fetching user data:", error);
         Swal.fire({
           title: "Error",
-          text: "An error occurred. Please try again.",
+          text: "Ha ocurrido un error. Por favor intenta nuevamente.",
           icon: "error",
           confirmButtonText: "OK",
         });
@@ -80,14 +80,14 @@ const Users = () => {
   const handleDeleteUser = async (id_user) => {
     // Show SweetAlert confirmation dialog
     Swal.fire({
-      title: "Are you sure?",
-      text: "This action will deactivate the user.",
+      title: "¿Estás seguro?",
+      text: "Esta acción desactivará el usuario.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, deactivate it!",
-      cancelButtonText: "Cancel",
+      confirmButtonText: "Sí, desactívalo!",
+      cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -118,8 +118,8 @@ const Users = () => {
 
           // Show a success notification
           Swal.fire(
-            "Deactivated!",
-            "The user has been deactivated.",
+            "¡Desactivado!",
+            "El usuaro ha sido desactivado.",
             "success"
           );
         } catch (error) {
@@ -133,14 +133,14 @@ const Users = () => {
   // Function to handle reactivating a user
   const handleReactivateUser = async (id_user) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "This action will reactivate the user.",
+      title: "¿Est´sa seguro?",
+      text: "Esta acción va a reactivar el usuario.",
       icon: "info",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, reactivate it!",
-      cancelButtonText: "Cancel",
+      confirmButtonText: "¡Sí, reactívalo!",
+      cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -173,11 +173,7 @@ const Users = () => {
           setData(updatedData);
 
           // Show success message
-          Swal.fire(
-            "Reactivated!",
-            "The user has been reactivated.",
-            "success"
-          );
+          Swal.fire("Reactivado!", "El usuario ha sido reactivado.", "success");
         } catch (error) {
           console.error("Error reactivating user:", error);
           Swal.fire("Error!", "Failed to reactivate the user.", "error");
@@ -194,15 +190,15 @@ const Users = () => {
 
     if (end > currentDate) {
       Swal.fire({
-        title: "Invalid End Date",
-        text: "End date cannot be greater than the current date.",
+        title: "Fecha fin inválida",
+        text: "La fecha de fin no puede ser mayor a la fecha actual.",
         icon: "error",
         confirmButtonText: "OK",
       });
     } else if (start > end) {
       Swal.fire({
-        title: "Invalid Date Range",
-        text: "Start date must be before or equal to end date.",
+        title: "Rango de fecha inválido",
+        text: "La fecha inical debe ser menor o igual a la fecha de fin..",
         icon: "error",
         confirmButtonText: "OK",
       });
@@ -258,9 +254,10 @@ const Users = () => {
   useEffect(() => {
     // Check if no data is found within the range and alert if empty
     if (filteredData.length === 0 && startDate && endDate) {
+      clearDateFilter();
       Swal.fire({
-        title: "No Data Found",
-        text: "No users found within the selected date range.",
+        title: "No hay data",
+        text: "No se encontraron usuarios dentro del rango de fechas indicado.",
         icon: "info",
         confirmButtonText: "OK",
       });
@@ -322,12 +319,14 @@ const Users = () => {
       Cell: ({ row }) => (
         <div className="icon-buttons-users-admin">
           <FaEye
+            className="user-admin-blue"
             style={{ cursor: "pointer" }}
             onClick={() =>
               (window.location.href = `user/${row.original.id_user}`)
             }
           />
           <FaEdit
+            className="user-admin-green"
             style={{ cursor: "pointer" }}
             onClick={() =>
               (window.location.href = `updateuser/${row.original.id_user}`)
@@ -335,11 +334,13 @@ const Users = () => {
           />
           {row.original.active ? (
             <FaTrash
+              className="user-admin-red"
               style={{ cursor: "pointer" }}
               onClick={() => handleDeleteUser(row.original.id_user)}
             />
           ) : (
             <FaCheck
+              className="user-admin-green"
               style={{ cursor: "pointer" }}
               onClick={() => handleReactivateUser(row.original.id_user)}
             />
@@ -381,22 +382,32 @@ const Users = () => {
     <div>
       {/* Role Filter Buttons outside of table-container */}
       <div className="user-admincontainer">
+        <div className="user-admin-title">
+          <h2>Administración de Usuarios</h2>
+        </div>
         <div className="filter-user-admin-container">
-          <div className="role-filter-buttons">
+          <div className="top-buttons-admin">
+            {[1, "1"].includes(roleId) ? (
+              <div className="role-filter-buttons">
+                <button
+                  className={roleFilter === "User" ? "active" : ""}
+                  onClick={() => setRoleFilter("User")}
+                >
+                  Filtrar por usuario
+                </button>
+                <button
+                  className={roleFilter === "Admin" ? "active" : ""}
+                  onClick={() => setRoleFilter("Admin")}
+                >
+                  Filtrar por administrador
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
+
             <button
-              className={roleFilter === "User" ? "active" : ""}
-              onClick={() => setRoleFilter("User")}
-            >
-              Filtrar por usuario
-            </button>
-            <button
-              className={roleFilter === "Admin" ? "active" : ""}
-              onClick={() => setRoleFilter("Admin")}
-            >
-              Filtrar por administrador
-            </button>
-            <button
-              className="create-button"
+              className="create-button-admin"
               onClick={() => (window.location.href = "/admin/create")}
             >
               Crear nuevo usuario
@@ -404,41 +415,55 @@ const Users = () => {
           </div>
 
           {/* Name Filter Input */}
+          <div className="filters-user-admin">
+            <div className="name-filter">
+              <label>Buscar por nombre</label>
+              <input
+                type="text"
+                placeholder="Filtrar por nombre"
+                value={nameFilter}
+                onChange={(e) => setNameFilter(e.target.value)}
+                className="name-filter-input"
+              />
+            </div>
+            {/* Date Range Filter Inputs */}
+            <div className="date-range-filter">
+              <div className="date-range-filter-item">
+                <div className="date-filter-user-admin">
+                  <div className="date-range-filter-item-label">
+                    <label>Fecha de inicio</label>
+                  </div>
+                  <input
+                    type="date"
+                    value={inputStartDate}
+                    onChange={(e) => setInputStartDate(e.target.value)}
+                    className="date-input"
+                    max={formattedToday}
+                  />
+                </div>
 
-          <div className="name-filter">
-            <label>Buscar por nombre:</label>
-            <input
-              type="text"
-              placeholder="Filtrar por nombre"
-              value={nameFilter}
-              onChange={(e) => setNameFilter(e.target.value)}
-              className="name-filter-input"
-            />
-          </div>
-          {/* Date Range Filter Inputs */}
-          <div className="date-range-filter">
-            <label>Fecha de inicio:</label>
-            <input
-              type="date"
-              value={inputStartDate}
-              onChange={(e) => setInputStartDate(e.target.value)}
-              className="date-input"
-              max={formattedToday}
-            />
-            <label>Fecha fin:</label>
-            <input
-              type="date"
-              value={inputEndDate}
-              onChange={(e) => setInputEndDate(e.target.value)}
-              className="date-input"
-              max={formattedToday}
-            />
-            <button className="search-button" onClick={applyDateFilter}>
-              Search
-            </button>
-            <button className="clear-button" onClick={clearDateFilter}>
-              Clear Filter
-            </button>
+                <div className="date-filter-user-admin">
+                  <div className="date-range-filter-item-label">
+                    <label>Fecha fin</label>
+                  </div>
+                  <input
+                    type="date"
+                    value={inputEndDate}
+                    onChange={(e) => setInputEndDate(e.target.value)}
+                    className="date-input"
+                    max={formattedToday}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="filter-buttons-user-admin">
+              <button className="search-button" onClick={applyDateFilter}>
+                Buscar
+              </button>
+              <button className="clear-button" onClick={clearDateFilter}>
+                Limpiar Filtros
+              </button>
+            </div>
           </div>
         </div>
         {/* Table container */}
