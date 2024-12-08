@@ -5,12 +5,12 @@
 Bienvenido al repositorio de **Medical AID**, una aplicación web diseñada para diagnósticos médicos remotos utilizando machine learning desarrollada durante el transcurso de la asignatura "Capstone" de Duoc UC.
 
 ## Tabla de contenidos
+  - [Aplicación](#Aplicación)
   - [Lenguajes](#Lenguajes)
   - [Tecnología](#Tecnología)
   - [Base de datos](#Base_de_datos)
   - [Arquitectura](#Arquitectura)
   - [Framework](#Framework)
-  - [Aplicación](#Aplicación)
   - [Pasos de implementación](#Pasos_de_implementación)
 
 ## Aplicación
