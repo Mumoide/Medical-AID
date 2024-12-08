@@ -5,17 +5,39 @@
 Bienvenido al repositorio de **Medical AID**, una aplicación web diseñada para diagnósticos médicos remotos utilizando machine learning desarrollada durante el transcurso de la asignatura "Capstone" de Duoc UC.
 
 ## Tabla de contenidos
+  - [Aplicación](#Aplicación)
   - [Lenguajes](#Lenguajes)
   - [Tecnología](#Tecnología)
   - [Base de datos](#Base_de_datos)
   - [Arquitectura](#Arquitectura)
   - [Framework](#Framework)
-  - [Aplicación](#Aplicación)
   - [Pasos de implementación](#Pasos_de_implementación)
 
 ## Aplicación
 
 Medical AID tiene como objetivo proporcionar un acceso rápido, preciso y económico a diagnósticos médicos remotos. Utiliza machine learning para permitir que los usuarios obtengan diagnósticos confiables.
+
+### Características de la Aplicación
+
+**Manejo de sesiones con JWT**:
+  - Las sesiones se gestionan mediante tokens JWT (JSON Web Token), con una duración de 1 hora.
+  - Cuando quedan menos de 5 minutos para que expire la sesión, se genera una alerta para que el usuario pueda renovarla.
+  - Si el usuario no realiza ninguna acción, la aplicación cierra automáticamente la sesión para garantizar la seguridad.
+
+**Manejo de autorizaciones con roles**:
+  - La aplicación cuenta con un sistema de roles que define diferentes niveles de acceso:
+    - User: Tiene acceso a todas las funcionalidades generales fuera de la sección de "Administración".
+    - Admin: Puede acceder a todas las funcionalidades, incluyendo las de "Administración", exceptuando la gestión de otros administradores.
+    - Superadmin: Tiene acceso total, incluyendo la gestión de administradores.
+  - Las autorizaciones se validan tanto en el frontend como en el backend para garantizar la seguridad y el cumplimiento de las reglas de acceso.
+
+**Uso de modelo de machine learning**:
+La aplicación integra un modelo de machine learning que analiza los síntomas ingresados por el usuario para proporcionar diagnósticos médicos remotos.
+
+**Envío de correos electrónicos**:
+  - Se envían correos para confirmar suscripciones al boletín y para recuperar contraseñas olvidadas.
+
+### Vistas de la aplicación
 
 A continuación, se presentan las vistas de la aplicación:
 
