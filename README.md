@@ -216,7 +216,7 @@ El proyecto utiliza PostgreSQL como sistema de gestión de bases de datos relaci
 
 ### Esquema de la Base de Datos
 
-<img src="Medical_AID\Medical-AID\Documentacion\Base de datos\Modelo ER Medical AID.png" height="50vh">
+<img src="Documentacion\Base%20de%20datos\Modelo%20ER%20Medical AID.png" height="50vh">
 
 El detalle del esquema de la base de datos se encuentra en el siguiente documento:
 [Documento Técnico de Base de Datos](Documentacion/Base%20de%20datos/Documento%20Técnico%20de%20Base%20de%20Datos.docx)
