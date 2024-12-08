@@ -1,4 +1,4 @@
-<h1 align="center">Medical AIDp</h1>
+<h1 align="center">Medical AID</h1>
 <p align="center"><i>Diagnósticos remotos.</i></p>
 <br>
 
@@ -17,52 +17,107 @@ Bienvenido al repositorio de **Medical AID**, una aplicación web diseñada para
 
 Medical AID tiene como objetivo proporcionar un acceso rápido, preciso y económico a diagnósticos médicos remotos. Utiliza machine learning para permitir que los usuarios obtengan diagnósticos confiables.
 
-A continuación, se presentan las principales vistas de la aplicación:
+A continuación, se presentan las vistas de la aplicación:
 
-1. Página de inicio
-La página de inicio permite a los usuarios iniciar sesión para acceder a todas las funcionalidades de la plataforma.
+**1. Página de Inicio**
+La página principal proporciona una introducción clara a la aplicación y guía a los usuarios hacia las funciones principales.
 
-<img src="images/Login" alt="Página de Inicio" height="500px">
+<img src="images/Homepage.png" alt="Página Principal" min-height="500px" max-height="1200px">
 
-2. Registro de Usuarios
-Los nuevos usuarios pueden registrarse fácilmente a través de esta interfaz.
+**2. Sobre Nosotros**
+Sección informativa sobre Medical AID.
 
-<img src="images/RegisterPage" alt="Registro de Usuarios" height="500px">
+<img src="images/About_us.png" alt="Sobre Nosotros" min-height="500px" max-height="1200px">
 
-3. Página de Perfil
-La sección de perfil permite a los usuarios ver y actualizar su información personal.
+**3. Biblioteca de Información**
+Permite a los usuarios acceder a información detallada sobre enfermedades y recomendaciones.
 
-<img src="images/ProfilePage" alt="Página de Perfil" height="500px">
+<img src="images/libraryPage.png" alt="Biblioteca de Información" min-height="500px" max-height="1200px">
 
-4. Formulario de Diagnóstico
-Interfaz intuitiva para ingresar síntomas y generar un diagnóstico médico remoto.
+**4. Formulario de Diagnóstico**
+Interfaz para que los usuarios ingresen sus síntomas y soliciten un diagnóstico.
 
-<img src="images/Formulario_diagnostico" alt="Formulario de Diagnóstico" height="500px">
+<img src="images/Formulario_diagnostico.png" alt="Formulario de Diagnóstico" min-height="500px" max-height="1200px">
 
-5. Resultados de Diagnóstico
-Los resultados del diagnóstico se muestran con un resumen claro y recomendaciones específicas.
+**5. Formulario Intuitivo de Diagnóstico**
+Una versión más amigable del formulario, optimizada para facilitar el uso al poder filtrar síntomas por categoría.
 
-<img src="images/Resultado_diagnostico" alt="Resultados del Diagnóstico" height="500px">
+<img src="images/Formulario_intuitivo_diagnostico.png" alt="Formulario Intuitivo de Diagnóstico" min-height="500px" max-height="1200px">
 
-6. Biblioteca de Diagnósticos
-Sección donde los usuarios pueden acceder a información detallada sobre enfermedades.
+**6. Ingresando un Diagnóstico**
+Ejemplo del ingreso de síntomas en el formulario intuitivo de diagónstico.
 
-<img src="images/libraryPage" alt="Biblioteca de Información" height="500px">
+<img src="images/Ingresando_diagnostico.png" alt="Ingresando un Diagnóstico" min-height="500px" max-height="1200px">
 
-7. Panel de Administración
-Vista exclusiva para administradores, donde pueden gestionar usuarios, alertas y revisar el comportamiento de las enfermedades diagnósticadas.
+**7. Resultados del Diagnóstico**
+Sección que muestra los resultados de un diagnóstico con un resumen claro y recomendaciones específicas.
 
-<img src="images/adminPage" alt="Panel de Administración" height="500px">
+<img src="images/Resultado_diagnostico.png" alt="Resultados del Diagnóstico" min-height="500px" max-height="1200px">
 
-8. Gestión de Alertas
-Los administradores pueden crear y gestionar alertas que se mostrarán a los usuarios.
+**8. Iniciar Sesión**
+Interfaz para que los usuarios ingresen sus credenciales y accedan a la plataforma.
 
-<img src="images/createAlert" alt="Gestión de Alertas" height="500px">
+<img src="images/Login.png" alt="Iniciar Sesión" min-height="500px" max-height="1200px">
 
-9. Dashboard
-Un dashboardo que permite visualizar volumetría y estadística relacionadas con los diagnósticos realizados.
+**9. Registro de Usuarios**
+Formulario para que los nuevos usuarios creen una cuenta.
 
-<img src="images/dashboard" alt="Tablero de Estadísticas" height="500px">
+<img src="images/RegisterPage.png" alt="Registro de Usuarios" min-height="500px" max-height="1200px">
+
+**10. Perfil de Usuario**
+Permite a los usuarios ver y actualizar su información personal, como nombre, dirección y más.
+
+<img src="images/ProfilePage.png" alt="Perfil de Usuario" min-height="500px" max-height="1200px">
+
+**11. Historial de Diagnósticos**
+Vista donde los usuarios pueden consultar los diagnósticos realizados previamente.
+
+<img src="images/DiagnosticRecords.png" alt="Historial de Diagnósticos" min-height="500px" max-height="1200px">
+
+**12. Actualización de Perfil**
+Interfaz para que los usuarios modifiquen sus datos personales.
+
+<img src="images/updateProfile.png" alt="Actualización de Perfil" min-height="500px" max-height="1200px">
+
+**13. Cambiar Contraseña**
+Formulario para que los usuarios actualicen su contraseña.
+
+<img src="images/changePassword.png" alt="Cambiar Contraseña" min-height="500px" max-height="1200px">
+
+**14. Panel de Administración**
+Vista exclusiva para administradores, donde pueden gestionar usuarios, diagnósticos y alertas.
+
+<img src="images/adminPage.png" alt="Panel de Administración" min-height="500px" max-height="1200px">
+
+**15. Gestión de Usuarios**
+Permite a los administradores administrar cuentas de usuario dentro de la plataforma.
+
+<img src="images/userAdminPage.png" alt="Gestión de Usuarios" min-height="500px" max-height="1200px">
+
+**16. Crear Administrador**
+Formulario para que un superadmin cree nuevas cuentas de administrador.
+
+<img src="images/createAdmin.png" alt="Crear Administrador" min-height="500px" max-height="1200px">
+
+**17. Dashboard**
+Un dashboard que muestra estadísticas relacionadas con diagnósticos.
+
+<img src="images/dashboard.png" alt="Tablero de Estadísticas" min-height="500px" max-height="1200px">
+
+**18. Crear Alerta**
+Permite a los administradores generar alertas personalizadas para los usuarios.
+
+<img src="images/createAlert.png" alt="Crear Alerta" min-height="500px" max-height="1200px">
+
+**19. Barra de Navegación de Alertas**
+La barra de navegación muestra notificaciones y alertas relevantes para los usuarios.
+
+<img src="images/alertNavbar.png" alt="Barra de Navegación de Alertas" min-height="500px" max-height="1200px">
+
+**20. Página de Alertas**
+Muestra todas las alertas activas o pasadas disponibles para el usuario.
+
+<img src="images/alertPage.png" alt="Página de Alertas" min-height="500px" max-height="1200px">
 
 ## Lenguajes
 
